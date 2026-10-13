@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafeteria Gourmet - Produtos</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- CDN Oficial estável do Font Awesome para carregar todos os ícones da página -->
+    <link rel="stylesheet" href="https://cloudflare.com">
+</head>
+<body>
+
+    <!-- NAVBAR (Topo Escuro) -->
+    <header class="navbar">
+    <div class="logo" style="display: flex; align-items: center; gap: 10px; cursor: pointer;" onclick="window.location.href='index.html'">
+    <!-- SÍMBOLO NATIVO DE XÍCARA EM TEXTO PURO (NUNCA FALHA) -->
+    <span style="font-size: 26px; line-height: 1; display: inline-block;">☕</span>
+    <span style="font-family: 'Playfair Display', serif; color: #ffffff; font-weight: bold; font-size: 16px; letter-spacing: 0.5px; line-height: 1.1;">
+        CAFETERIA<br><small style="font-size: 10px; letter-spacing: 2px; color: #DFCEB8; display: block;">GOURMET</small>
+    </span>
+</div>
+    
+    <!-- O menu ganha o ID correto "nav-menu" -->
+    <nav class="nav-menu" id="nav-menu">
+        <a href="index.html" class="active"><i class="fas fa-home"></i> Início</a>
+        <a href="produtos.html"><i class="fas fa-shopping-bag"></i> Produtos</a>
+        <a href="carrinho.html" class="cart-link">
+            <i class="fas fa-shopping-cart"></i> Carrinho 
+            <span class="cart-badge">0</span>
+        </a>
+        <a href="perfil.html"><i class="fas fa-user"></i> Perfil</a>
+    </nav>
+
+    <!-- O BOTÃO AGORA CHAMA A FUNÇÃO DIRETO NO CLIQUE (IMPOSSÍVEL TRAVAR) -->
+    <button class="menu-hamburger" id="menu-hamburger" type="button" onclick="toggleMenuMobile()">☰</button>
+</header>
+
+    <!-- CONTEÚDO PRINCIPAL (Filtros + Grid) -->
+    <div class="main-wrapper">
+        
+        <!-- BARRA LATERAL DE FILTROS -->
+        <aside class="sidebar-filters">
+            <h2>Filtros</h2>
+
+            <!-- Tipo de café com values operacionais adicionados -->
+            <div class="filter-group">
+                <h3>Tipo de café</h3>
+                <label class="check-item"><input type="checkbox" value="tradicional"> Tradicional</label>
+                <label class="check-item"><input type="checkbox" value="especial"> Especial</label>
+                <label class="check-item"><input type="checkbox" value="gourmet"> Gourmet</label>
+                <label class="check-item"><input type="checkbox" value="organico"> Orgânico</label>
+                <label class="check-item"><input type="checkbox" value="descafeinado"> Descafeinado</label>
+            </div>
+
+            <!-- Faixa de preço -->
+            <div class="filter-group">
+                <h3>Faixa de preço</h3>
+                <div class="slider-container">
+                    <div class="slider-track" id="slider-track-fill"></div>
+                    <!-- Controles interativos transparentes sobrepostos -->
+                    <input type="range" min="0" max="100" value="0" class="range-input" id="input-min">
+                    <input type="range" min="0" max="100" value="100" class="range-input" id="input-max">
+                </div>
+                <div class="price-labels">
+                    <span id="label-min">R$ 0</span>
+                    <span id="label-max">R$ 100</span>
+                </div>
+                <button type="button" class="btn-filter" id="btn-aplicar-preco">Aplicar filtros</button>
+            </div>
+
+
+
+            <!-- Ordenar por (Mobile/Sidebar) -->
+            <div class="filter-group select-group">
+                <h3>Ordenar por</h3>
+                <div class="custom-select">
+                    <select>
+                        <option>Mais populares</option>
+                        <option>Menor preço</option>
+                        <option>Maior preço</option>
+                    </select>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </aside>
+
+        <!-- SEÇÃO DE PRODUTOS -->
+        <main class="products-container">
+            <div class="products-header">
+                <h2>Todos os produtos</h2>
+                <div class="custom-select header-select">
+                    <select>
+                        <option>Mais populares</option>
+                        <option>Menor preço</option>
+                        <option>Maior preço</option>
+                    </select>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+
+            <!-- GRID DOS PRODUTOS INTEGRADO COM CATEGORIAS E LINKS DE IMAGEM -->
+            <div class="products-grid">
+
+                <!-- Card 1 (Café Bourbon) -->
+                <div class="product-card" data-category="especial">
+                    <div class="product-img-box">
+                        <img src="https://unsplash.com" alt="Café Especial Bourbon">
+                    </div>
+                    <h4>Café Especial Bourbon</h4>
+                    <div class="product-card-footer">
+                        <span class="price">R$ 32,90</span>
+                        <button class="btn-add" 
+                                data-id="1" 
+                                data-name="Café Especial Bourbon" 
+                                data-price="32.90" 
+                                data-image="https://unsplash.com">+</button>
+                    </div>
+                </div>
+
+                <!-- Card 2 (Café Arábica) -->
+                <div class="product-card" data-category="gourmet">
+                    <div class="product-img-box">
+                        <img src="https://unsplash.com" alt="Café Gourmet 100% Arábica">
+                    </div>
+                    <h4>Café Gourmet 100% Arábica</h4>
+                    <div class="product-card-footer">
+                        <span class="price">R$ 28,90</span>
+                        <button class="btn-add" 
+                                data-id="2" 
+                                data-name="Café Gourmet 100% Arábica" 
+                                data-price="28.90" 
+                                data-image="https://unsplash.com">+</button>
+                    </div>
+                </div>
+
+                <!-- Card 3 (Café Orgânico) -->
+                <div class="product-card" data-category="organico">
+                    <div class="product-img-box">
+                        <img src="https://unsplash.com" alt="Café Orgânico Torra Média">
+                    </div>
+                    <h4>Café Orgânico Torra Média</h4>
+                    <div class="product-card-footer">
+                        <span class="price">R$ 34,90</span>
+                        <button class="btn-add" 
+                                data-id="3" 
+                                data-name="Café Orgânico Torra Média" 
+                                data-price="34.90" 
+                                data-image="https://unsplash.com">+</button>
+                    </div>
+                </div>
+
+                <!-- Card 4 (Café Descafeinado) -->
+                <div class="product-card" data-category="descafeinado">
+                    <div class="product-img-box">
+                        <img src="https://unsplash.com" alt="Café Descafeinado Suave">
+                    </div>
+                    <h4>Café Descafeinado Suave</h4>
+                    <div class="product-card-footer">
+                        <span class="price">R$ 29,90</span>
+                        <button class="btn-add" 
+                                data-id="5" 
+                                data-name="Café Descafeinado Suave" 
+                                data-price="29.90" 
+                                data-image="https://unsplash.com">+</button>
+                    </div>
+                </div>
+
+                <!-- Card 5 (Café Premium) -->
+                <div class="product-card" data-category="especial">
+                    <div class="product-img-box">
+                        <img src="https://unsplash.com" alt="Café Premium Torra Escura">
+                    </div>
+                    <h4>Café Premium Torra Escura</h4>
+                    <div class="product-card-footer">
+                        <span class="price">R$ 36,90</span>
+                        <button class="btn-add" 
+                                data-id="6" 
+                                data-name="Café Premium Torra Escura" 
+                                data-price="36.90" 
+                                data-image="https://unsplash.com">+</button>
+                    </div>
+                </div>
+
+                <!-- Card 6 (Café Solúvel) -->
+                <div class="product-card" data-category="gourmet">
+                    <div class="product-img-box">
+                        <img src="https://unsplash.com" alt="Café Solúvel Gourmet">
+                    </div>
+                    <h4>Café Solúvel Gourmet</h4>
+                    <div class="product-card-footer">
+                        <span class="price">R$ 22,90</span>
+                        <button class="btn-add" 
+                                data-id="7" 
+                                data-name="Café Solúvel Gourmet" 
+                                data-price="22.90" 
+                                data-image="https://unsplash.com">+</button>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- RODAPÉ -->
+    <footer class="footer">
+        <div class="footer-brand">
+            <i class="fas fa-coffee"></i>
+            <span>CAFETERIA GOURMET</span>
+        </div>
+        <div class="footer-contact">
+            <a href="mailto:contato@cafeteriagourmet.com.br">contato@cafeteriagourmet.com.br</a>
+        </div>
+        <div class="footer-social">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+        </div>
+    </footer>
+
+    <!-- Script único mestre de controle das lógicas -->
+    <script src="script.js"></script>
+</body>
+</html>

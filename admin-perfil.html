@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafeteria Gourmet - Alterar Meus Dados</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- CDN Oficial do Font Awesome para renderizar os ícones estruturais -->
+    <link rel="stylesheet" href="https://cloudflare.com">
+</head>
+<body>
+
+    <!-- NAVBAR (Topo Escuro Padronizado) -->
+    <header class="navbar">
+        <div class="logo" style="display: flex; align-items: center; gap: 10px; cursor: pointer;" onclick="window.location.href='index.html'">
+            <!-- SÍMBOLO NATIVO DE XÍCARA EM TEXTO PURO -->
+            <span style="font-size: 26px; line-height: 1; display: inline-block;">☕</span>
+            <span style="font-family: 'Playfair Display', serif; color: #ffffff; font-weight: bold; font-size: 16px; letter-spacing: 0.5px; line-height: 1.1;">
+                CAFETERIA<br><small style="font-size: 10px; letter-spacing: 2px; color: #DFCEB8; display: block;">GOURMET</small>
+            </span>
+        </div>
+        
+        <nav class="nav-menu" id="nav-menu">
+            <a href="index.html"><i class="fas fa-home"></i> Início</a>
+            <a href="produtos.html"><i class="fas fa-shopping-bag"></i> Produtos</a>
+            <a href="carrinho.html" class="cart-link">
+                <i class="fas fa-shopping-cart"></i> Carrinho 
+                <span class="cart-badge">0</span>
+            </a>
+            <a href="perfil.html" class="active"><i class="fas fa-user"></i> Perfil</a>
+        </nav>
+
+        <!-- BOTÃO DO MENU HAMBÚRGUER MOBILE -->
+        <button class="menu-hamburger" id="menu-hamburger" type="button" onclick="toggleMenuMobile()">☰</button>
+    </header>
+
+    <!-- FORMULÁRIO DE ALTERAÇÃO COMPLETA DE DADOS -->
+    <main class="checkout-wrapper" style="margin-top: 30px; justify-content: center; padding: 0 8%;">
+        <div class="checkout-left-column" style="flex: 1; max-width: 750px; margin: 0 auto;">
+            <div class="checkout-section-card">
+                <h2 style="font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 25px;">
+                    <i class="fas fa-user-edit" style="color: var(--accent-gold);"></i> Alterar Meus Dados Cadastrais
+                </h2>
+                
+                <form class="checkout-form" id="form-alterar-perfil-completo">
+                    
+                    <!-- SEÇÃO 1: DADOS PESSOAIS -->
+                    <div class="form-row split-half">
+                        <div class="form-group">
+                            <label for="edit-nome">Nome Completo</label>
+                            <input type="text" id="edit-nome" required>
+                        </div>
+                        <div class="form-group input-phone-width">
+                            <label for="edit-telefone">Telefone de Contato</label>
+                            <input type="tel" id="edit-telefone" placeholder="(61) 99999-9999" maxlength="15" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row full-width">
+                        <div class="form-group">
+                            <label for="edit-email">E-mail de Acesso da Conta</label>
+                            <input type="email" id="edit-email" placeholder="name@gmail.com" required>
+                        </div>
+                    </div>
+
+                    <!-- SEÇÃO 2: ENDEREÇO DE ENTREGA -->
+                    <h2 style="font-size: 15px; margin-top: 25px; border-top: 1px solid var(--border-color); padding-top: 20px; font-family: 'Playfair Display', serif;">
+                        <i class="fas fa-map-marked-alt" style="color: var(--accent-gold);"></i> Endereço de Entrega Principal
+                    </h2>
+                    <div class="form-row split-half">
+                        <div class="form-group">
+                            <label for="edit-cep">CEP</label>
+                            <input type="text" id="edit-cep" placeholder="70000-000" maxlength="9" required>
+                        </div>
+                        <div class="form-group" style="flex: 2;">
+                            <label for="edit-endereco">Rua, Número, Complemento e Bairro</label>
+                            <input type="text" id="edit-endereco" placeholder="Ex: Rua das Flores, 123 - Centro" required>
+                        </div>
+                    </div>
+
+                    <!-- SEÇÃO 3: DADOS CARTÃO DE CRÉDITO -->
+                    <h2 style="font-size: 15px; margin-top: 25px; border-top: 1px solid var(--border-color); padding-top: 20px; font-family: 'Playfair Display', serif;">
+                        <i class="far fa-credit-card" style="color: var(--accent-gold);"></i> Cartão de Crédito de Preferência
+                    </h2>
+                    <div class="form-row full-width">
+                        <div class="form-group">
+                            <label for="edit-cartao-numero">Número do Cartão</label>
+                            <input type="text" id="edit-cartao-numero" placeholder="0000 0000 0000 0000" maxlength="19">
+                        </div>
+                    </div>
+                    <div class="form-row split-half">
+                        <div class="form-group">
+                            <label for="edit-cartao-validade">Validade (MM/AA)</label>
+                            <input type="text" id="edit-cartao-validade" placeholder="MM/AA" maxlength="5">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-cartao-nome">Nome do Titular (Igual no Cartão)</label>
+                            <input type="text" id="edit-cartao-nome" placeholder="EX: LUCAS O OLIVEIRA">
+                        </div>
+                    </div>
+
+                    <!-- BOTÕES DE AÇÃO FLUIDOS -->
+                    <div style="display: flex; gap: 15px; margin-top: 35px; width: 100%;">
+                        <button type="button" class="btn-finalize-checkout" onclick="window.location.href='perfil.html'" style="background: transparent; color: var(--text-dark); border: 1px solid var(--border-color); width: 150px; cursor: pointer;">Cancelar</button>
+                        <button type="submit" class="btn-finalize-checkout" style="flex: 1; cursor: pointer;">Salvar Todas as Alterações</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- RODAPÉ (Padrão Unificado) -->
+    <footer class="footer">
+        <div class="footer-brand"><i class="fas fa-coffee"></i> <span>CAFETERIA GOURMET</span></div>
+        <div class="footer-contact"><a href="mailto:contato@cafeteriagourmet.com.br">contato@cafeteriagourmet.com.br</a></div>
+        <div class="footer-social">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+        </div>
+    </footer>
+
+    <!-- CONEXÃO COMPLETA DA INTELIGÊNCIA EM JAVASCRIPT -->
+    <script src="script.js"></script>
+</body>
+</html>

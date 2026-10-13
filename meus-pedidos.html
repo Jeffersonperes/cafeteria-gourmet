@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafeteria Gourmet - Meus Pedidos</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cloudflare.com">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+    <div class="logo" style="display: flex; align-items: center; gap: 10px; cursor: pointer;" onclick="window.location.href='index.html'">
+    <!-- SÍMBOLO NATIVO DE XÍCARA EM TEXTO PURO (NUNCA FALHA) -->
+    <span style="font-size: 26px; line-height: 1; display: inline-block;">☕</span>
+    <span style="font-family: 'Playfair Display', serif; color: #ffffff; font-weight: bold; font-size: 16px; letter-spacing: 0.5px; line-height: 1.1;">
+        CAFETERIA<br><small style="font-size: 10px; letter-spacing: 2px; color: #DFCEB8; display: block;">GOURMET</small>
+    </span>
+</div>
+    
+    <!-- O menu ganha o ID correto "nav-menu" -->
+    <nav class="nav-menu" id="nav-menu">
+        <a href="index.html" class="active"><i class="fas fa-home"></i> Início</a>
+        <a href="produtos.html"><i class="fas fa-shopping-bag"></i> Produtos</a>
+        <a href="carrinho.html" class="cart-link">
+            <i class="fas fa-shopping-cart"></i> Carrinho 
+            <span class="cart-badge">0</span>
+        </a>
+        <a href="perfil.html"><i class="fas fa-user"></i> Perfil</a>
+    </nav>
+
+    <!-- O BOTÃO AGORA CHAMA A FUNÇÃO DIRETO NO CLIQUE (IMPOSSÍVEL TRAVAR) -->
+    <button class="menu-hamburger" id="menu-hamburger" type="button" onclick="toggleMenuMobile()">☰</button>
+</header>
+
+    <!-- CONTEÚDO PRINCIPAL: HISTÓRICO COMPLETO -->
+    <main class="orders-page-container">
+        <section class="orders-main-card">
+            <div class="orders-page-header">
+                <h2>Todos os Meus Pedidos</h2>
+                <span class="total-orders-count" id="orders-total-count">0 pedidos realizados</span>
+            </div>
+
+            <!-- CONTAINER DO JAVASCRIPT -->
+            <div class="orders-full-list" id="orders-history-container">
+                <p style="text-align: center; color: var(--text-muted); padding: 40px;">Você ainda não realizou nenhum pedido.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-brand"><i class="fas fa-seedling"></i> <span>CAFETERIA GOURMET</span></div>
+        <div class="footer-contact"><a href="mailto:contato@cafeteriagourmet.com.br">contato@cafeteriagourmet.com.br</a></div>
+        <div class="footer-social">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

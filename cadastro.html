@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafeteria Gourmet - Cadastro</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- CDN Oficial estável do Font Awesome para carregar todos os ícones da página -->
+    <link rel="stylesheet" href="https://cloudflare.com">
+</head>
+<body>
+
+    <!-- NAVBAR (Topo Escuro Padronizado) -->
+    <header class="navbar">
+        <div class="logo" style="display: flex; align-items: center; gap: 10px; cursor: pointer;" onclick="window.location.href='index.html'">
+            <span style="font-size: 26px; line-height: 1; display: inline-block;">☕</span>
+            <span style="font-family: 'Playfair Display', serif; color: #ffffff; font-weight: bold; font-size: 16px; letter-spacing: 0.5px; line-height: 1.1;">
+                CAFETERIA<br><small style="font-size: 10px; letter-spacing: 2px; color: #DFCEB8; display: block;">GOURMET</small>
+            </span>
+        </div>
+        
+        <nav class="nav-menu" id="nav-menu">
+            <a href="index.html"><i class="fas fa-home"></i> Início</a>
+            <a href="produtos.html"><i class="fas fa-shopping-bag"></i> Produtos</a>
+            <a href="carrinho.html" class="cart-link">
+                <i class="fas fa-shopping-cart"></i> Carrinho 
+                <span class="cart-badge">0</span>
+            </a>
+            <a href="perfil.html"><i class="fas fa-user"></i> Perfil</a>
+        </nav>
+
+        <button class="menu-hamburger" id="menu-hamburger" type="button" onclick="toggleMenuMobile()">☰</button>
+    </header>
+
+    <!-- CONTAINER CENTRAL DO CADASTRO -->
+    <main class="login-container">
+        <div class="login-card">
+            <h2>Crie sua conta</h2>
+            <p class="subtitle">Cadastre-se abaixo para gerenciar seus pedidos.</p>
+
+            <!-- FORMULÁRIO COM ID OPERACIONAL -->
+            <form class="login-form" id="form-cadastro-cliente">
+                
+                <div class="form-group">
+                    <label for="cadastro-nome">Nome Completo</label>
+                    <div class="input-with-icon">
+                        <input type="text" id="cadastro-nome" placeholder="Digite seu nome completo" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="cadastro-email">E-mail</label>
+                    <div class="input-with-icon">
+                        <input type="email" id="cadastro-email" placeholder="name@gmail.com" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="cadastro-password">Senha</label>
+                    <div class="input-password-container" style="position: relative; width: 100%;">
+                        <input type="password" id="cadastro-password" placeholder="Mínimo 6 caracteres" required style="width: 100%; padding-right: 40px;">
+                        <span id="btn-toggle-senha-cad" onclick="toggleMostrarSenhaCadastro()" style="position: absolute; right: 14px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 16px; user-select: none;">👁️</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="cadastro-confirm-password">Confirmar Senha</label>
+                    <div class="input-password-container" style="position: relative; width: 100%;">
+                        <input type="password" id="cadastro-confirm-password" placeholder="Repita a sua senha" required style="width: 100%; padding-right: 40px;">
+                        <span id="btn-toggle-confirm-cad" onclick="toggleMostrarConfirmacaoCadastro()" style="position: absolute; right: 14px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 16px; user-select: none;">👁️</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-submit" style="margin-top: 10px;">Criar minha conta</button>
+            </form>
+
+            <p class="signup-text" style="font-size: 13px; margin-top: 25px; color: var(--text-muted);">
+                Já possui uma conta? <a href="login.html" style="color: var(--text-dark); text-decoration: none; font-weight: 600;">Fazer Login</a>
+            </p>
+        </div>
+    </main>
+
+    <!-- RODAPÉ (Footer Claro Padronizado) -->
+    <footer class="footer">
+        <div class="footer-brand">
+            <i class="fas fa-coffee"></i>
+            <span>CAFETERIA GOURMET</span>
+        </div>
+        <div class="footer-contact">
+            <a href="mailto:contato@cafeteriagourmet.com.br">contato@cafeteriagourmet.com.br</a>
+        </div>
+        <div class="footer-social">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+        </div>
+    </footer>
+
+    <!-- CONEXÃO DO ARQUIVO MESTRE JAVASCRIPT -->
+    <script src="script.js"></script>
+</body>
+</html>

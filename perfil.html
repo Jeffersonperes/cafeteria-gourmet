@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafeteria Gourmet - Meu Perfil</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- CDN Oficial estável do Font Awesome para carregar todos os ícones da página -->
+    <link rel="stylesheet" href="https://cloudflare.com">
+</head>
+<body>
+
+    <!-- NAVBAR (Topo Escuro Padronizado) -->
+    <header class="navbar">
+        <div class="logo" style="display: flex; align-items: center; gap: 10px; cursor: pointer;" onclick="window.location.href='index.html'">
+            <!-- SÍMBOLO NATIVO DE XÍCARA EM TEXTO PURO (NUNCA FALHA) -->
+            <span style="font-size: 26px; line-height: 1; display: inline-block;">☕</span>
+            <span style="font-family: 'Playfair Display', serif; color: #ffffff; font-weight: bold; font-size: 16px; letter-spacing: 0.5px; line-height: 1.1;">
+                CAFETERIA<br><small style="font-size: 10px; letter-spacing: 2px; color: #DFCEB8; display: block;">GOURMET</small>
+            </span>
+        </div>
+        
+        <!-- O menu ganha o ID correto "nav-menu" -->
+        <nav class="nav-menu" id="nav-menu">
+            <a href="index.html"><i class="fas fa-home"></i> Início</a>
+            <a href="produtos.html"><i class="fas fa-shopping-bag"></i> Produtos</a>
+            <a href="carrinho.html" class="cart-link">
+                <i class="fas fa-shopping-cart"></i> Carrinho 
+                <span class="cart-badge">0</span>
+            </a>
+            <a href="perfil.html" class="active"><i class="fas fa-user"></i> Perfil</a>
+        </nav>
+
+        <!-- O BOTÃO DO MENU HAMBÚRGUER MOBILE -->
+        <button class="menu-hamburger" id="menu-hamburger" type="button" onclick="toggleMenuMobile()">☰</button>
+    </header>
+
+    <!-- CONTEÚDO PRINCIPAL DO PERFIL REESTRUTURADO E DINÂMICO -->
+    <main class="profile-wrapper">
+        
+        <!-- CARD DE INFORMAÇÕES DO USUÁRIO INTEGRADO -->
+        <section class="profile-card user-info-card" id="profile-user-card">
+            <div class="user-avatar-container">
+                <img src="https://dicebear.com" alt="Avatar" class="avatar-img" id="profile-avatar">
+            </div>
+            
+            <div class="user-details-box">
+                <!-- Nome em modo texto puro preenchido dinamicamente pelo JS -->
+                <h2 id="profile-nome">Carregando...</h2>
+                <span class="client-since-badge"><i class="far fa-user"></i> Cliente Gourmet</span>
+                
+                <ul class="user-contact-list">
+                    <!-- O e-mail e dados dinâmicos mapeados por IDs compatíveis com o script -->
+                    <li id="profile-email"><i class="far fa-envelope"></i> Carregando e-mail...</li>
+                    <li id="profile-telefone"><i class="fas fa-phone-alt"></i> (xx) xxxxx-xxxx</li>
+                    <li id="profile-endereco"><i class="fas fa-map-marker-alt"></i> Nenhum endereço cadastrado</li>
+                </ul>
+            </div>
+
+            <div class="profile-actions-column">
+                <!-- REDIRECIONA DIRETAMENTE PARA A PÁGINA DE ALTERAÇÃO COMPLETA -->
+                <button type="button" class="btn-profile-dark" onclick="window.location.href='admin-perfil.html'">Editar Perfil</button>
+                <button type="button" class="btn-profile-outline" onclick="efetuarLogout()"><i class="fas fa-sign-out-alt"></i> Sair da Conta</button>
+            </div>
+        </section>
+
+        <!-- Histórico do Perfil Dinâmico -->
+        <section class="profile-card orders-history-card">
+            <div class="orders-header">
+                <h3>Histórico de Pedidos Recentes</h3>
+                <a href="meus-pedidos.html" class="view-all-orders">Ver todos <i class="fas fa-chevron-right"></i></a>
+            </div>
+            
+            <!-- CONTAINER ONDE O SCRIPT CONECTA AS COMPRAS REAIS DO CLIENTE -->
+            <div class="orders-list" id="profile-orders-container">
+                <p style="font-size: 13px; color: var(--text-muted); padding: 25px; text-align: center; width: 100%;">Nenhum pedido recente encontrado em sua conta.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- RODAPÉ (Padronizado e Alinhado) -->
+    <footer class="footer">
+        <div class="footer-brand"><i class="fas fa-coffee"></i> <span>CAFETERIA GOURMET</span></div>
+        <div class="footer-contact"><a href="mailto:contato@cafeteriagourmet.com.br">contato@cafeteriagourmet.com.br</a></div>
+        <div class="footer-social">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

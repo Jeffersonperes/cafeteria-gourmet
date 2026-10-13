@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafeteria Gourmet - Pedido Confirmado</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Ícones do Font Awesome -->
+    <link rel="stylesheet" href="https://cloudflare.com" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<body>
+
+    <!-- NAVBAR (Topo Escuro) -->
+    <header class="navbar">
+    <div class="logo" style="display: flex; align-items: center; gap: 10px; cursor: pointer;" onclick="window.location.href='index.html'">
+    <!-- SÍMBOLO NATIVO DE XÍCARA EM TEXTO PURO (NUNCA FALHA) -->
+    <span style="font-size: 26px; line-height: 1; display: inline-block;">☕</span>
+    <span style="font-family: 'Playfair Display', serif; color: #ffffff; font-weight: bold; font-size: 16px; letter-spacing: 0.5px; line-height: 1.1;">
+        CAFETERIA<br><small style="font-size: 10px; letter-spacing: 2px; color: #DFCEB8; display: block;">GOURMET</small>
+    </span>
+</div>
+    
+    <!-- O menu ganha o ID correto "nav-menu" -->
+    <nav class="nav-menu" id="nav-menu">
+        <a href="index.html" class="active"><i class="fas fa-home"></i> Início</a>
+        <a href="produtos.html"><i class="fas fa-shopping-bag"></i> Produtos</a>
+        <a href="carrinho.html" class="cart-link">
+            <i class="fas fa-shopping-cart"></i> Carrinho 
+            <span class="cart-badge">0</span>
+        </a>
+        <a href="perfil.html"><i class="fas fa-user"></i> Perfil</a>
+    </nav>
+
+    <!-- O BOTÃO AGORA CHAMA A FUNÇÃO DIRETO NO CLIQUE (IMPOSSÍVEL TRAVAR) -->
+    <button class="menu-hamburger" id="menu-hamburger" type="button" onclick="toggleMenuMobile()">☰</button>
+</header>
+
+        <!-- CONTAINER CENTRAL DA CONFIRMAÇÃO CORRIGIDO -->
+    <main class="success-container">
+        <div class="success-card">
+            
+            <!-- Ícone de Check Verde -->
+            <div class="success-icon-circle">
+                <i class="fas fa-check"></i>
+            </div>
+
+            <h2>Pedido confirmado!</h2>
+            <p class="success-message">Seu pedido foi realizado com sucesso.</p>
+
+            <!-- Bloco do Número do Pedido com ID operacional -->
+            <div class="order-number-box">
+                <small>Número do pedido</small>
+                <!-- ADICIONADO O ID "order-id-display" AQUI -->
+                <div class="order-id" id="order-id-display">#C-2026-00000</div>
+                <p class="email-notice">Enviamos os detalhes para o seu e-mail.</p>
+            </div>
+
+            <!-- Tabela de Resumo Simples com IDs operacionais -->
+            <div class="order-summary-block">
+                <h3>Resumo do pedido</h3>
+                
+                <!-- ADICIONADO O ID "success-items-container" AQUI -->
+                <div class="summary-rows-list" id="success-items-container">
+                    <!-- O JavaScript vai apagar as linhas abaixo e colocar os itens comprados reais -->
+                </div>
+
+                <!-- Linha de Total com ID operacional -->
+                <div class="total-summary-row">
+                    <span class="total-label">Total pago</span>
+                    <!-- ADICIONADO O ID "success-total-display" AQUI -->
+                    <span class="total-value" id="success-total-display">R$ 0,00</span>
+                </div>
+            </div>
+
+            <!-- Botões de Ação Inferiores -->
+            <div class="success-actions-group">
+                <a href="meus-pedidos.html" class="btn-dark-action">Ver meu pedido</a>
+                <a href="index.html" class="btn-outline-action">Voltar ao início</a>
+            </div>
+
+        </div>
+    </main>
+
+
+    <!-- RODAPÉ (Footer Claro) -->
+    <footer class="footer">
+        <div class="footer-brand">
+            <i class="fas fa-seedling"></i>
+            <span>CAFETERIA GOURMET</span>
+        </div>
+        <div class="footer-contact">
+            <a href="mailto:contato@cafeteriagourmet.com.br">contato@cafeteriagourmet.com.br</a>
+        </div>
+        <div class="footer-social">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+        </div>
+    </footer>
+    
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafeteria Gourmet - Checkout</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Biblioteca mestre oficial do Font Awesome para renderizar todos os ícones e logos de pagamento -->
+    <link rel="stylesheet" href="https://cloudflare.com">
+</head>
+<body>
+
+    <!-- NAVBAR (Topo Escuro) -->
+    <header class="navbar">
+    <div class="logo" style="display: flex; align-items: center; gap: 10px; cursor: pointer;" onclick="window.location.href='index.html'">
+    <!-- SÍMBOLO NATIVO DE XÍCARA EM TEXTO PURO (NUNCA FALHA) -->
+    <span style="font-size: 26px; line-height: 1; display: inline-block;">☕</span>
+    <span style="font-family: 'Playfair Display', serif; color: #ffffff; font-weight: bold; font-size: 16px; letter-spacing: 0.5px; line-height: 1.1;">
+        CAFETERIA<br><small style="font-size: 10px; letter-spacing: 2px; color: #DFCEB8; display: block;">GOURMET</small>
+    </span>
+</div>
+    
+    <!-- O menu ganha o ID correto "nav-menu" -->
+    <nav class="nav-menu" id="nav-menu">
+        <a href="index.html" class="active"><i class="fas fa-home"></i> Início</a>
+        <a href="produtos.html"><i class="fas fa-shopping-bag"></i> Produtos</a>
+        <a href="carrinho.html" class="cart-link">
+            <i class="fas fa-shopping-cart"></i> Carrinho 
+            <span class="cart-badge">0</span>
+        </a>
+        <a href="perfil.html"><i class="fas fa-user"></i> Perfil</a>
+    </nav>
+
+    <!-- O BOTÃO AGORA CHAMA A FUNÇÃO DIRETO NO CLIQUE (IMPOSSÍVEL TRAVAR) -->
+    <button class="menu-hamburger" id="menu-hamburger" type="button" onclick="toggleMenuMobile()">☰</button>
+</header>
+
+    <!-- CONTEÚDO PRINCIPAL DO CHECKOUT -->
+    <main class="checkout-wrapper">
+        
+        <!-- COLUNA ESQUERDA: DADOS DE ENTREGA E PAGAMENTO -->
+        <div class="checkout-left-column">
+            
+            <!-- Bloco: Endereço de Entrega -->
+            <section class="checkout-section-card">
+                <h2>Endereço de entrega</h2>
+                <form class="checkout-form">
+                    
+                    <div class="form-row full-width">
+                        <div class="form-group">
+                            <label for="nome">Nome completo</label>
+                            <input type="text" id="nome" placeholder="Digite seu nome completo">
+                        </div>
+                    </div>
+
+                    <div class="form-row split-half">
+                        <div class="form-group">
+                            <label for="cep">CEP</label>
+                            <input type="text" id="cep" placeholder="00000-000" maxlength="9">
+                        </div>
+                        <div class="form-group">
+                            <label for="cidade">Cidade</label>
+                            <input type="text" id="cidade" placeholder="Cidade - UF" readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-row full-width">
+                        <div class="form-group">
+                            <label for="endereco">Endereço</label>
+                            <input type="text" id="endereco" placeholder="Rua, Avenida, Logradouro...">
+                        </div>
+                    </div>
+
+                    <div class="form-row split-half">
+                        <div class="form-group">
+                            <label for="numero">Número</label>
+                            <input type="text" id="numero" placeholder="Ex: 123">
+                        </div>
+                        <div class="form-group">
+                            <label for="bairro">Bairro</label>
+                            <input type="text" id="bairro" placeholder="Bairro">
+                        </div>
+                    </div>
+
+                    <div class="form-row full-width">
+                        <div class="form-group">
+                            <label for="complemento">Complemento (opcional)</label>
+                            <input type="text" id="complemento" placeholder="Apto, Bloco, Referência...">
+                        </div>
+                    </div>
+
+                    <div class="form-row split-half">
+                        <div class="form-group input-phone-width">
+                            <label for="telefone">Telefone</label>
+                            <input type="tel" id="telefone" placeholder="(61) 99999-9999" maxlength="15">
+                        </div>
+                    </div>
+
+                </form>
+            </section>
+
+            <!-- Bloco: Forma de Pagamento -->
+            <section class="checkout-section-card margin-top-box">
+                <h2>Forma de pagamento</h2>
+                <div class="payment-options-list">
+                    
+                    <!-- Opção 1: Cartão de Crédito -->
+                    <label class="payment-method-row active">
+                        <div class="radio-title">
+                            <input type="radio" name="pagamento" checked>
+                            <span class="custom-radio"></span>
+                            <span>Cartão de crédito</span>
+                        </div>
+                        <div class="payment-logos">
+                            <i class="fab fa-cc-visa text-visa"></i>
+                            <i class="fab fa-cc-mastercard text-master"></i>
+                            <span class="badge-elo">elo</span>
+                        </div>
+                    </label>
+
+                    <!-- Opção 2: Pix -->
+                    <label class="payment-method-row">
+                        <div class="radio-title">
+                            <input type="radio" name="pagamento">
+                            <span class="custom-radio"></span>
+                            <span>Pix</span>
+                        </div>
+                        <div class="payment-logos">
+                            <span class="pix-logo-text"><i class="fas fa-bolt"></i> pix</span>
+                        </div>
+                    </label>
+
+                    <!-- Opção 3: Boleto Bancário -->
+                    <label class="payment-method-row">
+                        <div class="radio-title">
+                            <input type="radio" name="pagamento">
+                            <span class="custom-radio"></span>
+                            <span>Boleto bancário</span>
+                        </div>
+                        <div class="payment-logos">
+                            <i class="fas fa-barcode barcode-icon"></i>
+                        </div>
+                    </label>
+
+                </div>
+            </section>
+
+        </div>
+
+        <!-- COLUNA DIREITA: RESUMO DO PEDIDO DINÂMICO -->
+        <div class="checkout-right-column">
+            <div class="sticky-summary-card">
+                <h2>Resumo do pedido</h2>
+                
+                <!-- Lista gerenciada via JavaScript -->
+                <div class="summary-items-list" id="checkout-items-container"></div>
+
+                <!-- Divisórias de Valores Financeiros -->
+                <div class="financial-block">
+                    <div class="financial-row">
+                        <span>Subtotal</span>
+                        <strong id="checkout-subtotal">R$ 0,00</strong>
+                    </div>
+                    <div class="financial-row">
+                        <span>Frete</span>
+                        <strong id="checkout-frete">R$ 0,00</strong>
+                    </div>
+                    <div class="financial-row total-row">
+                        <span class="total-title">Total</span>
+                        <span class="total-value" id="checkout-total">R$ 0,00</span>
+                    </div>
+                </div>
+
+                <!-- Botão de Finalização de Fluxo -->
+                <button type="submit" class="btn-finalize-checkout" id="btn-finalizar-pedido">Finalizar compra</button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- RODAPÉ (Footer Claro) -->
+    <footer class="footer">
+        <div class="footer-brand">
+            <i class="fas fa-seedling"></i>
+            <span>CAFETERIA GOURMET</span>
+        </div>
+        <div class="footer-contact">
+            <a href="mailto:contato@cafeteriagourmet.com.br">contato@cafeteriagourmet.com.br</a>
+        </div>
+        <div class="footer-social">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+        </div>
+    </footer>
+
+    <!-- Executa o arquivo script.js integrado de CEP e resumo -->
+    <script src="script.js"></script>
+    
+</body>
+</html>

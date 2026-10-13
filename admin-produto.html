@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafeteria Gourmet - Gerenciar Produto</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Ícones do Font Awesome -->
+    <link rel="stylesheet" href="https://cloudflare.com" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<body>
+
+    <!-- CONTAINER PRINCIPAL DO DASHBOARD -->
+    <div class="admin-wrapper">
+
+        <!-- BARRA LATERAL DE NAVEGAÇÃO (Sidebar) -->
+        <aside class="admin-sidebar">
+            <div class="admin-logo">
+                <i class="fas fa-coffee"></i>
+                <span>CAFETERIA<br><small>GOURMET</small></span>
+            </div>
+            <span class="sidebar-section-title">Gerenciamento</span>
+            <nav class="sidebar-menu">
+                <a href="admin.html"><i class="fas fa-chart-pie"></i> Dashboard</a>
+                <a href="#" class="active"><i class="fas fa-box-open"></i> Produtos</a>
+                <a href="#"><i class="fas fa-shopping-basket"></i> Pedidos</a>
+                <a href="#"><i class="fas fa-users"></i> Clientes</a>
+                <a href="#"><i class="fas fa-sliders-h"></i> Configurações</a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="index.html" class="btn-exit-admin"><i class="fas fa-sign-out-alt"></i> Sair do Painel</a>
+            </div>
+        </aside>
+
+        <!-- ÁREA DE CONTEÚDO PRINCIPAL -->
+        <div class="admin-content-area">
+            
+            <!-- Link de retorno para a listagem -->
+            <div class="order-details-back">
+                <a href="admin.html"><i class="fas fa-chevron-left"></i> Voltar para Produtos</a>
+            </div>
+
+            <!-- Barra Superior do Formulário -->
+            <header class="admin-topbar">
+                <div class="topbar-title">
+                    <h2>Cadastrar Novo Produto</h2>
+                    <p>Adicione um novo café ou item ao catálogo da loja.</p>
+                </div>
+            </header>
+
+            <!-- FORMULÁRIO DE CADASTRO -->
+            <form class="product-form-wrapper" id="form-admin-produto">
+                <div class="product-form-grid">
+                    
+                    <!-- COLUNA DA ESQUERDA: DADOS DO PRODUTO -->
+                    <div class="form-left-column">
+                        <div class="details-card">
+                            <h3>Informações Básicas</h3>
+                            
+                            <div class="admin-form-group">
+                                <label for="prod-name">Nome do Produto</label>
+                                <input type="text" id="prod-name" placeholder="Ex: Café Especial Bourbon" required>
+                            </div>
+
+                            <div class="admin-form-row">
+                                <div class="admin-form-group">
+                                    <label for="prod-type">Tipo de Café</label>
+                                    <div class="admin-custom-select">
+                                        <select id="prod-type" required>
+                                            <option value="" disabled selected>Selecione o tipo</option>
+                                            <option value="tradicional">Tradicional</option>
+                                            <option value="especial">Especial</option>
+                                            <option value="gourmet">Gourmet</option>
+                                            <option value="organico">Orgânico</option>
+                                        </select>
+                                        <i class="fas fa-chevron-down"></i>
+                                    </div>
+                                </div>
+                                <div class="admin-form-group">
+                                    <label for="prod-weight">Peso / Tamanho</label>
+                                    <input type="text" id="prod-weight" placeholder="Ex: 250g" required>
+                                </div>
+                            </div>
+
+                            <div class="admin-form-row">
+                                <div class="admin-form-group">
+                                    <label for="prod-price">Preço de Venda (R$)</label>
+                                    <input type="number" id="prod-price" step="0.01" placeholder="0,00" required>
+                                </div>
+                                <div class="admin-form-group">
+                                    <label for="prod-stock">Estoque Inicial</label>
+                                    <input type="number" id="prod-stock" placeholder="0" required>
+                                </div>
+                            </div>
+
+                            <div class="admin-form-group">
+                                <label for="prod-desc">Descrição do Produto</label>
+                                <textarea id="prod-desc" rows="5" placeholder="Descreva as notas aromáticas, tipo de torra e detalhes do sabor..." required></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- COLUNA DA DIREITA: MÍDIA E PREVIEW -->
+                    <div class="form-right-column">
+                        
+                        <!-- Bloco de Upload de Imagem -->
+                        <div class="details-card">
+                            <h3>Imagem do Produto</h3>
+                            <div class="image-upload-container">
+                                <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                                <p class="upload-text">Arrastar e soltar imagem ou</p>
+                                <label for="file-upload" class="btn-file-select">Selecionar Arquivo</label>
+                                <input type="file" id="file-upload" accept="image/*">
+                                <span class="upload-constraints">Suporta PNG, JPG ou WEBP (Máx: 2MB)</span>
+                            </div>
+                        </div>
+
+                        <!-- Botões de Salvamento rápidos embaixo -->
+                        <div class="form-actions-box margin-top-box">
+                            <button type="submit" class="btn-admin-save">Salvar Produto</button>
+                            <button type="button" class="btn-admin-cancel" onclick="window.location.href='admin.html'">Cancelar</button>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+</body>
+</html>

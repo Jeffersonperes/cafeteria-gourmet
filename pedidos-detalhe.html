@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafeteria Gourmet - Detalhes do Pedido</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- CDN Oficial e estável do Font Awesome para carregar todos os ícones da página -->
+    <link rel="stylesheet" href="https://cloudflare.com">
+</head>
+<body>
+
+    <!-- NAVBAR (Topo Escuro Padronizado) -->
+    <header class="navbar">
+    <div class="logo" style="display: flex; align-items: center; gap: 10px; cursor: pointer;" onclick="window.location.href='index.html'">
+    <!-- SÍMBOLO NATIVO DE XÍCARA EM TEXTO PURO (NUNCA FALHA) -->
+    <span style="font-size: 26px; line-height: 1; display: inline-block;">☕</span>
+    <span style="font-family: 'Playfair Display', serif; color: #ffffff; font-weight: bold; font-size: 16px; letter-spacing: 0.5px; line-height: 1.1;">
+        CAFETERIA<br><small style="font-size: 10px; letter-spacing: 2px; color: #DFCEB8; display: block;">GOURMET</small>
+    </span>
+</div>
+    
+    <!-- O menu ganha o ID correto "nav-menu" -->
+    <nav class="nav-menu" id="nav-menu">
+        <a href="index.html" class="active"><i class="fas fa-home"></i> Início</a>
+        <a href="produtos.html"><i class="fas fa-shopping-bag"></i> Produtos</a>
+        <a href="carrinho.html" class="cart-link">
+            <i class="fas fa-shopping-cart"></i> Carrinho 
+            <span class="cart-badge">0</span>
+        </a>
+        <a href="perfil.html"><i class="fas fa-user"></i> Perfil</a>
+    </nav>
+
+    <!-- O BOTÃO AGORA CHAMA A FUNÇÃO DIRETO NO CLIQUE (IMPOSSÍVEL TRAVAR) -->
+    <button class="menu-hamburger" id="menu-hamburger" type="button" onclick="toggleMenuMobile()">☰</button>
+</header>
+
+    <!-- CONTEÚDO PRINCIPAL: DETALHES DO PEDIDO DINÂMICO -->
+    <main class="order-details-container">
+        
+        <!-- Cabeçalho com link de retorno -->
+        <div class="order-details-back">
+            <a href="meus-pedidos.html"><i class="fas fa-chevron-left"></i> Voltar para Meus Pedidos</a>
+        </div>
+
+        <div class="order-details-grid">
+            
+            <!-- COLUNA DA ESQUERDA: INFORMAÇÕES GERAIS -->
+            <div class="details-left-column">
+                
+                <!-- Card 1: Resumo do Status -->
+                <section class="details-card">
+                    <div class="order-id-header">
+                        <h2 id="detail-order-id">Pedido #C-2026-00000</h2>
+                        <div class="status-badge-tag status-delivered" id="detail-order-status">
+                            <i class="far fa-clock"></i> Processando
+                        </div>
+                    </div>
+                    <p class="order-meta-text" id="detail-order-date"><i class="far fa-calendar"></i> Realizado em --/--/----</p>
+                </section>
+
+                <!-- Card 2: Dados de Entrega -->
+                <section class="details-card margin-top-box">
+                    <h3>Endereço de entrega</h3>
+                    <div class="info-block-content" id="detail-delivery-box">
+                        <!-- O JavaScript vai injetar o Nome, Rua, Bairro e Telefone reais aqui -->
+                    </div>
+                </section>
+
+                <!-- Card 3: Forma de Pagamento -->
+                <section class="details-card margin-top-box">
+                    <h3>Forma de pagamento</h3>
+                    <div class="info-block-content payment-detail-row">
+                        <div class="payment-method-info">
+                            <i class="fab fa-cc-visa text-visa" id="detail-payment-icon"></i>
+                            <span id="detail-payment-name">Cartão de Crédito</span>
+                        </div>
+                        <span class="payment-status-tag">Pago</span>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- COLUNA DA DIREITA: ITENS E VALORES -->
+            <div class="details-right-column">
+                
+                <!-- Card 4: Resumo dos Itens Comprados -->
+                <section class="details-card sticky-card">
+                    <h3>Itens do pedido</h3>
+                    
+                    <div class="details-items-list" id="detail-items-container">
+                        <!-- O JavaScript vai injetar as linhas dos produtos comprados aqui dentro -->
+                    </div>
+
+                    <!-- Bloco de Fechamento Financeiro com IDs operacionais -->
+                    <div class="financial-summary-block">
+                        <div class="financial-summary-row">
+                            <span>Subtotal</span>
+                            <strong id="detail-subtotal">R$ 0,00</strong>
+                        </div>
+                        <div class="financial-summary-row">
+                            <span>Frete</span>
+                            <strong id="detail-shipping">R$ 0,00</strong>
+                        </div>
+                        <div class="financial-summary-row total-summary-line">
+                            <span class="total-summary-title">Total</span>
+                            <span class="total-summary-value" id="detail-total">R$ 0,00</span>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+
+        </div>
+    </main>
+
+    <!-- RODAPÉ (Padronizado) -->
+    <footer class="footer">
+        <div class="footer-brand">
+            <i class="fas fa-coffee"></i>
+            <span>CAFETERIA GOURMET</span>
+        </div>
+        <div class="footer-contact">
+            <a href="mailto:contato@cafeteriagourmet.com.br">contato@cafeteriagourmet.com.br</a>
+        </div>
+        <div class="footer-social">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+        </div>
+    </footer>
+
+    <!-- EXECUÇÃO DA INTERATIVIDADE DO ARQUIVO MESTRE -->
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafeteria Gourmet</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Ícones do Font Awesome corretos e funcionais para a Web -->
+    <link rel="stylesheet" href="https://cloudflare.com" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+    <div class="logo" style="display: flex; align-items: center; gap: 10px; cursor: pointer;" onclick="window.location.href='index.html'">
+    <!-- SÍMBOLO NATIVO DE XÍCARA EM TEXTO PURO (NUNCA FALHA) -->
+    <span style="font-size: 26px; line-height: 1; display: inline-block;">☕</span>
+    <span style="font-family: 'Playfair Display', serif; color: #ffffff; font-weight: bold; font-size: 16px; letter-spacing: 0.5px; line-height: 1.1;">
+        CAFETERIA<br><small style="font-size: 10px; letter-spacing: 2px; color: #DFCEB8; display: block;">GOURMET</small>
+    </span>
+</div>
+    
+    <!-- O menu ganha o ID correto "nav-menu" -->
+    <nav class="nav-menu" id="nav-menu">
+        <a href="index.html" class="active"><i class="fas fa-home"></i> Início</a>
+        <a href="produtos.html"><i class="fas fa-shopping-bag"></i> Produtos</a>
+        <a href="carrinho.html" class="cart-link">
+            <i class="fas fa-shopping-cart"></i> Carrinho 
+            <span class="cart-badge">0</span>
+        </a>
+        <a href="perfil.html"><i class="fas fa-user"></i> Perfil</a>
+    </nav>
+
+    <!-- O BOTÃO AGORA CHAMA A FUNÇÃO DIRETO NO CLIQUE (IMPOSSÍVEL TRAVAR) -->
+    <button class="menu-hamburger" id="menu-hamburger" type="button" onclick="toggleMenuMobile()">☰</button>
+</header>
+
+    <!-- HERO BANNER -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Sinta o sabor que inspira seus melhores momentos.</h1>
+            <a href="produtos.html" class="btn-hero">Conheça nossos cafés</a>
+        </div>
+        <div class="hero-image">
+            <img src="img/banner.jpg" alt="Xícara de Café Quente">
+        </div>
+    </section>
+
+    <!-- SEÇÃO DE PRODUTOS -->
+    <main class="products-section">
+        <div class="section-header">
+            <h2>Destaques para você</h2>
+            <a href="produtos.html" class="see-all">Ver todos <i class="fas fa-chevron-right"></i></a>
+        </div>
+
+        <div class="products-grid">
+            <!-- Card 1 -->
+            <div class="product-card">
+                <div class="product-img-container">
+                    <img src="img/imagem-1.jpg" alt="Café Especial Bourbon">
+                </div>
+                <h3>Café Especial Bourbon</h3>
+                <div class="product-footer">
+                    <span class="price">R$ 32,90</span>
+                    <button class="btn-add" 
+                            data-id="1" 
+                            data-name="Café Especial Bourbon" 
+                            data-price="32.90" 
+                            data-image="https://unsplash.com">+</button>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="product-card">
+                <div class="product-img-container">
+                    <img src="img/imagem-2.jpg" alt="Café 100% arábico">
+                </div>
+                <h3>Café Gourmet 100% Arábica</h3>
+                <div class="product-footer">
+                    <span class="price">R$ 28,90</span>
+                    <button class="btn-add" 
+                            data-id="2" 
+                    data-name="Café Gourmet 100% Arábica" 
+                            data-price="28.90" 
+                            data-image="https://unsplash.com">+</button>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="product-card">
+                <div class="product-img-container">
+                    <img src="img/imagem-3.jpg" alt="Café organico torra média">
+                </div>
+                <h3>Café Orgânico Torra Média</h3>
+                <div class="product-footer">
+                    <span class="price">R$ 34,90</span>
+                    <button class="btn-add" 
+                            data-id="3" 
+                            data-name="Café Orgânico Torra Média" 
+                            data-price="34.90" 
+                            data-image="https://unsplash.com">+</button>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="product-card">
+                <div class="product-img-container">
+                    <img src="img/imagem-4.jpg" alt="Kit degustação 3 cafés">
+                </div>
+                <h3>Kit Degustação 3 Cafés</h3>
+                <div class="product-footer">
+                    <span class="price">R$ 49,90</span>
+                    <button class="btn-add" 
+                            data-id="4" 
+                            data-name="Kit Degustação 3 Cafés" 
+                            data-price="49.90" 
+                            data-image="https://unsplash.com">+</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- RECURSOS / DIFERENCIAIS -->
+    <section class="features">
+        <div class="feature-item">
+            <i class="fas fa-truck"></i>
+            <div>
+                <p>Entrega rápida</p>
+                <small>e segura</small>
+            </div>
+        </div>
+        <div class="feature-item">
+            <i class="fas fa-award"></i>
+            <div>
+                <p>Cafés selecionados</p>
+                <small>com qualidade</small>
+            </div>
+        </div>
+        <div class="feature-item">
+            <i class="fas fa-shield-alt"></i>
+            <div>
+                <p>Pagamento</p>
+                <small>100% seguro</small>
+            </div>
+        </div>
+        <div class="feature-item">
+            <i class="fas fa-headset"></i>
+            <div>
+                <p>Atendimento</p>
+                <small>especializado</small>
+            </div>
+        </div>
+    </section>
+
+    <!-- RODAPÉ -->
+    <footer class="footer">
+        <div class="footer-brand">
+            <i class="fas fa-coffee"></i>
+            <span>CAFETERIA GOURMET</span>
+        </div>
+        <div class="footer-contact">
+            <a href="mailto:contato@cafeteriagourmet.com.br">contato@cafeteriagourmet.com.br</a>
+        </div>
+        <div class="footer-social">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+        </div>
+    </footer>
+
+    <!-- Link mestre do Script único -->
+    <script src="script.js"></script>
+</body>
+</html>
