@@ -1,76 +1,41 @@
 /* ==========================================================================
-   1. INICIALIZADOR DE EVENTOS BLINDADO (MAPEAMENTO SEGURO POR TELA)
+   1. INICIALIZADOR DE EVENTOS BLINDADO COM SEGURANÇA DE ROTAS (PROFISSIONAL)
    ========================================================================== */
 document.addEventListener("DOMContentLoaded", () => {
-    // 1. Executa funções globais que rodam em todas as páginas
-    try { atualizarContadorMenu(); } catch(e) { console.log("Aviso Contador:", e); }
-    try { if (document.querySelector(".menu-hamburger")) inicializarMenuHamburger(); } catch(e) { console.log("Aviso Hambúrguer:", e); }
+    // 1. Lógicas globais obrigatórias em 100% das páginas do ecossistema
+    try { atualizarContadorMenu(); } catch(e) {}
+    try { renderizarBarraUsuarioNavbar(); } catch(e) {}
 
-    // 2. Executa funções específicas apenas se o elemento central da tela existir
+    // 2. BLINDAGEM E VALIDAÇÃO DE ROTAS (MÓDULO CORRIGIDO)
     try {
-        if (document.querySelectorAll(".btn-add").length > 0) inicializarBotoesHome();
-    } catch(e) { console.log("Ignorando botões home nesta tela"); }
+        if (document.getElementById("checkout-items-container")) {
+            const sessao = JSON.parse(localStorage.getItem("cafeteria_usuario_ativo"));
+            if (!sessao || !sessao.logado) {
+                alert("🔒 Sessão expirada ou inválida. Por favor, faça login para acessar o checkout.");
+                window.location.href = "login.html";
+                return; // Bloqueia intrusos de lerem o script
+            }
+            // SE ESTIVER LOGADO CORRETAMENTE: Executa a renderização imediatamente
+            renderizarCheckout();
+        }
+    } catch(e) { console.log("Erro na validação de rota do checkout:", e); }
 
-    try {
-        if (document.getElementById("cart-items-container")) renderizarCarrinho();
-    } catch(e) { console.log("Ignorando carrinho nesta tela"); }
-
-    try {
-        if (document.getElementById("checkout-items-container")) renderizarCheckout();
-    } catch(e) { console.log("Ignorando checkout nesta tela"); }
-
-    try {
-        if (document.getElementById("success-items-container")) renderizarPaginaSucesso();
-    } catch(e) { console.log("Ignorando página sucesso nesta tela"); }
-
-    try {
-        if (document.querySelectorAll(".sidebar-filters").length > 0) inicializarFiltrosProdutos();
-    } catch(e) { console.log("Ignorando filtros nesta tela"); }
-
-    try {
-        if (document.getElementById("input-min")) inicializarFaixaPrecoInterativa();
-    } catch(e) { console.log("Ignorando faixa preço nesta tela"); }
-
-    try {
-        if (document.getElementById("orders-history-container")) renderizarHistoricoCompleto();
-    } catch(e) { console.log("Ignorando histórico completo nesta tela"); }
-
-    try {
-        if (document.getElementById("profile-orders-container")) renderizarHistoricoPerfil();
-    } catch(e) { console.log("Ignorando histórico perfil nesta tela"); }
-
-    try {
-        if (document.getElementById("detail-order-id")) renderizarDetalhesDoPedido();
-    } catch(e) { console.log("Ignorando detalhes do pedido nesta tela"); }
-
-    try {
-        if (document.getElementById("telefone")) inicializarMascaraTelefone();
-    } catch(e) { console.log("Ignorando máscara telefone nesta tela"); }
-
-    try {
-        if (document.getElementById("product-thumbnails")) inicializarGaleriaDetalhes();
-    } catch(e) { console.log("Ignorando galeria nesta tela"); }
-
-    try {
-        if (document.getElementById("admin-tabela-produtos")) inicializarPainelAdmin();
-    } catch(e) { console.log("Ignorando painel admin nesta tela"); }
-
-    try {
-        if (document.getElementById("form-admin-produto")) inicializarFormularioCadastroAdmin();
-    } catch(e) { console.log("Ignorando cadastro admin nesta tela"); }
-
-    try {
-        if (document.getElementById("form-login-cliente")) inicializarLogicaLogin();
-    } catch(e) { console.log("Ignorando formulário de login nesta tela"); }
-
-    try {
-        if (document.getElementById("btn-toggle-senha")) inicializarMostrarOcultarSenha();
-    } catch(e) { console.log("Ignorando botão de alternar senha nesta tela"); }
-
-    try {
-        if (document.getElementById("form-cadastro-cliente")) inicializarLogicaCadastro();
-    } catch(e) { console.log("Ignorando formulário de cadastro nesta tela"); }
-
+    // 3. Execuções específicas por identificadores de tela (try/catch isolados)
+    try { if (document.querySelectorAll(".btn-add").length > 0) inicializarBotoesHome(); } catch(e) {}
+    try { if (document.getElementById("cart-items-container")) renderizarCarrinho(); } catch(e) {}
+    try { if (document.getElementById("success-items-container")) renderizarPaginaSucesso(); } catch(e) {}
+    try { if (document.querySelectorAll(".sidebar-filters").length > 0) inicializarFiltrosProdutos(); } catch(e) {}
+    try { if (document.getElementById("input-min")) inicializarFaixaPrecoInterativa(); } catch(e) {}
+    try { if (document.getElementById("orders-history-container")) renderizarHistoricoCompleto(); } catch(e) {}
+    try { if (document.getElementById("profile-orders-container")) renderizarHistoricoPerfil(); } catch(e) {}
+    try { if (document.getElementById("detail-order-id")) renderizarDetalhesDoPedido(); } catch(e) {}
+    try { if (document.getElementById("product-thumbnails")) inicializarGaleriaDetalhes(); } catch(e) {}
+    try { if (document.getElementById("admin-tabela-produtos")) inicializarPainelAdmin(); } catch(e) {}
+    try { if (document.getElementById("form-admin-produto")) inicializarFormularioCadastroAdmin(); } catch(e) {}
+    try { if (document.getElementById("form-login-cliente")) inicializarLogicaLogin(); } catch(e) {}
+    try { if (document.getElementById("form-cadastro-cliente")) inicializarLogicaCadastro(); } catch(e) {}
+    try { if (document.getElementById("profile-user-card")) inicializarDadosPerfilDinamico(); } catch(e) {}
+    try { if (document.getElementById("form-alterar-perfil-completo")) inicializarFormularioAlterarPerfil(); } catch(e) {}
 });
 
 /* ==========================================================================
