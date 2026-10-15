@@ -264,52 +264,66 @@ function atualizarValoresFinanceiros(subtotal) {
 
 
 /* ==========================================================================
-   4. MÓDULO: RENDERIZAÇÃO DINÂMICA DA TELA DE CHECKOUT (CONTINUAÇÃO)
+   4. MÓDULO: RENDERIZAÇÃO E PAGAMENTO REAL INTEGRADO (CHECKOUT)
    ========================================================================== */
-function atualizarValoresCheckout(subtotal) {
-    const frete = subtotal > 0 ? 9.90 : 0;
-    const total = subtotal + frete;
-
-    document.getElementById("checkout-subtotal").textContent = `R$ ${subtotal.toFixed(2).replace(".", ",")}`;
-    document.getElementById("checkout-frete").textContent = `R$ ${frete.toFixed(2).replace(".", ",")}`;
-    document.getElementById("checkout-total").textContent = `R$ ${total.toFixed(2).replace(".", ",")}`;
-}
-
 function inicializarBotaoFinalizar() {
     const btnFinalizar = document.getElementById("btn-finalizar-pedido");
     if (!btnFinalizar) return;
 
-    btnFinalizar.addEventListener("click", (evento) => {
-        evento.preventDefault();
+    btnFinalizar.addEventListener("click", async (evento) => {
+        evento.preventDefault(); 
+        
         let carrinho = JSON.parse(localStorage.getItem("cafeteria_carrinho")) || [];
         if (carrinho.length === 0) {
             alert("Seu carrinho está vazio!");
             return;
         }
-        const numeroAleatorio = Math.floor(10000 + Math.random() * 90000);
-        const pedidoID = `#C-2026-${numeroAleatorio}`;
-        const subtotal = carrinho.reduce((soma, item) => soma + (item.price * item.quantity), 0);
-        const totalPago = subtotal + 9.90;
 
-        const dataAtual = new Date();
-        const dataFormatada = dataAtual.toLocaleDateString("pt-BR");
-        const horaFormatada = dataAtual.toLocaleTimeString("pt-BR", { hour: '2-digit', minute: '2-digit' });
+        const usuarioAtivo = JSON.parse(localStorage.getItem("cafeteria_usuario_ativo")) || {};
 
-        const dadosNovoPedido = {
-            id: pedidoID,
-            data: `${dataFormatada} às ${horaFormatada}`,
-            items: carrinho,
-            total: totalPago,
-            status: "Processando",
-            primeiraImagem: carrinho[0] ? carrinho[0].image : "https://unsplash.com"
+        // 1. Mudança visual profissional: dá feedback instantâneo de segurança para o cliente
+        btnFinalizar.innerText = "🔒 Conectando ao Ambiente de Pagamento Seguro...";
+        btnFinalizar.style.backgroundColor = "var(--success-green)";
+        btnFinalizar.disabled = true;
+
+        // Prepara os parâmetros para enviar ao servidor da Vercel
+        const dadosTransacao = {
+            itens: carrinho,
+            emailUsuario: usuarioAtivo.email || "cliente@email.com"
         };
 
-        localStorage.setItem("cafeteria_ultimo_pedido", JSON.stringify(dadosNovoPedido));
-        let historicoGeral = JSON.parse(localStorage.getItem("cafeteria_historico_pedidos")) || [];
-        historicoGeral.unshift(dadosNovoPedido);
-        localStorage.setItem("cafeteria_historico_pedidos", JSON.stringify(historicoGeral));
-        window.location.href = "pedido-confirmado.html";
+        try {
+            // 2. CONEXÃO MESTRE: Dispara a chamada para a função serverless na Vercel
+            // ATENÇÃO: Substitua o link abaixo pela URL real que a Vercel gerou para o seu projeto!
+            const respostaServidor = await fetch("https://cafeteria-gourmet-one.vercel.app/", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(dadosTransacao)
+            });
+
+            const resultadoAPI = await respostaServidor.json();
+
+            if (resultadoAPI.urlCheckout) {
+                // 3. REDIRECIONAMENTO REAL: Envia o cliente para o ambiente criptografado do Mercado Pago
+                window.location.href = resultadoAPI.urlCheckout;
+            } else {
+                alert("⚠️ Ocorreu um problema ao gerar o link de pagamento. Tente novamente.");
+                resetarBotaoFinalizar(btnFinalizar);
+            }
+
+        } catch (erro) {
+            console.error("Erro na comunicação com a API de pagamentos:", erro);
+            alert("Não foi possível estabelecer uma conexão segura com o gateway de pagamento.");
+            resetarBotaoFinalizar(btnFinalizar);
+        }
     });
+}
+
+// Função auxiliar para restaurar o botão caso o link falhe
+function resetarBotaoFinalizar(botao) {
+    botao.innerText = "Finalizar Pedido";
+    botao.disabled = false;
+    botao.style.backgroundColor = "var(--bg-dark-brown)";
 }
 
 /* ==========================================================================
