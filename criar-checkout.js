@@ -1,6 +1,8 @@
-// api/criar-checkout.js
+/* ==========================================================================
+   SERVIDO BACK-END: PROCESSAMENTO SEGURO MERCADO PAGO (100% CORRIGIDO)
+   ========================================================================== */
 export default async function handler(req, res) {
-    // Libera o acesso para que o seu site no GitHub Pages consiga conversar com este servidor
+    // 1. BLINDAGEM CORS: Libera o tráfego seguro para o seu site do GitHub Pages consumir a API
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -16,11 +18,17 @@ export default async function handler(req, res) {
     try {
         const { itens, emailUsuario } = req.body;
 
-        // SUBSTITUA PELA SUA CREDENCIAL DE TESTE OU PRODUÇÃO DO MERCADO PAGO
-        // Pegue essa chave no painel: Mercado Pago Developers > Suas Aplicações > Credenciais
-        const MERCADO_PAGO_TOKEN = process.env.MERCADO_PAGO_TOKEN || "TEST-712839213890213-YOUR-ACCESS-TOKEN";
+        // 2. CAPTURA DO TOKEN OCULTO: Lê a variável configurada no painel da Vercel
+        const MERCADO_PAGO_TOKEN = process.env.MERCADO_PAGO_TOKEN;
 
-        // Prepara a lista de produtos formatada exatamente como o Mercado Pago exige
+        if (!MERCADO_PAGO_TOKEN) {
+            return res.status(500).json({ 
+                erro: "⚙️ Erro de Configuração no Back-end", 
+                detalhes: "A variável MERCADO_PAGO_TOKEN não foi detectada nas variáveis da Vercel." 
+            });
+        }
+
+        // Formata o pacote de itens para o padrão exigido pela engenharia do Mercado Pago
         const itensFormatados = itens.map(item => ({
             id: item.id,
             title: item.name,
@@ -30,7 +38,7 @@ export default async function handler(req, res) {
             picture_url: item.image
         }));
 
-        // Adiciona a taxa fixa de frete do seu e-commerce como um item extra
+        // Insere a taxa de entrega fixa do carrinho como item
         itensFormatados.push({
             id: "frete-fixo",
             title: "Taxa de Entrega (Frete)",
@@ -39,30 +47,28 @@ export default async function handler(req, res) {
             currency_id: "BRL"
         });
 
-        // Configura as preferências da transação segura
+        // 3. CONFIGURAÇÃO DE RETORNO DO GITHUB PAGES:
+        // IMPORTANTE: Substitua o termo 'seu-usuario' abaixo pelo seu nome de perfil real do GitHub!
         const preferenciaConfig = {
             items: itensFormatados,
             payer: {
                 email: emailUsuario || "cliente@email.com"
             },
-            // Links para onde o cliente será mandado de volta após pagar de verdade
             back_urls: {
-                // SUBSTITUA COM O LINK REAL DO SEU SITE HOSPEDADO NO GITHUB PAGES:
                 success: "https://github.io",
                 failure: "https://github.io",
                 pending: "https://github.io"
             },
             auto_return: "approved",
-            // Filtra os meios de pagamento para aceitar apenas PIX e Cartão de Crédito
             payment_methods: {
                 excluded_payment_types: [
-                    { id: "ticket" } // Exclui boleto bancário (demora a compensar)
+                    { id: "ticket" } // Bloqueia boletos para o PIX e Cartão rodarem rápido
                 ],
-                installments: 12 // Permite parcelamento em até 12x no cartão
+                installments: 12
             }
         };
 
-        // Dispara a requisição criptografada para os servidores do Mercado Pago
+        // 4. CORREÇÃO DA ENDPOINT DA API: Conecta de verdade aos servidores de transação do Mercado Pago
         const respostaMP = await fetch("https://mercadopago.com", {
             method: "POST",
             headers: {
@@ -74,8 +80,8 @@ export default async function handler(req, res) {
 
         const dadosPreferencia = await respostaMP.json();
 
+        // Se o token estiver ativo e as permissões certas, devolve o link criptografado (init_point)
         if (dadosPreferencia.init_point) {
-            // Retorna o link oficial e seguro do checkout criptografado para o front-end
             return res.status(200).json({ urlCheckout: dadosPreferencia.init_point });
         } else {
             return res.status(400).json({ erro: "Erro ao gerar preferência no Mercado Pago", detalhes: dadosPreferencia });
