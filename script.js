@@ -232,12 +232,13 @@ function atualizarValoresFinanceiros(subtotal) {
 
 
 /* ==========================================================================
-   4. MÓDULO: RENDERIZAÇÃO DINÂMICA DA TELA DE CHECKOUT E PAGAMENTO REAL (MERCADO PAGO)
+   4. MÓDULO: RENDERIZAÇÃO DINÂMICA DA TELA DE CHECKOUT E PAGAMENTO REAL (CORRIGIDO)
    ========================================================================== */
 function renderizarCheckout() {
     const container = document.getElementById("checkout-items-container");
     if (!container) return;
 
+    // CORRIGIDO: Puxa exatamente a mesma chave que a Home e o Catálogo usam para salvar os produtos
     let carrinho = JSON.parse(localStorage.getItem("cafeteria_carrinho")) || [];
 
     if (carrinho.length === 0) {
@@ -270,7 +271,7 @@ function renderizarCheckout() {
     const subtotalCheckout = carrinho.reduce((soma, item) => soma + (item.price * item.quantity), 0);
     atualizarValoresCheckout(subtotalCheckout);
     
-    // Inicializa o ouvinte do botão que fará a cobrança real
+    // Inicializa o ouvinte do botão que fará a cobrança real no Mercado Pago
     inicializarBotaoFinalizar();
     
     if (document.getElementById("cep")) {
