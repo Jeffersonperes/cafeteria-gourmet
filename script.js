@@ -322,7 +322,7 @@ function inicializarBotaoFinalizar() {
         try {
             // CONEXÃO MESTRE: Faz o fetch real para a API serverless protegida na Vercel
             // IMPORTANTE: Insira dentro das aspas abaixo o seu link copiado da aba DOMAINS da Vercel!
-            const respostaServidor = await fetch("https://cafeteria-gourmet-one.vercel.app/", {
+            const respostaServidor = await fetch("https://cafeteria-gourmet-gamma.vercel.app/", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(dadosTransacao)
