@@ -6,19 +6,21 @@ document.addEventListener("DOMContentLoaded", () => {
     try { atualizarContadorMenu(); } catch(e) {}
     try { renderizarBarraUsuarioNavbar(); } catch(e) {}
 
-    // 2. BLINDAGEM E VALIDAÇÃO DE ROTAS (MÓDULO CORRIGIDO)
+    // 2. RENDERIZAÇÃO IMEDIATA DO CHECKOUT (Evita tela em branco no GitHub)
     try {
         if (document.getElementById("checkout-items-container")) {
+            // Desenha os produtos e valores na tela primeiro
+            renderizarCheckout();
+
+            // Depois aplica a trava de segurança em segundo plano
             const sessao = JSON.parse(localStorage.getItem("cafeteria_usuario_ativo"));
             if (!sessao || !sessao.logado) {
                 alert("🔒 Sessão expirada ou inválida. Por favor, faça login para acessar o checkout.");
                 window.location.href = "login.html";
-                return; // Bloqueia intrusos de lerem o script
+                return;
             }
-            // SE ESTIVER LOGADO CORRETAMENTE: Executa a renderização imediatamente
-            renderizarCheckout();
         }
-    } catch(e) { console.log("Erro na validação de rota do checkout:", e); }
+    } catch(e) { console.log("Erro na inicialização do checkout:", e); }
 
     // 3. Execuções específicas por identificadores de tela (try/catch isolados)
     try { if (document.querySelectorAll(".btn-add").length > 0) inicializarBotoesHome(); } catch(e) {}
@@ -37,6 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
     try { if (document.getElementById("profile-user-card")) inicializarDadosPerfilDinamico(); } catch(e) {}
     try { if (document.getElementById("form-alterar-perfil-completo")) inicializarFormularioAlterarPerfil(); } catch(e) {}
 });
+
 
 /* ==========================================================================
    2. MÓDULO: CARRINHO GLOBAL (GRAVAÇÃO, CONTADOR E ADIÇÃO)
@@ -229,8 +232,66 @@ function atualizarValoresFinanceiros(subtotal) {
 
 
 /* ==========================================================================
-   4. MÓDULO: RENDERIZAÇÃO E PAGAMENTO REAL INTEGRADO (CHECKOUT)
+   4. MÓDULO: RENDERIZAÇÃO DINÂMICA DA TELA DE CHECKOUT E PAGAMENTO REAL (MERCADO PAGO)
    ========================================================================== */
+function renderizarCheckout() {
+    const container = document.getElementById("checkout-items-container");
+    if (!container) return;
+
+    let carrinho = JSON.parse(localStorage.getItem("cafeteria_carrinho")) || [];
+
+    if (carrinho.length === 0) {
+        container.innerHTML = '<p style="font-size: 13px; color: var(--text-muted); text-align: center; padding: 20px;">Nenhum item selecionado.</p>';
+        atualizarValoresCheckout(0);
+        return;
+    }
+
+    container.innerHTML = "";
+
+    // Loop que desenha os produtos comprados no painel lateral
+    carrinho.forEach(item => {
+        const precoCalculadoItem = (item.price * item.quantity).toFixed(2).replace(".", ",");
+        
+        const linhaHTML = `
+            <div class="summary-item-line">
+                <div class="summary-item-thumb">
+                    <img src="${item.image}" alt="${item.name}">
+                </div>
+                <div class="summary-item-info">
+                    <h4>${item.name}</h4>
+                </div>
+                <div class="summary-item-price">
+                    <span>${item.quantity}x R$ ${precoCalculadoItem}</span>
+                </div>
+            </div>`;
+        container.insertAdjacentHTML("beforeend", linhaHTML);
+    });
+
+    const subtotalCheckout = carrinho.reduce((soma, item) => soma + (item.price * item.quantity), 0);
+    atualizarValoresCheckout(subtotalCheckout);
+    
+    // Inicializa o ouvinte do botão que fará a cobrança real
+    inicializarBotaoFinalizar();
+    
+    if (document.getElementById("cep")) {
+        inicializarMascaraEBuscaCEP();
+    }
+}
+
+function atualizarValoresCheckout(subtotal) {
+    const frete = subtotal > 0 ? 9.90 : 0;
+    const total = subtotal + frete;
+
+    const elSub = document.getElementById("checkout-subtotal");
+    const elFre = document.getElementById("checkout-frete");
+    const elTot = document.getElementById("checkout-total");
+
+    if (elSub) elSub.textContent = "R\$ " + subtotal.toFixed(2).replace(".", ",");
+    if (elFre) elFre.textContent = "R\$ " + frete.toFixed(2).replace(".", ",");
+    if (elTot) elTot.textContent = "R\$ " + total.toFixed(2).replace(".", ",");
+}
+
+// AQUI ESTÁ O FETCH CORRIGIDO E INTEGRADO AO SEU SERVIDOR DA VERCEL
 function inicializarBotaoFinalizar() {
     const btnFinalizar = document.getElementById("btn-finalizar-pedido");
     if (!btnFinalizar) return;
@@ -246,20 +307,20 @@ function inicializarBotaoFinalizar() {
 
         const usuarioAtivo = JSON.parse(localStorage.getItem("cafeteria_usuario_ativo")) || {};
 
-        // 1. Mudança visual profissional: dá feedback instantâneo de segurança para o cliente
+        // Modificação visual para dar feedback de segurança ao cliente
         btnFinalizar.innerText = "🔒 Conectando ao Ambiente de Pagamento Seguro...";
         btnFinalizar.style.backgroundColor = "var(--success-green)";
         btnFinalizar.disabled = true;
 
-        // Prepara os parâmetros para enviar ao servidor da Vercel
+        // Prepara o pacote de dados para disparar ao servidor back-end
         const dadosTransacao = {
             itens: carrinho,
             emailUsuario: usuarioAtivo.email || "cliente@email.com"
         };
 
         try {
-            // 2. CONEXÃO MESTRE: Dispara a chamada para a função serverless na Vercel
-            // ATENÇÃO: Substitua o link abaixo pela URL real que a Vercel gerou para o seu projeto!
+            // CONEXÃO MESTRE: Faz o fetch real para a API serverless protegida na Vercel
+            // IMPORTANTE: Insira dentro das aspas abaixo o seu link copiado da aba DOMAINS da Vercel!
             const respostaServidor = await fetch("https://cafeteria-gourmet-one.vercel.app/", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -269,10 +330,10 @@ function inicializarBotaoFinalizar() {
             const resultadoAPI = await respostaServidor.json();
 
             if (resultadoAPI.urlCheckout) {
-                // 3. REDIRECIONAMENTO REAL: Envia o cliente para o ambiente criptografado do Mercado Pago
+                // REDIRECIONAMENTO CRIPTOGRAFADO: Abre a interface oficial de PIX e Cartão do Mercado Pago
                 window.location.href = resultadoAPI.urlCheckout;
             } else {
-                alert("⚠️ Ocorreu um problema ao gerar o link de pagamento. Tente novamente.");
+                alert("⚠️ Ocorreu um problema ao gerar a preferência de pagamento. Tente novamente.");
                 resetarBotaoFinalizar(btnFinalizar);
             }
 
@@ -284,12 +345,13 @@ function inicializarBotaoFinalizar() {
     });
 }
 
-// Função auxiliar para restaurar o botão caso o link falhe
 function resetarBotaoFinalizar(botao) {
     botao.innerText = "Finalizar Pedido";
     botao.disabled = false;
     botao.style.backgroundColor = "var(--bg-dark-brown)";
 }
+
+
 
 /* ==========================================================================
    5. MÓDULO: INTEGRAÇÃO DA API VIACEP

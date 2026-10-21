@@ -1714,3 +1714,34 @@ box-shadow: none;
     from { transform: scale(0.95); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
 }
+
+/* ================= ALINHAMENTO PROFISSIONAL DO CHECKOUT ================= */
+.checkout-summary-card {
+    background-color: var(--bg-card-white) !important;
+    border-radius: 12px !important;
+    padding: 30px !important;
+    box-shadow: 0 4px 20px rgba(60, 36, 25, 0.02) !important;
+    border: 1px solid var(--border-color) !important;
+}
+
+.summary-totals {
+    margin-top: 20px !important;
+    padding-top: 15px !important;
+    border-top: 1px solid var(--border-color) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+}
+
+.summary-totals p {
+    display: flex !important;
+    justify-content: space-between !important; /* Afasta o texto do preço */
+    font-size: 14px !important;
+    color: var(--text-dark) !important;
+    margin: 0 !important;
+}
+
+.summary-totals span {
+    font-weight: 600 !important;
+    color: var(--text-dark) !important;
+}
