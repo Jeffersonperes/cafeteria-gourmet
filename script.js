@@ -328,7 +328,7 @@ function resetarBotaoFinalizar(botao) {
 }
 
 /* ==========================================================================
-   5. MÓDULO: INTEGRAÇÃO DA API VIACEP (CORRIGIDO COM CRASES E SINAL DE \$)
+   5. MÓDULO: INTEGRAÇÃO DA API VIACEP (AUTO-PREENCHIMENTO 100% BLINDADO)
    ========================================================================== */
 function inicializarMascaraEBuscaCEP() {
     const inputCep = document.getElementById("cep");
@@ -336,11 +336,14 @@ function inicializarMascaraEBuscaCEP() {
     
     inputCep.addEventListener("input", (e) => {
         let valor = e.target.value.replace(/\D/g, "");
+        
+        // Aplica a máscara visual de hífen (XXXXX-XXX)
         if (valor.length > 5) {
             valor = valor.replace(/^(\d{5})(\d)/, "\$1-\$2");
         }
         e.target.value = valor;
 
+        // Quando completar os 9 caracteres (5 números + hífen + 3 números), dispara a busca
         if (valor.length === 9) {
             buscarEnderecoPeloCEP(valor);
         }
@@ -349,36 +352,52 @@ function inicializarMascaraEBuscaCEP() {
 
 function buscarEnderecoPeloCEP(cepFormatado) {
     const cepLimpo = cepFormatado.replace(/\D/g, "");
+    
+    // Captura os elementos do formulário de forma segura
     const campoEndereco = document.getElementById("endereco");
     const campoBairro = document.getElementById("bairro");
     const campoCidade = document.getElementById("cidade");
 
-    if (!campoEndereco || !campoBairro || !campoCidade) return;
+    if (!campoEndereco || !campoBairro || !campoCidade) {
+        console.log("⚠️ Erro Técnico: Campos de endereço não encontrados no HTML.");
+        return;
+    }
 
-    campoEndereco.value = "Buscando endereço...";
+    // Feedback instantâneo para o usuário enquanto o servidor busca o endereço
+    campoEndereco.value = "Buscando logradouro...";
     campoBairro.value = "Buscando bairro...";
     campoCidade.value = "Buscando cidade...";
 
-    // CORRIGIDO: Utiliza crases e a sintaxe universal \${cepLimpo} para bater na API do ViaCEP
+    // Dispara a requisição oficial para o webservice seguro do ViaCEP usando Crases e Interpolador
     fetch(`https://viacep.com.br{cepLimpo}/json/`)
         .then(resposta => resposta.json())
         .then(dados => {
             if (dados.erro) {
-                alert("⚠️ CEP não encontrado!");
-                limparCamposEndereco();
+                alert("⚠️ CEP inválido ou não encontrado na base de dados nacional!");
+                limparCamposEnderecoCheckout();
                 return;
             }
+            
+            // Injeta os dados oficiais do Correio diretamente nos inputs
             campoEndereco.value = dados.logradouro || "";
             campoBairro.value = dados.bairro || "";
             campoCidade.value = dados.localidade ? `${dados.localidade} - ${dados.uf}` : "";
             
+            // Move o foco do teclado automaticamente para a caixa do Número
             const campoNumero = document.getElementById("numero");
             if (campoNumero) campoNumero.focus();
         })
-        .catch(() => {
-            alert("Não foi possível conectar ao ViaCEP.");
-            limparCamposEndereco();
+        .catch(erro => {
+            console.error("Erro na requisição ViaCEP:", erro);
+            alert("Não foi possível conectar ao serviço de busca de CEP.");
+            limparCamposEnderecoCheckout();
         });
+}
+
+function limparCamposEnderecoCheckout() {
+    if (document.getElementById("endereco")) document.getElementById("endereco").value = "";
+    if (document.getElementById("bairro")) document.getElementById("bairro").value = "";
+    if (document.getElementById("cidade")) document.getElementById("cidade").value = "";
 }
 
 /* ==========================================================================
