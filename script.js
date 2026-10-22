@@ -328,7 +328,7 @@ function resetarBotaoFinalizar(botao) {
 }
 
 /* ==========================================================================
-   5. MÓDULO: INTEGRAÇÃO DA API VIACEP (AUTO-PREENCHIMENTO 100% BLINDADO)
+   5. MÓDULO: INTEGRAÇÃO DA API RE RESERVA CEP (AWESOMEAPI - 100% BLINDADO)
    ========================================================================== */
 function inicializarMascaraEBuscaCEP() {
     const inputCep = document.getElementById("cep");
@@ -337,13 +337,11 @@ function inicializarMascaraEBuscaCEP() {
     inputCep.addEventListener("input", (e) => {
         let valor = e.target.value.replace(/\D/g, "");
         
-        // Aplica a máscara visual de hífen (XXXXX-XXX)
         if (valor.length > 5) {
             valor = valor.replace(/^(\d{5})(\d)/, "\$1-\$2");
         }
         e.target.value = valor;
 
-        // Quando completar os 9 caracteres (5 números + hífen + 3 números), dispara a busca
         if (valor.length === 9) {
             buscarEnderecoPeloCEP(valor);
         }
@@ -353,51 +351,43 @@ function inicializarMascaraEBuscaCEP() {
 function buscarEnderecoPeloCEP(cepFormatado) {
     const cepLimpo = cepFormatado.replace(/\D/g, "");
     
-    // Captura os elementos do formulário de forma segura
     const campoEndereco = document.getElementById("endereco");
     const campoBairro = document.getElementById("bairro");
     const campoCidade = document.getElementById("cidade");
 
-    if (!campoEndereco || !campoBairro || !campoCidade) {
-        console.log("⚠️ Erro Técnico: Campos de endereço não encontrados no HTML.");
-        return;
-    }
+    if (!campoEndereco || !campoBairro || !campoCidade) return;
 
-    // Feedback instantâneo para o usuário enquanto o servidor busca o endereço
-    campoEndereco.value = "Buscando logradouro...";
+    // Feedback visual instantâneo na tela do cliente
+    campoEndereco.value = "Buscando logradouro de forma segura...";
     campoBairro.value = "Buscando bairro...";
     campoCidade.value = "Buscando cidade...";
 
-    // Dispara a requisição oficial para o webservice seguro do ViaCEP usando Crases e Interpolador
-    fetch(`https://viacep.com.br{cepLimpo}/json/`)
-        .then(resposta => resposta.json())
+    // SOLUÇÃO DEFINITIVA: Nova rota HTTPS corporativa com suporte total a CORS liberado
+    fetch(`https://awesomeapi.com.br{cepLimpo}`)
+        .then(resposta => {
+            if (!resposta.ok) throw new Error("CEP não encontrado");
+            return resposta.json();
+        })
         .then(dados => {
-            if (dados.erro) {
-                alert("⚠️ CEP inválido ou não encontrado na base de dados nacional!");
-                limparCamposEnderecoCheckout();
-                return;
-            }
+            // Injeta os dados da API de alta velocidade nas caixas de texto correspondentes
+            campoEndereco.value = dados.address || "";
+            campoBairro.value = dados.district || "";
+            campoCidade.value = dados.city ? `${dados.city} - ${dados.state}` : "";
             
-            // Injeta os dados oficiais do Correio diretamente nos inputs
-            campoEndereco.value = dados.logradouro || "";
-            campoBairro.value = dados.bairro || "";
-            campoCidade.value = dados.localidade ? `${dados.localidade} - ${dados.uf}` : "";
-            
-            // Move o foco do teclado automaticamente para a caixa do Número
+            // Move o foco do teclado de forma inteligente para a caixa do Número
             const campoNumero = document.getElementById("numero");
             if (campoNumero) campoNumero.focus();
         })
         .catch(erro => {
-            console.error("Erro na requisição ViaCEP:", erro);
-            alert("Não foi possível conectar ao serviço de busca de CEP.");
-            limparCamposEnderecoCheckout();
+            console.error("Erro na requisição da API de CEP:", erro);
+            alert("⚠️ CEP inválido ou indisponível! Por favor, preencha o seu endereço manualmente.");
+            
+            // Destrava os campos para digitação manual caso o usuário digite um CEP errado
+            campoEndereco.value = "";
+            campoBairro.value = "";
+            campoCidade.value = "";
+            campoEndereco.focus();
         });
-}
-
-function limparCamposEnderecoCheckout() {
-    if (document.getElementById("endereco")) document.getElementById("endereco").value = "";
-    if (document.getElementById("bairro")) document.getElementById("bairro").value = "";
-    if (document.getElementById("cidade")) document.getElementById("cidade").value = "";
 }
 
 /* ==========================================================================
