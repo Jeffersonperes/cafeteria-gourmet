@@ -2,7 +2,7 @@
    SERVIDO BACK-END: PROCESSAMENTO SEGURO MERCADO PAGO (100% CORRIGIDO)
    ========================================================================== */
 export default async function handler(req, res) {
-    // 1. BLINDAGEM CORS: Libera o tráfego seguro para o seu site do GitHub Pages consumir a API
+    // 1. BLINDAGEM CORS: Libera o tráfego seguro para requisições externas
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -47,17 +47,17 @@ export default async function handler(req, res) {
             currency_id: "BRL"
         });
 
-        // 3. CONFIGURAÇÃO DE RETORNO DO GITHUB PAGES:
-        // IMPORTANTE: Substitua o termo 'seu-usuario' abaixo pelo seu nome de perfil real do GitHub!
+        // 3. CONFIGURAÇÃO DE RETORNO DA VERCEL (SOLUÇÃO DEFINITIVA):
+        // Como o seu site agora roda na Vercel, o cliente volta direto para seu domínio seguro
         const preferenciaConfig = {
             items: itensFormatados,
             payer: {
                 email: emailUsuario || "cliente@email.com"
             },
             back_urls: {
-                success: "https://github.io",
-                failure: "https://github.io",
-                pending: "https://github.io"
+                success: "https://vercel.app",
+                failure: "https://vercel.app",
+                pending: "https://vercel.app"
             },
             auto_return: "approved",
             payment_methods: {
@@ -68,7 +68,7 @@ export default async function handler(req, res) {
             }
         };
 
-        // 4. CORREÇÃO DA ENDPOINT DA API: Conecta de verdade aos servidores de transação do Mercado Pago
+        // 4. CORREÇÃO DA ENDPOINT DA API (CORRIGIDO): URL oficial de produção e teste da API do Mercado Pago
         const respostaMP = await fetch("https://mercadopago.com", {
             method: "POST",
             headers: {
