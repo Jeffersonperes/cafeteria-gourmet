@@ -328,7 +328,7 @@ function resetarBotaoFinalizar(botao) {
 }
 
 /* ==========================================================================
-   5. MÓDULO: INTEGRAÇÃO DA API RE RESERVA CEP (AWESOMEAPI - 100% BLINDADO)
+   5. MÓDULO: INTEGRAÇÃO DA API DE CEP (UNIVERSAL E DESBLOQUEADO)
    ========================================================================== */
 function inicializarMascaraEBuscaCEP() {
     const inputCep = document.getElementById("cep");
@@ -351,41 +351,41 @@ function inicializarMascaraEBuscaCEP() {
 function buscarEnderecoPeloCEP(cepFormatado) {
     const cepLimpo = cepFormatado.replace(/\D/g, "");
     
-    const campoEndereco = document.getElementById("endereco");
+    const campoEndereco = document.getElementById("endereco") || document.getElementById("rua");
     const campoBairro = document.getElementById("bairro");
     const campoCidade = document.getElementById("cidade");
 
-    if (!campoEndereco || !campoBairro || !campoCidade) return;
+    if (!campoEndereco || !campoCidade) return;
 
-    // Feedback visual instantâneo na tela do cliente
-    campoEndereco.value = "Buscando logradouro de forma segura...";
-    campoBairro.value = "Buscando bairro...";
+    campoEndereco.value = "Buscando endereço...";
+    if (campoBairro) campoBairro.value = "Buscando bairro...";
     campoCidade.value = "Buscando cidade...";
 
-    // SOLUÇÃO DEFINITIVA: Nova rota HTTPS corporativa com suporte total a CORS liberado
     fetch(`https://awesomeapi.com.br{cepLimpo}`)
         .then(resposta => {
             if (!resposta.ok) throw new Error("CEP não encontrado");
             return resposta.json();
         })
         .then(dados => {
-            // Injeta os dados da API de alta velocidade nas caixas de texto correspondentes
             campoEndereco.value = dados.address || "";
-            campoBairro.value = dados.district || "";
-            campoCidade.value = dados.city ? `${dados.city} - ${dados.state}` : "";
+            if (campoBairro) campoBairro.value = dados.district || "";
             
-            // Move o foco do teclado de forma inteligente para a caixa do Número
+            const cidadeNome = dados.city || "";
+            const estadoSigla = dados.state || "";
+            campoCidade.value = cidadeNome ? `${cidadeNome} - ${estadoSigla}` : "";
+            
             const campoNumero = document.getElementById("numero");
             if (campoNumero) campoNumero.focus();
         })
         .catch(erro => {
-            console.error("Erro na requisição da API de CEP:", erro);
-            alert("⚠️ CEP inválido ou indisponível! Por favor, preencha o seu endereço manualmente.");
+            console.error("Rastreio:", erro);
             
-            // Destrava os campos para digitação manual caso o usuário digite um CEP errado
+            // Se falhar, limpa os textos de carregamento e deixa o cliente digitar livremente
             campoEndereco.value = "";
-            campoBairro.value = "";
+            if (campoBairro) campoBairro.value = "";
             campoCidade.value = "";
+            
+            alert("⚠️ CEP não localizado! Por favor, digite o seu endereço e cidade manualmente.");
             campoEndereco.focus();
         });
 }
