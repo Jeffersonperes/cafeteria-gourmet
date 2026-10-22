@@ -322,7 +322,7 @@ function inicializarBotaoFinalizar() {
         try {
             // CONEXÃO MESTRE: Faz o fetch real para a API serverless protegida na Vercel
             // IMPORTANTE: Insira dentro das aspas abaixo o seu link copiado da aba DOMAINS da Vercel!
-            const respostaServidor = await fetch("https://cafeteria-gourmet-gamma.vercel.app/", {
+            const respostaServidor = await fetch("https://vercel.app/api/criar-checkout", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(dadosTransacao)
@@ -355,58 +355,43 @@ function resetarBotaoFinalizar(botao) {
 
 
 /* ==========================================================================
-   5. MÓDULO: INTEGRAÇÃO DA API VIACEP
+   5. MÓDULO: INTEGRAÇÃO INTEGRAL DA API VIACEP (AUTO-PREENCHIMENTO)
    ========================================================================== */
-function inicializarMascaraEBuscaCEP() {
-    const inputCep = document.getElementById("cep");
-    if (!inputCep) return;
-
-    inputCep.addEventListener("input", (e) => {
-        let valor = e.target.value.replace(/\D/g, "");
-        if (valor.length > 5) {
-            valor = valor.replace(/^(\d{5})(\d)/, "$1-$2");
-        }
-        e.target.value = valor;
-        if (valor.length === 9) {
-            buscarEnderecoPeloCEP(valor);
-        }
-    });
-}
-
 function buscarEnderecoPeloCEP(cepFormatado) {
     const cepLimpo = cepFormatado.replace(/\D/g, "");
     const campoEndereco = document.getElementById("endereco");
     const campoBairro = document.getElementById("bairro");
     const campoCidade = document.getElementById("cidade");
 
-    campoEndereco.value = "Buscando...";
-    campoBairro.value = "Buscando...";
-    campoCidade.value = "Buscando...";
+    if (!campoEndereco || !campoBairro || !campoCidade) return;
 
-    fetch(`https://viacep.com.br{cepLimpo}/json/`)
+    campoEndereco.value = "Buscando endereço...";
+    campoBairro.value = "Buscando bairro...";
+    campoCidade.value = "Buscando cidade...";
+
+    // DISPARADOR DA API UTILIZANDO CRASES E A SINTAXE DE INTERPOLAÇÃO DE VARIÁVEIS
+    fetch(`https://viacep.com.br ${cepLimpo}/json/`)
         .then(resposta => resposta.json())
         .then(dados => {
             if (dados.erro) {
-                alert("⚠️ CEP não encontrado!");
+                alert("⚠️ CEP informado não foi localizado na base de dados nacional!");
                 limparCamposEndereco();
                 return;
             }
+            // Preenche de forma automatizada cada caixa de texto correspondente
             campoEndereco.value = dados.logradouro || "";
             campoBairro.value = dados.bairro || "";
             campoCidade.value = dados.localidade ? `${dados.localidade} - ${dados.uf}` : "";
+            
+            // Move o foco do teclado de forma inteligente para o campo de Número
             const campoNumero = document.getElementById("numero");
             if (campoNumero) campoNumero.focus();
         })
-        .catch(() => {
-            alert("Não foi possível conectar ao ViaCEP.");
+        .catch(erro => {
+            console.error("Falha na comunicação com o webservice ViaCEP:", erro);
+            alert("Não foi possível estabelecer conexão com o serviço de busca de CEP.");
             limparCamposEndereco();
         });
-}
-
-function limparCamposEndereco() {
-    document.getElementById("endereco").value = "";
-    document.getElementById("bairro").value = "";
-    document.getElementById("cidade").value = "";
 }
 
 /* ==========================================================================
