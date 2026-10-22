@@ -232,13 +232,12 @@ function atualizarValoresFinanceiros(subtotal) {
 
 
 /* ==========================================================================
-   4. MÓDULO: RENDERIZAÇÃO DINÂMICA DA TELA DE CHECKOUT E PAGAMENTO REAL (CORRIGIDO)
+   4. MÓDULO: RENDERIZAÇÃO DINÂMICA DA TELA DE CHECKOUT E PAGAMENTO REAL (MERCADO PAGO)
    ========================================================================== */
 function renderizarCheckout() {
     const container = document.getElementById("checkout-items-container");
     if (!container) return;
 
-    // CORRIGIDO: Puxa exatamente a mesma chave que a Home e o Catálogo usam para salvar os produtos
     let carrinho = JSON.parse(localStorage.getItem("cafeteria_carrinho")) || [];
 
     if (carrinho.length === 0) {
@@ -292,7 +291,6 @@ function atualizarValoresCheckout(subtotal) {
     if (elTot) elTot.textContent = "R\$ " + total.toFixed(2).replace(".", ",");
 }
 
-// AQUI ESTÁ O FETCH CORRIGIDO E INTEGRADO AO SEU SERVIDOR DA VERCEL
 function inicializarBotaoFinalizar() {
     const btnFinalizar = document.getElementById("btn-finalizar-pedido");
     if (!btnFinalizar) return;
@@ -313,16 +311,14 @@ function inicializarBotaoFinalizar() {
         btnFinalizar.style.backgroundColor = "var(--success-green)";
         btnFinalizar.disabled = true;
 
-        // Prepara o pacote de dados para disparar ao servidor back-end
         const dadosTransacao = {
             itens: carrinho,
             emailUsuario: usuarioAtivo.email || "cliente@email.com"
         };
 
         try {
-            // CONEXÃO MESTRE: Faz o fetch real para a API serverless protegida na Vercel
-            // IMPORTANTE: Insira dentro das aspas abaixo o seu link copiado da aba DOMAINS da Vercel!
-            const respostaServidor = await fetch("https://vercel.app/api/criar-checkout", {
+            // CONEXÃO CORRIGIDA COM /api/criar-checkout NO FINAL
+            const respostaServidor = await fetch("https://vercel.app", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(dadosTransacao)
@@ -331,7 +327,7 @@ function inicializarBotaoFinalizar() {
             const resultadoAPI = await respostaServidor.json();
 
             if (resultadoAPI.urlCheckout) {
-                // REDIRECIONAMENTO CRIPTOGRAFADO: Abre a interface oficial de PIX e Cartão do Mercado Pago
+                // Abre a interface oficial de PIX e Cartão do Mercado Pago
                 window.location.href = resultadoAPI.urlCheckout;
             } else {
                 alert("⚠️ Ocorreu um problema ao gerar a preferência de pagamento. Tente novamente.");
@@ -352,11 +348,26 @@ function resetarBotaoFinalizar(botao) {
     botao.style.backgroundColor = "var(--bg-dark-brown)";
 }
 
-
-
 /* ==========================================================================
-   5. MÓDULO: INTEGRAÇÃO INTEGRAL DA API VIACEP (AUTO-PREENCHIMENTO)
+   5. MÓDULO: INTEGRAÇÃO DA API VIACEP (CORRIGIDO COM CRASES E SINAL DE \$)
    ========================================================================== */
+function inicializarMascaraEBuscaCEP() {
+    const inputCep = document.getElementById("cep");
+    if (!inputCep) return;
+    
+    inputCep.addEventListener("input", (e) => {
+        let valor = e.target.value.replace(/\D/g, "");
+        if (valor.length > 5) {
+            valor = valor.replace(/^(\d{5})(\d)/, "\$1-\$2");
+        }
+        e.target.value = valor;
+
+        if (valor.length === 9) {
+            buscarEnderecoPeloCEP(valor);
+        }
+    });
+}
+
 function buscarEnderecoPeloCEP(cepFormatado) {
     const cepLimpo = cepFormatado.replace(/\D/g, "");
     const campoEndereco = document.getElementById("endereco");
@@ -369,27 +380,24 @@ function buscarEnderecoPeloCEP(cepFormatado) {
     campoBairro.value = "Buscando bairro...";
     campoCidade.value = "Buscando cidade...";
 
-    // DISPARADOR DA API UTILIZANDO CRASES E A SINTAXE DE INTERPOLAÇÃO DE VARIÁVEIS
-    fetch(`https://viacep.com.br ${cepLimpo}/json/`)
+    // CORRIGIDO: Utiliza crases e a sintaxe universal \${cepLimpo} para bater na API do ViaCEP
+    fetch(`https://viacep.com.br{cepLimpo}/json/`)
         .then(resposta => resposta.json())
         .then(dados => {
             if (dados.erro) {
-                alert("⚠️ CEP informado não foi localizado na base de dados nacional!");
+                alert("⚠️ CEP não encontrado!");
                 limparCamposEndereco();
                 return;
             }
-            // Preenche de forma automatizada cada caixa de texto correspondente
             campoEndereco.value = dados.logradouro || "";
             campoBairro.value = dados.bairro || "";
             campoCidade.value = dados.localidade ? `${dados.localidade} - ${dados.uf}` : "";
             
-            // Move o foco do teclado de forma inteligente para o campo de Número
             const campoNumero = document.getElementById("numero");
             if (campoNumero) campoNumero.focus();
         })
-        .catch(erro => {
-            console.error("Falha na comunicação com o webservice ViaCEP:", erro);
-            alert("Não foi possível estabelecer conexão com o serviço de busca de CEP.");
+        .catch(() => {
+            alert("Não foi possível conectar ao ViaCEP.");
             limparCamposEndereco();
         });
 }
