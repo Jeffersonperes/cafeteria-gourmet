@@ -291,11 +291,14 @@ function atualizarValoresCheckout(subtotal) {
     if (elTot) elTot.textContent = "R\$ " + total.toFixed(2).replace(".", ",");
 }
 
+/* ==========================================================================
+   4. MÓDULO: REDIRECIONAMENTO DIRETO PARA O GATEWAY SEGURO (MERCADO PAGO)
+   ========================================================================== */
 function inicializarBotaoFinalizar() {
     const btnFinalizar = document.getElementById("btn-finalizar-pedido");
     if (!btnFinalizar) return;
 
-    btnFinalizar.addEventListener("click", async (evento) => {
+    btnFinalizar.addEventListener("click", (evento) => {
         evento.preventDefault(); 
         
         let carrinho = JSON.parse(localStorage.getItem("cafeteria_carrinho")) || [];
@@ -304,41 +307,17 @@ function inicializarBotaoFinalizar() {
             return;
         }
 
-        const usuarioAtivo = JSON.parse(localStorage.getItem("cafeteria_usuario_ativo")) || {};
-
-        // Modificação visual para dar feedback de segurança ao cliente
-        btnFinalizar.innerText = "🔒 Conectando ao Ambiente de Pagamento Seguro...";
+        // Feedback visual instantâneo de segurança para o cliente na tela
+        btnFinalizar.innerText = "🔒 Redirecionando para o Pagamento Seguro...";
         btnFinalizar.style.backgroundColor = "var(--success-green)";
         btnFinalizar.disabled = true;
 
-        const dadosTransacao = {
-            itens: carrinho,
-            emailUsuario: usuarioAtivo.email || "cliente@email.com"
-        };
+        // Limpa o carrinho local para evitar duplicação de pedidos após o pagamento
+        localStorage.removeItem("cafeteria_carrinho");
 
-        try {
-            // CONEXÃO CORRIGIDA COM /api/criar-checkout NO FINAL
-            const respostaServidor = await fetch("https://vercel.app", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(dadosTransacao)
-            });
-
-            const resultadoAPI = await respostaServidor.json();
-
-            if (resultadoAPI.urlCheckout) {
-                // Abre a interface oficial de PIX e Cartão do Mercado Pago
-                window.location.href = resultadoAPI.urlCheckout;
-            } else {
-                alert("⚠️ Ocorreu um problema ao gerar a preferência de pagamento. Tente novamente.");
-                resetarBotaoFinalizar(btnFinalizar);
-            }
-
-        } catch (erro) {
-            console.error("Erro na comunicação com a API de pagamentos:", erro);
-            alert("Não foi possível estabelecer uma conexão segura com o gateway de pagamento.");
-            resetarBotaoFinalizar(btnFinalizar);
-        }
+        // SOLUÇÃO DEFINITIVA: Envia o cliente direto para o ambiente criptografado oficial do Mercado Pago
+        // COLE O SEU LINK CURTO GERADO NO PASSO 1 EXATAMENTE ENTRE AS ASPAS ABAIXO:
+        window.location.href = "https://link.mercadopago.com.br/cafeteriagourmet";
     });
 }
 
