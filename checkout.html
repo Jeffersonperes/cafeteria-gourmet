@@ -5,35 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cafeteria Gourmet - Checkout</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Biblioteca mestre oficial do Font Awesome para renderizar todos os ícones e logos de pagamento -->
+    <!-- CDN Oficial estável do Font Awesome para carregar todos os logotipos de cartões e ícones reais -->
     <link rel="stylesheet" href="https://cloudflare.com">
 </head>
 <body>
 
     <!-- NAVBAR (Topo Escuro) -->
     <header class="navbar">
-    <div class="logo" style="display: flex; align-items: center; gap: 10px; cursor: pointer;" onclick="window.location.href='index.html'">
-    <!-- SÍMBOLO NATIVO DE XÍCARA EM TEXTO PURO (NUNCA FALHA) -->
-    <span style="font-size: 26px; line-height: 1; display: inline-block;">☕</span>
-    <span style="font-family: 'Playfair Display', serif; color: #ffffff; font-weight: bold; font-size: 16px; letter-spacing: 0.5px; line-height: 1.1;">
-        CAFETERIA<br><small style="font-size: 10px; letter-spacing: 2px; color: #DFCEB8; display: block;">GOURMET</small>
-    </span>
-</div>
-    
-    <!-- O menu ganha o ID correto "nav-menu" -->
-    <nav class="nav-menu" id="nav-menu">
-        <a href="index.html" class="active"><i class="fas fa-home"></i> Início</a>
-        <a href="produtos.html"><i class="fas fa-shopping-bag"></i> Produtos</a>
-        <a href="carrinho.html" class="cart-link">
-            <i class="fas fa-shopping-cart"></i> Carrinho 
-            <span class="cart-badge">0</span>
-        </a>
-        <a href="perfil.html"><i class="fas fa-user"></i> Perfil</a>
-    </nav>
+        <div class="logo" style="display: flex; align-items: center; gap: 10px; cursor: pointer;" onclick="window.location.href='index.html'">
+            <!-- SÍMBOLO NATIVO DE XÍCARA EM TEXTO PURO (NUNCA FALHA) -->
+            <span style="font-size: 26px; line-height: 1; display: inline-block;">☕</span>
+            <span style="font-family: 'Playfair Display', serif; color: #ffffff; font-weight: bold; font-size: 16px; letter-spacing: 0.5px; line-height: 1.1;">
+                CAFETERIA<br><small style="font-size: 10px; letter-spacing: 2px; color: #DFCEB8; display: block;">GOURMET</small>
+            </span>
+        </div>
+        
+        <!-- O menu ganha o ID correto "nav-menu" -->
+        <nav class="nav-menu" id="nav-menu">
+            <a href="index.html" class="active"><i class="fas fa-home"></i> Início</a>
+            <a href="produtos.html"><i class="fas fa-shopping-bag"></i> Produtos</a>
+            <a href="carrinho.html" class="cart-link">
+                <i class="fas fa-shopping-cart"></i> Carrinho 
+                <span class="cart-badge">0</span>
+            </a>
+            <a href="perfil.html"><i class="fas fa-user"></i> Perfil</a>
+        </nav>
 
-    <!-- O BOTÃO AGORA CHAMA A FUNÇÃO DIRETO NO CLIQUE (IMPOSSÍVEL TRAVAR) -->
-    <button class="menu-hamburger" id="menu-hamburger" type="button" onclick="toggleMenuMobile()">☰</button>
-</header>
+        <!-- O BOTÃO AGORA CHAMA A FUNÇÃO DIRETO NO CLIQUE (IMPOSSÍVEL TRAVAR) -->
+        <button class="menu-hamburger" id="menu-hamburger" type="button" onclick="toggleMenuMobile()">☰</button>
+    </header>
 
     <!-- CONTEÚDO PRINCIPAL DO CHECKOUT -->
     <main class="checkout-wrapper">
@@ -147,38 +147,28 @@
 
         </div>
 
-        <!-- COLUNA DIREITA: RESUMO DO PEDIDO DINÂMICO -->
-        <div class="checkout-right-column">
-            <div class="sticky-summary-card">
-                <h2>Resumo do pedido</h2>
-                
-                <!-- Lista gerenciada via JavaScript -->
-                <div class="summary-items-list" id="checkout-items-container"></div>
-
-                <!-- Divisórias de Valores Financeiros -->
-                <div class="financial-block">
-                    <div class="financial-row">
-                        <span>Subtotal</span>
-                        <strong id="checkout-subtotal">R$ 0,00</strong>
-                    </div>
-                    <div class="financial-row">
-                        <span>Frete</span>
-                        <strong id="checkout-frete">R$ 0,00</strong>
-                    </div>
-                    <div class="financial-row total-row">
-                        <span class="total-title">Total</span>
-                        <span class="total-value" id="checkout-total">R$ 0,00</span>
-                    </div>
-                </div>
-
-                <!-- Botão de Finalização de Fluxo -->
-                <button type="submit" class="btn-finalize-checkout" id="btn-finalizar-pedido">Finalizar compra</button>
+        <!-- COLUNA DIREITA: PAINEL DE RESUMO DO PEDIDO -->
+        <div class="checkout-summary-card">
+            <h3>Resumo do Pedido</h3>
+            
+            <!-- CONTAINER ONDE O JAVASCRIPT INJETA OS PRODUTOS REAIS -->
+            <div id="checkout-items-container">
+                <!-- O script limpa este bloco e renderiza os itens dinamicamente -->
             </div>
+
+            <div class="summary-totals">
+                <p>Subtotal: <span id="checkout-subtotal">R$ 0,00</span></p>
+                <p>Frete: <span id="checkout-frete">R$ 0,00</span></p>
+                <hr>
+                <p><strong>Total: <span id="checkout-total">R$ 0,00</span></strong></p>
+            </div>
+            
+            <button type="submit" id="btn-finalizar-pedido" class="btn-finalize-checkout">Finalizar Pedido</button>
         </div>
 
     </main>
 
-    <!-- RODAPÉ (Footer Claro) -->
+    <!-- RODAPÉ (Footer Claro Restaurado) -->
     <footer class="footer">
         <div class="footer-brand">
             <i class="fas fa-seedling"></i>
@@ -193,8 +183,7 @@
         </div>
     </footer>
 
-    <!-- Executa o arquivo script.js integrado de CEP e resumo -->
+    <!-- VINCULAÇÃO CONECTANDO A INTELIGÊNCIA EM SCRIPT JAVASCRIPT -->
     <script src="script.js"></script>
-    
 </body>
 </html>
