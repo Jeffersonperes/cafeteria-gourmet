@@ -1745,3 +1745,32 @@ box-shadow: none;
     font-weight: 600 !important;
     color: var(--text-dark) !important;
 }
+
+/* ==========================================================================
+   AJUSTE DE DESIGN DO BANNER PRINCIPAL (HERO) - ULTRA RESPONSIVO
+   ========================================================================== */
+.banner-img {
+    max-width: 450px !important; /* Controla a largura máxima para não cobrir a tela */
+    width: 100% !important;      /* Garante que ela encolha proporcionalmente em telas menores */
+    height: 400px !important;    /* Define uma altura fixa elegante para manter a proporção */
+    object-fit: cover !important; /* Corta a imagem de forma inteligente sem distorcer ou esticar o café */
+    border-radius: 12px !important; /* Deixa as bordas arredondadas com acabamento moderno */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4) !important; /* Cria uma sombra profunda premium */
+    display: block !important;
+    margin: 0 auto !important;
+    transition: transform 0.3s ease !important; /* Efeito suave ao passar o mouse */
+}
+
+/* Efeito sutil de aproximação ao passar o mouse por cima */
+.banner-img:hover {
+    transform: scale(1.02);
+}
+
+/* QUEBRA DE LAYOUT PARA CELULARES (MOBILE) */
+@media (max-width: 768px) {
+    .banner-img {
+        max-width: 320px !important;
+        height: 280px !important; /* Diminui a altura no celular para não empurrar o conteúdo */
+        margin-top: 20px !important;
+    }
+}
