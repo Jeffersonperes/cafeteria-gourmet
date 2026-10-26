@@ -11,30 +11,36 @@
 </head>
 <body>
 
-    <!-- NAVBAR -->
-    <header class="navbar">
-    <div class="logo" style="display: flex; align-items: center; gap: 10px; cursor: pointer;" onclick="window.location.href='index.html'">
-    <!-- SÍMBOLO NATIVO DE XÍCARA EM TEXTO PURO (NUNCA FALHA) -->
-    <span style="font-size: 26px; line-height: 1; display: inline-block;">☕</span>
-    <span style="font-family: 'Playfair Display', serif; color: #ffffff; font-weight: bold; font-size: 16px; letter-spacing: 0.5px; line-height: 1.1;">
-        CAFETERIA<br><small style="font-size: 10px; letter-spacing: 2px; color: #DFCEB8; display: block;">GOURMET</small>
-    </span>
-</div>
-    
-    <!-- O menu ganha o ID correto "nav-menu" -->
-    <nav class="nav-menu" id="nav-menu">
-        <a href="index.html" class="active"><i class="fas fa-home"></i> Início</a>
-        <a href="produtos.html"><i class="fas fa-shopping-bag"></i> Produtos</a>
-        <a href="carrinho.html" class="cart-link">
-            <i class="fas fa-shopping-cart"></i> Carrinho 
-            <span class="cart-badge">0</span>
-        </a>
-        <a href="perfil.html"><i class="fas fa-user"></i> Perfil</a>
-    </nav>
+        <!-- NAVBAR (Topo Escuro Padronizado e Idêntico ao Design) -->
+    <header class="navbar" style="display: flex; align-items: center; justify-content: space-between; padding: 20px 8%; background-color: #1c0f0a; border-bottom: 1px solid rgba(223, 206, 184, 0.1);">
+        
+        <!-- Logo do Lado Esquerdo -->
+        <div class="logo" style="display: flex; align-items: center; gap: 12px; cursor: pointer;" onclick="window.location.href='index.html'">
+            <i class="fas fa-coffee" style="font-size: 24px; color: #DFCEB8;"></i>
+            <span style="font-family: 'Playfair Display', serif; color: #ffffff; font-weight: bold; font-size: 16px; letter-spacing: 0.5px; line-height: 1.1;">
+                CAFETERIA<br><small style="font-size: 10px; letter-spacing: 2px; color: #DFCEB8; display: block;">GOURMET</small>
+            </span>
+        </div>
+        
+        <!-- Menu Central/Direito com Ícones Finos e Precisos -->
+        <nav class="nav-menu" id="nav-menu" style="display: flex; align-items: center; gap: 30px;">
+            <a href="index.html" class="active" style="color: #ffffff; text-decoration: none; font-size: 14px; display: inline-flex; align-items: center; gap: 8px;">
+                <i class="far fa-home"></i> Início
+            </a>
+            <a href="produtos.html" style="color: #DFCEB8; text-decoration: none; font-size: 14px; display: inline-flex; align-items: center; gap: 8px;">
+                <i class="far fa-shopping-bag"></i> Produtos
+            </a>
+            <a href="carrinho.html" class="cart-link" style="color: #DFCEB8; text-decoration: none; font-size: 14px; display: inline-flex; align-items: center; gap: 8px;">
+                <i class="far fa-shopping-cart"></i> Carrinho <span class="cart-badge" style="background-color: #DFCEB8; color: #1c0f0a; padding: 2px 7px; border-radius: 50%; font-size: 11px; font-weight: bold; margin-left: 2px;">2</span>
+            </a>
+            <a href="perfil.html" style="color: #DFCEB8; text-decoration: none; font-size: 14px; display: inline-flex; align-items: center; gap: 8px;">
+                <i class="far fa-user"></i> Perfil
+            </a>
+        </nav>
 
-    <!-- O BOTÃO AGORA CHAMA A FUNÇÃO DIRETO NO CLIQUE (IMPOSSÍVEL TRAVAR) -->
-    <button class="menu-hamburger" id="menu-hamburger" type="button" onclick="toggleMenuMobile()">☰</button>
-</header>
+        <!-- Botão Hamburguer Mobile invisível no PC -->
+        <button class="menu-hamburger" id="menu-hamburger" type="button" onclick="toggleMenuMobile()" style="display: none;">☰</button>
+    </header>
 
     <!-- HERO BANNER -->
     <section class="hero">
@@ -122,50 +128,40 @@
         </div>
     </main>
 
-    <!-- RECURSOS / DIFERENCIAIS -->
-    <section class="features">
-        <div class="feature-item">
-            <i class="fas fa-truck"></i>
-            <div>
-                <p>Entrega rápida</p>
-                <small>e segura</small>
-            </div>
+        <!-- SEÇÃO DE DIFERENCIAIS (Barra Bege Logo Abaixo dos Produtos) -->
+    <section class="features-bar" style="background-color: #f7f4f0; display: flex; justify-content: space-between; align-items: center; padding: 25px 8%; border-top: 1px solid rgba(60, 36, 25, 0.05); gap: 20px; flex-wrap: wrap;">
+        <div class="feature-item" style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: #3c2419;">
+            <i class="far fa-truck" style="font-size: 18px; color: #3c2419;"></i>
+            <span>Entrega rápida e segura</span>
         </div>
-        <div class="feature-item">
-            <i class="fas fa-award"></i>
-            <div>
-                <p>Cafés selecionados</p>
-                <small>com qualidade</small>
-            </div>
+        <div class="feature-item" style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: #3c2419;">
+            <i class="far fa-badge-check" style="font-size: 18px; color: #3c2419;"></i>
+            <span>Cafés selecionados com qualidade</span>
         </div>
-        <div class="feature-item">
-            <i class="fas fa-shield-alt"></i>
-            <div>
-                <p>Pagamento</p>
-                <small>100% seguro</small>
-            </div>
+        <div class="feature-item" style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: #3c2419;">
+            <i class="far fa-shield-check" style="font-size: 18px; color: #3c2419;"></i>
+            <span>Pagamento 100% seguro</span>
         </div>
-        <div class="feature-item">
-            <i class="fas fa-headset"></i>
-            <div>
-                <p>Atendimento</p>
-                <small>especializado</small>
-            </div>
+        <div class="feature-item" style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: #3c2419;">
+            <i class="far fa-comments" style="font-size: 18px; color: #3c2419;"></i>
+            <span>Atendimento especializado</span>
         </div>
     </section>
 
-    <!-- RODAPÉ -->
-    <footer class="footer">
-        <div class="footer-brand">
-            <i class="fas fa-coffee"></i>
+    <!-- RODAPÉ MESTRE (Idêntico ao Rodapé da Foto) -->
+    <footer class="footer" style="background-color: #f7f4f0; border-top: 1px solid rgba(60, 36, 25, 0.1); display: flex; align-items: center; justify-content: space-between; padding: 25px 8%; flex-wrap: wrap; gap: 20px;">
+        <div class="footer-brand" style="display: flex; align-items: center; gap: 10px; font-family: 'Playfair Display', serif; font-weight: bold; font-size: 14px; color: #1c0f0a; letter-spacing: 1px;">
+            <i class="fas fa-coffee" style="font-size: 16px; color: #1c0f0a;"></i>
             <span>CAFETERIA GOURMET</span>
         </div>
-        <div class="footer-contact">
-            <a href="mailto:contato@cafeteriagourmet.com.br">contato@cafeteriagourmet.com.br</a>
+        
+        <div class="footer-contact" style="font-size: 13px; color: #3c2419; font-weight: 500;">
+            <a href="mailto:contato@cafeteriagourmet.com.br" style="color: #3c2419; text-decoration: none;">contato@cafeteriagourmet.com.br</a>
         </div>
-        <div class="footer-social">
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-facebook-f"></i></a>
+        
+        <div class="footer-social" style="display: flex; align-items: center; gap: 18px;">
+            <a href="#" style="color: #1c0f0a; font-size: 18px; text-decoration: none;"><i class="fab fa-instagram"></i></a>
+            <a href="#" style="color: #1c0f0a; font-size: 18px; text-decoration: none;"><i class="fab fa-facebook-f"></i></a>
         </div>
     </footer>
 
