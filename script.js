@@ -691,9 +691,7 @@ miniatura.classList.add("active");
 });
 });
 }
-/* ==========================================================================
-13. MÓDULO: PAINEL ADMINISTRATIVO (DASHBOARD)
-========================================================================== */
+
 /* ==========================================================================
    13. MÓDULO: PAINEL ADMINISTRATIVO (DASHBOARD)
    ========================================================================== */
@@ -712,13 +710,27 @@ function renderizarTabelaAdmin() {
     if (!tabelaBody) return;
 
     // CORRIGIDO: Substituídos os links quebrados por imagens reais de alta qualidade
-    let produtosLista = JSON.parse(localStorage.getItem("cafeteria_produtos_admin")) || [
-        { id: "1", name: "Café Especial Bourbon", type: "Especial", price: 32.90, stock: "45 un", image: "https://unsplash.com" },
-        { id: "2", name: "Café Gourmet 100% Arábica", type: "Gourmet", price: 28.90, stock: "32 un", image: "https://unsplash.com" },
-        { id: "3", name: "Café Orgânico Torra Média", type: "Orgânico", price: 34.90, stock: "5 un", image: "https://unsplash.com" }
-    ];
+    /* ==========================================================================
+   SINCRONIZAÇÃO MESTRE: BANCO DE DADOS LOCAL DOS 13 PRODUTOS
+   ========================================================================== */
+let produtosLista = JSON.parse(localStorage.getItem("cafeteria_produtos_admin")) || [
+    { id: "1", name: "Café Especial Bourbon", type: "Especial", price: 32.90, stock: "45 un", image: "https://unsplash.com" },
+    { id: "2", name: "Café Gourmet 100% Arábica", type: "Gourmet", price: 28.90, stock: "32 un", image: "https://unsplash.com" },
+    { id: "13", name: "Café Tradicional Premium", type: "Tradicional", price: 19.90, stock: "80 un", image: "https://unsplash.com" },
+    { id: "3", name: "Café Orgânico Torra Média", type: "Orgânico", price: 34.90, stock: "15 un", image: "https://unsplash.com" },
+    { id: "4", name: "Kit Degustação Exclusivo", type: "Kits", price: 49.90, stock: "20 un", image: "https://unsplash.com" },
+    { id: "5", name: "Cápsulas Café Intenso", type: "Cápsulas", price: 24.50, stock: "110 un", image: "https://unsplash.com" },
+    { id: "6", name: "Café Especial Geisha Raro", type: "Especial", price: 68.00, stock: "12 un", image: "https://unsplash.com" },
+    { id: "7", name: "Café Descafeinado Suave", type: "Descafeinado", price: 29.90, stock: "25 un", image: "https://unsplash.com" },
+    { id: "8", name: "Moedor de Café Manual", type: "Acessórios", price: 89.90, stock: "7 un", image: "https://unsplash.com" },
+    { id: "9", name: "Café Jacu Bird Exótico", type: "Especial", price: 145.00, stock: "4 un", image: "https://unsplash.com" },
+    { id: "10", name: "Cold Brew Artesanal", type: "Gourmet", price: 16.90, stock: "40 un", image: "https://unsplash.com" },
+    { id: "11", name: "Café Baunilha Francesa", type: "Orgânico", price: 38.95, stock: "19 un", image: "https://unsplash.com" },
+    { id: "12", name: "Kit Barista Completo", type: "Kits", price: 139.90, stock: "8 un", image: "https://unsplash.com" }
+];
+// Salva a nova matriz estruturada na memória do navegador automaticamente
+localStorage.setItem("cafeteria_produtos_admin", JSON.stringify(produtosLista));
 
-    localStorage.setItem("cafeteria_produtos_admin", JSON.stringify(produtosLista));
     tabelaBody.innerHTML = "";
 
     // CORRIGIDO: HTML da tabela restaurado por completo com as tags estruturais tr/td do design mestre
@@ -785,9 +797,6 @@ function inicializarFormularioCadastroAdmin() {
     });
 }
 
-/* ==========================================================================
-14. MÓDULO: INTERATIVIDADE DO MENU HAMBÚRGUER MOBILE
-========================================================================== */
 /* ==========================================================================
    14. MÓDULO: INTERATIVIDADE DIRETA DO MENU HAMBÚRGUER (SISTEMA ONCLICK)
    ========================================================================== */

@@ -12,28 +12,28 @@
 
     <!-- NAVBAR (Topo Escuro) -->
     <header class="navbar">
-    <div class="logo" style="display: flex; align-items: center; gap: 10px; cursor: pointer;" onclick="window.location.href='index.html'">
-    <!-- SÍMBOLO NATIVO DE XÍCARA EM TEXTO PURO (NUNCA FALHA) -->
-    <span style="font-size: 26px; line-height: 1; display: inline-block;">☕</span>
-    <span style="font-family: 'Playfair Display', serif; color: #ffffff; font-weight: bold; font-size: 16px; letter-spacing: 0.5px; line-height: 1.1;">
-        CAFETERIA<br><small style="font-size: 10px; letter-spacing: 2px; color: #DFCEB8; display: block;">GOURMET</small>
-    </span>
-</div>
-    
-    <!-- O menu ganha o ID correto "nav-menu" -->
-    <nav class="nav-menu" id="nav-menu">
-        <a href="index.html" class="active"><i class="fas fa-home"></i> Início</a>
-        <a href="produtos.html"><i class="fas fa-shopping-bag"></i> Produtos</a>
-        <a href="carrinho.html" class="cart-link">
-            <i class="fas fa-shopping-cart"></i> Carrinho 
-            <span class="cart-badge">0</span>
-        </a>
-        <a href="perfil.html"><i class="fas fa-user"></i> Perfil</a>
-    </nav>
+        <div class="logo" style="display: flex; align-items: center; gap: 10px; cursor: pointer;" onclick="window.location.href='index.html'">
+            <!-- SÍMBOLO NATIVO DE XÍCARA EM TEXTO PURO (NUNCA FALHA) -->
+            <span style="font-size: 26px; line-height: 1; display: inline-block;">☕</span>
+            <span style="font-family: 'Playfair Display', serif; color: #ffffff; font-weight: bold; font-size: 16px; letter-spacing: 0.5px; line-height: 1.1;">
+                CAFETERIA<br><small style="font-size: 10px; letter-spacing: 2px; color: #DFCEB8; display: block;">GOURMET</small>
+            </span>
+        </div>
+        
+        <!-- O menu ganha o ID correto "nav-menu" -->
+        <nav class="nav-menu" id="nav-menu">
+            <a href="index.html"><i class="fas fa-home"></i> Início</a>
+            <a href="produtos.html" class="active"><i class="fas fa-shopping-bag"></i> Produtos</a>
+            <a href="carrinho.html" class="cart-link">
+                <i class="fas fa-shopping-cart"></i> Carrinho 
+                <span class="cart-badge">0</span>
+            </a>
+            <a href="perfil.html"><i class="fas fa-user"></i> Perfil</a>
+        </nav>
 
-    <!-- O BOTÃO AGORA CHAMA A FUNÇÃO DIRETO NO CLIQUE (IMPOSSÍVEL TRAVAR) -->
-    <button class="menu-hamburger" id="menu-hamburger" type="button" onclick="toggleMenuMobile()">☰</button>
-</header>
+        <!-- O BOTÃO AGORA CHAMA A FUNÇÃO DIRETO NO CLIQUE (IMPOSSÍVEL TRAVAR) -->
+        <button class="menu-hamburger" id="menu-hamburger" type="button" onclick="toggleMenuMobile()">☰</button>
+    </header>
 
     <!-- CONTEÚDO PRINCIPAL (Filtros + Grid) -->
     <div class="main-wrapper">
@@ -58,26 +58,24 @@
                 <div class="slider-container">
                     <div class="slider-track" id="slider-track-fill"></div>
                     <!-- Controles interativos transparentes sobrepostos -->
-                    <input type="range" min="0" max="100" value="0" class="range-input" id="input-min">
-                    <input type="range" min="0" max="100" value="100" class="range-input" id="input-max">
+                    <input type="range" min="0" max="150" value="0" class="range-input" id="input-min">
+                    <input type="range" min="0" max="150" value="150" class="range-input" id="input-max">
                 </div>
                 <div class="price-labels">
                     <span id="label-min">R$ 0</span>
-                    <span id="label-max">R$ 100</span>
+                    <span id="label-max">R$ 150</span>
                 </div>
                 <button type="button" class="btn-filter" id="btn-aplicar-preco">Aplicar filtros</button>
             </div>
-
-
 
             <!-- Ordenar por (Mobile/Sidebar) -->
             <div class="filter-group select-group">
                 <h3>Ordenar por</h3>
                 <div class="custom-select">
-                    <select>
-                        <option>Mais populares</option>
-                        <option>Menor preço</option>
-                        <option>Maior preço</option>
+                    <select id="select-ordenar-sidebar">
+                        <option value="populares">Mais populares</option>
+                        <option value="menor">Menor preço</option>
+                        <option value="maior">Maior preço</option>
                     </select>
                     <i class="fas fa-chevron-down"></i>
                 </div>
@@ -89,10 +87,10 @@
             <div class="products-header">
                 <h2>Todos os produtos</h2>
                 <div class="custom-select header-select">
-                    <select>
-                        <option>Mais populares</option>
-                        <option>Menor preço</option>
-                        <option>Maior preço</option>
+                    <select id="select-ordenar-header">
+                        <option value="populares">Mais populares</option>
+                        <option value="menor">Menor preço</option>
+                        <option value="maior">Maior preço</option>
                     </select>
                     <i class="fas fa-chevron-down"></i>
                 </div>
@@ -101,7 +99,7 @@
             <!-- GRID DOS PRODUTOS INTEGRADO COM CATEGORIAS E LINKS DE IMAGEM -->
             <div class="products-grid">
 
-                <!-- Card 1 (Café Bourbon) -->
+                <!-- 1. Café Bourbon -->
                 <div class="product-card" data-category="especial">
                     <div class="product-img-box">
                         <img src="https://unsplash.com" alt="Café Especial Bourbon">
@@ -109,15 +107,11 @@
                     <h4>Café Especial Bourbon</h4>
                     <div class="product-card-footer">
                         <span class="price">R$ 32,90</span>
-                        <button class="btn-add" 
-                                data-id="1" 
-                                data-name="Café Especial Bourbon" 
-                                data-price="32.90" 
-                                data-image="https://unsplash.com">+</button>
+                        <button class="btn-add" data-id="1" data-name="Café Especial Bourbon" data-price="32.90" data-image="https://unsplash.com">+</button>
                     </div>
                 </div>
 
-                <!-- Card 2 (Café Arábica) -->
+                <!-- 2. Café Arábica -->
                 <div class="product-card" data-category="gourmet">
                     <div class="product-img-box">
                         <img src="https://unsplash.com" alt="Café Gourmet 100% Arábica">
@@ -125,15 +119,23 @@
                     <h4>Café Gourmet 100% Arábica</h4>
                     <div class="product-card-footer">
                         <span class="price">R$ 28,90</span>
-                        <button class="btn-add" 
-                                data-id="2" 
-                                data-name="Café Gourmet 100% Arábica" 
-                                data-price="28.90" 
-                                data-image="https://unsplash.com">+</button>
+                        <button class="btn-add" data-id="2" data-name="Café Gourmet 100% Arábica" data-price="28.90" data-image="https://unsplash.com">+</button>
                     </div>
                 </div>
 
-                <!-- Card 3 (Café Orgânico) -->
+                <!-- 3. Café Tradicional da Casa -->
+                <div class="product-card" data-category="tradicional">
+                    <div class="product-img-box">
+                        <img src="https://unsplash.com" alt="Café Tradicional Premium">
+                    </div>
+                    <h4>Café Tradicional Premium</h4>
+                    <div class="product-card-footer">
+                        <span class="price">R$ 19,90</span>
+                        <button class="btn-add" data-id="13" data-name="Café Tradicional Premium" data-price="19.90" data-image="https://unsplash.com">+</button>
+                    </div>
+                </div>
+
+                <!-- 4. Café Orgânico -->
                 <div class="product-card" data-category="organico">
                     <div class="product-img-box">
                         <img src="https://unsplash.com" alt="Café Orgânico Torra Média">
@@ -141,15 +143,11 @@
                     <h4>Café Orgânico Torra Média</h4>
                     <div class="product-card-footer">
                         <span class="price">R$ 34,90</span>
-                        <button class="btn-add" 
-                                data-id="3" 
-                                data-name="Café Orgânico Torra Média" 
-                                data-price="34.90" 
-                                data-image="https://unsplash.com">+</button>
+                        <button class="btn-add" data-id="3" data-name="Café Orgânico Torra Média" data-price="34.90" data-image="https://unsplash.com">+</button>
                     </div>
                 </div>
 
-                <!-- Card 4 (Café Descafeinado) -->
+                <!-- 5. Café Descafeinado -->
                 <div class="product-card" data-category="descafeinado">
                     <div class="product-img-box">
                         <img src="https://unsplash.com" alt="Café Descafeinado Suave">
@@ -157,80 +155,192 @@
                     <h4>Café Descafeinado Suave</h4>
                     <div class="product-card-footer">
                         <span class="price">R$ 29,90</span>
-                        <button class="btn-add" 
-                                data-id="5" 
-                                data-name="Café Descafeinado Suave" 
-                                data-price="29.90" 
-                                data-image="https://unsplash.com">+</button>
+                        <button class="btn-add" data-id="5" data-name="Café Descafeinado Suave" data-price="29.90" data-image="https://unsplash.com">+</button>
                     </div>
                 </div>
 
-                <!-- Card 5 (Café Premium) -->
+                <!-- 6. Café Premium Torra Escura -->
                 <div class="product-card" data-category="especial">
                     <div class="product-img-box">
                         <img src="https://unsplash.com" alt="Café Premium Torra Escura">
                     </div>
                     <h4>Café Premium Torra Escura</h4>
                     <div class="product-card-footer">
-                        <span class="price">R$ 36,90</span>
+                        <span class="price">R$ 39,90</span>
+                        <button class="btn-add" data-id="14" data-name="Café Premium Torra Escura" data-price="39.90" data-image="https://unsplash.com">+</button>
+                    </div>
+                </div>
+
+                  <!-- 7. Kit Degustação Premium -->
+                <div class="product-card" data-category="especial">
+                    <div class="product-img-box">
+                        <img src="https://unsplash.com" alt="Kit Degustação Exclusivo">
+                    </div>
+                    <h4>Kit Degustação Exclusivo</h4>
+                    <div class="product-card-footer">
+                        <span class="price">R$ 49,90</span>
+                        <button class="btn-add" 
+                                data-id="4" 
+                                data-name="Kit Degustação Exclusivo" 
+                                data-price="49.90" 
+                                data-image="https://unsplash.com">+</button>
+                    </div>
+                </div>
+
+                <!-- 8. Cápsulas Café Intenso -->
+                <div class="product-card" data-category="tradicional">
+                    <div class="product-img-box">
+                        <img src="https://unsplash.com" alt="Cápsulas Café Intenso">
+                    </div>
+                    <h4>Cápsulas Café Intenso</h4>
+                    <div class="product-card-footer">
+                        <span class="price">R$ 24,50</span>
+                        <button class="btn-add" 
+                                data-id="5" 
+                                data-name="Cápsulas Café Intenso" 
+                                data-price="24.50" 
+                                data-image="https://unsplash.com">+</button>
+                    </div>
+                </div>
+
+                <!-- 9. Café Especial Geisha Raro -->
+                <div class="product-card" data-category="especial">
+                    <div class="product-img-box">
+                        <img src="https://unsplash.com" alt="Café Especial Geisha Raro">
+                    </div>
+                    <h4>Café Especial Geisha Raro</h4>
+                    <div class="product-card-footer">
+                        <span class="price">R$ 68,00</span>
                         <button class="btn-add" 
                                 data-id="6" 
-                                data-name="Café Premium Torra Escura" 
-                                data-price="36.90" 
+                                data-name="Café Especial Geisha" 
+                                data-price="68.00" 
                                 data-image="https://unsplash.com">+</button>
                     </div>
                 </div>
 
-                <!-- Card 6 (Café Solúvel) -->
+                <!-- 10. Moedor de Café Manual -->
                 <div class="product-card" data-category="gourmet">
                     <div class="product-img-box">
-                        <img src="https://unsplash.com" alt="Café Solúvel Gourmet">
+                        <img src="https://unsplash.com" alt="Moedor de Café Manual">
                     </div>
-                    <h4>Café Solúvel Gourmet</h4>
+                    <h4>Moedor de Café Manual</h4>
                     <div class="product-card-footer">
-                        <span class="price">R$ 22,90</span>
+                        <span class="price">R$ 89,90</span>
                         <button class="btn-add" 
-                                data-id="7" 
-                                data-name="Café Solúvel Gourmet" 
-                                data-price="22.90" 
+                                data-id="8" 
+                                data-name="Moedor de Café Manual" 
+                                data-price="89.90" 
                                 data-image="https://unsplash.com">+</button>
                     </div>
                 </div>
 
-                <!-- 7. CAFÉ TRADICIONAL DA CASA (NOVO!) -->
-            <div class="product-card" data-category="Gourmet">
-                <div class="product-img-wrapper">
-                    <img src="https://unsplash.com" alt="Café Tradicional da Casa">
-                </div>
-                <div class="product-info-wrapper">
-                    <h3>Café Tradicional Premium (Torra Clássica Moído)</h3>
-                    <div class="product-price-row">
-                        <span class="product-price">R$ 19,90</span>
-                        <button type="button" class="btn-add" data-id="13" data-name="Café Tradicional Premium" data-price="19.90" data-image="https://unsplash.com">+</button>
+                <!-- 11. Café Jacu Bird Exótico -->
+                <div class="product-card" data-category="especial">
+                    <div class="product-img-box">
+                        <img src="https://unsplash.com" alt="Café Jacu Bird Exótico">
+                    </div>
+                    <h4>Café Jacu Bird Exótico</h4>
+                    <div class="product-card-footer">
+                        <span class="price">R$ 145,00</span>
+                        <button class="btn-add" 
+                                data-id="9" 
+                                data-name="Café Jacu Bird" 
+                                data-price="145.00" 
+                                data-image="https://unsplash.com">+</button>
                     </div>
                 </div>
-            </div>
+
+                <!-- 12. Cold Brew Artesanal -->
+                <div class="product-card" data-category="gourmet">
+                    <div class="product-img-box">
+                        <img src="https://unsplash.com" alt="Cold Brew Artesanal">
+                    </div>
+                    <h4>Cold Brew Artesanal</h4>
+                    <div class="product-card-footer">
+                        <span class="price">R$ 16,90</span>
+                        <button class="btn-add" 
+                                data-id="10" 
+                                data-name="Cold Brew Artesanal" 
+                                data-price="16.90" 
+                                data-image="https://unsplash.com">+</button>
+                    </div>
+                </div>
+
+                <!-- 13. Café Baunilha Francesa -->
+                <div class="product-card" data-category="organico">
+                    <div class="product-img-box">
+                        <img src="https://unsplash.com" alt="Café Baunilha Francesa">
+                    </div>
+                    <h4>Café Baunilha Francesa</h4>
+                    <div class="product-card-footer">
+                        <span class="price">R$ 38,95</span>
+                        <button class="btn-add" 
+                                data-id="11" 
+                                data-name="Café Baunilha Francesa" 
+                                data-price="38.95" 
+                                data-image="https://unsplash.com">+</button>
+                    </div>
+                </div>
+
+                <!-- 13. KIT BARISTA COMPLETO (ÚLTIMO ITEM PARA FECHAR OS 13 PRODUTOS) -->
+                <div class="product-card" data-category="especial">
+                    <div class="product-img-box">
+                        <img src="https://unsplash.com" alt="Kit Barista Completo">
+                    </div>
+                    <h4>Kit Barista Completo</h4>
+                    <div class="product-card-footer">
+                        <span class="price">R$ 139,90</span>
+                        <button class="btn-add" 
+                                data-id="12" 
+                                data-name="Kit Barista Completo" 
+                                data-price="139.90" 
+                                data-image="https://unsplash.com">+</button>
+                    </div>
+                </div>
 
             </div>
         </main>
     </div>
 
-    <!-- RODAPÉ -->
-    <footer class="footer">
-        <div class="footer-brand">
-            <i class="fas fa-coffee"></i>
+    <!-- SEÇÃO DE DIFERENCIAIS -->
+    <section class="features-bar" style="background-color: #f7f4f0; display: flex; justify-content: space-between; align-items: center; padding: 25px 8%; border-top: 1px solid rgba(60, 36, 25, 0.05); gap: 20px; flex-wrap: wrap;">
+        <div class="feature-item" style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: #3c2419;">
+            <i class="far fa-truck" style="font-size: 18px; color: #3c2419;"></i>
+            <span>Entrega rápida e segura</span>
+        </div>
+        <div class="feature-item" style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: #3c2419;">
+            <i class="far fa-badge-check" style="font-size: 18px; color: #3c2419;"></i>
+            <span>Cafés selecionados com qualidade</span>
+        </div>
+        <div class="feature-item" style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: #3c2419;">
+            <i class="far fa-shield-check" style="font-size: 18px; color: #3c2419;"></i>
+            <span>Pagamento 100% seguro</span>
+        </div>
+        <div class="feature-item" style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: #3c2419;">
+            <i class="far fa-comments" style="font-size: 18px; color: #3c2419;"></i>
+            <span>Atendimento especializado</span>
+        </div>
+    </section>
+
+    <!-- RODAPÉ MESTRE COMPLETO -->
+    <footer class="footer" style="background-color: #f7f4f0; border-top: 1px solid rgba(60, 36, 25, 0.1); display: flex; align-items: center; justify-content: space-between; padding: 25px 8%; flex-wrap: wrap; gap: 20px;">
+        <div class="footer-brand" style="display: flex; align-items: center; gap: 10px; font-family: 'Playfair Display', serif; font-weight: bold; font-size: 14px; color: #1c0f0a; letter-spacing: 1px;">
+            <i class="fas fa-coffee" style="font-size: 16px; color: #1c0f0a;"></i>
             <span>CAFETERIA GOURMET</span>
         </div>
-        <div class="footer-contact">
-            <a href="mailto:contato@cafeteriagourmet.com.br">contato@cafeteriagourmet.com.br</a>
+        
+        <div class="footer-contact" style="font-size: 13px; color: #3c2419; font-weight: 500;">
+            <a href="mailto:contato@cafeteriagourmet.com.br" style="color: #3c2419; text-decoration: none;">contato@cafeteriagourmet.com.br</a>
         </div>
-        <div class="footer-social">
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-facebook-f"></i></a>
+        
+        <div class="footer-social" style="display: flex; align-items: center; gap: 18px;">
+            <a href="#" style="color: #1c0f0a; font-size: 18px; text-decoration: none;"><i class="fab fa-instagram"></i></a>
+            <a href="#" style="color: #1c0f0a; font-size: 18px; text-decoration: none;"><i class="fab fa-facebook-f"></i></a>
         </div>
     </footer>
 
-    <!-- Script único mestre de controle das lógicas -->
-    <script src="script.js"></script>
+    <!-- SCRIPT COM CONTROLE DE CACHE REATUALIZADO -->
+    <script src="script.js?v=21.0"></script>
 </body>
 </html>

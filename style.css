@@ -1774,3 +1774,267 @@ box-shadow: none;
         margin-top: 20px !important;
     }
 }
+
+/* ==========================================================================
+   ESTILIZAÇÃO DA GRADE DE PRODUTOS E BARRA LATERAL DE FILTROS (COMPLETO)
+   ========================================================================== */
+
+/* Container mestre que divide a tela em duas colunas */
+.main-wrapper {
+    display: flex !important;
+    gap: 30px !important;
+    padding: 40px 8% !important;
+    background-color: #f7f4f0 !important; /* Fundo bege claro premium */
+    min-height: 80vh;
+}
+
+/* Barra Lateral de Filtros */
+.sidebar-filters {
+    flex: 0 0 260px !important;
+    background-color: #ffffff !important;
+    padding: 25px !important;
+    border-radius: 12px !important;
+    border: 1px solid rgba(60, 36, 25, 0.06) !important;
+    height: fit-content !important;
+    box-shadow: 0 4px 15px rgba(60, 36, 25, 0.02) !important;
+}
+
+.sidebar-filters h2 {
+    font-family: 'Playfair Display', serif !important;
+    font-size: 20px !important;
+    color: #1c0f0a !important;
+    margin-top: 0 !important;
+    margin-bottom: 20px !important;
+    border-bottom: 2px solid #dfceb8;
+    padding-bottom: 8px;
+}
+
+.filter-group {
+    margin-bottom: 25px !important;
+}
+
+.filter-group h3 {
+    font-size: 14px !important;
+    color: #3c2419 !important;
+    margin-top: 0 !important;
+    margin-bottom: 12px !important;
+    font-weight: 600 !important;
+}
+
+.check-item {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    font-size: 13px !important;
+    color: #6e5b53 !important;
+    margin-bottom: 8px !important;
+    cursor: pointer !important;
+}
+
+/* Customização dos Controles de Preço (Slider) */
+.slider-container {
+    position: relative !important;
+    width: 100% !important;
+    height: 6px !important;
+    background-color: #e8e3df !important;
+    border-radius: 3px !important;
+    margin-bottom: 15px !important;
+}
+
+.slider-track {
+    position: absolute !important;
+    height: 100% !important;
+    background-color: #3c2419 !important; /* Cor marrom no preenchimento */
+    border-radius: 3px !important;
+    left: 0;
+    right: 0;
+}
+
+/* ==========================================================================
+   ATUALIZAÇÃO DE COMPATIBILIDADE DO CONTROLE DE PREÇO (SLIDER)
+   ========================================================================== */
+.range-input {
+    position: absolute !important;
+    width: 100% !important;
+    height: 6px !important;
+    top: 0 !important;
+    background: none !important;
+    pointer-events: none !important;
+    -webkit-appearance: none !important;
+    appearance: none !important; /* ADICIONADO PARA COMPATIBILIDADE PADRÃO UNIVERSAL */
+}
+
+.range-input::-webkit-slider-thumb {
+    height: 16px !important;
+    width: 16px !important;
+    border-radius: 50% !important;
+    background-color: #3c2419 !important;
+    border: 2px solid #ffffff !important;
+    cursor: pointer !important;
+    pointer-events: auto !important;
+    -webkit-appearance: none !important;
+    appearance: none !important; /* ADICIONADO PARA COMPATIBILIDADE PADRÃO UNIVERSAL */
+}
+
+/* Caso o cliente utilize o navegador Firefox, adicionamos a regra para o marcador deles também */
+.range-input::-moz-range-thumb {
+    height: 16px !important;
+    width: 16px !important;
+    border-radius: 50% !important;
+    background-color: #3c2419 !important;
+    border: 2px solid #ffffff !important;
+    cursor: pointer !important;
+    pointer-events: auto !important;
+    appearance: none !important; /* REMOVE O BOTÃO PADRÃO DO FIREFOX */
+}
+
+.price-labels {
+    display: flex !important;
+    justify-content: space-between !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    color: #3c2419 !important;
+    margin-bottom: 12px !important;
+}
+
+.btn-filter {
+    width: 100% !important;
+    background-color: #3c2419 !important;
+    color: #ffffff !important;
+    border: none !important;
+    padding: 10px !important;
+    border-radius: 6px !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    cursor: pointer !important;
+    transition: background-color 0.2s !important;
+}
+
+.btn-filter:hover {
+    background-color: #24140d !important;
+}
+
+/* Coluna de Exibição dos Produtos */
+.products-container {
+    flex: 1 !important;
+}
+
+.products-header {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    margin-bottom: 25px !important;
+}
+
+.products-header h2 {
+    font-family: 'Playfair Display', serif !important;
+    font-size: 24px !important;
+    color: #1c0f0a !important;
+    margin: 0 !important;
+}
+
+/* Grade de Produtos Estilizada (Cards Inteligentes) */
+.products-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)) !important;
+    gap: 25px !important;
+    width: 100% !important;
+}
+
+.product-card {
+    background-color: #ffffff !important;
+    border-radius: 12px !important;
+    padding: 16px !important;
+    box-shadow: 0 4px 15px rgba(60, 36, 25, 0.02) !important;
+    border: 1px solid rgba(60, 36, 25, 0.05) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.product-card:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 8px 25px rgba(60, 36, 25, 0.08) !important;
+}
+
+.product-img-box {
+    background-color: #fcfbfa !important;
+    border-radius: 8px !important;
+    height: 160px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin-bottom: 12px !important;
+    padding: 10px !important;
+    overflow: hidden !important;
+}
+
+.product-img-box img {
+    max-height: 100% !important;
+    max-width: 100% !important;
+    object-fit: contain !important;
+}
+
+.product-card h4 {
+    font-family: 'Playfair Display', serif !important;
+    font-size: 15px !important;
+    color: #1c0f0a !important;
+    margin: 0 0 12px 0 !important;
+    line-height: 1.3 !important;
+    min-height: 40px !important;
+}
+
+.product-card-footer {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+}
+
+.product-card-footer .price {
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    color: #1c0f0a !important;
+}
+
+/* Botão Quadrado de Adicionar do Design */
+.product-card-footer .btn-add {
+    background-color: #3c2419 !important;
+    color: #ffffff !important;
+    border: none !important;
+    width: 32px !important;
+    height: 32px !important;
+    border-radius: 4px !important;
+    font-size: 18px !important;
+    font-weight: 500 !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    line-height: 1 !important;
+    transition: background-color 0.2s ease !important;
+}
+
+.product-card-footer .btn-add:hover {
+    background-color: #24140d !important;
+}
+
+/* ==========================================================================
+   RESPONSIVIDADE PARA DISPOSITIVOS MÓVEIS (CELULAR)
+   ========================================================================== */
+@media (max-width: 768px) {
+    .main-wrapper {
+        flex-direction: column !important; /* Empilha filtros no topo e produtos embaixo */
+        padding: 20px 5% !important;
+    }
+    
+    .sidebar-filters {
+        flex: 1 1 100% !important;
+        width: 100% !important;
+        margin-bottom: 10px !important;
+    }
+    
+    .products-header h2 {
+        font-size: 20px !important;
+    }
+}
