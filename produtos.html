@@ -99,39 +99,39 @@
             <!-- GRID DOS PRODUTOS COM IMAGENS INTEGRADAS EM TEXTO PURO (BLINDADO) -->
             <div class="products-grid" style="display: grid !important; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)) !important; gap: 25px !important; width: 100% !important;">
 
-                <!-- Card 1 (Café Bourbon) -->
-                <div class="product-card" data-category="especial" style="display: flex !important; flex-direction: column !important; background: #ffffff !important; padding: 15px !important; border-radius: 8px !important;">
-                    <div class="product-img-box" style="display: flex !important; align-items: center !important; justify-content: center !important; height: 140px !important; background: #fcfbfa !important;">
-                        <img src="data:image/svg+xml;utf8,<svg xmlns='http://w3.org' viewBox='0 0 100 100'><text y='0.9em' font-size='80'>☕</text></svg>" alt="Café" style="width: 70px !important; height: 70px !important; display: block !important;">
+                <!-- 1. Café Bourbon -->
+                <div class="product-card" data-category="especial">
+                    <div class="product-img-box">
+                        <img src="https://unsplash.com" alt="Café Especial Bourbon">
                     </div>
-                    <h4 style="color: #1c0f0a !important; margin: 10px 0 !important;">Café Especial Bourbon</h4>
-                    <div class="product-card-footer" style="display: flex !important; justify-content: space-between !important; align-items: center !important;">
-                        <span class="price" style="color: #1c0f0a !important; font-weight: bold !important;">R$ 32,90</span>
-                        <button class="btn-add" data-id="1" data-name="Café Especial Bourbon" data-price="32.90" style="background: #3c2419 !important; color: #fff !important; border: none !important; width: 30px !important; height: 30px !important; border-radius: 4px !important; cursor: pointer !important;">+</button>
-                    </div>
-                </div>
-
-                <!-- Card 2 (Café Arábica) -->
-                <div class="product-card" data-category="gourmet" style="display: flex !important; flex-direction: column !important; background: #ffffff !important; padding: 15px !important; border-radius: 8px !important;">
-                    <div class="product-img-box" style="display: flex !important; align-items: center !important; justify-content: center !important; height: 140px !important; background: #fcfbfa !important;">
-                        <img src="data:image/svg+xml;utf8,<svg xmlns='http://w3.org' viewBox='0 0 100 100'><text y='0.9em' font-size='80'>☕</text></svg>" alt="Café" style="width: 70px !important; height: 70px !important; display: block !important;">
-                    </div>
-                    <h4 style="color: #1c0f0a !important; margin: 10px 0 !important;">Café Gourmet 100% Arábica</h4>
-                    <div class="product-card-footer" style="display: flex !important; justify-content: space-between !important; align-items: center !important;">
-                        <span class="price" style="color: #1c0f0a !important; font-weight: bold !important;">R$ 28,90</span>
-                        <button class="btn-add" data-id="2" data-name="Café Gourmet 100% Arábica" data-price="28.90" style="background: #3c2419 !important; color: #fff !important; border: none !important; width: 30px !important; height: 30px !important; border-radius: 4px !important; cursor: pointer !important;">+</button>
+                    <h4>Café Especial Bourbon</h4>
+                    <div class="product-card-footer">
+                        <span class="price">R$ 32,90</span>
+                        <button class="btn-add" data-id="1" data-name="Café Especial Bourbon" data-price="32.90" data-image="https://unsplash.com">+</button>
                     </div>
                 </div>
 
-                <!-- Card 3 (Café Tradicional Premium) -->
-                <div class="product-card" data-category="tradicional" style="display: flex !important; flex-direction: column !important; background: #ffffff !important; padding: 15px !important; border-radius: 8px !important;">
-                    <div class="product-img-box" style="display: flex !important; align-items: center !important; justify-content: center !important; height: 140px !important; background: #fcfbfa !important;">
-                        <img src="data:image/svg+xml;utf8,<svg xmlns='http://w3.org' viewBox='0 0 100 100'><text y='0.9em' font-size='80'>☕</text></svg>" alt="Café" style="width: 70px !important; height: 70px !important; display: block !important;">
+                <!-- 2. Café Arábica -->
+                <div class="product-card" data-category="gourmet">
+                    <div class="product-img-box">
+                        <img src="https://unsplash.com" alt="Café Gourmet 100% Arábica">
                     </div>
-                    <h4 style="color: #1c0f0a !important; margin: 10px 0 !important;">Café Tradicional Premium</h4>
-                    <div class="product-card-footer" style="display: flex !important; justify-content: space-between !important; align-items: center !important;">
-                        <span class="price" style="color: #1c0f0a !important; font-weight: bold !important;">R$ 19,90</span>
-                        <button class="btn-add" data-id="13" data-name="Café Tradicional Premium" data-price="19.90" style="background: #3c2419 !important; color: #fff !important; border: none !important; width: 30px !important; height: 30px !important; border-radius: 4px !important; cursor: pointer !important;">+</button>
+                    <h4>Café Gourmet 100% Arábica</h4>
+                    <div class="product-card-footer">
+                        <span class="price">R$ 28,90</span>
+                        <button class="btn-add" data-id="2" data-name="Café Gourmet 100% Arábica" data-price="28.90" data-image="https://unsplash.com">+</button>
+                    </div>
+                </div>
+
+                <!-- 3. CAFÉ TRADICIONAL PREMIUM (PONTO DE CONTINUAÇÃO) -->
+                <div class="product-card" data-category="gourmet">
+                    <div class="product-img-box">
+                        <img src="https://unsplash.com" alt="Café Tradicional Premium">
+                    </div>
+                    <h4>Café Tradicional Premium</h4>
+                    <div class="product-card-footer">
+                        <span class="price">R$ 19,90</span>
+                        <button class="btn-add" data-id="13" data-name="Café Tradicional Premium" data-price="19.90" data-image="https://unsplash.com">+</button>
                     </div>
                 </div>
 
