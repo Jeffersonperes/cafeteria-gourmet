@@ -38,6 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
     try { if (document.getElementById("form-cadastro-cliente")) inicializarLogicaCadastro(); } catch(e) {}
     try { if (document.getElementById("profile-user-card")) inicializarDadosPerfilDinamico(); } catch(e) {}
     try { if (document.getElementById("form-alterar-perfil-completo")) inicializarFormularioAlterarPerfil(); } catch(e) {}
+    try { inicializarPaginaDetalhesDinamica(); } catch(e) {}
 });
 
 
@@ -1189,5 +1190,35 @@ function efetuarLogout() {
         localStorage.removeItem("cafeteria_usuario_ativo");
         alert("Sessão encerrada!");
         window.location.href = "login.html";
+    }
+}
+ 
+/* ==========================================================================
+   MOTOR CAPTURADOR DA PÁGINA DE DETALHES DO PRODUTO (LOCALSTORAGE)
+   ========================================================================== */
+function inicializarPaginaDetalhesDinamica() {
+    // 1. Pega o ID passado pelo link (ex: detalhes.html?id=2)
+    const urlParams = new URLSearchParams(window.location.search);
+    const idProduto = urlParams.get("id");
+    if (!idProduto) return;
+
+    // 2. Busca o café correspondente na lista mestre de 13 produtos do e-commerce
+    const bancoProdutos = JSON.parse(localStorage.getItem("cafeteria_produtos_admin")) || [];
+    const produtoEncontrado = bancoProdutos.find(p => p.id === idProduto);
+
+    if (!produtoEncontrado) return;
+
+    // 3. Alimenta as tags da página com os dados reais e as imagens da pasta 'img'
+    const txtNome = document.getElementById("detail-product-name");
+    const txtPreco = document.getElementById("detail-product-price");
+    const imgFoto = document.getElementById("detail-product-image");
+    const txtCategoria = document.getElementById("detail-product-category");
+
+    if (txtNome) txtNome.textContent = produtoEncontrado.name;
+    if (txtPreco) txtPreco.textContent = "R$ " + parseFloat(produtoEncontrado.price).toFixed(2).replace(".", ",");
+    if (txtCategoria) txtCategoria.textContent = produtoEncontrado.type || "Gourmet";
+    if (imgFoto) {
+        imgFoto.src = produtoEncontrado.image;
+        imgFoto.alt = produtoEncontrado.name;
     }
 }
