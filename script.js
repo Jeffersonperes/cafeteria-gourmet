@@ -593,26 +593,55 @@ function renderizarHistoricoPerfil() {
 /* ==========================================================================
 10. MÓDULO: DETALHAMENTO DE PEDIDOS INDIVIDUAIS
 ========================================================================== */
+/* ==========================================================================
+   MOTOR CAPTURADOR DINÂMICO DE DETALHES (BLINDADO CONTRA LOCALSTORAGE ANTIGO)
+   ========================================================================== */
 function inicializarPaginaDetalhesDinamica() {
-    // 1. Pega o ID passado pelo link (ex: detalhes.html?id=1)
+    // 1. Pega o ID passado pelo link da imagem (ex: detalhes.html?id=13)
     const urlParams = new URLSearchParams(window.location.search);
     const idProduto = urlParams.get("id");
     if (!idProduto) return;
 
-    // 2. Busca o café correspondente na lista mestre de 14 produtos do e-commerce
-    const bancoProdutos = JSON.parse(localStorage.getItem("cafeteria_produtos_admin")) || [];
-    const produtoEncontrado = bancoProdutos.find(p => p.id === idProduto);
+    // 2. MATRIZ DE SEGURANÇA IMEDIATA (Se o localStorage falhar, o código usa esta lista na hora)
+    const produtosBackup = [
+        { id: "1", name: "Café Especial Bourbon Amarelo (Grãos)", type: "Especial", price: 32.90, image: "img/bourbon.jpg", description: "Cultivado acima de 1.200 metros de altitude em solo vulcânico. Apresenta notas sensoriais adocicadas que remetem a caramelo, chocolate ao leite e uma acidez cítrica perfeitamente equilibrada de frutas amarelas." },
+        { id: "2", name: "Café Gourmet 100% Arábica (Moído)", type: "Gourmet", price: 28.90, image: "img/arabica.jpg", description: "Blend exclusivo de grãos Arábica rigorosamente selecionados e com torra média artesanal. Possui um corpo denso, aroma marcante de castanhas torradas e notas sutis de açúcar mascavo." },
+        { id: "13", name: "Café Tradicional Premium", type: "Tradicional", price: 19.90, image: "img/tradicional.jpg", description: "Nossa torra clássica e tradicional da casa, desenvolvida com grãos encorpados de torra média-escura. Entrega um café forte, robusto e reconfortante, com baixa acidez." },
+        { id: "15", name: "Café Solúvel Liofilizado", type: "Gourmet", price: 22.90, image: "img/soluvel.jpg", description: "Produzido através do moderno processo de liofilização (congelamento a vácuo), que preserva integralmente o óleo essencial, o aroma e as características originais do grão Arábica." },
+        { id: "3", name: "Café Orgânico Sustentável Torra Média", type: "Orgânico", price: 34.90, image: "img/organico.jpg", description: "Grãos produzidos em pequenas propriedades familiares sem o uso de defensivos químicos ou fertilizantes artificiais. Entrega uma bebida leve, frutada, com notas de mel." },
+        { id: "4", name: "Kit Degustação Exclusivo", type: "Kits", price: 49.90, image: "img/kit-degustacao.jpg", description: "Perfeito para explorar novos horizontes. Contém 3 pacotes de 100g das nossas principais variedades micro-lotes (Especial, Gourmet e Orgânico)." },
+        { id: "5", name: "Cápsulas Café Intenso", type: "Cápsulas", price: 24.50, image: "img/capsulas.jpg", description: "Blends de intensidade 10 com grãos de torra escura pronunciada. Caixa com 10 unidades totalmente compatíveis com máquinas Nespresso." },
+        { id: "6", name: "Café Especial Geisha Raro", type: "Especial", price: 68.00, image: "img/geisha.jpg", description: "Variedade Geisha originária da Etiópia, colhida manualmente em lotes restritos. Considerado um dos melhores cafés do mundo, destaca-se por um aroma floral exótico." },
+        { id: "7", name: "Café Descafeinado Suave", type: "Descafeinado", price: 29.90, image: "img/descafeinado.jpg", description: "Extraído através do processo natural de lavagem com água, mantendo os compostos de sabor intactos e removendo 99,7% da cafeína. Bebida leve e equilibrada." },
+        { id: "8", name: "Moedor de Café Manual", type: "Acessórios", price: 89.90, image: "img/moedor.jpg", description: "Manivela ergonômica em aço inox com engrenagens internas de cerâmica cônica. Permite ajustar a moagem com precisão (de grossa para prensa a ultra-fina para espresso)." },
+        { id: "9", name: "Café Jacu Bird Exótico", type: "Especial", price: 145.00, image: "img/jacu.jpg", description: "Raridade nacional produzida nas montanhas do Espírito Santo. Os frutos são selecionados e ingeridos organicamente pelo pássaro Jacu, gerando um café ultra-suave." },
+        { id: "10", name: "Cold Brew Artesanal Extra Forte", type: "Gourmet", price: 16.90, image: "img/coldbrew.jpg", description: "Infusão a frio extraída lentamente por mais de 18 horas em água filtrada. Esse processo reduz o amargor tradicional em 60%, resultando em uma bebida altamente cafeinada." },
+        { id: "11", name: "Café Aromatizado de Baunilha Francesa", type: "Orgânico", price: 38.95, image: "img/baunilha.jpg", description: "Base de grãos selecionados combinada delicadamente com óleos naturais de baunilha de Madagascar durante o resfriamento da torra. Proporciona um aroma doce e reconfortante." },
+        { id: "12", name: "Kit Barista Completo", type: "Kits", price: 139.90, image: "img/kit-barista.jpg", description: "Conjunto profissional contendo uma Prensa Francesa em vidro borossilicato de 600ml com filtro de malha dupla em aço inox e um termômetro culinário digital." }
+    ];
 
-    if (!produtoEncontrado) return;
+    // 3. Força a renovação do localStorage caso ele esteja com a lista velha (Bourbon)
+    let bancoProdutos = JSON.parse(localStorage.getItem("cafeteria_produtos_admin")) || [];
+    if (bancoProdutos.length < 10) { 
+        localStorage.setItem("cafeteria_produtos_admin", JSON.stringify(produtosBackup));
+        bancoProdutos = produtosBackup;
+    }
 
-    // 3. Captura cada elemento da tela de detalhes de forma segura
+    // 4. Encontra o café clicado comparando com o ID da URL
+    const produtoEncontrado = bancoProdutos.find(p => p.id === String(idProduto)) || produtosBackup.find(p => p.id === String(idProduto));
+
+    if (!produtoEncontrado) {
+        console.error("⚠️ ID não localizado no banco mestre:", idProduto);
+        return;
+    }
+
+    // 5. Injeta os dados dinâmicos na tela de detalhes
     const txtNome = document.getElementById("detail-product-name");
     const txtPreco = document.getElementById("detail-product-price");
     const imgFoto = document.getElementById("detail-product-image");
     const txtCategoria = document.getElementById("detail-product-category");
-    const txtDescricao = document.getElementById("detail-product-description"); // CAPTURA DA DESCRIÇÃO
+    const txtDescricao = document.getElementById("detail-product-description");
 
-    // 4. Alimenta as tags da página com os dados reais do banco
     if (txtNome) txtNome.textContent = produtoEncontrado.name;
     if (txtPreco) txtPreco.textContent = "R$ " + parseFloat(produtoEncontrado.price).toFixed(2).replace(".", ",");
     if (txtCategoria) txtCategoria.textContent = produtoEncontrado.type || "Gourmet";
@@ -620,16 +649,18 @@ function inicializarPaginaDetalhesDinamica() {
         imgFoto.src = produtoEncontrado.image;
         imgFoto.alt = produtoEncontrado.name;
     }
-    
-    // INJEÇÃO DA DESCRIÇÃO DINÂMICA CUSTOMIZADA
     if (txtDescricao) {
-        txtDescricao.textContent = produtoEncontrado.description || "Café gourmet selecionado criteriosamente por nossos baristas especialistas.";
+        txtDescricao.textContent = produtoEncontrado.description;
     }
 
-    // 5. Configura o botão de adicionar ao carrinho dentro da tela de detalhes
+    // 6. Configura o botão de comprar dentro da tela de detalhes
     const btnComprar = document.getElementById("btn-detail-buy");
     if (btnComprar) {
-        btnComprar.addEventListener("click", () => {
+        // Remove ouvintes antigos para não duplicar cliques
+        const novoBtn = btnComprar.cloneNode(true);
+        btnComprar.parentNode.replaceChild(novoBtn, btnComprar);
+        
+        novoBtn.addEventListener("click", () => {
             let carrinho = JSON.parse(localStorage.getItem("cafeteria_carrinho")) || [];
             const itemExistente = carrinho.find(item => item.id === produtoEncontrado.id);
 
@@ -648,13 +679,12 @@ function inicializarPaginaDetalhesDinamica() {
             localStorage.setItem("cafeteria_carrinho", JSON.stringify(carrinho));
             try { atualizarContadorMenu(); } catch(e) {}
             
-            // Efeito visual de confirmação rápida para o cliente
-            btnComprar.innerText = "✓ Adicionado com Sucesso!";
-            btnComprar.style.backgroundColor = "var(--success-green)";
+            novoBtn.innerText = "✓ Adicionado com Sucesso!";
+            novoBtn.style.backgroundColor = "var(--success-green)";
             
             setTimeout(() => {
-                btnComprar.innerText = "Adicionar ao Carrinho";
-                btnComprar.style.backgroundColor = "#3c2419";
+                novoBtn.innerText = "Adicionar ao Carrinho";
+                novoBtn.style.backgroundColor = "#3c2419";
             }, 2000);
         });
     }
