@@ -593,19 +593,72 @@ function renderizarHistoricoPerfil() {
 /* ==========================================================================
 10. MÓDULO: DETALHAMENTO DE PEDIDOS INDIVIDUAIS
 ========================================================================== */
-function renderizarDetalhesDoPedido() {
-    const parametrosURL = new URLSearchParams(window.location.search);
-    let idPedidoBuscado = parametrosURL.get("id");
-    const historico = JSON.parse(localStorage.getItem("cafeteria_historico_pedidos")) || [];
-    let pedidoEncontrado = historico.find(p => p.id.replace("#", "") === idPedidoBuscado) || JSON.parse(localStorage.getItem("cafeteria_ultimo_pedido"));
-    
-    if (!pedidoEncontrado) return;
+function inicializarPaginaDetalhesDinamica() {
+    // 1. Pega o ID passado pelo link (ex: detalhes.html?id=1)
+    const urlParams = new URLSearchParams(window.location.search);
+    const idProduto = urlParams.get("id");
+    if (!idProduto) return;
 
-    // CORRIGIDO: Adicionadas as crases para ler a variável do ID do pedido
-    document.getElementById("detail-order-id").textContent = `Pedido ${pedidoEncontrado.id}`;
+    // 2. Busca o café correspondente na lista mestre de 14 produtos do e-commerce
+    const bancoProdutos = JSON.parse(localStorage.getItem("cafeteria_produtos_admin")) || [];
+    const produtoEncontrado = bancoProdutos.find(p => p.id === idProduto);
+
+    if (!produtoEncontrado) return;
+
+    // 3. Captura cada elemento da tela de detalhes de forma segura
+    const txtNome = document.getElementById("detail-product-name");
+    const txtPreco = document.getElementById("detail-product-price");
+    const imgFoto = document.getElementById("detail-product-image");
+    const txtCategoria = document.getElementById("detail-product-category");
+    const txtDescricao = document.getElementById("detail-product-description"); // CAPTURA DA DESCRIÇÃO
+
+    // 4. Alimenta as tags da página com os dados reais do banco
+    if (txtNome) txtNome.textContent = produtoEncontrado.name;
+    if (txtPreco) txtPreco.textContent = "R$ " + parseFloat(produtoEncontrado.price).toFixed(2).replace(".", ",");
+    if (txtCategoria) txtCategoria.textContent = produtoEncontrado.type || "Gourmet";
+    if (imgFoto) {
+        imgFoto.src = produtoEncontrado.image;
+        imgFoto.alt = produtoEncontrado.name;
+    }
     
-    // CORRIGIDO: Adicionadas as crases para o HTML do ícone de calendário
-    document.getElementById("detail-order-date").innerHTML = `<i class="far fa-calendar"></i> Realizado em ${pedidoEncontrado.data}`;
+    // INJEÇÃO DA DESCRIÇÃO DINÂMICA CUSTOMIZADA
+    if (txtDescricao) {
+        txtDescricao.textContent = produtoEncontrado.description || "Café gourmet selecionado criteriosamente por nossos baristas especialistas.";
+    }
+
+    // 5. Configura o botão de adicionar ao carrinho dentro da tela de detalhes
+    const btnComprar = document.getElementById("btn-detail-buy");
+    if (btnComprar) {
+        btnComprar.addEventListener("click", () => {
+            let carrinho = JSON.parse(localStorage.getItem("cafeteria_carrinho")) || [];
+            const itemExistente = carrinho.find(item => item.id === produtoEncontrado.id);
+
+            if (itemExistente) {
+                itemExistente.quantity++;
+            } else {
+                carrinho.push({
+                    id: produtoEncontrado.id,
+                    name: produtoEncontrado.name,
+                    price: parseFloat(produtoEncontrado.price),
+                    image: produtoEncontrado.image,
+                    quantity: 1
+                });
+            }
+
+            localStorage.setItem("cafeteria_carrinho", JSON.stringify(carrinho));
+            try { atualizarContadorMenu(); } catch(e) {}
+            
+            // Efeito visual de confirmação rápida para o cliente
+            btnComprar.innerText = "✓ Adicionado com Sucesso!";
+            btnComprar.style.backgroundColor = "var(--success-green)";
+            
+            setTimeout(() => {
+                btnComprar.innerText = "Adicionar ao Carrinho";
+                btnComprar.style.backgroundColor = "#3c2419";
+            }, 2000);
+        });
+    }
+}
     
     const containerEntrega = document.getElementById("detail-delivery-box");
     if (containerEntrega) {
@@ -712,25 +765,139 @@ function renderizarTabelaAdmin() {
 
     // CORRIGIDO: Substituídos os links quebrados por imagens reais de alta qualidade
     /* ==========================================================================
-   SINCRONIZAÇÃO MESTRE: BANCO DE DADOS LOCAL DOS 13 PRODUTOS
+   BANCO DE DADOS MESTRE: 14 PRODUTOS COM DETALHES DE BARISTA INCLUSOS
    ========================================================================== */
 let produtosLista = JSON.parse(localStorage.getItem("cafeteria_produtos_admin")) || [
-    { id: "1", name: "Café Especial Bourbon", type: "Especial", price: 32.90, stock: "45 un", image: "https://unsplash.com" },
-    { id: "2", name: "Café Gourmet 100% Arábica", type: "Gourmet", price: 28.90, stock: "32 un", image: "https://unsplash.com" },
-    { id: "13", name: "Café Tradicional Premium", type: "Tradicional", price: 19.90, stock: "80 un", image: "https://unsplash.com" },
-    { id: "3", name: "Café Orgânico Torra Média", type: "Orgânico", price: 34.90, stock: "15 un", image: "https://unsplash.com" },
-    { id: "4", name: "Kit Degustação Exclusivo", type: "Kits", price: 49.90, stock: "20 un", image: "https://unsplash.com" },
-    { id: "5", name: "Cápsulas Café Intenso", type: "Cápsulas", price: 24.50, stock: "110 un", image: "https://unsplash.com" },
-    { id: "6", name: "Café Especial Geisha Raro", type: "Especial", price: 68.00, stock: "12 un", image: "https://unsplash.com" },
-    { id: "7", name: "Café Descafeinado Suave", type: "Descafeinado", price: 29.90, stock: "25 un", image: "https://unsplash.com" },
-    { id: "8", name: "Moedor de Café Manual", type: "Acessórios", price: 89.90, stock: "7 un", image: "https://unsplash.com" },
-    { id: "9", name: "Café Jacu Bird Exótico", type: "Especial", price: 145.00, stock: "4 un", image: "https://unsplash.com" },
-    { id: "10", name: "Cold Brew Artesanal", type: "Gourmet", price: 16.90, stock: "40 un", image: "https://unsplash.com" },
-    { id: "11", name: "Café Baunilha Francesa", type: "Orgânico", price: 38.95, stock: "19 un", image: "https://unsplash.com" },
-    { id: "12", name: "Kit Barista Completo", type: "Kits", price: 139.90, stock: "8 un", image: "https://unsplash.com" }
+    { 
+        id: "1", 
+        name: "Café Especial Bourbon Amarelo (Grãos)", 
+        type: "Especial", 
+        price: 32.90, 
+        stock: "45 un", 
+        image: "img/bourbon.jpg",
+        description: "Cultivado acima de 1.200 metros de altitude em solo vulcânico. Apresenta notas sensoriais adocicadas que remetem a caramelo, chocolate ao leite e uma acidez cítrica perfeitamente equilibrada de frutas amarelas. Finalização limpa e aveludada."
+    },
+    { 
+        id: "2", 
+        name: "Café Gourmet 100% Arábica (Moído)", 
+        type: "Gourmet", 
+        price: 28.90, 
+        stock: "32 un", 
+        image: "img/arabica.jpg",
+        description: "Blend exclusivo de grãos Arábica rigorosamente selecionados e com torra média artesanal. Possui um corpo denso, aroma marcante de castanhas torradas e notas sutis de açúcar mascavo. Perfeito para o filtro de papel clássico."
+    },
+    { 
+        id: "13", 
+        name: "Café Tradicional Premium", 
+        type: "Tradicional", 
+        price: 19.90, 
+        stock: "80 un", 
+        image: "img/tradicional.jpg",
+        description: "Nossa torra clássica e tradicional da casa, desenvolvida com grãos encorpados de torra média-escura. Entrega um café forte, robusto e reconfortante, com baixa acidez e sabor altamente marcante que remete ao aconchego do lar brasileiro."
+    },
+    { 
+        id: "15", 
+        name: "Café Solúvel Liofilizado", 
+        type: "Gourmet", 
+        price: 22.90, 
+        stock: "50 un", 
+        image: "img/soluvel.jpg",
+        description: "Produzido através do moderno processo de liofilização (congelamento a vácuo), que preserva integralmente o óleo essencial, o aroma e as características originais do grão Arábica. Praticidade extrema com sabor de café passado na hora."
+    },
+    { 
+        id: "3", 
+        name: "Café Orgânico Sustentável Torra Média", 
+        type: "Orgânico", 
+        price: 34.90, 
+        stock: "15 un", 
+        image: "img/organico.jpg",
+        description: "Grãos produzidos em pequenas propriedades familiares sem o uso de defensivos químicos ou fertilizantes artificiais. Certificado biologicamente, entrega uma bebida leve, frutada, com notas de mel e acidez refrescante."
+    },
+    { 
+        id: "4", 
+        name: "Kit Degustação Exclusivo", 
+        type: "Kits", 
+        price: 49.90, 
+        stock: "20 un", 
+        image: "img/kit-degustacao.jpg",
+        description: "Perfeito para explorar novos horizontes. Contém 3 pacotes de 100g das nossas principais variedades micro-lotes (Especial, Gourmet e Orgânico). Acompanha um mini guia impresso com orientações de preparo e degustação."
+    },
+    { 
+        id: "5", 
+        name: "Cápsulas Café Intenso", 
+        type: "Cápsulas", 
+        price: 24.50, 
+        stock: "110 un", 
+        image: "img/capsulas.jpg",
+        description: "Blends de intensidade 10 com grãos de torra escura pronunciada. Desenvolvido para entregar um espresso cremoso, encorpado e com crema densa persistente. Caixa com 10 unidades totalmente compatíveis com máquinas Nespresso."
+    },
+    { 
+        id: "6", 
+        name: "Café Especial Geisha Raro", 
+        type: "Especial", 
+        price: 68.00, 
+        stock: "12 un", 
+        image: "img/geisha.jpg",
+        description: "Variedade Geisha originária da Etiópia, colhida manualmente em lotes restritos. Considerado um dos melhores cafés do mundo, destaca-se por um aroma floral exótico inconfundível (jasmim) e notas de bergamota e chá preto."
+    },
+    { 
+        id: "7", 
+        name: "Café Descafeinado Suave", 
+        type: "Descafeinado", 
+        price: 29.90, 
+        stock: "25 un", 
+        image: "img/descafeinado.jpg",
+        description: "Extraído através do processo natural de lavagem com água, mantendo os compostos de sabor intactos e removendo 99,7% da cafeína. Bebida leve, equilibrada e perfeita para ser apreciada no período da noite antes de dormir."
+    },
+    { 
+        id: "8", 
+        name: "Moedor de Café Manual", 
+        type: "Acessórios", 
+        price: 89.90, 
+        stock: "7 un", 
+        image: "img/moedor.jpg",
+        description: "Manivela ergonômica em aço inox com engrenagens internas de cerâmica cônica. Permite ajustar a moagem com precisão (de grossa para prensa a ultra-fina para espresso), garantindo grãos moídos na hora sem aquecer o café."
+    },
+    { 
+        id: "9", 
+        name: "Café Jacu Bird Exótico", 
+        type: "Especial", 
+        price: 145.00, 
+        stock: "4 un", 
+        image: "img/jacu.jpg",
+        description: "Raridade nacional produzida nas montanhas do Espírito Santo. Os frutos são selecionados e ingeridos organicamente pelo pássaro Jacu. O processo de digestão natural elimina a acidez excessiva, gerando um café ultra-suave com notas de anis."
+    },
+    { 
+        id: "10", 
+        name: "Cold Brew Artesanal Extra Forte", 
+        type: "Gourmet", 
+        price: 16.90, 
+        stock: "40 un", 
+        image: "img/coldbrew.jpg",
+        description: "Infusão a frio extraída lentamente por mais de 18 horas em água filtrada. Esse processo reduz o amargor tradicional em 60%, resultando em uma bebida engarrafada altamente cafeinada, adocicada e extremamente refrescante."
+    },
+    { 
+        id: "11", 
+        name: "Café Aromatizado de Baunilha Francesa", 
+        type: "Orgânico", 
+        price: 38.95, 
+        stock: "19 un", 
+        image: "img/baunilha.jpg",
+        description: "Base de grãos selecionados combinada delicadamente com óleos naturais de baunilha de Madagascar durante o resfriamento da torra. Proporciona um aroma doce e reconfortante no ambiente e sabor encorpado de sobremesa gourmet."
+    },
+    { 
+        id: "12", 
+        name: "Kit Barista Completo", 
+        type: "Kits", 
+        price: 139.90, 
+        stock: "8 un", 
+        image: "img/kit-barista.jpg",
+        description: "Conjunto profissional contendo uma Prensa Francesa em vidro borossilicato de 600ml com filtro de malha dupla em aço inox e um termômetro culinário digital de espeto. Ideal para calibrar a água na temperatura correta de extração."
+    }
 ];
-// Salva a nova matriz estruturada na memória do navegador automaticamente
+// Força a atualização do banco de dados na memória do navegador
 localStorage.setItem("cafeteria_produtos_admin", JSON.stringify(produtosLista));
+
 
     tabelaBody.innerHTML = "";
 
