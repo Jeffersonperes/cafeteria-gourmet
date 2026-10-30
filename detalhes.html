@@ -5,203 +5,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cafeteria Gourmet - Detalhes do Produto</title>
     <link rel="stylesheet" href="style.css">
-    <!-- CDN Oficial do Font Awesome para os ícones funcionarem -->
+    <!-- CDN do Font Awesome para os ícones do menu e rodapé -->
     <link rel="stylesheet" href="https://cloudflare.com">
 </head>
-<body>
+<body style="background-color: #f7f4f0;">
 
-        <!-- NAVBAR (Topo Escuro Padronizado e Idêntico ao Design) -->
+    <!-- NAVBAR (Topo Escuro Padronizado) -->
     <header class="navbar" style="display: flex; align-items: center; justify-content: space-between; padding: 20px 8%; background-color: #1c0f0a; border-bottom: 1px solid rgba(223, 206, 184, 0.1);">
-        
-        <!-- Logo do Lado Esquerdo -->
         <div class="logo" style="display: flex; align-items: center; gap: 12px; cursor: pointer;" onclick="window.location.href='index.html'">
             <i class="fas fa-coffee" style="font-size: 24px; color: #DFCEB8;"></i>
             <span style="font-family: 'Playfair Display', serif; color: #ffffff; font-weight: bold; font-size: 16px; letter-spacing: 0.5px; line-height: 1.1;">
                 CAFETERIA<br><small style="font-size: 10px; letter-spacing: 2px; color: #DFCEB8; display: block;">GOURMET</small>
             </span>
         </div>
-        
-        <!-- Menu Central/Direito com Ícones Finos e Precisos -->
         <nav class="nav-menu" id="nav-menu" style="display: flex; align-items: center; gap: 30px;">
-            <a href="index.html" class="active" style="color: #ffffff; text-decoration: none; font-size: 14px; display: inline-flex; align-items: center; gap: 8px;">
-                <i class="far fa-home"></i> Início
-            </a>
-            <a href="produtos.html" style="color: #DFCEB8; text-decoration: none; font-size: 14px; display: inline-flex; align-items: center; gap: 8px;">
-                <i class="far fa-shopping-bag"></i> Produtos
-            </a>
-            <a href="carrinho.html" class="cart-link" style="color: #DFCEB8; text-decoration: none; font-size: 14px; display: inline-flex; align-items: center; gap: 8px;">
-                <i class="far fa-shopping-cart"></i> Carrinho <span class="cart-badge" style="background-color: #DFCEB8; color: #1c0f0a; padding: 2px 7px; border-radius: 50%; font-size: 11px; font-weight: bold; margin-left: 2px;">2</span>
-            </a>
-            <a href="perfil.html" style="color: #DFCEB8; text-decoration: none; font-size: 14px; display: inline-flex; align-items: center; gap: 8px;">
-                <i class="far fa-user"></i> Perfil
-            </a>
+            <a href="index.html" style="color: #DFCEB8; text-decoration: none; font-size: 14px;"><i class="far fa-home"></i> Início</a>
+            <a href="produtos.html" class="active" style="color: #ffffff; text-decoration: none; font-size: 14px;"><i class="far fa-shopping-bag"></i> Produtos</a>
+            <a href="carrinho.html" style="color: #DFCEB8; text-decoration: none; font-size: 14px;"><i class="far fa-shopping-cart"></i> Carrinho</a>
+            <a href="perfil.html" style="color: #DFCEB8; text-decoration: none; font-size: 14px;"><i class="far fa-user"></i> Perfil</a>
         </nav>
-
-        <!-- Botão Hamburguer Mobile invisível no PC -->
-        <button class="menu-hamburger" id="menu-hamburger" type="button" onclick="toggleMenuMobile()" style="display: none;">☰</button>
     </header>
 
-    <!-- BLOCO 1: DETALHES DO PRODUTO (Apenas Duas Colunas: Galeria e Painel) -->
-    <main class="product-details-wrapper">
-        
-        <!-- COLUNA DA ESQUERDA: GALERIA -->
-        <div class="product-gallery">
-            <div id="main-product-image-box">
-                <img id="main-product-image" src="https://unsplash.com" alt="Café Especial Bourbon">
-            </div>
+    <!-- ÁREA CENTRAL DO PRODUTO (100% DINÂMICA) -->
+    <main class="main-wrapper" style="padding: 60px 8%; min-height: 75vh; display: flex; justify-content: center; align-items: center;">
+        <div class="detail-container" style="display: flex; gap: 50px; background: #ffffff; padding: 40px; border-radius: 12px; box-shadow: 0 4px 20px rgba(60, 36, 25, 0.02); width: 100%; flex-wrap: wrap; max-width: 1100px;">
             
-            <div class="thumbnails-grid" id="product-thumbnails">
-                <div class="thumb-box active">
-                    <img src="https://unsplash.com" alt="Miniatura 1">
-                </div>
-                <div class="thumb-box">
-                    <img src="https://unsplash.com" alt="Miniatura 2">
-                </div>
-                <div class="thumb-box">
-                    <img src="https://unsplash.com" alt="Miniatura 3">
-                </div>
+            <!-- Lado Esquerdo: Bloco da Foto -->
+            <div class="detail-image-box" style="flex: 1; min-width: 300px; background: #fcfbfa; border-radius: 8px; display: flex; align-items: center; justify-content: center; padding: 20px; height: 380px; overflow: hidden; border: 1px solid rgba(60,36,25,0.03);">
+                <!-- O JAVASCRIPT INJETA A IMAGEM DA PASTA IMG DIRETAMENTE AQUI -->
+                <img id="detail-product-image" src="" alt="Foto do Café" style="max-width: 100%; max-height: 100%; object-fit: contain; display: block;">
             </div>
-        </div>
 
-        <!-- COLUNA DA DIREITA: PAINEL DE INFORMAÇÕES -->
-        <div class="product-info-panel">
-            <span class="product-meta-type">Café Especial</span>
-            <h1>Café Especial Bourbon</h1>
-            <p class="product-weight-tag">Embalagem de 250g - Moído ou em Grãos</p>
-            
-            <div class="product-price-box">
-                <span class="price-value">R$ 32,90</span>
+            <!-- Lado Direito: Textos Informativos -->
+            <div class="detail-info-box" style="flex: 1.2; min-width: 300px; display: flex; flex-direction: column; justify-content: center;">
+                <span id="detail-product-category" style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: #6e5b53; letter-spacing: 1.5px; margin-bottom: 10px; display: block;">Categoria</span>
+                
+                <!-- O JAVASCRIPT EXCLUI ESTE TEXTO E COLOCA O NOME DO CAFÉ CLICADO -->
+                <h1 id="detail-product-name" style="font-family: 'Playfair Display', serif; font-size: 32px; color: #1c0f0a; margin: 0 0 15px 0; font-weight: bold;">Buscando café...</h1>
+                
+                <!-- O JAVASCRIPT INJETA A DESCRIÇÃO DO COFFEE EM TEMPO REAL AQUI -->
+                <p id="detail-product-description" style="color: #6e5b53; font-size: 14px; line-height: 1.6; margin-bottom: 25px;">Carregando notas sensoriais do banco de dados local...</p>
+                
+                <div style="border-top: 1px solid rgba(60, 36, 25, 0.08); padding-top: 20px; margin-bottom: 25px;">
+                    <!-- O JAVASCRIPT ATUALIZA O VALOR EM REAIS DO CAFÉ ESPECÍFICO AQUI -->
+                    <span id="detail-product-price" style="font-size: 26px; font-weight: bold; color: #1c0f0a;">R$ 0,00</span>
+                </div>
+
+                <button type="button" id="btn-detail-buy" style="background-color: #3c2419; color: #ffffff; border: none; padding: 14px 28px; font-size: 14px; font-weight: bold; border-radius: 4px; cursor: pointer; max-width: 240px; transition: background-color 0.2s;">Adicionar ao Carrinho</button>
             </div>
-            
-            <p class="product-description">
-                Produzido em altitudes elevadas, o Café Especial Bourbon apresenta notas sensoriais adocicadas que remetem ao chocolate e caramelo, com uma acidez cítrica perfeitamente equilibrada e finalização limpa e prolongada. Ideal para os paladares mais exigentes.
-            </p>
-            
-            <div class="purchase-actions">
-                <button class="btn-add-to-cart btn-add" 
-                        data-id="1" 
-                        data-name="Café Especial Bourbon" 
-                        data-price="32.90" 
-                        data-image="https://unsplash.com">
-                    Adicionar ao Carrinho
-                </button>
-            </div>
+
         </div>
     </main>
 
-    <!-- BLOCO 2: AVALIAÇÕES (Isolado na Base da Página - Ocupa Largura Total) -->
-    <div class="reviews-bottom-container">
-        <section class="product-reviews-section">
-            <h2>Avaliações dos clientes</h2>
-            
-            <div class="reviews-dashboard-grid">
-                <!-- Nota Mestre Geral -->
-                <div class="reviews-score-card">
-                    <div class="big-score-number">4.8</div>
-                    <div class="stars-row">
-                        <span class="star-filled">★</span>
-                        <span class="star-filled">★</span>
-                        <span class="star-filled">★</span>
-                        <span class="star-filled">★</span>
-                        <span class="star-filled">★</span>
-                    </div>
-                    <p class="total-reviews-count">32 avaliações</p>
-                </div>
-
-                <!-- Barras de Progresso -->
-                <div class="reviews-bars-panel">
-                    <div class="progress-bar-row">
-                        <span class="bar-label-text">5 estrelas</span>
-                        <div class="bar-track-bg"><div class="bar-fill-orange" style="width: 85%;"></div></div>
-                        <span class="bar-percentage-text">85%</span>
-                    </div>
-                    <div class="progress-bar-row">
-                        <span class="bar-label-text">4 estrelas</span>
-                        <div class="bar-track-bg"><div class="bar-fill-orange" style="width: 10%;"></div></div>
-                        <span class="bar-percentage-text">10%</span>
-                    </div>
-                    <div class="progress-bar-row">
-                        <span class="bar-label-text">3 estrelas</span>
-                        <div class="bar-track-bg"><div class="bar-fill-orange" style="width: 5%;"></div></div>
-                        <span class="bar-percentage-text">5%</span>
-                    </div>
-                    <div class="progress-bar-row">
-                        <span class="bar-label-text">2 estrelas</span>
-                        <div class="bar-track-bg"><div class="bar-fill-orange" style="width: 0%;"></div></div>
-                        <span class="bar-percentage-text">0%</span>
-                    </div>
-                    <div class="progress-bar-row">
-                        <span class="bar-label-text">1 estrela</span>
-                        <div class="bar-track-bg"><div class="bar-fill-orange" style="width: 0%;"></div></div>
-                        <span class="bar-percentage-text">0%</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Feed de Comentários -->
-            <div class="comments-feed-list">
-                <div class="user-comment-card">
-                    <div class="comment-header-meta">
-                        <strong>Jefferson Peres</strong>
-                        <div class="comment-stars">★★★★★</div>
-                        <span class="comment-date">Há 2 dias</span>
-                    </div>
-                    <p class="comment-text-body">
-                        Café simplesmente espetacular! Aroma marcante de caramelo que invade a casa inteira na hora do preparo. A torra média é perfeita e a acidez é super equilibrada. Com certeza comprarei mais.
-                    </p>
-                </div>
-
-                <div class="user-comment-card">
-                    <div class="comment-header-meta">
-                        <strong>Mariana Costa</strong>
-                        <div class="comment-stars">★★★★☆</div>
-                        <span class="comment-date">Há 1 semana</span>
-                    </div>
-                    <p class="comment-text-body">
-                        Excelente qualidade de grãos. O sabor de chocolate ao fundo é perceptível e muito gostoso. Só dou 4 estrelas porque a entrega atrasou um dia, mas o produto em si é nota 10.
-                    </p>
-                </div>
-            </div>
-        </section>
-    </div>
-
-        <!-- SEÇÃO DE DIFERENCIAIS (Barra Bege Logo Abaixo dos Produtos) -->
-    <section class="features-bar" style="background-color: #f7f4f0; display: flex; justify-content: space-between; align-items: center; padding: 25px 8%; border-top: 1px solid rgba(60, 36, 25, 0.05); gap: 20px; flex-wrap: wrap;">
-        <div class="feature-item" style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: #3c2419;">
-            <i class="far fa-truck" style="font-size: 18px; color: #3c2419;"></i>
-            <span>Entrega rápida e segura</span>
-        </div>
-        <div class="feature-item" style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: #3c2419;">
-            <i class="far fa-badge-check" style="font-size: 18px; color: #3c2419;"></i>
-            <span>Cafés selecionados com qualidade</span>
-        </div>
-        <div class="feature-item" style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: #3c2419;">
-            <i class="far fa-shield-check" style="font-size: 18px; color: #3c2419;"></i>
-            <span>Pagamento 100% seguro</span>
-        </div>
-        <div class="feature-item" style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: #3c2419;">
-            <i class="far fa-comments" style="font-size: 18px; color: #3c2419;"></i>
-            <span>Atendimento especializado</span>
-        </div>
-    </section>
-
-    <!-- RODAPÉ MESTRE (Idêntico ao Rodapé da Foto) -->
-    <footer class="footer" style="background-color: #f7f4f0; border-top: 1px solid rgba(60, 36, 25, 0.1); display: flex; align-items: center; justify-content: space-between; padding: 25px 8%; flex-wrap: wrap; gap: 20px;">
-        <div class="footer-brand" style="display: flex; align-items: center; gap: 10px; font-family: 'Playfair Display', serif; font-weight: bold; font-size: 14px; color: #1c0f0a; letter-spacing: 1px;">
-            <i class="fas fa-coffee" style="font-size: 16px; color: #1c0f0a;"></i>
-            <span>CAFETERIA GOURMET</span>
-        </div>
-        
-        <div class="footer-contact" style="font-size: 13px; color: #3c2419; font-weight: 500;">
-            <a href="mailto:contato@cafeteriagourmet.com.br" style="color: #3c2419; text-decoration: none;">contato@cafeteriagourmet.com.br</a>
-        </div>
-        
-        <div class="footer-social" style="display: flex; align-items: center; gap: 18px;">
-            <a href="#" style="color: #1c0f0a; font-size: 18px; text-decoration: none;"><i class="fab fa-instagram"></i></a>
-            <a href="#" style="color: #1c0f0a; font-size: 18px; text-decoration: none;"><i class="fab fa-facebook-f"></i></a>
-        </div>
+    <!-- RODAPÉ COMPLETO -->
+    <footer class="footer" style="background-color: #f7f4f0; border-top: 1px solid rgba(60, 36, 25, 0.1); display: flex; align-items: center; justify-content: space-between; padding: 25px 8%;">
+        <div class="footer-brand" style="font-family: 'Playfair Display', serif; font-weight: bold; color: #1c0f0a; font-size: 14px;"><i class="fas fa-coffee"></i> CAFETERIA GOURMET</div>
+        <div class="footer-contact" style="font-size: 13px;"><a href="mailto:contato@cafeteriagourmet.com.br" style="color: #3c2419; text-decoration: none;">contato@cafeteriagourmet.com.br</a></div>
     </footer>
 
-    <script src="script.js"></script>
+    <!-- GATILHO UNIVERSAL CONTRA CACHE DO GITHUB (VERSÃO INCREMENTADA 35.0) -->
+    <script src="script.js?v=35.0"></script>
 </body>
 </html>
