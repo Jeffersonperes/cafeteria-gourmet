@@ -700,7 +700,6 @@ function inicializarPaginaDetalhesDinamica() {
     document.getElementById("detail-subtotal").textContent = `R$ ${subtotal.toFixed(2).replace(".", ",")}`;
     document.getElementById("detail-shipping").textContent = "R\$ 9,90";
     document.getElementById("detail-total").textContent = `R$ ${pedidoEncontrado.total.toFixed(2).replace(".", ",")}`;
-}
 
 /* ==========================================================================
 11. MÓDULO: MÁSCARA AUTOMÁTICA DE TELEFONE
