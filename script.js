@@ -38,7 +38,13 @@ document.addEventListener("DOMContentLoaded", () => {
     try { if (document.getElementById("form-cadastro-cliente")) inicializarLogicaCadastro(); } catch(e) {}
     try { if (document.getElementById("profile-user-card")) inicializarDadosPerfilDinamico(); } catch(e) {}
     try { if (document.getElementById("form-alterar-perfil-completo")) inicializarFormularioAlterarPerfil(); } catch(e) {}
-    try { inicializarPaginaDetalhesDinamica(); } catch(e) { console.error(e); }
+    try {
+        if (document.getElementById("detail-product-name")) {
+            inicializarPaginaDetalhesDinamica();
+        }
+    } catch (erro) {
+        console.error("Erro ao rodar o motor de detalhes:", erro);
+    }
 });
 
 /* ==========================================================================
