@@ -3,46 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cafeteria Gourmet - Produtos</title>
+    <title>Cafeteria Gourmet - Nossos Produtos</title>
     <link rel="stylesheet" href="style.css">
     <!-- CDN Oficial estável do Font Awesome para carregar todos os ícones da página -->
     <link rel="stylesheet" href="https://cloudflare.com">
 </head>
 <body>
 
-    <!-- NAVBAR (Topo Escuro) -->
-    <header class="navbar">
-        <div class="logo" style="display: flex; align-items: center; gap: 10px; cursor: pointer;" onclick="window.location.href='index.html'">
-            <!-- SÍMBOLO NATIVO DE XÍCARA EM TEXTO PURO (NUNCA FALHA) -->
+    <!-- NAVBAR (Topo Escuro Padronizado) -->
+    <header class="navbar" style="display: flex; align-items: center; justify-content: space-between; padding: 20px 8%; background-color: #1c0f0a; border-bottom: 1px solid rgba(223, 206, 184, 0.1);">
+        <!-- Logo do Lado Esquerdo -->
+        <div class="logo" style="display: flex; align-items: center; gap: 12px; cursor: pointer;" onclick="window.location.href='index.html'">
             <span style="font-size: 26px; line-height: 1; display: inline-block;">☕</span>
             <span style="font-family: 'Playfair Display', serif; color: #ffffff; font-weight: bold; font-size: 16px; letter-spacing: 0.5px; line-height: 1.1;">
                 CAFETERIA<br><small style="font-size: 10px; letter-spacing: 2px; color: #DFCEB8; display: block;">GOURMET</small>
             </span>
         </div>
         
-        <!-- O menu ganha o ID correto "nav-menu" -->
-        <nav class="nav-menu" id="nav-menu">
-            <a href="index.html"><i class="fas fa-home"></i> Início</a>
-            <a href="produtos.html" class="active"><i class="fas fa-shopping-bag"></i> Produtos</a>
-            <a href="carrinho.html" class="cart-link">
-                <i class="fas fa-shopping-cart"></i> Carrinho 
-                <span class="cart-badge">0</span>
+        <!-- Menu Central/Direito com Ícones Finos e Precisos -->
+        <nav class="nav-menu" id="nav-menu" style="display: flex; align-items: center; gap: 30px;">
+            <a href="index.html" style="color: #DFCEB8; text-decoration: none; font-size: 14px; display: inline-flex; align-items: center; gap: 8px;">
+                <i class="far fa-home"></i> Início
             </a>
-            <a href="perfil.html"><i class="fas fa-user"></i> Perfil</a>
+            <a href="produtos.html" class="active" style="color: #ffffff; text-decoration: none; font-size: 14px; display: inline-flex; align-items: center; gap: 8px;">
+                <i class="far fa-shopping-bag"></i> Produtos
+            </a>
+            <a href="carrinho.html" class="cart-link" style="color: #DFCEB8; text-decoration: none; font-size: 14px; display: inline-flex; align-items: center; gap: 8px;">
+                <i class="far fa-shopping-cart"></i> Carrinho <span class="cart-badge" style="background-color: #DFCEB8; color: #1c0f0a; padding: 2px 7px; border-radius: 50%; font-size: 11px; font-weight: bold; margin-left: 2px;">0</span>
+            </a>
+            <a href="perfil.html" style="color: #DFCEB8; text-decoration: none; font-size: 14px; display: inline-flex; align-items: center; gap: 8px;">
+                <i class="far fa-user"></i> Perfil
+            </a>
         </nav>
 
-        <!-- O BOTÃO AGORA CHAMA A FUNÇÃO DIRETO NO CLIQUE (IMPOSSÍVEL TRAVAR) -->
+        <!-- Botão Hambúrguer Mobile -->
         <button class="menu-hamburger" id="menu-hamburger" type="button" onclick="toggleMenuMobile()">☰</button>
     </header>
 
-    <!-- CONTEÚDO PRINCIPAL (Filtros + Grid) -->
-    <div class="main-wrapper">
+    <!-- CONTAINER CORPO PRINCIPAL DO E-COMMERCE -->
+    <div class="main-wrapper" style="display: flex !important; gap: 30px !important; padding: 40px 8% !important; background-color: #f7f4f0 !important; min-height: 80vh !important; align-items: flex-start !important;">
         
         <!-- BARRA LATERAL DE FILTROS -->
         <aside class="sidebar-filters">
             <h2>Filtros</h2>
 
-            <!-- Tipo de café com values operacionais adicionados -->
             <div class="filter-group">
                 <h3>Tipo de café</h3>
                 <label class="check-item"><input type="checkbox" value="tradicional"> Tradicional</label>
@@ -52,12 +56,10 @@
                 <label class="check-item"><input type="checkbox" value="descafeinado"> Descafeinado</label>
             </div>
 
-            <!-- Faixa de preço -->
             <div class="filter-group">
                 <h3>Faixa de preço</h3>
                 <div class="slider-container">
                     <div class="slider-track" id="slider-track-fill"></div>
-                    <!-- Controles interativos transparentes sobrepostos -->
                     <input type="range" min="0" max="150" value="0" class="range-input" id="input-min">
                     <input type="range" min="0" max="150" value="150" class="range-input" id="input-max">
                 </div>
@@ -67,42 +69,21 @@
                 </div>
                 <button type="button" class="btn-filter" id="btn-aplicar-preco">Aplicar filtros</button>
             </div>
-
-            <!-- Ordenar por (Mobile/Sidebar) -->
-            <div class="filter-group select-group">
-                <h3>Ordenar por</h3>
-                <div class="custom-select">
-                    <select id="select-ordenar-sidebar">
-                        <option value="populares">Mais populares</option>
-                        <option value="menor">Menor preço</option>
-                        <option value="maior">Maior preço</option>
-                    </select>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-            </div>
         </aside>
 
-        <!-- SEÇÃO DE PRODUTOS -->
-        <main class="products-container">
+        <!-- SEÇÃO DE CONTEÚDO DOS PRODUTOS -->
+        <main class="products-container" style="flex: 1 !important; width: 100% !important;">
             <div class="products-header">
                 <h2>Todos os produtos</h2>
-                <div class="custom-select header-select">
-                    <select id="select-ordenar-header">
-                        <option value="populares">Mais populares</option>
-                        <option value="menor">Menor preço</option>
-                        <option value="maior">Maior preço</option>
-                    </select>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
             </div>
 
-            <!-- GRID DOS PRODUTOS COM IMAGENS INTEGRADAS EM TEXTO PURO (BLINDADO) -->
-            <div class="products-grid" style="display: grid !important; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)) !important; gap: 25px !important; width: 100% !important;">
+            <!-- GRADE DE PRODUTOS COMPLETA COM 14 CARDS PREMIUM -->
+            <div class="products-grid" style="display: grid !important; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)) !important; gap: 25px !important; width: 100% !important; align-items: start !important;">
 
                 <!-- 1. CAFÉ ESPECIAL BOURBON -->
                 <div class="product-card" data-category="especial">
                     <div class="product-img-box" onclick="window.location.href='detalhes.html?id=1'" style="cursor: pointer;">
-                        <img src="img/imagem-1.jpg" alt="Café Especial Bourbon">
+                        <img src="img/bourbon.jpg" alt="Café Especial Bourbon">
                     </div>
                     <h4 onclick="window.location.href='detalhes.html?id=1'" style="cursor: pointer;">Café Especial Bourbon</h4>
                     <div class="product-card-footer">
@@ -114,7 +95,7 @@
                 <!-- 2. CAFÉ GOURMET 100% ARÁBICA -->
                 <div class="product-card" data-category="gourmet">
                     <div class="product-img-box" onclick="window.location.href='detalhes.html?id=2'" style="cursor: pointer;">
-                        <img src="img/imagem-2.jpg" alt="Café Gourmet 100% Arábica">
+                        <img src="img/arabica.jpg" alt="Café Gourmet 100% Arábica">
                     </div>
                     <h4 onclick="window.location.href='detalhes.html?id=2'" style="cursor: pointer;">Café Gourmet 100% Arábica</h4>
                     <div class="product-card-footer">
@@ -126,7 +107,7 @@
                 <!-- 3. CAFÉ TRADICIONAL PREMIUM -->
                 <div class="product-card" data-category="tradicional">
                     <div class="product-img-box" onclick="window.location.href='detalhes.html?id=13'" style="cursor: pointer;">
-                        <img src="img/imagem-5.jpg" alt="Café Tradicional Premium">
+                        <img src="img/tradicional.jpg" alt="Café Tradicional Premium">
                     </div>
                     <h4 onclick="window.location.href='detalhes.html?id=13'" style="cursor: pointer;">Café Tradicional Premium</h4>
                     <div class="product-card-footer">
@@ -138,7 +119,7 @@
                 <!-- 4. CAFÉ SOLÚVEL LIOFILIZADO -->
                 <div class="product-card" data-category="gourmet">
                     <div class="product-img-box" onclick="window.location.href='detalhes.html?id=15'" style="cursor: pointer;">
-                        <img src="img/imagem-7.jpg" alt="Café Solúvel Liofilizado">
+                        <img src="img/soluvel.jpg" alt="Café Solúvel Liofilizado">
                     </div>
                     <h4 onclick="window.location.href='detalhes.html?id=15'" style="cursor: pointer;">Café Solúvel Liofilizado</h4>
                     <div class="product-card-footer">
@@ -150,7 +131,7 @@
                 <!-- 5. CAFÉ ORGÂNICO TORRA MÉDIA -->
                 <div class="product-card" data-category="organico">
                     <div class="product-img-box" onclick="window.location.href='detalhes.html?id=3'" style="cursor: pointer;">
-                        <img src="img/imagem-9.jpg" alt="Café Orgânico Torra Média">
+                        <img src="img/organico.jpg" alt="Café Orgânico Torra Média">
                     </div>
                     <h4 onclick="window.location.href='detalhes.html?id=3'" style="cursor: pointer;">Café Orgânico Torra Média</h4>
                     <div class="product-card-footer">
@@ -162,7 +143,7 @@
                 <!-- 6. CAFÉ DESCAFEINADO SUAVE -->
                 <div class="product-card" data-category="descafeinado">
                     <div class="product-img-box" onclick="window.location.href='detalhes.html?id=7'" style="cursor: pointer;">
-                        <img src="img/imagem-8.webp" alt="Café Descafeinado Suave">
+                        <img src="img/descafeinado.jpg" alt="Café Descafeinado Suave">
                     </div>
                     <h4 onclick="window.location.href='detalhes.html?id=7'" style="cursor: pointer;">Café Descafeinado Suave</h4>
                     <div class="product-card-footer">
@@ -171,10 +152,10 @@
                     </div>
                 </div>
 
-                <!-- 7. CAFÉ PREMIUM TORRA ESCURA -->
+                                <!-- 7. CAFÉ PREMIUM TORRA ESCURA -->
                 <div class="product-card" data-category="especial">
                     <div class="product-img-box" onclick="window.location.href='detalhes.html?id=14'" style="cursor: pointer;">
-                        <img src="img/imagem-6.webp" alt="Café Premium Torra Escura">
+                        <img src="img/premium-escura.jpg" alt="Café Premium Torra Escura">
                     </div>
                     <h4 onclick="window.location.href='detalhes.html?id=14'" style="cursor: pointer;">Café Premium Torra Escura</h4>
                     <div class="product-card-footer">
@@ -186,7 +167,7 @@
                 <!-- 8. KIT DEGUSTAÇÃO EXCLUSIVO -->
                 <div class="product-card" data-category="especial">
                     <div class="product-img-box" onclick="window.location.href='detalhes.html?id=4'" style="cursor: pointer;">
-                        <img src="img/imagem-4.jpg" alt="Kit Degustação Exclusivo">
+                        <img src="img/kit-degustacao.jpg" alt="Kit Degustação Exclusivo">
                     </div>
                     <h4 onclick="window.location.href='detalhes.html?id=4'" style="cursor: pointer;">Kit Degustação Exclusivo</h4>
                     <div class="product-card-footer">
@@ -198,7 +179,7 @@
                 <!-- 9. CÁPSULAS CAFÉ INTENSO -->
                 <div class="product-card" data-category="tradicional">
                     <div class="product-img-box" onclick="window.location.href='detalhes.html?id=5'" style="cursor: pointer;">
-                        <img src="img/imagem-10.jpg" alt="Cápsulas Café Intenso">
+                        <img src="img/capsulas.jpg" alt="Cápsulas Café Intenso">
                     </div>
                     <h4 onclick="window.location.href='detalhes.html?id=5'" style="cursor: pointer;">Cápsulas Café Intenso</h4>
                     <div class="product-card-footer">
@@ -210,7 +191,7 @@
                 <!-- 10. CAFÉ ESPECIAL GEISHA RARO -->
                 <div class="product-card" data-category="especial">
                     <div class="product-img-box" onclick="window.location.href='detalhes.html?id=6'" style="cursor: pointer;">
-                        <img src="img/imagem-11.jpg" alt="Café Especial Geisha Raro">
+                        <img src="img/geisha.jpg" alt="Café Especial Geisha Raro">
                     </div>
                     <h4 onclick="window.location.href='detalhes.html?id=6'" style="cursor: pointer;">Café Especial Geisha Raro</h4>
                     <div class="product-card-footer">
@@ -222,7 +203,7 @@
                 <!-- 11. MOEDOR DE CAFÉ MANUAL -->
                 <div class="product-card" data-category="gourmet">
                     <div class="product-img-box" onclick="window.location.href='detalhes.html?id=8'" style="cursor: pointer;">
-                        <img src="img/imagem-12.jpg" alt="Moedor de Café Manual">
+                        <img src="img/moedor.jpg" alt="Moedor de Café Manual">
                     </div>
                     <h4 onclick="window.location.href='detalhes.html?id=8'" style="cursor: pointer;">Moedor de Café Manual</h4>
                     <div class="product-card-footer">
@@ -234,18 +215,19 @@
                 <!-- 12. CAFÉ JACU BIRD EXÓTICO -->
                 <div class="product-card" data-category="especial">
                     <div class="product-img-box" onclick="window.location.href='detalhes.html?id=9'" style="cursor: pointer;">
-                        <img src="img/imagem-13.jpg" alt="Café Jacu Bird Exótico">
+                        <img src="img/jacu.jpg" alt="Café Jacu Bird Exótico">
                     </div>
                     <h4 onclick="window.location.href='detalhes.html?id=9'" style="cursor: pointer;">Café Jacu Bird Exótico</h4>
                     <div class="product-card-footer">
                         <span class="price">R$ 145,00</span>
                         <button class="btn-add" data-id="9" data-name="Café Jacu Bird" data-price="145.00" data-image="img/jacu.jpg">+</button>
                     </div>
+                </div>
 
                 <!-- 13. COLD BREW ARTESANAL -->
                 <div class="product-card" data-category="gourmet">
                     <div class="product-img-box" onclick="window.location.href='detalhes.html?id=10'" style="cursor: pointer;">
-                        <img src="img/imagem-14.jpg" alt="Cold Brew Artesanal">
+                        <img src="img/coldbrew.jpg" alt="Cold Brew Artesanal">
                     </div>
                     <h4 onclick="window.location.href='detalhes.html?id=10'" style="cursor: pointer;">Cold Brew Artesanal</h4>
                     <div class="product-card-footer">
@@ -254,7 +236,7 @@
                     </div>
                 </div>
 
-                 <!-- 14. CAFÉ BAUNILHA FRANCESA (ÚLTIMO ITEM DA GRADE) -->
+                <!-- 14. CAFÉ BAUNILHA FRANCESA -->
                 <div class="product-card" data-category="organico">
                     <div class="product-img-box" onclick="window.location.href='detalhes.html?id=11'" style="cursor: pointer;">
                         <img src="img/baunilha.jpg" alt="Café Baunilha Francesa">
@@ -266,11 +248,11 @@
                     </div>
                 </div>
 
-            </div> <!-- FECHAMENTO CORRETO DA DIV PRODUCTS-GRID -->
+            </div> <!-- FECHAMENTO DA DIV PRODUCTS-GRID -->
         </main>
-    </div> <!-- FECHAMENTO CORRETO DA DIV MAIN-WRAPPER -->
+    </div> <!-- FECHAMENTO DA DIV MAIN-WRAPPER -->
 
-    <!-- SEÇÃO DE DIFERENCIAIS (ISOLADA DA GRADE) -->
+    <!-- SEÇÃO DE DIFERENCIAIS -->
     <section class="features-bar" style="background-color: #f7f4f0; display: flex; justify-content: space-between; align-items: center; padding: 25px 8%; border-top: 1px solid rgba(60, 36, 25, 0.05); gap: 20px; flex-wrap: wrap; width: 100%; box-sizing: border-box; clear: both !important;">
         <div class="feature-item" style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: #3c2419;">
             <i class="far fa-truck" style="font-size: 18px; color: #3c2419;"></i>
@@ -290,7 +272,7 @@
         </div>
     </section>
 
-    <!-- RODAPÉ MESTRE (ISOLADO E BLINDADO) -->
+    <!-- RODAPÉ MESTRE COMPLETO -->
     <footer class="footer" style="background-color: #f7f4f0; border-top: 1px solid rgba(60, 36, 25, 0.1); display: flex; align-items: center; justify-content: space-between; padding: 25px 8%; flex-wrap: wrap; gap: 20px; width: 100%; box-sizing: border-box; clear: both !important;">
         <div class="footer-brand" style="display: flex; align-items: center; gap: 10px; font-family: 'Playfair Display', serif; font-weight: bold; font-size: 14px; color: #1c0f0a; letter-spacing: 1px;">
             <i class="fas fa-coffee" style="font-size: 16px; color: #1c0f0a;"></i>
@@ -307,7 +289,8 @@
         </div>
     </footer>
 
-    <!-- INJEÇÃO DE NOVA VERSÃO PARA DETONAR CACHE -->
-    <script src="script.js?v=60.0"></script>
+    <!-- VINCULAÇÃO CONECTANDO A INTELIGÊNCIA EM SCRIPT JAVASCRIPT COM CACHE BUSTING MÁXIMO -->
+    <script src="script.js?v=76.0"></script>
 </body>
 </html>
+
