@@ -2038,3 +2038,87 @@ box-shadow: none;
         font-size: 20px !important;
     }
 }
+
+/* ==========================================================================
+   RESET E CORREÇÃO DE ALINHAMENTO DO GRID DE PRODUTOS (ANTI-ESTICAMENTO)
+   ========================================================================== */
+
+/* Força o wrapper das duas colunas (Filtros + Catálogo) a se comportar */
+.main-wrapper {
+    display: flex !important;
+    gap: 30px !important;
+    padding: 40px 8% !important;
+    background-color: #f7f4f0 !important;
+    align-items: flex-start !important; /* IMPEDE QUE A COLUNA SE ESTIQUE PARA BAIXO */
+}
+
+/* Garante que a coluna dos produtos ocupe o espaço restante */
+.products-container, .products-grid-column {
+    flex: 1 !important;
+    width: 100% !important;
+}
+
+/* Força a grade de produtos a criar colunas padronizadas */
+.products-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)) !important;
+    gap: 25px !important;
+    width: 100% !important;
+    align-items: start !important; /* TRAVA O INÍCIO DE CADA CARD */
+}
+
+/* CORREÇÃO DO CARD: Trava a altura máxima e impede o espaço em branco gigante */
+.product-card {
+    background-color: #ffffff !important;
+    border-radius: 12px !important;
+    padding: 16px !important;
+    box-shadow: 0 4px 15px rgba(60, 36, 25, 0.02) !important;
+    border: 1px solid rgba(60, 36, 25, 0.05) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    height: auto !important;         /* REMOVE A ALTURA GIGANTE TRAVADA */
+    min-height: 320px !important;    /* DEFINE UM TAMANHO PADRÃO ELEGANTE */
+    max-height: 380px !important;    /* LIMITA O CRESCIMENTO DO CARD */
+    box-sizing: border-box !important;
+}
+
+/* Garante o enquadramento perfeito da foto dentro do card */
+.product-img-box, .product-img-wrapper {
+    background-color: #fcfbfa !important;
+    border-radius: 8px !important;
+    height: 150px !important;        /* Altura controlada para a foto */
+    min-height: 150px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin-bottom: 12px !important;
+    padding: 10px !important;
+    overflow: hidden !important;
+    flex-shrink: 0 !important;       /* Impede a foto de amassar */
+}
+
+.product-img-box img, .product-img-wrapper img {
+    max-height: 100% !important;
+    max-width: 100% !important;
+    object-fit: contain !important;
+}
+
+/* Alinhamento dos títulos e preços */
+.product-card h4, .product-card h3 {
+    font-family: 'Playfair Display', serif !important;
+    font-size: 15px !important;
+    color: #1c0f0a !important;
+    margin: 0 0 12px 0 !important;
+    line-height: 1.3 !important;
+    min-height: 40px !important;     /* Mantém títulos alinhados */
+    flex-grow: 1 !important;
+}
+
+.product-card-footer, .product-price-row {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    margin-top: auto !important;     /* Empurra o preço fixo para o rodapé do card */
+    width: 100% !important;
+}
