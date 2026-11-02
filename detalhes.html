@@ -103,26 +103,35 @@
         <div class="footer-contact" style="font-size: 13px; color:#3c2419;"><a href="mailto:contato@cafeteriagourmet.com.br" style="color: #3c2419; text-decoration: none;">contato@cafeteriagourmet.com.br</a></div>
     </footer>
 
-    <!-- LÓGICA E BANCO DE DADOS INTEGRADO (SEM ERROS DE SINTAXE) -->
+    <!-- ENGINE MESTRE DE RENDERIZAÇÃO ISOLADA (BLINDADA CONTRA CONFLITOS) -->
     <script>
+        // Trocador dinâmico de fotos das miniaturas
+        function mudarFotoMiniatura(elementoClicado) {
+            const imagemInterna = elementoClicado.querySelector("img");
+            if (!imagemInterna || !imagemInterna.src) return;
+            
+            const principal = document.getElementById("detail-product-image");
+            if (principal) {
+                principal.src = imagemInterna.src;
+            }
+            
+            const caixas = document.querySelectorAll(".thumb-box");
+            caixas.forEach(c => c.classList.remove("active"));
+            elementoClicado.classList.add("active");
+        }
+
+        // Incrementador e decrementador do seletor de quantidade
         function alterarQtd(valor) {
             const input = document.getElementById("product-quantity-input");
+            if (!input) return;
             let atual = parseInt(input.value) || 1;
             atual += valor;
             if (atual < 1) atual = 1;
             input.value = atual;
         }
 
-        function mudarFotoMiniatura(elementoClicado) {
-            const imagemInterna = elementoClicado.querySelector("img");
-            if (!imagemInterna) return;
-            document.getElementById("detail-product-image").src = imagemInterna.src;
-            const caixas = document.querySelectorAll(".thumb-box");
-            caixas.forEach(c => c.classList.remove("active"));
-            elementoClicado.classList.add("active");
-        }
-
-        window.onload = function() {
+        // Motor principal de captura e carregamento de dados
+        document.addEventListener("DOMContentLoaded", () => {
             const urlParams = new URLSearchParams(window.location.search);
             const idBuscado = urlParams.get("id") || "1";
 
@@ -141,33 +150,71 @@
                 { id: "9", name: "Café Jacu Bird Exótico", type: "Exótico", torra: "Média", peso: "125g", moagem: "Média", price: "145,00", image: "img/jacu.jpg", desc: "Frutos selecionados biologicamente pelo pássaro Jacu nas montanhas do ES. Bebida refinada e única." },
                 { id: "10", name: "Cold Brew Artesanal", type: "Líquido Concentrado", torra: "Média", peso: "300ml", moagem: "Infusão", price: "16,90", image: "img/coldbrew.jpg", desc: "Infusão a frio extraída por 18 horas, com sabor altamente cafeinado e refrescante." },
                 { id: "11", name: "Café Baunilha Francesa", type: "Aromatizado", torra: "Média", peso: "250g", moagem: "Média", price: "38,95", image: "img/baunilha.jpg", desc: "Deliciosa combinação de óleos essenciais de baunilha com grãos nobres selecionados." }
-                ];
-const item = bancoCompleto.find(p => String(p.id) === String(idBuscado));
-if (!item) return;
-document.getElementById("detail-product-name").textContent = item.name;
-document.getElementById("detail-product-price").textContent = "R$ " + item.price;
-document.getElementById("detail-product-description").textContent = item.desc;
-document.getElementById("spec-tipo").textContent = item.type;
-document.getElementById("spec-torra").textContent = item.torra;
-document.getElementById("spec-peso").textContent = item.peso;
-document.getElementById("spec-moagem").textContent = item.moagem;
-document.getElementById("detail-product-image").src = item.image;
-document.getElementById("thumb-img-1").src = item.image;
-document.getElementById("thumb-img-2").src = item.image;
-document.getElementById("thumb-img-3").src = item.image;
-const btn = document.getElementById("btn-detail-buy");
-if (btn) {
-btn.onclick = function() {
-let c = JSON.parse(localStorage.getItem("cafeteria_carrinho")) || [];
-const qtd = parseInt(document.getElementById("product-quantity-input").value) || 1;
-let exist = c.find(x => x.id === item.id);
-if (exist) { exist.quantity += qtd; } else {
-c.push({ id: item.id, name: item.name, price: parseFloat(item.price.replace(",", ".")), image: item.image, quantity: qtd });
-}
-localStorage.setItem("cafeteria_carrinho", JSON.stringify(c));
-btn.innerHTML = "✓ Adicionado com Sucesso!";
-btn.style.backgroundColor = "#28a745";
-setTimeout(() => { btn.innerHTML = ' Adicionar ao carrinho'; btn.style.backgroundColor = "#2b170f"; }, 2000);
-};
-}
-};
+            ];
+
+            // Garante que o painel admin ou carrinho leiam a lista atualizada
+            localStorage.setItem("cafeteria_produtos_admin", JSON.stringify(bancoCompleto));
+
+            const item = bancoCompleto.find(p => String(p.id) === String(idBuscado));
+            if (!item) return;
+
+            // Injeção de textos segura substituindo as strings "Carregando"
+            const nameEl = document.getElementById("detail-product-name");
+            const priceEl = document.getElementById("detail-product-price");
+            const descEl = document.getElementById("detail-product-description");
+            const tipoEl = document.getElementById("spec-tipo");
+            const torraEl = document.getElementById("spec-torra");
+            const pesoEl = document.getElementById("spec-peso");
+            const moagemEl = document.getElementById("spec-moagem");
+
+            if (nameEl) nameEl.textContent = item.name;
+            if (priceEl) priceEl.textContent = "R$ " + item.price;
+            if (descEl) descEl.textContent = item.desc;
+            if (tipoEl) tipoEl.textContent = item.type;
+            if (torraEl) torraEl.textContent = item.torra;
+            if (pesoEl) pesoEl.textContent = item.peso;
+            if (moagemEl) moagemEl.textContent = item.moagem;
+            
+            // Renderização das fotos locais
+            const principalImg = document.getElementById("detail-product-image");
+            const thumb1 = document.getElementById("thumb-img-1");
+            const thumb2 = document.getElementById("thumb-img-2");
+            const thumb3 = document.getElementById("thumb-img-3");
+
+            if (principalImg) principalImg.src = item.image;
+            if (thumb1) thumb1.src = item.image;
+            if (thumb2) thumb2.src = item.image;
+            if (thumb3) thumb3.src = item.image;
+
+            // Ativação e funcionamento estável do botão de adicionar ao carrinho
+            const btn = document.getElementById("btn-detail-buy");
+            if (btn) {
+                btn.onclick = function() {
+                    let c = JSON.parse(localStorage.getItem("cafeteria_carrinho")) || [];
+                    const inputQtd = document.getElementById("product-quantity-input");
+                    const qtd = inputQtd ? (parseInt(inputQtd.value) || 1) : 1;
+                    
+                    let exist = c.find(x => x.id === item.id);
+                    if (exist) {
+                        exist.quantity += qtd;
+                    } else {
+                        c.push({
+                            id: item.id,
+                            name: item.name,
+                            price: parseFloat(item.price.replace(",", ".")),
+                            image: item.image,
+                            quantity: qtd
+                        });
+                    }
+                    localStorage.setItem("cafeteria_carrinho", JSON.stringify(c));
+                    
+                    btn.innerHTML = "✓ Adicionado com Sucesso!";
+                    btn.style.backgroundColor = "#28a745";
+                    setTimeout(() => {
+                        btn.innerHTML = '<i class="fas fa-shopping-cart"></i> Adicionar ao carrinho';
+                        btn.style.backgroundColor = "#2b170f";
+                    }, 2000);
+                };
+            }
+        });
+    </script>
