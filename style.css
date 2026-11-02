@@ -2124,7 +2124,7 @@ box-shadow: none;
 }
 
 /* ==========================================================================
-   ESTILOS EXCLUSIVOS DA PÁGINA DE DETALHES (PADRÃO DESIGN PREMIUM)
+   5. DETALHES PREMIUM DO PRODUTO E GRID DE AVALIAÇÕES (100% SEPARADO)
    ========================================================================== */
 .details-wrapper {
     max-width: 1200px !important;
@@ -2292,7 +2292,7 @@ box-shadow: none;
     outline: none !important;
 }
 
-/* Força a cor marrom escura premium no botão do design */
+/* BOTÃO ESCURO PREMIUM IGUAL AO DESIGN */
 .btn-add-to-cart-premium {
     background-color: #2b170f !important;
     color: #ffffff !important;
@@ -2314,7 +2314,7 @@ box-shadow: none;
     background-color: #1c0f0a !important;
 }
 
-/* FORMATALIZAÇÃO DAS BARRAS DE AVALIAÇÃO */
+/* ALINHAMENTO HORIZONTAL SIMÉTRICO DAS AVALIAÇÕES */
 .reviews-section-box {
     border-top: 1px solid rgba(60, 36, 25, 0.1) !important;
     padding-top: 50px !important;
@@ -2330,14 +2330,12 @@ box-shadow: none;
     color: #1c0f0a !important;
 }
 
-/* Garante o alinhamento horizontal flexível do painel de avaliações */
 .reviews-dashboard {
     display: flex !important;
     flex-direction: row !important;
     gap: 60px !important;
     flex-wrap: wrap !important;
     align-items: flex-start !important;
-    margin-top: 20px !important;
 }
 
 .score-box {
@@ -2367,7 +2365,6 @@ box-shadow: none;
     gap: 12px !important;
 }
 
-/* Alinha a nota, a barra cinza e a porcentagem lado a lado na horizontal */
 .bar-row {
     display: flex !important;
     flex-direction: row !important;
