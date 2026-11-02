@@ -4,15 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cafeteria Gourmet - Detalhes do Produto</title>
+    <!-- Vinculação oficial com o arquivo de estilos separado -->
     <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome para os ícones do design -->
     <link rel="stylesheet" href="https://cloudflare.com">
 </head>
-<body style="background-color: #f7f4f0;">
+<body style="background-color: #fcfbfa;">
 
     <!-- NAVBAR (Topo Escuro) -->
     <header class="navbar" style="display: flex; align-items: center; justify-content: space-between; padding: 20px 8%; background-color: #1c0f0a; border-bottom: 1px solid rgba(223, 206, 184, 0.1);">
         <div class="logo" style="display: flex; align-items: center; gap: 12px; cursor: pointer;" onclick="window.location.href='index.html'">
-            <i class="fas fa-coffee" style="font-size: 24px; color: #DFCEB8;"></i>
+            <span style="font-size: 24px; line-height: 1;">☕</span>
             <span style="font-family: 'Playfair Display', serif; color: #ffffff; font-weight: bold; font-size: 16px; letter-spacing: 0.5px; line-height: 1.1;">
                 CAFETERIA<br><small style="font-size: 10px; letter-spacing: 2px; color: #DFCEB8; display: block;">GOURMET</small>
             </span>
@@ -24,30 +26,82 @@
         </nav>
     </header>
 
-    <!-- ÁREA CENTRAL DO PRODUTO -->
-    <main class="main-wrapper" style="padding: 60px 8%; min-height: 75vh; display: flex; justify-content: center; align-items: center;">
-        <div class="detail-container" style="display: flex; gap: 50px; background: #ffffff; padding: 40px; border-radius: 12px; box-shadow: 0 4px 20px rgba(60, 36, 25, 0.02); width: 100%; flex-wrap: wrap; max-width: 1100px;">
+    <!-- WRAPPER CENTRAL DO DESIGN (Usa as classes do style.css) -->
+    <div class="details-wrapper">
+        <main class="main-product-box">
             
-            <!-- Foto -->
-            <div class="detail-image-box" style="flex: 1; min-width: 300px; background: #fcfbfa; border-radius: 8px; display: flex; align-items: center; justify-content: center; padding: 20px; height: 380px; overflow: hidden; border: 1px solid rgba(60,36,25,0.03);">
-                <img id="detail-product-image" src="" alt="Foto" style="max-width: 100%; max-height: 100%; object-fit: contain; display: none;">
+            <!-- COLUNA ESQUERDA: GALERIA DE FOTOS -->
+            <div class="image-gallery-side">
+                <div class="main-img-container">
+                    <img id="detail-product-image" src="img/bourbon.jpg" alt="Café">
+                </div>
+                <div class="thumbs-row">
+                    <div class="thumb-box active"><img src="img/bourbon.jpg" alt="Miniatura 1"></div>
+                    <div class="thumb-box"><img src="img/arabica.jpg" alt="Miniatura 2"></div>
+                    <div class="thumb-box"><img src="img/tradicional.jpg" alt="Miniatura 3"></div>
+                </div>
             </div>
 
-            <!-- Textos -->
-            <div class="detail-info-box" style="flex: 1.2; min-width: 300px; display: flex; flex-direction: column; justify-content: center;">
-                <span id="detail-product-category" style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: #6e5b53; letter-spacing: 1.5px; margin-bottom: 10px; display: block;">Gourmet</span>
-                <h1 id="detail-product-name" style="font-family: 'Playfair Display', serif; font-size: 32px; color: #1c0f0a; margin: 0 0 15px 0; font-weight: bold;">Buscando café...</h1>
-                <p id="detail-product-description" style="color: #6e5b53; font-size: 14px; line-height: 1.6; margin-bottom: 25px;">Carregando notas sensoriais...</p>
+            <!-- COLUNA DIREITA: INFORMAÇÕES PREMIUM -->
+            <div class="info-side">
+                <h1 id="detail-product-name" class="product-title">Carregando...</h1>
                 
-                <div style="border-top: 1px solid rgba(60, 36, 25, 0.08); padding-top: 20px; margin-bottom: 25px;">
-                    <span id="detail-product-price" style="font-size: 26px; font-weight: bold; color: #1c0f0a;">R$ 0,00</span>
+                <div class="rating-row">
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <span>(128 avaliações)</span>
                 </div>
 
-                <button type="button" id="btn-detail-buy" style="background-color: #3c2419; color: #ffffff; border: none; padding: 14px 28px; font-size: 14px; font-weight: bold; border-radius: 4px; cursor: pointer; max-width: 240px;">Adicionar ao Carrinho</button>
-            </div>
+                <div id="detail-product-price" class="product-price-large">R$ 0,00</div>
+                
+                <p id="detail-product-description" class="product-description-text">Carregando...</p>
 
-        </div>
-    </main>
+                <ul class="specs-list">
+                    <li><i class="far fa-seedling"></i> <span>Tipo: <strong id="spec-tipo">-</strong></span></li>
+                    <li><i class="far fa-fire"></i> <span>Torra: <strong id="spec-torra">-</strong></span></li>
+                    <li><i class="far fa-weight-hanging"></i> <span>Peso: <strong id="spec-peso">-</strong></span></li>
+                    <li><i class="far fa-sliders-h"></i> <span>Moagem: <strong id="spec-moagem">-</strong></span></li>
+                </ul>
+
+                <div class="quantity-selector">
+                    <button type="button" onclick="alterarQtd(-1)">-</button>
+                    <input type="text" id="product-quantity-input" value="1" readonly>
+                    <button type="button" onclick="alterarQtd(1)">+</button>
+                </div>
+
+                <button type="button" id="btn-detail-buy" class="btn-add-to-cart-premium">
+                    <i class="fas fa-shopping-cart"></i> Adicionar ao carrinho
+                </button>
+            </div>
+        </main>
+
+        <!-- SEÇÃO DE AVALIAÇÕES -->
+        <section class="reviews-section-box">
+            <h3>Avaliações dos clientes</h3>
+            <div class="reviews-dashboard">
+                <div class="score-box">
+                    <div class="score-number">5,0</div>
+                    <div class="stars" style="font-size: 18px; margin-bottom: 8px;">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <div class="score-subtitle">Baseado em 128 avaliações</div>
+                </div>
+                <div class="bars-container">
+                    <div class="bar-row"><span class="bar-label">5 <i class="fas fa-star" style="font-size: 10px; color:#6e5b53;"></i></span><div class="bar-track"><div class="bar-fill" style="width: 98%;"></div></div><span class="bar-percent">98%</span></div>
+                    <div class="bar-row"><span class="bar-label">4 <i class="fas fa-star" style="font-size: 10px; color:#6e5b53;"></i></span><div class="bar-track"><div class="bar-fill" style="width: 2%;"></div></div><span class="bar-percent">2%</span></div>
+                    <div class="bar-row"><span class="bar-label">3 <i class="fas fa-star" style="font-size: 10px; color:#6e5b53;"></i></span><div class="bar-track"><div class="bar-fill" style="width: 0%;"></div></div><span class="bar-percent">0%</span></div>
+                    <div class="bar-row"><span class="bar-label">2 <i class="fas fa-star" style="font-size: 10px; color:#6e5b53;"></i></span><div class="bar-track"><div class="bar-fill" style="width: 0%;"></div></div><span class="bar-percent">0%</span></div>
+                    <div class="bar-row"><span class="bar-label">1 <i class="fas fa-star" style="font-size: 10px; color:#6e5b53;"></i></span><div class="bar-track"><div class="bar-fill" style="width: 0%;"></div></div><span class="bar-percent">0%</span></div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer" style="background-color: #fcfbfa; border-top: 1px solid rgba(60, 36, 25, 0.1); display: flex; align-items: center; justify-content: space-between; padding: 25px 8%;">
+        <div class="footer-brand" style="font-family: 'Playfair Display', serif; font-weight: bold; color: #1c0f0a;">CAFETERIA GOURMET</div>
+        <div class="footer-contact" style="font-size: 13px; color:#3c2419;"><a href="mailto:contato@cafeteriagourmet.com.br" style="color: #3c2419; text-decoration: none;">contato@cafeteriagourmet.com.br</a></div>
+    </footer>
 
         <!-- INTELIGÊNCIA ISOLADA ATUALIZADA (14 PRODUTOS MILIMETRICAMENTE INDEXADOS) -->
     <script>

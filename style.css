@@ -2122,3 +2122,271 @@ box-shadow: none;
     margin-top: auto !important;     /* Empurra o preço fixo para o rodapé do card */
     width: 100% !important;
 }
+
+/* ==========================================================================
+   ESTILOS EXCLUSIVOS DA PÁGINA DE DETALHES (PADRÃO DESIGN PREMIUM)
+   ========================================================================== */
+.details-wrapper {
+    max-width: 1100px !important;
+    margin: 0 auto !important;
+    padding: 40px 20px !important;
+}
+
+.main-product-box {
+    display: flex !important;
+    gap: 40px !important;
+    margin-bottom: 50px !important;
+}
+
+.image-gallery-side {
+    flex: 1 !important;
+    max-width: 500px !important;
+}
+
+.main-img-container {
+    width: 100% !important;
+    height: 450px !important;
+    background-color: #1a0f0a !important;
+    border-radius: 12px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+    margin-bottom: 15px !important;
+}
+
+.main-img-container img {
+    max-width: 100% !important;
+    max-height: 100% !important;
+    object-fit: cover !important;
+}
+
+.thumbs-row {
+    display: flex !important;
+    gap: 15px !important;
+}
+
+.thumb-box {
+    width: 80px !important;
+    height: 80px !important;
+    background-color: #1a0f0a !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    overflow: hidden !important;
+    border: 2px solid transparent !important;
+}
+
+.thumb-box.active {
+    border-color: #dfceb8 !important;
+}
+
+.thumb-box img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    opacity: 0.6 !important;
+}
+
+.thumb-box.active img, .thumb-box:hover img {
+    opacity: 1 !important;
+}
+
+.info-side {
+    flex: 1.2 !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.product-title {
+    font-family: 'Playfair Display', Georgia, serif !important;
+    font-size: 38px !important;
+    color: #1c0f0a !important;
+    margin: 0 0 10px 0 !important;
+    font-weight: bold !important;
+}
+
+.rating-row {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    margin-bottom: 20px !important;
+    font-size: 14px !important;
+    color: #6e5b53 !important;
+}
+
+.stars {
+    color: #ff9900 !important;
+}
+
+.product-price-large {
+    font-size: 32px !important;
+    font-weight: bold !important;
+    color: #1c0f0a !important;
+    margin-bottom: 20px !important;
+}
+
+.product-description-text {
+    color: #3c2419 !important;
+    font-size: 15px !important;
+    line-height: 1.6 !important;
+    margin-bottom: 25px !important;
+}
+
+.specs-list {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 0 30px 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    font-size: 14px !important;
+    color: #3c2419 !important;
+}
+
+.specs-list li {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+}
+
+.specs-list i {
+    color: #6e5b53 !important;
+    width: 16px !important;
+    text-align: center !important;
+}
+
+.quantity-selector {
+    display: inline-flex !important;
+    align-items: center !important;
+    border: 1px solid rgba(60, 36, 25, 0.2) !important;
+    border-radius: 6px !important;
+    margin-bottom: 25px !important;
+    background: #ffffff !important;
+    width: fit-content !important;
+}
+
+.quantity-selector button {
+    background: none !important;
+    border: none !important;
+    width: 36px !important;
+    height: 36px !important;
+    font-size: 18px !important;
+    cursor: pointer !important;
+    color: #3c2419 !important;
+}
+
+.quantity-selector input {
+    width: 40px !important;
+    text-align: center !important;
+    border: none !important;
+    font-size: 15px !important;
+    font-weight: bold !important;
+    color: #3c2419 !important;
+    outline: none !important;
+}
+
+.btn-add-to-cart-premium {
+    background-color: #2b170f !important;
+    color: #ffffff !important;
+    border: none !important;
+    padding: 15px 35px !important;
+    font-size: 15px !important;
+    font-weight: bold !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    width: fit-content !important;
+    box-shadow: 0 4px 15px rgba(43, 23, 15, 0.15) !important;
+    transition: background-color 0.2s !important;
+}
+
+.reviews-section-box {
+    border-top: 1px solid rgba(60, 36, 25, 0.1) !important;
+    padding-top: 40px !important;
+}
+
+.reviews-section-box h3 {
+    font-family: 'Playfair Display', Georgia, serif !important;
+    font-size: 22px !important;
+    color: #1c0f0a !important;
+    margin: 0 0 25px 0 !important;
+}
+
+.reviews-dashboard {
+    display: flex !important;
+    gap: 60px !important;
+    flex-wrap: wrap !important;
+}
+
+.score-box {
+    text-align: left !important;
+    min-width: 180px !important;
+}
+
+.score-number {
+    font-size: 56px !important;
+    font-weight: bold !important;
+    color: #1c0f0a !important;
+    line-height: 1 !important;
+    margin-bottom: 10px !important;
+}
+
+.score-subtitle {
+    font-size: 12px !important;
+    color: #6e5b53 !important;
+    margin-top: 10px !important;
+}
+
+.bars-container {
+    flex: 1 !important;
+    max-width: 500px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+}
+
+.bar-row {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    font-size: 13px !important;
+    color: #3c2419 !important;
+}
+
+.bar-label {
+    width: 25px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+}
+
+.bar-track {
+    flex: 1 !important;
+    height: 6px !important;
+    background-color: rgba(60, 36, 25, 0.06) !important;
+    border-radius: 3px !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.bar-fill {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    height: 100%;
+    background-color: #ff9900 !important;
+    border-radius: 3px !important;
+}
+
+.bar-percent {
+    width: 35px !important;
+    text-align: right !important;
+    color: #6e5b53 !important;
+}
+
+@media (max-width: 768px) {
+    .main-product-box { flex-direction: column !important; }
+    .reviews-dashboard { gap: 30px !important; }
+}
