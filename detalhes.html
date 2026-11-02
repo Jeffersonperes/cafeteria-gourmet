@@ -113,70 +113,79 @@
         <div class="footer-contact" style="font-size: 13px; color:#3c2419;"><a href="mailto:contato@cafeteriagourmet.com.br" style="color: #3c2419; text-decoration: none;">contato@cafeteriagourmet.com.br</a></div>
     </footer>
 
-        <!-- INTELIGÊNCIA ISOLADA ATUALIZADA (14 PRODUTOS MILIMETRICAMENTE INDEXADOS) -->
+            <!-- ENGINE DINÂMICA PREMIUM CONTRA TRAVAMENTOS DE TEXTO (100% OPERACIONAL) -->
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
+        function carregarDadosDoProduto() {
             const urlParams = new URLSearchParams(window.location.search);
-            const idProduto = urlParams.get("id");
-            if (!idProduto) return;
+            const idBuscado = urlParams.get("id") || "1";
 
-            // Banco de Dados Local Estrito Corrigido (Bate 100% com os links do produtos.html)
-            const produtosBoutique = [
-                { id: "1", name: "Café Especial Bourbon (Grãos)", type: "Especial", price: 32.90, image: "img/bourbon.jpg", description: "Cultivado acima de 1.200 metros de altitude em solo vulcânico. Apresenta notas sensoriais adocicadas que remetem a caramelo e chocolate ao leite." },
-                { id: "2", name: "Café Gourmet 100% Arábica (Moído)", type: "Gourmet", price: 28.90, image: "img/arabica.jpg", description: "Blend exclusivo de grãos Arábica rigorosamente selecionados e com torra média artesanal. Possui um corpo denso e aroma marcante de castanhas." },
-                { id: "13", name: "Café Tradicional Premium", type: "Tradicional", price: 19.90, image: "img/tradicional.jpg", description: "Nossa torra clássica e tradicional da casa, desenvolvida com grãos encorpados de torra média-escura. Entrega um café forte e reconfortante." },
-                { id: "15", name: "Café Solúvel Liofilizado", type: "Gourmet", price: 22.90, image: "img/soluvel.jpg", description: "Produzido através do moderno processo de liofilização (congelamento a vácuo), que preserva integralmente o aroma original do grão Arábica." },
-                { id: "3", name: "Café Orgânico Sustentável Torra Média", type: "Orgânico", price: 34.90, image: "img/organico.jpg", description: "Grãos produzidos em pequenas propriedades familiares sem o uso de defensivos químicos. Entrega uma bebida leve e frutada com notas de mel." },
-                { id: "7", name: "Café Descafeinado Suave", type: "Descafeinado", price: 29.90, image: "img/descafeinado.jpg", description: "Extraído através do processo de lavagem com água, mantendo os compostos de sabor intactos e removendo 99,7% da cafeína. Bebida leve e equilibrada." },
-                { id: "14", name: "Café Premium Torra Escura", type: "Especial", price: 39.90, image: "img/premium-escura.jpg", description: "Uma torra intensa e marcante que realça notas de cacau escuro e corpo extremamente denso. Perfeito para amantes de café forte." },
-                { id: "4", name: "Kit Degustação Exclusivo", type: "Kits", price: 49.90, image: "img/kit-degustacao.jpg", description: "Perfeito para explorar novos horizontes. Contém 3 pacotes de 100g das nossas principais variedades micro-lotes (Especial, Gourmet e Orgânico)." },
-                { id: "5", name: "Cápsulas Café Intenso", type: "Cápsulas", price: 24.50, image: "img/capsulas.jpg", description: "Blends de intensidade 10 com grãos de torra escura pronunciada. Caixa com 10 unidades totalmente compatíveis com máquinas Nespresso." },
-                { id: "6", name: "Café Especial Geisha Raro", type: "Especial", price: 68.00, image: "img/geisha.jpg", description: "Variedade Geisha originária da Etiópia, colhida manualmente em lotes restritos. Destaca-se por um aroma floral exótico inconfundível." },
-                { id: "8", name: "Moedor de Café Manual", type: "Acessórios", price: 89.90, image: "img/moedor.jpg", description: "Manivela ergonômica em aço inox com engrenagens internas de cerâmica cônica. Permite ajustar a moagem com precisão cirúrgica." },
-                { id: "9", name: "Café Jacu Bird Exótico", type: "Especial", price: 145.00, image: "img/jacu.jpg", description: "Raridade nacional produzida nas montanhas do Espírito Santo. O processo de digestão natural elimina a acidez, gerando um café ultra-suave." },
-                { id: "10", name: "Cold Brew Artesanal Extra Forte", type: "Gourmet", price: 16.90, image: "img/coldbrew.jpg", description: "Infusão a frio extraída lentamente por mais de 18 horas em água filtrada. Resulta em uma bebida altamente cafeinada e refrescante." },
-                { id: "11", name: "Café Aromatizado de Baunilha Francesa", type: "Orgânico", price: 38.95, image: "img/baunilha.jpg", description: "Base de grãos selecionados combinada delicadamente com óleos naturais de baunilha. Proporciona um aroma doce e reconfortante." }
+            // Banco de dados completo com todas as propriedades que o HTML precisa ler
+            const bancoEstrito = [
+                { id: "1", name: "Café Especial Bourbon Amarelo (Grãos)", type: "100% Arábica", torra: "Média", peso: "250g", moagem: "Média", price: "32,90", image: "img/bourbon.jpg", desc: "Cultivado acima de 1.200 metros de altitude em solo vulcânico. Apresenta notas sensoriais adocicadas que remetem a caramelo, chocolate ao leite e uma acidez cítrica equilibrada." },
+                { id: "2", name: "Café Gourmet 100% Arábica (Moído)", type: "100% Arábica", torra: "Média-Clara", peso: "250g", moagem: "Fina", price: "28,90", image: "img/arabica.jpg", desc: "Blend exclusivo de grãos Arábica rigorosamente selecionados e com torra média artesanal. Possui um corpo denso e aroma marcante de castanhas." },
+                { id: "13", name: "Café Tradicional Premium", type: "Blend Tradicional", torra: "Média-Escura", peso: "500g", moagem: "Média", price: "19,90", image: "img/tradicional.jpg", desc: "Nossa torra clássica e tradicional da casa, desenvolvida com grãos encorpados de torra média-escura. Entrega um café forte e reconfortante." },
+                { id: "15", name: "Café Solúvel Liofilizado", type: "Arábica Solúvel", torra: "Média", peso: "100g", moagem: "Instantâneo", price: "22,90", image: "img/soluvel.jpg", desc: "Processo de congelamento a vácuo que preserva integralmente o aroma original do grão Arábica fresco." },
+                { id: "3", name: "Café Orgânico Sustentável", type: "Orgânico Puro", torra: "Média", peso: "250g", moagem: "Média", price: "34,90", image: "img/organico.jpg", desc: "Grãos ecológicos produzidos sem defensivos agrícolas, com notas de mel e acidez equilibrada." },
+                { id: "7", name: "Café Descafeinado Suave", type: "Arábica", torra: "Clara", peso: "250g", moagem: "Fina", price: "29,90", image: "img/descafeinado.jpg", desc: "Remoção natural da cafeína com água que preserva integralmente os aromas originais adocicados." },
+                { id: "14", name: "Café Premium Torra Escura", type: "Arábica Intenso", torra: "Escura", peso: "250g", moagem: "Grossa", price: "39,90", image: "img/premium-escura.jpg", desc: "Uma torra acentuada de sabor forte com retrogosto prolongado de cacau puro." },
+                { id: "4", name: "Kit Degustação Exclusivo", type: "Vários Blends", torra: "Variada", peso: "3x 100g", moagem: "Média", price: "49,90", image: "img/kit-degustacao.jpg", desc: "Experimente 3 variedades exclusivas de nossos micro-lotes para expandir seus horizontes." },
+                { id: "5", name: "Cápsulas Café Intenso", type: "Nespresso Comp.", torra: "Escura", peso: "10 un", moagem: "Cápsula", price: "24,50", image: "img/capsulas.jpg", desc: "Intensidade máxima e crema densa persistente compatível com sistemas Nespresso." },
+                { id: "6", name: "Café Especial Geisha Raro", type: "Geisha", torra: "Clara", peso: "150g", moagem: "Média", price: "68,00", image: "img/geisha.jpg", desc: "Micro-lote raríssimo com notas altamente florais de jasmim e acidez cítrica sublime." },
+                { id: "8", name: "Moedor de Café Manual", type: "Acessório", torra: "N/A", peso: "450g", moagem: "Cerâmica", price: "89,90", image: "img/moedor.jpg", desc: "Moinho manual de cerâmica cônica ajustável para garantir grãos moídos na hora perfeitos." },
+                { id: "9", name: "Café Jacu Bird Exótico", type: "Exótico", torra: "Média", peso: "125g", moagem: "Média", price: "145,00", image: "img/jacu.jpg", desc: "Frutos selecionados biologicamente pelo pássaro Jacu nas montanhas do ES. Bebida refinada e única." },
+                { id: "10", name: "Cold Brew Artesanal", type: "Concentrado", torra: "Média", peso: "300ml", moagem: "Infusão", price: "16,90", image: "img/coldbrew.jpg", desc: "Infusão a frio extraída por 18 hours, 60% menos amarga e extremamente energética." },
+                { id: "11", name: "Café Baunilha Francesa", type: "Aromatizado", torra: "Média", peso: "250g", moagem: "Média", price: "38,95", image: "img/baunilha.jpg", desc: "Deliciosa combinação de óleos essenciais de baunilha com grãos nobres selecionados." }
             ];
 
-            // Sincroniza a memória local para o carrinho e painel admin não quebrarem
-            localStorage.setItem("cafeteria_produtos_admin", JSON.stringify(produtosBoutique));
+            // Sobrescreve e limpa qualquer lixo de memória antigo do LocalStorage
+            localStorage.setItem("cafeteria_produtos_admin", JSON.stringify(bancoEstrito));
 
-            // Encontra o café clicado comparando o ID da URL de forma estrita textualmente
-            const produto = produtosBoutique.find(p => String(p.id) === String(idProduto));
+            const item = bancoEstrito.find(p => String(p.id) === String(idBuscado));
+            if (!item) return;
+
+            // Alinhamento exato com as tags ID do seu HTML
+            if (document.getElementById("detail-product-name")) document.getElementById("detail-product-name").textContent = item.name;
+            if (document.getElementById("detail-product-price")) document.getElementById("detail-product-price").textContent = "R$ " + item.price;
+            if (document.getElementById("detail-product-description")) document.getElementById("detail-product-description").textContent = item.desc;
             
-            if (!produto) {
-                document.getElementById("detail-product-name").textContent = "Produto não localizado";
-                console.warn("ID buscado não encontrado no script:", idProduto);
-                return;
+            // Alinhamento das fichas técnicas
+            if (document.getElementById("spec-tipo")) document.getElementById("spec-tipo").textContent = item.type;
+            if (document.getElementById("spec-torra")) document.getElementById("spec-torra").textContent = item.torra;
+            if (document.getElementById("spec-peso")) document.getElementById("spec-peso").textContent = item.peso;
+            if (document.getElementById("spec-moagem")) document.getElementById("spec-moagem").textContent = item.moagem;
+            
+            const pic = document.getElementById("detail-product-image");
+            if (pic) {
+                pic.src = item.image;
+                pic.alt = item.name;
+                pic.style.display = "block";
             }
 
-            // Injeta na tela na mesma hora limpa
-            document.getElementById("detail-product-name").textContent = produto.name;
-            document.getElementById("detail-product-price").textContent = "R$ " + parseFloat(produto.price).toFixed(2).replace(".", ",");
-            document.getElementById("detail-product-category").textContent = produto.type;
-            document.getElementById("detail-product-description").textContent = produto.description;
-            
-            const imgEl = document.getElementById("detail-product-image");
-            if (imgEl) {
-                imgEl.src = produto.image;
-                imgEl.alt = produto.name;
-                imgEl.style.display = "block";
-            }
-
-            // Configuração isolada e à prova de falhas do Botão Comprar
-            const btnComprar = document.getElementById("btn-detail-buy");
-            if (btnComprar) {
-                btnComprar.addEventListener("click", () => {
-                    let carrinho = JSON.parse(localStorage.getItem("cafeteria_carrinho")) || [];
-                    const itemExistente = carrinho.find(item => item.id === produto.id);
-                    if (itemExistente) { itemExistente.quantity++; } else {
-                        carrinho.push({ id: produto.id, name: produto.name, price: parseFloat(produto.price), image: produto.image, quantity: 1 });
+            // Comportamento do botão comprar
+            const btn = document.getElementById("btn-detail-buy");
+            if (btn) {
+                const novoBtn = btn.cloneNode(true);
+                btn.parentNode.replaceChild(novoBtn, btn);
+                novoBtn.addEventListener("click", () => {
+                    let c = JSON.parse(localStorage.getItem("cafeteria_carrinho")) || [];
+                    const qtd = parseInt(document.getElementById("product-quantity-input").value) || 1;
+                    let exist = c.find(x => x.id === item.id);
+                    if (exist) { exist.quantity += qtd; } else {
+                        c.push({ id: item.id, name: item.name, price: parseFloat(item.price.replace(",", ".")), image: item.image, quantity: qtd });
                     }
-                    localStorage.setItem("cafeteria_carrinho", JSON.stringify(carrinho));
-                    btnComprar.innerText = "✓ Adicionado com Sucesso!";
-                    btnComprar.style.backgroundColor = "#28a745";
-                    setTimeout(() => { btnComprar.innerText = "Adicionar ao Carrinho"; btnComprar.style.backgroundColor = "#3c2419"; }, 2000);
+                    localStorage.setItem("cafeteria_carrinho", JSON.stringify(c));
+                    novoBtn.innerHTML = "✓ Adicionado!";
+                    novoBtn.style.backgroundColor = "#28a745";
+                    setTimeout(() => { novoBtn.innerHTML = '<i class="fas fa-shopping-cart"></i> Adicionar ao carrinho'; novoBtn.style.backgroundColor = "#2b170f"; }, 2000);
                 });
             }
-        });
+        }
+
+        // Garante a execução instantânea em qualquer ciclo de carregamento
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", carregarDadosDoProduto);
+        } else {
+            carregarDadosDoProduto();
+        }
     </script>
+
