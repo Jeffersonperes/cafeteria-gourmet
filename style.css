@@ -2292,8 +2292,9 @@ box-shadow: none;
     outline: none !important;
 }
 
+/* Força a cor marrom escura premium no botão do design */
 .btn-add-to-cart-premium {
-    background-color: #3c2419 !important;
+    background-color: #2b170f !important;
     color: #ffffff !important;
     border: none !important;
     padding: 16px 40px !important;
@@ -2304,8 +2305,13 @@ box-shadow: none;
     display: inline-flex !important;
     align-items: center !important;
     gap: 12px !important;
-    box-shadow: 0 6px 20px rgba(60, 36, 25, 0.15) !important;
+    box-shadow: 0 6px 20px rgba(43, 23, 15, 0.15) !important;
     width: fit-content !important;
+    transition: background-color 0.2s !important;
+}
+
+.btn-add-to-cart-premium:hover {
+    background-color: #1c0f0a !important;
 }
 
 /* FORMATALIZAÇÃO DAS BARRAS DE AVALIAÇÃO */
@@ -2324,11 +2330,14 @@ box-shadow: none;
     color: #1c0f0a !important;
 }
 
+/* Garante o alinhamento horizontal flexível do painel de avaliações */
 .reviews-dashboard {
     display: flex !important;
+    flex-direction: row !important;
     gap: 60px !important;
     flex-wrap: wrap !important;
-    align-items: center !important;
+    align-items: flex-start !important;
+    margin-top: 20px !important;
 }
 
 .score-box {
@@ -2358,8 +2367,10 @@ box-shadow: none;
     gap: 12px !important;
 }
 
+/* Alinha a nota, a barra cinza e a porcentagem lado a lado na horizontal */
 .bar-row {
     display: flex !important;
+    flex-direction: row !important;
     align-items: center !important;
     gap: 15px !important;
     font-size: 14px !important;
@@ -2372,6 +2383,7 @@ box-shadow: none;
     display: flex !important;
     align-items: center !important;
     gap: 4px !important;
+    white-space: nowrap !important;
 }
 
 .bar-track {

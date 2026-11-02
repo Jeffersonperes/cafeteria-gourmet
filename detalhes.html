@@ -28,55 +28,30 @@
 
     <!-- WRAPPER CENTRAL DO DESIGN -->
     <div class="details-wrapper">
+                <!-- SEÇÃO DA GALERIA DE FOTOS (ATUALIZADA) -->
         <main class="main-product-box">
-            
-            <!-- COLUNA ESQUERDA: GALERIA DE FOTOS -->
             <div class="image-gallery-side">
                 <div class="main-img-container">
                     <img id="detail-product-image" src="img/bourbon.jpg" alt="Café">
                 </div>
                 <div class="thumbs-row">
-                    <div class="thumb-box active"><img src="img/bourbon.jpg" alt="Miniatura 1"></div>
-                    <div class="thumb-box"><img src="img/arabica.jpg" alt="Miniatura 2"></div>
-                    <div class="thumb-box"><img src="img/tradicional.jpg" alt="Miniatura 3"></div>
+                    <!-- Adicionado a função onclick para mudar a foto dinamicamente -->
+                    <div class="thumb-box active" onclick="mudarFotoMiniatura(this, 'img/bourbon.jpg')"><img src="img/bourbon.jpg" alt="Miniatura 1"></div>
+                    <div class="thumb-box" onclick="mudarFotoMiniatura(this, 'img/arabica.jpg')"><img src="img/arabica.jpg" alt="Miniatura 2"></div>
+                    <div class="thumb-box" onclick="mudarFotoMiniatura(this, 'img/tradicional.jpg')"><img src="img/tradicional.jpg" alt="Miniatura 3"></div>
                 </div>
             </div>
 
-            <!-- COLUNA DIREITA: INFORMAÇÕES PREMIUM -->
+            <!-- COLUNA DIREITA CONTINUA IGUAL... -->
             <div class="info-side">
-                <h1 id="detail-product-name" class="product-title">Carregando...</h1>
-                
-                <div class="rating-row">
-                    <div class="stars">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                    </div>
-                    <span>(128 avaliações)</span>
-                </div>
-
-                <div id="detail-product-price" class="product-price-large">R$ 0,00</div>
-                
-                <p id="detail-product-description" class="product-description-text">Carregando notas sensoriais...</p>
-
-                <ul class="specs-list">
-                    <li><i class="far fa-seedling"></i> <span>Tipo: <strong id="spec-tipo">-</strong></span></li>
-                    <li><i class="far fa-fire"></i> <span>Torra: <strong id="spec-torra">-</strong></span></li>
-                    <li><i class="far fa-weight-hanging"></i> <span>Peso: <strong id="spec-peso">-</strong></span></li>
-                    <li><i class="far fa-sliders-h"></i> <span>Moagem: <strong id="spec-moagem">-</strong></span></li>
-                </ul>
-
-                <div class="quantity-selector">
-                    <button type="button" onclick="alterarQtd(-1)">-</button>
-                    <input type="text" id="product-quantity-input" value="1" readonly>
-                    <button type="button" onclick="alterarQtd(1)">+</button>
-                </div>
-
+                <!-- Certifique-se de que o botão de adicionar ao carrinho use a classe abaixo -->
                 <button type="button" id="btn-detail-buy" class="btn-add-to-cart-premium">
                     <i class="fas fa-shopping-cart"></i> Adicionar ao carrinho
                 </button>
             </div>
         </main>
 
-        <!-- SEÇÃO DE AVALIAÇÕES -->
+        <!-- SEÇÃO DE AVALIAÇÕES (CORRIGIDA) -->
         <section class="reviews-section-box">
             <h3>Avaliações dos clientes</h3>
             <div class="reviews-dashboard">
@@ -88,11 +63,31 @@
                     <div class="score-subtitle">Baseado em 128 avaliações</div>
                 </div>
                 <div class="bars-container">
-                    <div class="bar-row"><span class="bar-label">5 <i class="fas fa-star" style="font-size: 10px; color:#6e5b53;"></i></span><div class="bar-track"><div class="bar-fill" style="width: 98%;"></div></div><span class="bar-percent">98%</span></div>
-                    <div class="bar-row"><span class="bar-label">4 <i class="fas fa-star" style="font-size: 10px; color:#6e5b53;"></i></span><div class="bar-track"><div class="bar-fill" style="width: 2%;"></div></div><span class="bar-percent">2%</span></div>
-                    <div class="bar-row"><span class="bar-label">3 <i class="fas fa-star" style="font-size: 10px; color:#6e5b53;"></i></span><div class="bar-track"><div class="bar-fill" style="width: 0%;"></div></div><span class="bar-percent">0%</span></div>
-                    <div class="bar-row"><span class="bar-label">2 <i class="fas fa-star" style="font-size: 10px; color:#6e5b53;"></i></span><div class="bar-track"><div class="bar-fill" style="width: 0%;"></div></div><span class="bar-percent">0%</span></div>
-                    <div class="bar-row"><span class="bar-label">1 <i class="fas fa-star" style="font-size: 10px; color:#6e5b53;"></i></span><div class="bar-track"><div class="bar-fill" style="width: 0%;"></div></div><span class="bar-percent">0%</span></div>
+                    <div class="bar-row">
+                        <span class="bar-label">5 <i class="fas fa-star" style="font-size: 10px; color:#ff9900;"></i></span>
+                        <div class="bar-track"><div class="bar-fill" style="width: 98%;"></div></div>
+                        <span class="bar-percent">98%</span>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">4 <i class="fas fa-star" style="font-size: 10px; color:#ff9900;"></i></span>
+                        <div class="bar-track"><div class="bar-fill" style="width: 2%;"></div></div>
+                        <span class="bar-percent">2%</span>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">3 <i class="fas fa-star" style="font-size: 10px; color:#ff9900;"></i></span>
+                        <div class="bar-track"><div class="bar-fill" style="width: 0%;"></div></div>
+                        <span class="bar-percent">0%</span>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">2 <i class="fas fa-star" style="font-size: 10px; color:#ff9900;"></i></span>
+                        <div class="bar-track"><div class="bar-fill" style="width: 0%;"></div></div>
+                        <span class="bar-percent">0%</span>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">1 <i class="fas fa-star" style="font-size: 10px; color:#ff9900;"></i></span>
+                        <div class="bar-track"><div class="bar-fill" style="width: 0%;"></div></div>
+                        <span class="bar-percent">0%</span>
+                    </div>
                 </div>
             </div>
         </section>
@@ -160,4 +155,18 @@ setTimeout(() => { btn.innerHTML = ' Adicionar ao carrinho'; btn.style.backgroun
 };
 }
 };
+
+        // Função para alterar a imagem ao clicar na miniatura
+        function mudarFotoMiniatura(elemento, caminhoImagem) {
+            // Atualiza a imagem grande principal
+            document.getElementById("detail-product-image").src = caminhoImagem;
+            
+            // Remove a classe ativa de todas as miniaturas
+            const miniaturas = document.querySelectorAll(".thumb-box");
+            miniaturas.forEach(thumb => thumb.classList.remove("active"));
+            
+            // Adiciona a classe ativa apenas na miniatura clicada
+            elemento.classList.add("active");
+        }
+
 </script>
