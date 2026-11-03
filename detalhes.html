@@ -34,15 +34,16 @@
             <!-- COLUNA ESQUERDA: GALERIA DE FOTOS INTERATIVAS -->
             <div class="image-gallery-side">
                 <div class="main-img-container">
-                    <img id="detail-product-image" src="./img/bourbon.jpg" alt="Café">
+                    <img id="detail-product-image" src="" alt="Café Principal">
                 </div>
                 <div class="thumbs-row">
-                    <!-- Funções conectadas ao trocador dinâmico estável -->
-                    <div class="thumb-box active" onclick="mudarFotoMiniatura(this)"><img id="thumb-img-1" src="./img/bourbon.jpg" alt="Miniatura 1"></div>
-                    <div class="thumb-box" onclick="mudarFotoMiniatura(this)"><img id="thumb-img-2" src="./img/bourbon.jpg" alt="Miniatura 2"></div>
-                    <div class="thumb-box" onclick="mudarFotoMiniatura(this)"><img id="thumb-img-3" src="./img/bourbon.jpg" alt="Miniatura 3"></div>
+                    <!-- O JavaScript vai preencher as imagens corretas aqui de forma automatizada -->
+                    <div class="thumb-box active" onclick="mudarFotoMiniatura(this)"><img id="thumb-img-1" src="" alt="Miniatura 1"></div>
+                    <div class="thumb-box" onclick="mudarFotoMiniatura(this)"><img id="thumb-img-2" src="" alt="Miniatura 2"></div>
+                    <div class="thumb-box" onclick="mudarFotoMiniatura(this)"><img id="thumb-img-3" src="" alt="Miniatura 3"></div>
                 </div>
             </div>
+
 
             <!-- COLUNA DIREITA: INFORMAÇÕES PREMIUM DINÂMICAS -->
             <div class="info-side">
@@ -107,7 +108,11 @@
 
      <!-- ENGINE INDUSTRIAL DE SINCRONIZAÇÃO (À PROVA DE CACHE E CORRIGIDA) -->
 <script>
-        function alterarQtd(valor) {
+        /* ==========================================================================
+   ENGINE INDUSTRIAL DE SINCRONIZAÇÃO DA PÁGINA DE DETALHES (GALERIA TRIPLA REAL)
+   ========================================================================== */
+
+function alterarQtd(valor) {
     var inputQtd = document.getElementById("product-quantity-input");
     if (!inputQtd) return;
     var atual = parseInt(inputQtd.value) || 1;
@@ -134,7 +139,7 @@ function inicializarDetalhesBarista() {
     var urlParams = new URLSearchParams(window.location.search);
     var idBuscado = urlParams.get("id") || "1";
 
-    // Banco de dados premium configurado para ler as 3 imagens locais de cada produto
+    // O seu banco de dados oficial com a nomenclatura exata dos seus arquivos locais
     var bancoCompleto = [
         { id: "1", name: "Café Especial Bourbon (Grãos)", type: "100% Arábica", torra: "Média", peso: "250g", moagem: "Média", price: "32,90", image: "./img/imagem-1.jpg", thumb2: "./img/cafe-bourbon-nutricional.jpg", thumb3: "./img/cafe-bourbon-angulo-cima.jpg", desc: "Café 100% Arábica com notas carameladas e sabor encorpado. Perfeito para quem aprecia um café equilibrado e aromático." },
         { id: "2", name: "Café Gourmet 100% Arábica (Moído)", type: "100% Arábica", torra: "Média-Clara", peso: "250g", moagem: "Fina", price: "28,90", image: "./img/imagem-2.jpg", thumb2: "./img/cafe-gourmet-nutricional.jpg", thumb3: "./img/cafe-gourmet-angulo-cima.jpg", desc: "Blend exclusivo de grãos Arábica com notas marcantes de castanhas e chocolate ao leite." },
@@ -165,7 +170,7 @@ function inicializarDetalhesBarista() {
         document.getElementById("spec-peso").textContent = produtoSelecionado.peso;
         document.getElementById("spec-moagem").textContent = produtoSelecionado.moagem;
         
-        // Alimenta as fotos de forma cirúrgica e limpa
+        // Injeção limpa e síncrona das fotos reais mapeadas
         document.getElementById("detail-product-image").src = produtoSelecionado.image;
         document.getElementById("thumb-img-1").src = produtoSelecionado.image;
         document.getElementById("thumb-img-2").src = produtoSelecionado.thumb2;
@@ -207,4 +212,5 @@ if (document.readyState === "loading") {
 } else {
     inicializarDetalhesBarista();
 }
+
 </script>
