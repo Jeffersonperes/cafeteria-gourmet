@@ -33,40 +33,50 @@
             
             <!-- ÁREA DO AVATAR: BONEQUINHO CINZA PREMIUM -->
             <div class="avatar-box" style="width: 120px; height: 120px; background-color: #e2e8f0; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; border: 3px solid #dfceb8; box-shadow: 0 4px 10px rgba(0,0,0,0.02); position: relative; overflow: hidden;">
-                <!-- Ícone oficial do bonequinho cinza (User Silhouette) -->
                 <i class="fas fa-user" style="font-size: 64px; color: #94a3b8; margin-top: 15px;"></i>
             </div>
 
             <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 26px; color: #1c0f0a; margin: 0 0 5px 0; font-weight: 700;">Área do Cliente</h2>
             <p style="font-size: 13px; color: #6e5b53; margin-bottom: 35px;">Gerencie suas informações cadastrais e pedidos</p>
 
-            <!-- FORMULÁRIO DE DADOS OPERACIONAIS -->
+            <!-- FORMULÁRIO DE DADOS OPERACIONAIS (INICIA TRAVADO COM BACKGROUND ESCURECIDO) -->
             <form id="form-perfil" style="width: 100%; display: flex; flex-direction: column; gap: 20px;">
                 <div style="display: flex; gap: 20px; flex-wrap: wrap; width: 100%;">
                     <div style="flex: 1; min-width: 250px; display: flex; flex-direction: column; gap: 6px;">
                         <label style="font-size: 13px; font-weight: 600; color: #3c2419;">Nome Completo</label>
-                        <input type="text" value="Cliente Gourmet" style="padding: 12px; border: 1px solid rgba(60, 36, 25, 0.2); border-radius: 6px; font-size: 14px; outline: none; background-color: #faf9f7;">
+                        <input type="text" class="profile-input" value="Cliente Gourmet" readonly style="padding: 12px; border: 1px solid rgba(60, 36, 25, 0.15); border-radius: 6px; font-size: 14px; outline: none; background-color: #f3f1ed; color: #7a6860; transition: all 0.2s;">
                     </div>
                     <div style="flex: 1; min-width: 250px; display: flex; flex-direction: column; gap: 6px;">
                         <label style="font-size: 13px; font-weight: 600; color: #3c2419;">E-mail Cadastrado</label>
-                        <input type="email" value="cliente@cafeteriagourmet.com" style="padding: 12px; border: 1px solid rgba(60, 36, 25, 0.2); border-radius: 6px; font-size: 14px; outline: none; background-color: #faf9f7;">
+                        <input type="email" class="profile-input" value="cliente@cafeteriagourmet.com" readonly style="padding: 12px; border: 1px solid rgba(60, 36, 25, 0.15); border-radius: 6px; font-size: 14px; outline: none; background-color: #f3f1ed; color: #7a6860; transition: all 0.2s;">
                     </div>
                 </div>
 
                 <div style="display: flex; gap: 20px; flex-wrap: wrap; width: 100%;">
                     <div style="flex: 1; min-width: 250px; display: flex; flex-direction: column; gap: 6px;">
                         <label style="font-size: 13px; font-weight: 600; color: #3c2419;">Telefone / WhatsApp</label>
-                        <input type="text" value="(11) 99999-9999" style="padding: 12px; border: 1px solid rgba(60, 36, 25, 0.2); border-radius: 6px; font-size: 14px; outline: none; background-color: #faf9f7;">
+                        <input type="text" class="profile-input" value="(11) 99999-9999" readonly style="padding: 12px; border: 1px solid rgba(60, 36, 25, 0.15); border-radius: 6px; font-size: 14px; outline: none; background-color: #f3f1ed; color: #7a6860; transition: all 0.2s;">
                     </div>
                     <div style="flex: 1; min-width: 250px; display: flex; flex-direction: column; gap: 6px;">
                         <label style="font-size: 13px; font-weight: 600; color: #3c2419;">Endereço de Entrega Principal</label>
-                        <input type="text" value="Av. Paulista, 1000 - São Paulo/SP" style="padding: 12px; border: 1px solid rgba(60, 36, 25, 0.2); border-radius: 6px; font-size: 14px; outline: none; background-color: #faf9f7;">
+                        <input type="text" class="profile-input" value="Av. Paulista, 1000 - São Paulo/SP" readonly style="padding: 12px; border: 1px solid rgba(60, 36, 25, 0.15); border-radius: 6px; font-size: 14px; outline: none; background-color: #f3f1ed; color: #7a6860; transition: all 0.2s;">
                     </div>
                 </div>
 
-                <button type="button" style="background-color: #2b170f; color: #ffffff; border: none; padding: 14px 30px; font-size: 14px; font-weight: 700; border-radius: 6px; cursor: pointer; width: fit-content; margin: 15px auto 0 auto; transition: background-color 0.2s; box-shadow: 0 4px 12px rgba(43, 23, 15, 0.15);" onclick="alert('✓ Dados atualizados localmente com sucesso!')">
-                    Salvar Alterações
-                </button>
+                <!-- LINHA DE BOTÕES INTERATIVOS -->
+                <div style="display: flex; justify-content: center; gap: 15px; margin-top: 20px; flex-wrap: wrap;">
+                    
+                    <!-- BOTÃO PRINCIPAL DE ALTERNÂNCIA (EDITAR / CANCELAR) -->
+                    <button type="button" id="btn-toggle-edit" style="background-color: #3c2419; color: #ffffff; border: none; padding: 14px 30px; font-size: 14px; font-weight: 700; border-radius: 6px; cursor: pointer; transition: background-color 0.2s; box-shadow: 0 4px 12px rgba(60, 36, 25, 0.15); display: inline-flex; align-items: center; gap: 8px;" onclick="alternarModoEdicao()">
+                        <i class="fas fa-edit"></i> <span>Editar Perfil</span>
+                    </button>
+
+                    <!-- BOTÃO DE SALVAR SALVAGUARDADO (FICA EM SEGUNDO PLANO OCULTO ATÉ CLICAR EM EDITAR) -->
+                    <button type="button" id="btn-save-profile" style="background-color: #28a745; color: #ffffff; border: none; padding: 14px 30px; font-size: 14px; font-weight: 700; border-radius: 6px; cursor: pointer; transition: background-color 0.2s; box-shadow: 0 4px 12px rgba(40, 167, 69, 0.15); display: none; align-items: center; gap: 8px;" onclick="salvarAlteraçõesPerfil()">
+                        <i class="fas fa-save"></i> Salvar Alterações
+                    </button>
+
+                </div>
             </form>
 
         </main>
@@ -78,5 +88,54 @@
         <div class="footer-contact" style="font-size: 13px; color:#3c2419;"><a href="mailto:contato@cafeteriagourmet.com.br" style="color: #3c2419; text-decoration: none;">contato@cafeteriagourmet.com.br</a></div>
     </footer>
 
-</body>
-</html>
+    <!-- ENGINE ISOLADA DE EDICAO DINÂMICA DE PERFIL -->
+    <script>
+        var emEdicao = false;
+
+        function alternarModoEdicao() {
+            var inputs = document.querySelectorAll(".profile-input");
+            var btnToggle = document.getElementById("btn-toggle-edit");
+            var btnSave = document.getElementById("btn-save-profile");
+            
+            emEdicao = !emEdicao;
+
+            if (emEdicao) {
+                // Modo Edição Ativo: Destrava inputs e clareia background
+                inputs.forEach(function(input) {
+                    input.removeAttribute("readonly");
+                    input.style.backgroundColor = "#ffffff";
+                    input.style.borderColor = "#3c2419";
+                    input.style.color = "#3c2419";
+                });
+                
+                // Transforma o botão em Cancelar
+                btnToggle.style.backgroundColor = "#dc3545";
+                btnToggle.innerHTML = '<i class="fas fa-times"></i> Cancelar';
+                
+                // Revela o botão verde de Salvar
+                btnSave.style.display = "inline-flex";
+            } else {
+                // Modo Leitura Ativo: Retorna ao estado travado original
+                inputs.forEach(function(input) {
+                    input.setAttribute("readonly", "readonly");
+                    input.style.background = "#f3f1ed";
+                    input.style.borderColor = "rgba(60, 36, 25, 0.15)";
+                    input.style.color = "#7a6860";
+                });
+
+                // Retorna o botão para Editar
+                btnToggle.style.backgroundColor = "#3c2419";
+                btnToggle.innerHTML = '<i class="fas fa-edit"></i> Editar Perfil';
+                
+                // Oculta o botão verde de Salvar
+                btnSave.style.display = "none";
+            }
+        }
+
+        function salvarAlteraçõesPerfil() {
+            // Executa salvamento simulado e retorna a tela para travada
+            alert("✓ Dados atualizados e salvos com sucesso!");
+            alternarModoEdicao();
+            }
+
+</script>
