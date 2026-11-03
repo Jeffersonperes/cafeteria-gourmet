@@ -792,14 +792,21 @@ object-fit: cover !important;
 .profile-wrapper, .orders-page-container { flex: 1; width: 84%; max-width: 1000px; margin: 40px auto; display: flex; flex-direction: column; gap: 25px; }
 .profile-card, .orders-main-card { background-color: var(--bg-card-white); border-radius: 12px; padding: 30px 35px; box-shadow: 0 4px 15px rgba(60, 36, 25, 0.02); }
 /* ==========================================================================
-   8. ESTILIZAÇÃO COMPLETA DA PÁGINA DE PERFIL (PADRÃO FIDELIDADE DESIGN)
+   RESET E ALINHAMENTO COMPLETO DA PÁGINA DE PERFIL (ANTI-BAGUNÇA)
    ========================================================================== */
-.profile-body-bg {
+
+/* Força o fundo da página de perfil a ser cinza bem claro e limpo */
+body.profile-body-bg {
     background-color: #f7f4f0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 100vh !important;
 }
 
+/* Container mestre centralizado */
 .profile-page-wrapper {
     max-width: 1000px !important;
+    width: 100% !important;
     margin: 40px auto !important;
     padding: 0 20px !important;
     display: flex !important;
@@ -808,76 +815,64 @@ object-fit: cover !important;
     box-sizing: border-box !important;
 }
 
-/* Bloco superior de dados */
+/* Bloco Superior (Dados do usuário) */
 .profile-card-info {
-    background-color: #ffffff !important;
+    background: #ffffff !important;
     border-radius: 16px !important;
     padding: 30px !important;
     display: flex !important;
+    flex-direction: row !important;
     justify-content: space-between !important;
     align-items: center !important;
     box-shadow: 0 4px 20px rgba(60, 36, 25, 0.02) !important;
-    border: 1px solid rgba(60, 36, 25, 0.04) !important;
+    border: 1px solid rgba(60, 36, 25, 0.05) !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    flex-wrap: wrap !important;
+    gap: 20px !important;
 }
 
 .profile-info-left {
     display: flex !important;
+    flex-direction: row !important;
     align-items: center !important;
     gap: 25px !important;
+    flex-wrap: wrap !important;
 }
 
 .profile-avatar-circle {
-    width: 110px !important;
-    height: 110px !important;
+    width: 100px !important;
+    height: 100px !important;
     background-color: #e2e8f0 !important;
     border-radius: 50% !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     border: 3px solid #dfceb8 !important;
-    overflow: hidden !important;
+    flex-shrink: 0 !important;
 }
 
-.profile-avatar-circle i {
-    font-size: 56px !important;
-    color: #94a3b8 !important;
-    margin-top: 12px !important;
+.profile-details-text {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
 }
 
-.profile-details-text h2 {
-    font-size: 26px !important;
-    color: #1c0f0a !important;
-    margin-bottom: 4px !important;
-    font-weight: 600 !important;
-}
-
-.client-since-badge {
-    display: inline-block !important;
-    font-size: 11px !important;
-    background-color: #faf7f5 !important;
-    padding: 4px 10px !important;
-    border-radius: 20px !important;
-    color: #6e5b53 !important;
-    margin-bottom: 15px !important;
-    border: 1px solid rgba(60,36,25,0.05) !important;
+.contact-info-list {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 6px !important;
+    margin-top: 10px !important;
 }
 
 .contact-info-list p {
-    font-size: 13px !important;
-    color: #55433c !important;
-    margin-bottom: 6px !important;
+    margin: 0 !important;
     display: flex !important;
     align-items: center !important;
     gap: 10px !important;
 }
 
-.contact-info-list i {
-    color: #a08a80 !important;
-    width: 16px !important;
-    text-align: center !important;
-}
-
-/* Coluna de ações da direita */
+/* Botões da Direita */
 .profile-actions-right {
     display: flex !important;
     flex-direction: column !important;
@@ -885,40 +880,15 @@ object-fit: cover !important;
     min-width: 200px !important;
 }
 
-.btn-profile-edit {
-    background-color: #2b170f !important;
-    color: #ffffff !important;
-    border: none !important;
-    padding: 12px !important;
-    font-weight: 600 !important;
-    font-size: 14px !important;
-    border-radius: 8px !important;
-    cursor: pointer !important;
-    transition: background-color 0.2s !important;
-}
-
-.btn-profile-logout {
-    background-color: #ffffff !important;
-    color: #2b170f !important;
-    border: 1px solid rgba(43, 23, 15, 0.2) !important;
-    padding: 12px !important;
-    font-weight: 600 !important;
-    font-size: 14px !important;
-    border-radius: 8px !important;
-    cursor: pointer !important;
-    transition: background-color 0.2s !important;
-}
-
-.btn-profile-edit:hover { background-color: #1c0f0a !important; }
-.btn-profile-logout:hover { background-color: #faf9f7 !important; }
-
-/* Histórico de Pedidos */
+/* Bloco Inferior (Histórico de Pedidos) */
 .orders-history-card {
-    background-color: #ffffff !important;
+    background: #ffffff !important;
     border-radius: 16px !important;
     padding: 30px !important;
     box-shadow: 0 4px 20px rgba(60, 36, 25, 0.02) !important;
-    border: 1px solid rgba(60, 36, 25, 0.04) !important;
+    border: 1px solid rgba(60, 36, 25, 0.05) !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
 }
 
 .orders-header-row {
@@ -926,123 +896,78 @@ object-fit: cover !important;
     justify-content: space-between !important;
     align-items: center !important;
     margin-bottom: 25px !important;
-}
-
-.orders-header-row h3 {
-    font-size: 18px !important;
-    font-weight: 700 !important;
-    color: #1c0f0a !important;
-}
-
-.view-all-link {
-    font-size: 13px !important;
-    color: #6e5b53 !important;
-    text-decoration: none !important;
-    font-weight: 500 !important;
+    width: 100% !important;
 }
 
 .orders-list-container {
     display: flex !important;
     flex-direction: column !important;
-    gap: 20px !important;
+    gap: 15px !important;
+    width: 100% !important;
 }
 
-/* Linha de cada Pedido */
+/* Linha horizontal perfeita de cada pedido */
 .order-item-row {
     display: flex !important;
+    flex-direction: row !important;
     align-items: center !important;
     justify-content: space-between !important;
-    padding-bottom: 20px !important;
+    padding: 15px 0 !important;
     border-bottom: 1px solid rgba(60, 36, 25, 0.06) !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
     gap: 20px !important;
-}
-
-.order-item-row:last-child {
-    border-bottom: none !important;
-    padding-bottom: 0 !important;
 }
 
 .order-img-box {
-    width: 70px !important;
-    height: 70px !important;
+    width: 65px !important;
+    height: 65px !important;
     background-color: #faf9f7 !important;
     border-radius: 10px !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    overflow: hidden !important;
+    flex-shrink: 0 !important;
     border: 1px solid rgba(60,36,25,0.04) !important;
-}
-
-.order-img-box img {
-    max-width: 80% !important;
-    max-height: 80% !important;
-    object-fit: contain !important;
 }
 
 .order-info-block {
     flex: 2 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2px !important;
 }
 
-.order-info-block h4 {
-    font-size: 15px !important;
-    color: #1c0f0a !important;
-    margin-bottom: 4px !important;
-}
-
-.order-meta {
-    font-size: 12px !important;
-    color: #8a746c !important;
-    margin-bottom: 4px !important;
-}
-
-.order-total {
-    font-size: 13px !important;
-    color: #3c2419 !important;
+.order-info-block h4, .order-info-block p {
+    margin: 0 !important;
 }
 
 .order-status-block {
     flex: 1 !important;
     display: flex !important;
     flex-direction: column !important;
-    gap: 4px !important;
+    align-items: flex-start !important;
+    gap: 2px !important;
 }
 
-.status-label {
-    font-size: 11px !important;
-    color: #a08a80 !important;
-}
-
-/* Badges de Status Arredondados do Protótipo */
-.badge-status {
-    display: inline-flex !important;
-    align-items: center !important;
-    gap: 6px !important;
-    padding: 6px 14px !important;
-    border-radius: 30px !important;
-    font-size: 12px !important;
-    font-weight: 600 !important;
-    width: fit-content !important;
-}
-
-.badge-status.delivered { background-color: #e6f7ed !important; color: #28a745 !important; }
-.badge-status.shipping { background-color: #fff8e6 !important; color: #ff9900 !important; }
-.badge-status.processing { background-color: #e6f0fa !important; color: #0066cc !important; }
-
-.btn-order-details {
-    background-color: #2b170f !important;
-    color: #ffffff !important;
-    border: none !important;
-    padding: 10px 20px !important;
-    border-radius: 6px !important;
-    font-size: 13px !important;
-    font-weight: 600 !important;
-    cursor: pointer !important;
-}
-
+/* Ajuste Responsivo para Celulares */
 @media (max-width: 768px) {
-    .profile-card-info, .order-item-row { flex-direction: column !important; align-items: flex-start !important; }
-    .profile-actions-right { width: 100% !important; }
+    .profile-card-info {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+    }
+    .profile-actions-right {
+        width: 100% !important;
+    }
+    .order-item-row {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 15px !important;
+        padding: 20px 0 !important;
+    }
+    .order-status-block {
+        align-items: flex-start !important;
+    }
 }
 
 /* Detalhes do Pedido */
