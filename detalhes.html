@@ -134,105 +134,22 @@ function inicializarDetalhesBarista() {
     var urlParams = new URLSearchParams(window.location.search);
     var idBuscado = urlParams.get("id") || "1";
 
+    // Banco de dados premium configurado para ler as 3 imagens locais de cada produto
     var bancoCompleto = [
-        { 
-            id: "1", name: "Café Especial Bourbon (Grãos)", type: "100% Arábica", torra: "Média", peso: "250g", moagem: "Média", price: "32,90", 
-            image: "./img/imagem-1.jpg", 
-            thumb2: "./img/cafe-bourbon-nutricional.jpg", 
-            thumb3: "./img/cafe-bourbon-angulo-cima.jpg", 
-            desc: "Café 100% Arábica com notas carameladas e sabor encorpado. Perfeito para quem aprecia um café equilibrado e aromático." 
-        },
-        { 
-            id: "2", name: "Café Gourmet 100% Arábica (Moído)", type: "100% Arábica", torra: "Média-Clara", peso: "250g", moagem: "Fina", price: "28,90", 
-            image: "./img/arabica.jpg", 
-            thumb2: "https://unsplash.com", 
-            thumb3: "https://unsplash.com", 
-            desc: "Blend exclusivo de grãos Arábica com notas marcantes de castanhas e chocolate ao leite." 
-        },
-        { 
-            id: "13", name: "Café Tradicional Premium", type: "Blend Tradicional", torra: "Média-Escura", peso: "500g", moagem: "Média", price: "19,90", 
-            image: "./img/tradicional.jpg", 
-            thumb2: "https://unsplash.com", 
-            thumb3: "https://unsplash.com", 
-            desc: "Nossa torra clássica e encorpada desenvolvida para trazer o verdadeiro aconchego do café forte brasileiro." 
-        },
-        { 
-            id: "15", name: "Café Solúvel Liofilizado", type: "Arábica Solúvel", torra: "Média", peso: "100g", moagem: "Instantâneo", price: "22,90", 
-            image: "./img/soluvel.jpg", 
-            thumb2: "https://unsplash.com", 
-            thumb3: "https://unsplash.com", 
-            desc: "Processo de congelamento a vácuo que preserva integralmente o aroma original do grão Arábica fresco." 
-        },
-        { 
-            id: "3", name: "Café Orgânico Sustentável", type: "Orgânico Puro", torra: "Média", peso: "250g", moagem: "Média", price: "34,90", 
-            image: "./img/organico.jpg", 
-            thumb2: "https://unsplash.com", 
-            thumb3: "https://unsplash.com", 
-            desc: "Grãos ecológicos produzidos sem defensivos agrícolas, com notas de mel e acidez equilibrada." 
-        },
-        { 
-            id: "7", name: "Café Descafeinado Suave", type: "Arábica", torra: "Clara", peso: "250g", moagem: "Fina", price: "29,90", 
-            image: "./img/descafeinado.jpg", 
-            thumb2: "https://unsplash.com", 
-            thumb3: "https://unsplash.com", 
-            desc: "Remoção natural da cafeína com água que preserva integralmente os aromas originais adocicados." 
-        },
-        { 
-            id: "14", name: "Café Premium Torra Escura", type: "Arábica Intenso", torra: "Escura", peso: "250g", moagem: "Grossa", price: "39,90", 
-            image: "./img/premium-escura.jpg", 
-            thumb2: "https://unsplash.com", 
-            thumb3: "https://unsplash.com", 
-            desc: "Uma torra acentuada de sabor forte com retrogosto prolongado de cacau puro." 
-        },
-        { 
-            id: "4", name: "Kit Degustação Exclusivo", type: "Vários Blends", torra: "Variada", peso: "3x 100g", moagem: "Média", price: "49,90", 
-            image: "./img/kit-degustacao.jpg", 
-            thumb2: "https://unsplash.com", 
-            thumb3: "https://unsplash.com", 
-            desc: "Experimente 3 variedades exclusivas de nossos micro-lotes para expandir seus horizontes." 
-        },
-        { 
-            id: "5", name: "Cápsulas Café Intenso", type: "Nespresso Comp.", torra: "Escura", peso: "10 un", moagem: "Cápsula", price: "24,50", 
-            image: "./img/capsulas.jpg", 
-            thumb2: "https://unsplash.com", 
-            thumb3: "https://unsplash.com", 
-            desc: "Intensidade máxima e crema densa persistente compatível com sistemas Nespresso." 
-        },
-        { 
-            id: "6", name: "Café Especial Geisha Raro", type: "Geisha", torra: "Clara", peso: "150g", moagem: "Média", price: "68,00", 
-            image: "./img/geisha.jpg", 
-            thumb2: "https://unsplash.com", 
-            thumb3: "https://unsplash.com", 
-            desc: "Micro-lote raríssimo com notas altamente florais de jasmim e acidez cítrica sublime." 
-        },
-        { 
-            id: "8", name: "Moedor de Café Manual", type: "Acessório", torra: "N/A", peso: "450g", moagem: "Cerâmica", price: "89,90", 
-            image: "./img/moedor.jpg", 
-            thumb2: "https://unsplash.com", 
-            thumb3: "https://unsplash.com", 
-            desc: "Moinho manual de cerâmica cônica ajustável para garantir grãos moídos na hora perfeitos." 
-        },
-        { 
-            id: "9", name: "Café Jacu Bird Exótico", type: "Exótico", torra: "Média", peso: "125g", moagem: "Média", price: "145,00", 
-            image: "./img/jacu.jpg", 
-            thumb2: "https://unsplash.com", 
-            thumb3: "https://unsplash.com", 
-            desc: "Frutos selecionados biologicamente pelo pássaro Jacu nas montanhas do ES. Bebida refinada e única." 
-        },
-        { 
-            id: "10", name: "Cold Brew Artesanal", type: "Líquido Concentrado", torra: "Média", peso: "300ml", moagem: "Infusão", price: "16,90", 
-            image: "./img/coldbrew.jpg", 
-            thumb2: "https://unsplash.com", 
-            thumb3: "https://unsplash.com", 
-            desc: "Infusão a frio extraída por 18 horas, com sabor altamente cafeinado e refrescante." 
-        },
-        { 
-            id: "11", name: "Café Baunilha Francesa", type: "Aromatizado", torra: "Média", peso: "250g", moagem: "Média", price: "38,95", 
-            image: "./img/baunilha.jpg", 
-            thumb2: "https://unsplash.com", 
-            thumb3: "https://unsplash.com", 
-            desc: "Deliciosa combinação de óleos essenciais de baunilha com grãos nobres selecionados." 
-        }
+        { id: "1", name: "Café Especial Bourbon Amarelo (Grãos)", type: "100% Arábica", torra: "Média", peso: "250g", moagem: "Média", price: "32,90", image: "./img/bourbon-1.jpg", thumb2: "./img/bourbon-2.jpg", thumb3: "./img/bourbon-3.jpg", desc: "Café 100% Arábica com notas carameladas e sabor encorpado. Perfeito para quem aprecia um café equilibrado e aromático." },
+        { id: "2", name: "Café Gourmet 100% Arábica (Moído)", type: "100% Arábica", torra: "Média-Clara", peso: "250g", moagem: "Fina", price: "28,90", image: "./img/arabica-1.jpg", thumb2: "./img/arabica-2.jpg", thumb3: "./img/arabica-3.jpg", desc: "Blend exclusivo de grãos Arábica com notas marcantes de castanhas e chocolate ao leite." },
+        { id: "13", name: "Café Tradicional Premium", type: "Blend Tradicional", torra: "Média-Escura", peso: "500g", moagem: "Média", price: "19,90", image: "./img/tradicional-1.jpg", thumb2: "./img/tradicional-2.jpg", thumb3: "./img/tradicional-3.jpg", desc: "Nossa torra clássica e encorpada desenvolvida para trazer o verdadeiro aconchego do café forte brasileiro." },
+        { id: "15", name: "Café Solúvel Liofilizado", type: "Arábica Solúvel", torra: "Média", peso: "100g", moagem: "Instantâneo", price: "22,90", image: "./img/soluvel-1.jpg", thumb2: "./img/soluvel-2.jpg", thumb3: "./img/soluvel-3.jpg", desc: "Processo de congelamento a vácuo que preserva integralmente o aroma original do grão Arábica fresco." },
+        { id: "3", name: "Café Orgânico Sustentável", type: "Orgânico Puro", torra: "Média", peso: "250g", moagem: "Média", price: "34,90", image: "./img/organico-1.jpg", thumb2: "./img/organico-2.jpg", thumb3: "./img/organico-3.jpg", desc: "Grãos ecológicos produzidos sem defensivos agrícolas, com notas de mel e acidez equilibrada." },
+        { id: "7", name: "Café Descafeinado Suave", type: "Arábica", torra: "Clara", peso: "250g", moagem: "Fina", price: "29,90", image: "./img/descafeinado-1.jpg", thumb2: "./img/descafeinado-2.jpg", thumb3: "./img/descafeinado-3.jpg", desc: "Remoção natural da cafeína com água que preserva integralmente os aromas originais adocicados." },
+        { id: "14", name: "Café Premium Torra Escura", type: "Arábica Intenso", torra: "Escura", peso: "250g", moagem: "Grossa", price: "39,90", image: "./img/premium-escura-1.jpg", thumb2: "./img/premium-escura-2.jpg", thumb3: "./img/premium-escura-3.jpg", desc: "Uma torra acentuada de sabor forte com retrogosto prolongado de cacau puro." },
+        { id: "4", name: "Kit Degustação Exclusivo", type: "Vários Blends", torra: "Variada", peso: "3x 100g", moagem: "Média", price: "49,90", image: "./img/kit-degustacao-1.jpg", thumb2: "./img/kit-degustacao-2.jpg", thumb3: "./img/kit-degustacao-3.jpg", desc: "Experimente 3 variedades exclusivas de nossos micro-lotes para expandir seus horizontes." },
+        { id: "5", name: "Cápsulas Café Intenso", type: "Nespresso Comp.", torra: "Escura", peso: "10 un", moagem: "Cápsula", price: "24,50", image: "./img/capsulas-1.jpg", thumb2: "./img/capsulas-2.jpg", thumb3: "./img/capsulas-3.jpg", desc: "Intensidade máxima e crema densa persistente compatível com sistemas Nespresso." },
+        { id: "6", name: "Café Especial Geisha Raro", type: "Geisha", torra: "Clara", peso: "150g", moagem: "Média", price: "68,00", image: "./img/geisha-1.jpg", thumb2: "./img/geisha-2.jpg", thumb3: "./img/geisha-3.jpg", desc: "Micro-lote raríssimo com notas altamente florais de jasmim e acidez cítrica sublime." },
+        { id: "8", name: "Moedor de Café Manual", type: "Acessório", torra: "N/A", peso: "450g", moagem: "Cerâmica", price: "89,90", image: "./img/moedor-1.jpg", thumb2: "./img/moedor-2.jpg", thumb3: "./img/moedor-3.jpg", desc: "Moinho manual de cerâmica cônica ajustável para garantir grãos moídos na hora perfeitos." },
+        { id: "9", name: "Café Jacu Bird Exótico", type: "Exótico", torra: "Média", peso: "125g", moagem: "Média", price: "145,00", image: "./img/jacu-1.jpg", thumb2: "./img/jacu-2.jpg", thumb3: "./img/jacu-3.jpg", desc: "Frutos selecionados biologicamente pelo pássaro Jacu nas montanhas do ES. Bebida refinada e única." },
+        { id: "10", name: "Cold Brew Artesanal", type: "Líquido Concentrado", torra: "Média", peso: "300ml", moagem: "Infusão", price: "16,90", image: "./img/coldbrew-1.jpg", thumb2: "./img/coldbrew-2.jpg", thumb3: "./img/coldbrew-3.jpg", desc: "Infusão a frio extraída por 18 horas, com sabor altamente cafeinado e refrescante." },
+        { id: "11", name: "Café Baunilha Francesa", type: "Aromatizado", torra: "Média", peso: "250g", moagem: "Média", price: "38,95", image: "./img/baunilha-1.jpg", thumb2: "./img/baunilha-2.jpg", thumb3: "./img/baunilha-3.jpg", desc: "Deliciosa combinação de óleos essenciais de baunilha com grãos nobres selecionados." }
     ];
 
     localStorage.setItem("cafeteria_produtos_admin", JSON.stringify(bancoCompleto));
@@ -248,10 +165,11 @@ function inicializarDetalhesBarista() {
         document.getElementById("spec-peso").textContent = produtoSelecionado.peso;
         document.getElementById("spec-moagem").textContent = produtoSelecionado.moagem;
         
+        // Alimenta as fotos de forma cirúrgica e limpa
         document.getElementById("detail-product-image").src = produtoSelecionado.image;
         document.getElementById("thumb-img-1").src = produtoSelecionado.image;
-        document.getElementById("thumb-img-2").src = produtoSelecionado.image;
-        document.getElementById("thumb-img-3").src = produtoSelecionado.image;
+        document.getElementById("thumb-img-2").src = produtoSelecionado.thumb2;
+        document.getElementById("thumb-img-3").src = produtoSelecionado.thumb3;
     }
 
     var btn = document.getElementById("btn-detail-buy");
@@ -279,13 +197,11 @@ function inicializarDetalhesBarista() {
             setTimeout(function() { 
                 btn.innerHTML = '<i class="fas fa-shopping-cart"></i> Adicionar ao carrinho'; 
                 btn.style.backgroundColor = "#2b170f"; 
-                window.location.reload(); // Recarrega para sincronizar o badge do menu se houver
             }, 2000);
         };
     }
 }
 
-// Inicialização amarrada de forma limpa e segura
 if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", inicializarDetalhesBarista);
 } else {
