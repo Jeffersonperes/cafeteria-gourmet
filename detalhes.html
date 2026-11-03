@@ -4,26 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cafeteria Gourmet - Detalhes do Produto</title>
-    <!-- Chamada oficial do arquivo de estilos separado -->
-    <link rel="stylesheet" href="style.css">
+    <!-- ROTA ABSOLUTA FIXA PARA IMPEDIR QUEBRA NO GITHUB PAGES -->
+    <link rel="stylesheet" href="./style.css">
     <!-- Font Awesome para os ícones reais do design -->
     <link rel="stylesheet" href="https://cloudflare.com">
 </head>
 <body style="background-color: #fcfbfa;">
 
     <!-- NAVBAR (Topo Escuro) -->
-    <header class="navbar">
-        <div class="logo" style="display: flex; align-items: center; gap: 10px; cursor: pointer;" onclick="window.location.href='index.html'">
+    <header class="navbar" style="display: flex; align-items: center; justify-content: space-between; padding: 20px 8%; background-color: #1c0f0a; border-bottom: 1px solid rgba(223, 206, 184, 0.1);">
+        <div class="logo" style="display: flex; align-items: center; gap: 10px; cursor: pointer;" onclick="window.location.href='./index.html'">
             <span style="font-size: 26px; line-height: 1; display: inline-block;">☕</span>
             <span style="font-family: 'Playfair Display', serif; color: #ffffff; font-weight: bold; font-size: 16px; letter-spacing: 0.5px; line-height: 1.1;">
                 CAFETERIA<br><small style="font-size: 10px; letter-spacing: 2px; color: #DFCEB8; display: block;">GOURMET</small>
             </span>
         </div>
-        <nav class="nav-menu">
-            <a href="index.html"><i class="fas fa-home"></i> Início</a>
-            <a href="produtos.html" class="active"><i class="fas fa-shopping-bag"></i> Produtos</a>
-            <a href="carrinho.html"><i class="fas fa-shopping-cart"></i> Carrinho</a>
-            <a href="perfil.html"><i class="fas fa-user"></i> Perfil</a>
+        <nav class="nav-menu" style="display: flex; align-items: center; gap: 30px;">
+            <a href="./index.html" style="color: #DFCEB8; text-decoration: none; font-size: 14px;"><i class="fas fa-home"></i> Início</a>
+            <a href="./produtos.html" class="active" style="color: #ffffff; text-decoration: none; font-size: 14px;"><i class="fas fa-shopping-bag"></i> Produtos</a>
+            <a href="./carrinho.html" style="color: #DFCEB8; text-decoration: none; font-size: 14px;"><i class="fas fa-shopping-cart"></i> Carrinho</a>
+            <a href="./perfil.html" style="color: #DFCEB8; text-decoration: none; font-size: 14px;"><i class="fas fa-user"></i> Perfil</a>
         </nav>
     </header>
 
@@ -34,12 +34,13 @@
             <!-- COLUNA ESQUERDA: GALERIA DE FOTOS INTERATIVAS -->
             <div class="image-gallery-side">
                 <div class="main-img-container">
-                    <img id="detail-product-image" src="" alt="Café">
+                    <img id="detail-product-image" src="./img/bourbon.jpg" alt="Café">
                 </div>
                 <div class="thumbs-row">
-                    <div class="thumb-box active" onclick="mudarFotoMiniatura(this)"><img id="thumb-img-1" src="" alt="Miniatura 1"></div>
-                    <div class="thumb-box" onclick="mudarFotoMiniatura(this)"><img id="thumb-img-2" src="" alt="Miniatura 2"></div>
-                    <div class="thumb-box" onclick="mudarFotoMiniatura(this)"><img id="thumb-img-3" src="" alt="Miniatura 3"></div>
+                    <!-- Funções conectadas ao trocador dinâmico estável -->
+                    <div class="thumb-box active" onclick="mudarFotoMiniatura(this)"><img id="thumb-img-1" src="./img/bourbon.jpg" alt="Miniatura 1"></div>
+                    <div class="thumb-box" onclick="mudarFotoMiniatura(this)"><img id="thumb-img-2" src="./img/bourbon.jpg" alt="Miniatura 2"></div>
+                    <div class="thumb-box" onclick="mudarFotoMiniatura(this)"><img id="thumb-img-3" src="./img/bourbon.jpg" alt="Miniatura 3"></div>
                 </div>
             </div>
 
@@ -104,101 +105,93 @@
         <div class="footer-contact" style="font-size: 13px; color:#3c2419;"><a href="mailto:contato@cafeteriagourmet.com.br" style="color: #3c2419; text-decoration: none;">contato@cafeteriagourmet.com.br</a></div>
     </footer>
 
-        <!-- ENGINE DE SINCRONIZAÇÃO COMPLETA (CORRIGIDA SEM DUPLICAÇÃO DE VARIÁVEIS) -->
+     <!-- ENGINE INDUSTRIAL DE SINCRONIZAÇÃO (À PROVA DE CACHE E CORRIGIDA) -->
     <script>
         function alterarQtd(valor) {
-            const inputQtd = document.getElementById("product-quantity-input");
+            var inputQtd = document.getElementById("product-quantity-input");
             if (!inputQtd) return;
-            let atual = parseInt(inputQtd.value) || 1;
+            var atual = parseInt(inputQtd.value) || 1;
             atual += valor;
             if (atual < 1) atual = 1;
             inputQtd.value = atual;
         }
 
         function mudarFotoMiniatura(elementoClicado) {
-            const imagemInterna = elementoClicado.querySelector("img");
-            if (!imagemInterna) return;
+            var imagemInterna = elementoClicado.querySelector("img");
+            if (!imagemInterna || !imagemInterna.src) return;
             
-            const principal = document.getElementById("detail-product-image");
+            var principal = document.getElementById("detail-product-image");
             if (principal) {
                 principal.src = imagemInterna.src;
             }
             
-            const caixas = document.querySelectorAll(".thumb-box");
-            caixas.forEach(c => c.classList.remove("active"));
+            var caixas = document.querySelectorAll(".thumb-box");
+            caixas.forEach(function(c) { c.classList.remove("active"); });
             elementoClicado.classList.add("active");
         }
 
-        window.onload = function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const idBuscado = urlParams.get("id") || "1";
+        function inicializarDetalhesBarista() {
+            var urlParams = new URLSearchParams(window.location.search);
+            var idBuscado = urlParams.get("id") || "1";
 
-            const bancoCompleto = [
-                { id: "1", name: "Café Especial Bourbon Amarelo (Grãos)", type: "100% Arábica", torra: "Média", peso: "250g", moagem: "Média", price: "32,90", image: "img/bourbon.jpg", thumb2: "https://unsplash.com", thumb3: "https://unsplash.com", desc: "Café 100% Arábica com notas carameladas e sabor encorpado. Perfeito para quem aprecia um café equilibrado e aromático." },
-                { id: "2", name: "Café Gourmet 100% Arábica (Moído)", type: "100% Arábica", torra: "Média-Clara", peso: "250g", moagem: "Fina", price: "28,90", image: "img/arabica.jpg", thumb2: "https://unsplash.com", thumb3: "https://unsplash.com", desc: "Blend exclusivo de grãos Arábica com notas marcantes de castanhas e chocolate ao leite." },
-                { id: "13", name: "Café Tradicional Premium", type: "Blend Tradicional", torra: "Média-Escura", peso: "500g", moagem: "Média", price: "19,90", image: "img/tradicional.jpg", thumb2: "https://unsplash.com", thumb3: "https://unsplash.com", desc: "Nossa torra clássica e encorpada desenvolvida para trazer o verdadeiro aconchego do café forte brasileiro." },
-                { id: "15", name: "Café Solúvel Liofilizado", type: "Arábica Solúvel", torra: "Média", peso: "100g", moagem: "Instantâneo", price: "22,90", image: "img/soluvel.jpg", thumb2: "https://unsplash.com", thumb3: "https://unsplash.com", desc: "Processo de congelamento a vácuo que preserva integralmente o aroma original do grão Arábica fresco." },
-                { id: "3", name: "Café Orgânico Sustentável", type: "Orgânico Puro", torra: "Média", peso: "250g", moagem: "Média", price: "34,90", image: "img/organico.jpg", thumb2: "https://unsplash.com", thumb3: "https://unsplash.com", desc: "Grãos ecológicos produzidos sem defensivos agrícolas, com notas de mel e acidez equilibrada." },
-                { id: "7", name: "Café Descafeinado Suave", type: "Arábica", torra: "Clara", peso: "250g", moagem: "Fina", price: "29,90", image: "img/descafeinado.jpg", thumb2: "https://unsplash.com", thumb3: "https://unsplash.com", desc: "Remoção natural da cafeína com água que preserva integralmente os aromas originais adocicados." },
-                { id: "14", name: "Café Premium Torra Escura", type: "Arábica Intenso", torra: "Escura", peso: "250g", moagem: "Grossa", price: "39,90", image: "img/premium-escura.jpg", thumb2: "https://unsplash.com", thumb3: "https://unsplash.com", desc: "Uma torra acentuada de sabor forte com retrogosto prolongado de cacau puro." },
-                { id: "4", name: "Kit Degustação Exclusivo", type: "Vários Blends", torra: "Variada", peso: "3x 100g", moagem: "Média", price: "49,90", image: "img/kit-degustacao.jpg", thumb2: "https://unsplash.com", thumb3: "https://unsplash.com", desc: "Experimente 3 variedades exclusivas de nossos micro-lotes para expandir seus horizontes." },
-                { id: "5", name: "Cápsulas Café Intenso", type: "Nespresso Comp.", torra: "Escura", peso: "10 un", moagem: "Cápsula", price: "24,50", image: "img/capsulas.jpg", thumb2: "https://unsplash.com", thumb3: "https://unsplash.com", desc: "Intensidade máxima e crema densa persistente compatível com sistemas Nespresso." },
-                { id: "6", name: "Café Especial Geisha Raro", type: "Geisha", torra: "Clara", peso: "150g", moagem: "Média", price: "68,00", image: "img/geisha.jpg", thumb2: "https://unsplash.com", thumb3: "https://unsplash.com", desc: "Micro-lote raríssimo com notas altamente florais de jasmim e acidez cítrica sublime." },
-                { id: "8", name: "Moedor de Café Manual", type: "Acessório", torra: "N/A", peso: "450g", moagem: "Cerâmica", price: "89,90", image: "img/moedor.jpg", thumb2: "https://unsplash.com", thumb3: "https://unsplash.com", desc: "Moinho manual de cerâmica cônica ajustável para garantir grãos moídos na hora perfeitos." },
-                { id: "9", name: "Café Jacu Bird Exótico", type: "Exótico", torra: "Média", peso: "125g", moagem: "Média", price: "145,00", image: "img/jacu.jpg", thumb2: "https://unsplash.com", thumb3: "https://unsplash.com", desc: "Frutos selecionados biologicamente pelo pássaro Jacu nas montanhas do ES. Bebida refinada e única." },
-                { id: "10", name: "Cold Brew Artesanal", type: "Líquido Concentrado", torra: "Média", peso: "300ml", moagem: "Infusão", price: "16,90", image: "img/coldbrew.jpg", thumb2: "https://unsplash.com", thumb3: "https://unsplash.com", desc: "Infusão a frio extraída por 18 horas, com sabor altamente cafeinado e refrescante." },
-                { id: "11", name: "Café Baunilha Francesa", type: "Aromatizado", torra: "Média", peso: "250g", moagem: "Média", price: "38,95", image: "img/baunilha.jpg", thumb2: "https://unsplash.com", thumb3: "https://unsplash.com", desc: "Deliciosa combinação de óleos essenciais de baunilha com grãos nobres selecionados." }
+            var bancoCompleto = [
+                { id: "1", name: "Café Especial Bourbon Amarelo (Grãos)", type: "100% Arábica", torra: "Média", peso: "250g", moagem: "Média", price: "32,90", image: "./img/bourbon.jpg", desc: "Café 100% Arábica com notas carameladas e sabor encorpado. Perfeito para quem aprecia um café equilibrado e aromático." },
+                { id: "2", name: "Café Gourmet 100% Arábica (Moído)", type: "100% Arábica", torra: "Média-Clara", peso: "250g", moagem: "Fina", price: "28,90", image: "./img/arabica.jpg", desc: "Blend exclusivo de grãos Arábica com notas marcantes de castanhas e chocolate ao leite." },
+                { id: "13", name: "Café Tradicional Premium", type: "Blend Tradicional", torra: "Média-Escura", peso: "500g", moagem: "Média", price: "19,90", image: "./img/tradicional.jpg", desc: "Nossa torra clássica e encorpada desenvolvida para trazer o verdadeiro aconchego do café forte brasileiro." },
+                { id: "15", name: "Café Solúvel Liofilizado", type: "Arábica Solúvel", torra: "Média", peso: "100g", moagem: "Instantâneo", price: "22,90", image: "./img/soluvel.jpg", desc: "Processo de congelamento a vácuo que preserva integralmente o aroma original do grão Arábica fresco." },
+                { id: "3", name: "Café Orgânico Sustentável", type: "Orgânico Puro", torra: "Média", peso: "250g", moagem: "Média", price: "34,90", image: "./img/organico.jpg", desc: "Grãos ecológicos produzidos sem defensivos agrícolas, com notas de mel e acidez equilibrada." },
+                { id: "7", name: "Café Descafeinado Suave", type: "Arábica", torra: "Clara", peso: "250g", moagem: "Fina", price: "29,90", image: "./img/descafeinado.jpg", desc: "Remoção natural da cafeína com água que preserva integralmente os aromas originais adocicados." },
+                { id: "14", name: "Café Premium Torra Escura", type: "Arábica Intenso", torra: "Escura", peso: "250g", moagem: "Grossa", price: "39,90", image: "./img/premium-escura.jpg", desc: "Uma torra acentuada de sabor forte com retrogosto prolongado de cacau puro." },
+                { id: "4", name: "Kit Degustação Exclusivo", type: "Vários Blends", torra: "Variada", peso: "3x 100g", moagem: "Média", price: "49,90", image: "./img/kit-degustacao.jpg", desc: "Experimente 3 variedades exclusivas de nossos micro-lotes para expandir seus horizontes." },
+                { id: "5", name: "Cápsulas Café Intenso", type: "Nespresso Comp.", torra: "Escura", peso: "10 un", moagem: "Cápsula", price: "24,50", image: "./img/capsulas.jpg", desc: "Intensidade máxima e crema densa persistente compatível com sistemas Nespresso." },
+                { id: "6", name: "Café Especial Geisha Raro", type: "Geisha", torra: "Clara", peso: "150g", moagem: "Média", price: "68,00", image: "./img/geisha.jpg", desc: "Micro-lote raríssimo com notas altamente florais de jasmim e acidez cítrica sublime." },
+                { id: "8", name: "Moedor de Café Manual", type: "Acessório", torra: "N/A", peso: "450g", moagem: "Cerâmica", price: "89,90", image: "./img/moedor.jpg", desc: "Moinho manual de cerâmica cônica ajustável para garantir grãos moídos na hora perfeitos." },
+                { id: "9", name: "Café Jacu Bird Exótico", type: "Exótico", torra: "Média", peso: "125g", moagem: "Média", price: "145,00", image: "./img/jacu.jpg", desc: "Frutos selecionados biologicamente pelo pássaro Jacu nas montanhas do ES. Bebida refinada e única." },
+                { id: "10", name: "Cold Brew Artesanal", type: "Líquido Concentrado", torra: "Média", peso: "300ml", moagem: "Infusão", price: "16,90", image: "./img/coldbrew.jpg", desc: "Infusão a frio extraída por 18 horas, com sabor altamente cafeinado e refrescante." },
+                { id: "11", name: "Café Baunilha Francesa", type: "Aromatizado", torra: "Média", peso: "250g", moagem: "Média", price: "38,95", image: "./img/baunilha.jpg", desc: "Deliciosa combinação de óleos essenciais de baunilha com grãos nobres selecionados." }
             ];
 
-            // Força a lista atualizada para as outras abas usarem
             localStorage.setItem("cafeteria_produtos_admin", JSON.stringify(bancoCompleto));
 
-            // Procura o item clicado (Aqui o nome da variável é único e limpo)
-            const produtoSelecionado = bancoCompleto.find(p => String(p.id) === String(idBuscado));
-            if (!produtoSelecionado) return;
-
-            // Injeta os dados nas tags correspondentes
-            document.getElementById("detail-product-name").textContent = produtoSelecionado.name;
-            document.getElementById("detail-product-price").textContent = "R$ " + produtoSelecionado.price;
-            document.getElementById("detail-product-description").textContent = produtoSelecionado.desc;
-            document.getElementById("spec-tipo").textContent = produtoSelecionado.type;
-            document.getElementById("spec-torra").textContent = produtoSelecionado.torra;
-            document.getElementById("spec-peso").textContent = produtoSelecionado.peso;
-            document.getElementById("spec-moagem").textContent = produtoSelecionado.moagem;
+            var produtoSelecionado = bancoCompleto.find(function(p) { return String(p.id) === String(idBuscado); });
             
-            // Sincroniza as fotos locais e as miniaturas extras
-            document.getElementById("detail-product-image").src = produtoSelecionado.image;
-            document.getElementById("thumb-img-1").src = produtoSelecionado.image;
-            document.getElementById("thumb-img-2").src = produtoSelecionado.thumb2 || produtoSelecionado.image;
-            document.getElementById("thumb-img-3").src = produtoSelecionado.thumb3 || produtoSelecionado.image;
+            if (produtoSelecionado) {
+                document.getElementById("detail-product-name").textContent = produtoSelecionado.name;
+                document.getElementById("detail-product-price").textContent = "R$ " + produtoSelecionado.price;
+                document.getElementById("detail-product-description").textContent = produtoSelecionado.desc;
+                document.getElementById("spec-tipo").textContent = produtoSelecionado.type;
+                document.getElementById("spec-torra").textContent = produtoSelecionado.torra;
+                document.getElementById("spec-peso").textContent = produtoSelecionado.peso;
+                document.getElementById("spec-moagem").textContent = produtoSelecionado.moagem;
+                
+                document.getElementById("detail-product-image").src = produtoSelecionado.image;
+                document.getElementById("thumb-img-1").src = produtoSelecionado.image;
+                document.getElementById("thumb-img-2").src = produtoSelecionado.image;
+                document.getElementById("thumb-img-3").src = produtoSelecionado.image;
+            }
 
-            // Configura o clique do botão de adicionar ao carrinho
-            const btnComprar = document.getElementById("btn-detail-buy");
-            if (btnComprar) {
-                btnComprar.onclick = function() {
-                    let carrinho = JSON.parse(localStorage.getItem("cafeteria_carrinho")) || [];
-                    const inputQtd = document.getElementById("product-quantity-input");
-                    const qtdVal = inputQtd ? (parseInt(inputQtd.value) || 1) : 1;
-                    
-                    let exist = carrinho.find(x => x.id === produtoSelecionado.id);
-                    if (exist) { 
-                        exist.quantity += qtdVal; 
-                    } else {
-                        carrinho.push({ 
-                            id: produtoSelecionado.id, 
-                            name: produtoSelecionado.name, 
-                            price: parseFloat(produtoSelecionado.price.replace(",", ".")),
-image: produtoSelecionado.image,
-quantity: qtdVal
-});
-}
-localStorage.setItem("cafeteria_carrinho", JSON.stringify(carrinho));
-btnComprar.innerHTML = "✓ Adicionado com Sucesso!";
-btnComprar.style.backgroundColor = "#28a745";
-setTimeout(() => {
-btnComprar.innerHTML = ' Adicionar ao carrinho';
-btnComprar.style.backgroundColor = "#2b170f";
-}, 2000);
-};
-}
-};
+            var btn = document.getElementById("btn-detail-buy");
+            if (btn && produtoSelecionado) {
+                btn.onclick = function() {
+                    let c = JSON.parse(localStorage.getItem("cafeteria_carrinho")) || [];
+                    var inputQtd = document.getElementById("product-quantity-input");
+                    var qtd = inputQtd ? (parseInt(inputQtd.value) || 1) : 1;
+                    let exist = c.find(function(x) { return x.id === produtoSelecionado.id; });
+                    if (exist) { exist.quantity += qtd; } else {
+                        c.push({ id: produtoSelecionado.id, name: produtoSelecionado.name, price: parseFloat(produtoSelecionado.price.replace(",", ".")), image: produtoSelecionado.image, quantity: qtd });
+                    }
+                    localStorage.setItem("cafeteria_carrinho", JSON.stringify(c));
+                    btn.innerHTML = "✓ Adicionado com Sucesso!";
+                    btn.style.backgroundColor = "#28a745";
+                    setTimeout(function() { btn.innerHTML = '<i class="fas fa-shopping-cart"></i> Adicionar ao carrinho'; btn.style.backgroundColor = "#2b170f"; }, 2000);
+                };
+            }
+        }
+
+        // Execução amarrada de forma limpa e compatível com navegadores antigos e novos
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", inicializarDetalhesBarista);
+        } else {
+            inicializarDetalhesBarista();
+        }
+    </script>
