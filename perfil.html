@@ -47,10 +47,17 @@
                 </div>
             </div>
             
+            <!-- COLUNA DE AÇÕES DA DIREITA -->
             <div class="profile-actions-right">
-                <button type="button" class="btn-profile-edit" onclick="abrirModalEdicao()"><i class="far fa-edit"></i> Editar Perfil</button>
-                <button type="button" class="btn-profile-logout"><i class="fas fa-sign-out-alt"></i> Sair da Conta</button>
+                <!-- BOTÃO CONFIGURADO COM DIRECIONAMENTO PARA ADMIN-PERFIL.HTML -->
+                <button type="button" class="btn-profile-edit" onclick="window.location.href='./admin-perfil.html'">
+                    <i class="far fa-edit"></i> Editar Perfil
+                </button>
+                <button type="button" class="btn-profile-logout" onclick="window.location.href='./index.html'">
+                    <i class="fas fa-sign-out-alt"></i> Sair da Conta
+                </button>
             </div>
+
         </section>
 
         <!-- CARD 2: HISTÓRICO DE PEDIDOS (IDÊNTICO AO DESIGN) -->
