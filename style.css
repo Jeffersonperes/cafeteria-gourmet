@@ -2384,3 +2384,33 @@ box-shadow: none;
     .main-img-container { height: 320px !important; }
     .details-wrapper { padding: 0 20px !important; margin: 20px auto !important; }
 }
+
+/* ==========================================================================
+   AJUSTE DE TAMANHO DAS IMAGENS DO HISTÓRICO (PADRÃO FIDELIDADE DESIGN)
+   ========================================================================== */
+
+/* Força a caixinha da foto a manter o tamanho de um quadrado perfeito pequeno */
+.order-img-box {
+    width: 65px !important;
+    height: 65px !important;
+    max-width: 65px !important;
+    max-height: 65px !important;
+    background-color: #faf9f7 !important;
+    border-radius: 10px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important; /* Impede o navegador de esmagar o quadrado */
+    border: 1px solid rgba(60, 36, 25, 0.05) !important;
+    overflow: hidden !important;
+}
+
+/* Força a imagem física a se enquadrar perfeitamente dentro dos 65px sem vazar */
+.order-img-box img {
+    width: auto !important;
+    height: auto !important;
+    max-width: 85% !important;  /* Deixa uma margem interna elegante */
+    max-height: 85% !important; /* Impede a foto de ficar gigante ou esticada */
+    object-fit: contain !important; /* Garante a proporção perfeita do pacote de café */
+    display: block !important;
+}
