@@ -67,69 +67,83 @@
                 <a href="#" class="view-all-link">Ver todos <i class="fas fa-chevron-right"></i></a>
             </div>
 
+            <!-- CONTAINER DO HISTÓRICO DE PEDIDOS COM IMAGENS REAIS VINCULADAS -->
             <div class="orders-list-container">
                 
-                <!-- PEDIDO 1: ENTREGUE -->
+                <!-- PEDIDO 1: CAFÉ ESPECIAL BOURBON (IMAGEM 1) -->
                 <div class="order-item-row">
-                    <div class="order-img-box"><img src="./img/bourbon.jpg" alt="Café"></div>
+                    <div class="order-img-box">
+                        <img src="./img/imagem-1.jpg" alt="Café Especial Bourbon">
+                    </div>
                     <div class="order-info-block">
                         <h4>Pedido #C-2026-00123</h4>
                         <p class="order-meta"><i class="far fa-calendar"></i> 15/05/2026 às 10:30</p>
-                        <p class="order-total"><i class="far fa-money-bill-alt"></i> Total: <strong>R$ 135,50</strong></p>
+                        <p class="order-total"><i class="far fa-money-bill-alt"></i> Total: <strong>R$ 32,90</strong></p>
                     </div>
                     <div class="order-status-block">
                         <span class="status-label">Status</span>
                         <span class="badge-status delivered"><i class="far fa-check-circle"></i> Entregue</span>
                     </div>
-                    <button type="button" class="btn-order-details">Ver detalhes</button>
+                    <button type="button" class="btn-order-details" onclick="window.location.href='./detalhes.html?id=1'">Ver produto</button>
                 </div>
 
-                <!-- PEDIDO 2: EM TRANSPORTE -->
+                <!-- PEDIDO 2: CAFÉ GOURMET 100% ARÁBICA (IMAGEM 2) -->
                 <div class="order-item-row">
-                    <div class="order-img-box"><img src="./img/arabica.jpg" alt="Café"></div>
+                    <div class="order-img-box">
+                        <img src="./img/imagem-2.jpg" alt="Café Gourmet">
+                    </div>
                     <div class="order-info-block">
                         <h4>Pedido #C-2026-00105</h4>
                         <p class="order-meta"><i class="far fa-calendar"></i> 02/05/2026 às 14:15</p>
-                        <p class="order-total"><i class="far fa-money-bill-alt"></i> Total: <strong>R$ 57,80</strong></p>
+                        <p class="order-total"><i class="far fa-money-bill-alt"></i> Total: <strong>R$ 28,90</strong></p>
                     </div>
                     <div class="order-status-block">
                         <span class="status-label">Status</span>
                         <span class="badge-status shipping"><i class="fas fa-truck"></i> Em transporte</span>
                     </div>
-                    <button type="button" class="btn-order-details">Ver detalhes</button>
+                    <button type="button" class="btn-order-details" onclick="window.location.href='./detalhes.html?id=2'">Ver produto</button>
                 </div>
 
-                <!-- PEDIDO 3: PROCESSANDO -->
+                <!-- PEDIDO 3: CAFÉ TRADICIONAL PREMIUM (IMAGEM 5) -->
                 <div class="order-item-row">
-                    <div class="order-img-box"><img src="./img/organico.jpg" alt="Café"></div>
+                    <div class="order-img-box">
+                        <img src="./img/imagem-5.jpg" alt="Café Tradicional Premium">
+                    </div>
                     <div class="order-info-block">
                         <h4>Pedido #C-2026-00087</h4>
                         <p class="order-meta"><i class="far fa-calendar"></i> 20/04/2026 às 09:45</p>
-                        <p class="order-total"><i class="far fa-money-bill-alt"></i> Total: <strong>R$ 34,90</strong></p>
+                        <p class="order-total"><i class="far fa-money-bill-alt"></i> Total: <strong>R$ 19,90</strong></p>
                     </div>
                     <div class="order-status-block">
                         <span class="status-label">Status</span>
                         <span class="badge-status processing"><i class="far fa-clock"></i> Processando</span>
                     </div>
-                    <button type="button" class="btn-order-details">Ver detalhes</button>
+                    <div class="order-status-block">
+                        <span class="status-label">Status</span>
+                        <span class="badge-status processing"><i class="far fa-clock"></i> Processando</span>
+                    </div>
+                    <button type="button" class="btn-order-details" onclick="window.location.href='./detalhes.html?id=13'">Ver produto</button>
                 </div>
 
-                <!-- PEDIDO 4: ENTREGUE -->
+                <!-- PEDIDO 4: CAFÉ SOLÚVEL LIOFILIZADO (IMAGEM 7) -->
                 <div class="order-item-row">
-                    <div class="order-img-box"><img src="./img/tradicional.jpg" alt="Café"></div>
+                    <div class="order-img-box">
+                        <img src="./img/imagem-7.jpg" alt="Café Solúvel Liofilizado">
+                    </div>
                     <div class="order-info-block">
                         <h4>Pedido #C-2026-00065</h4>
                         <p class="order-meta"><i class="far fa-calendar"></i> 10/04/2026 às 16:20</p>
-                        <p class="order-total"><i class="far fa-money-bill-alt"></i> Total: <strong>R$ 29,90</strong></p>
+                        <p class="order-total"><i class="far fa-money-bill-alt"></i> Total: <strong>R$ 22,90</strong></p>
                     </div>
                     <div class="order-status-block">
                         <span class="status-label">Status</span>
                         <span class="badge-status delivered"><i class="far fa-check-circle"></i> Entregue</span>
                     </div>
-                    <button type="button" class="btn-order-details">Ver detalhes</button>
+                    <button type="button" class="btn-order-details" onclick="window.location.href='./detalhes.html?id=15'">Ver produto</button>
                 </div>
 
             </div>
+
         </section>
     </div>
 
