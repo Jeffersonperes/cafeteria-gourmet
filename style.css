@@ -2416,54 +2416,62 @@ box-shadow: none;
 }
 
 /* ==========================================================================
-   ALINHAMENTO VERTICAL DA COLUNA DE STATUS DO HISTÓRICO
+   ESTILIZAÇÃO DE CORES DOS STATUS E BOTÕES (PADRÃO FIDELIDADE DESIGN)
    ========================================================================== */
 
-/* Fixa a largura da caixinha de status para que fiquem todas simétricas */
+/* 1. CONFIGURAÇÃO GERAL DA COLUNA DE STATUS */
 .order-status-block {
-    flex: 1 !important;
-    min-width: 150px !important;
-    max-width: 180px !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: flex-start !important;
     justify-content: center !important;
     gap: 4px !important;
+    min-width: 130px !important;
 }
 
-/* Alinha a palavra cinza pequena "Status" */
 .status-label {
     font-size: 11px !important;
-    color: #a08a80 !important;
+    color: #8a746c !important;
     font-weight: 500 !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.5px !important;
 }
 
-/* Garante o formato de pílula arredondada elegante para os badges */
+/* Base Comum para todas as pílulas de Status */
 .badge-status {
     display: inline-flex !important;
     align-items: center !important;
     gap: 6px !important;
-    padding: 6px 14px !important;
-    border-radius: 30px !important;
+    padding: 6px 16px !important;
+    border-radius: 20px !important;
     font-size: 12px !important;
     font-weight: 600 !important;
-    width: fit-content !important;
     white-space: nowrap !important;
 }
 
-/* Força as cores de sucesso, alerta e processamento */
-.badge-status.delivered { background-color: #e6f7ed !important; color: #28a745 !important; }
-.badge-status.shipping { background-color: #fff8e6 !important; color: #ff9900 !important; }
-.badge-status.processing { background-color: #e6f0fa !important; color: #0066cc !important; }
+/* 2. CORES EXATAS DE CADA BADGE DE STATUS */
+/* Status: Entregue (Verde Suave do Design) */
+.badge-status.delivered { 
+    background-color: #e2f2e9 !important; 
+    color: #2e7d32 !important; 
+}
 
-/* Mantém os botões da direita alinhados */
+/* Status: Em transporte (Amarelo/Laranja Suave do Design) */
+.badge-status.shipping { 
+    background-color: #fff3e0 !important; 
+    color: #ef6c00 !important; 
+}
+
+/* Status: Processando (Azul Suave do Design) */
+.badge-status.processing { 
+    background-color: #e3f2fd !important; 
+    color: #1565c0 !important; 
+}
+
+/* 3. BOTÕES DO HISTÓRICO ("Ver detalhes" / "Ver produto") */
 .btn-order-details {
-    background-color: #2b170f !important;
+    background-color: #2b170f !important; /* Marrom escuro do design */
     color: #ffffff !important;
     border: none !important;
-    padding: 10px 18px !important;
+    padding: 10px 22px !important;
     border-radius: 6px !important;
     font-size: 13px !important;
     font-weight: 600 !important;
@@ -2473,5 +2481,5 @@ box-shadow: none;
 }
 
 .btn-order-details:hover {
-    background-color: #1c0f0a !important;
+    background-color: #1c0f0a !important; /* Escurece suavemente no foco */
 }
