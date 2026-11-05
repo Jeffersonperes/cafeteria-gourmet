@@ -2483,3 +2483,57 @@ box-shadow: none;
 .btn-order-details:hover {
     background-color: #1c0f0a !important; /* Escurece suavemente no foco */
 }
+
+/* ==========================================================================
+   BOTÕES DE AÇÃO DO PERFIL (MOLDADOS IDENTICOS AO DESIGN)
+   ========================================================================== */
+
+/* Container da direita que agrupa os dois botões */
+.profile-actions-right {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    min-width: 220px !important;
+    box-sizing: border-box !important;
+}
+
+/* 1. BOTÃO EDITAR PERFIL (MARROM ESCURO PREMIUM) */
+.btn-profile-edit {
+    background-color: #2b170f !important; /* Marrom escuro do design */
+    color: #ffffff !important;
+    border: none !important;
+    padding: 12px 24px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    width: 100% !important;
+    text-align: center !important;
+    box-shadow: 0 4px 12px rgba(43, 23, 15, 0.15) !important;
+    transition: background-color 0.2s, transform 0.1s !important;
+    display: inline-block !important;
+}
+
+.btn-profile-edit:hover {
+    background-color: #1c0f0a !important; /* Escurece suavemente no foco */
+}
+
+/* 2. BOTÃO SAIR DA CONTA (FUNDO BRANCO COM BORDA FINA) */
+.btn-profile-logout {
+    background-color: #ffffff !important;
+    color: #2b170f !important; /* Texto em marrom escuro */
+    border: 1px solid rgba(43, 23, 15, 0.25) !important; /* Borda sutil */
+    padding: 12px 24px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    width: 100% !important;
+    text-align: center !important;
+    transition: background-color 0.2s !important;
+    display: inline-block !important;
+}
+
+.btn-profile-logout:hover {
+    background-color: #faf9f7 !important; /* Efeito cinza-claro muito suave */
+}
