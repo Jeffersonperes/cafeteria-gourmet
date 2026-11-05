@@ -3,155 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cafeteria Gourmet - Alterar Meus Dados</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- CDN Oficial do Font Awesome para renderizar os ícones estruturais -->
+    <title>Cafeteria Gourmet - Painel Administrativo do Perfil</title>
+    <!-- Chamada oficial do arquivo de estilos separado -->
+    <link rel="stylesheet" href="./style.css">
+    <!-- Font Awesome para os ícones reais do design -->
     <link rel="stylesheet" href="https://cloudflare.com">
 </head>
-<body>
+<body class="admin-body-bg">
 
-        <!-- NAVBAR (Topo Escuro Padronizado e Idêntico ao Design) -->
-    <header class="navbar" style="display: flex; align-items: center; justify-content: space-between; padding: 20px 8%; background-color: #1c0f0a; border-bottom: 1px solid rgba(223, 206, 184, 0.1);">
-        
-        <!-- Logo do Lado Esquerdo -->
-        <div class="logo" style="display: flex; align-items: center; gap: 12px; cursor: pointer;" onclick="window.location.href='index.html'">
-            <i class="fas fa-coffee" style="font-size: 24px; color: #DFCEB8;"></i>
-            <span style="font-family: 'Playfair Display', serif; color: #ffffff; font-weight: bold; font-size: 16px; letter-spacing: 0.5px; line-height: 1.1;">
-                CAFETERIA<br><small style="font-size: 10px; letter-spacing: 2px; color: #DFCEB8; display: block;">GOURMET</small>
-            </span>
+    <!-- NAVBAR (Topo Escuro Premium Sincronizado) -->
+    <header class="navbar">
+        <div class="logo" onclick="window.location.href='./index.html'">
+            <span>☕</span>
+            <span>CAFETERIA<br><small>GOURMET</small></span>
         </div>
-        
-        <!-- Menu Central/Direito com Ícones Finos e Precisos -->
-        <nav class="nav-menu" id="nav-menu" style="display: flex; align-items: center; gap: 30px;">
-            <a href="index.html" class="active" style="color: #ffffff; text-decoration: none; font-size: 14px; display: inline-flex; align-items: center; gap: 8px;">
-                <i class="far fa-home"></i> Início
-            </a>
-            <a href="produtos.html" style="color: #DFCEB8; text-decoration: none; font-size: 14px; display: inline-flex; align-items: center; gap: 8px;">
-                <i class="far fa-shopping-bag"></i> Produtos
-            </a>
-            <a href="carrinho.html" class="cart-link" style="color: #DFCEB8; text-decoration: none; font-size: 14px; display: inline-flex; align-items: center; gap: 8px;">
-                <i class="far fa-shopping-cart"></i> Carrinho <span class="cart-badge" style="background-color: #DFCEB8; color: #1c0f0a; padding: 2px 7px; border-radius: 50%; font-size: 11px; font-weight: bold; margin-left: 2px;">2</span>
-            </a>
-            <a href="perfil.html" style="color: #DFCEB8; text-decoration: none; font-size: 14px; display: inline-flex; align-items: center; gap: 8px;">
-                <i class="far fa-user"></i> Perfil
-            </a>
+        <nav class="nav-menu">
+            <a href="./index.html"><i class="fas fa-home"></i> Início</a>
+            <a href="./produtos.html"><i class="fas fa-shopping-bag"></i> Produtos</a>
+            <a href="./carrinho.html"><i class="fas fa-shopping-cart"></i> Carrinho</a>
+            <a href="./perfil.html" class="active"><i class="fas fa-user"></i> Perfil</a>
         </nav>
-
-        <!-- Botão Hamburguer Mobile invisível no PC -->
-        <button class="menu-hamburger" id="menu-hamburger" type="button" onclick="toggleMenuMobile()" style="display: none;">☰</button>
     </header>
 
-    <!-- FORMULÁRIO DE ALTERAÇÃO COMPLETA DE DADOS -->
-    <main class="checkout-wrapper" style="margin-top: 30px; justify-content: center; padding: 0 8%;">
-        <div class="checkout-left-column" style="flex: 1; max-width: 750px; margin: 0 auto;">
-            <div class="checkout-section-card">
-                <h2 style="font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 25px;">
-                    <i class="fas fa-user-edit" style="color: var(--accent-gold);"></i> Alterar Meus Dados Cadastrais
-                </h2>
-                
-                <form class="checkout-form" id="form-alterar-perfil-completo">
-                    
-                    <!-- SEÇÃO 1: DADOS PESSOAIS -->
-                    <div class="form-row split-half">
-                        <div class="form-group">
-                            <label for="edit-nome">Nome Completo</label>
-                            <input type="text" id="edit-nome" required>
-                        </div>
-                        <div class="form-group input-phone-width">
-                            <label for="edit-telefone">Telefone de Contato</label>
-                            <input type="tel" id="edit-telefone" placeholder="(61) 99999-9999" maxlength="15" required>
-                        </div>
-                    </div>
-
-                    <div class="form-row full-width">
-                        <div class="form-group">
-                            <label for="edit-email">E-mail de Acesso da Conta</label>
-                            <input type="email" id="edit-email" placeholder="name@gmail.com" required>
-                        </div>
-                    </div>
-
-                    <!-- SEÇÃO 2: ENDEREÇO DE ENTREGA -->
-                    <h2 style="font-size: 15px; margin-top: 25px; border-top: 1px solid var(--border-color); padding-top: 20px; font-family: 'Playfair Display', serif;">
-                        <i class="fas fa-map-marked-alt" style="color: var(--accent-gold);"></i> Endereço de Entrega Principal
-                    </h2>
-                    <div class="form-row split-half">
-                        <div class="form-group">
-                            <label for="edit-cep">CEP</label>
-                            <input type="text" id="edit-cep" placeholder="70000-000" maxlength="9" required>
-                        </div>
-                        <div class="form-group" style="flex: 2;">
-                            <label for="edit-endereco">Rua, Número, Complemento e Bairro</label>
-                            <input type="text" id="edit-endereco" placeholder="Ex: Rua das Flores, 123 - Centro" required>
-                        </div>
-                    </div>
-
-                    <!-- SEÇÃO 3: DADOS CARTÃO DE CRÉDITO -->
-                    <h2 style="font-size: 15px; margin-top: 25px; border-top: 1px solid var(--border-color); padding-top: 20px; font-family: 'Playfair Display', serif;">
-                        <i class="far fa-credit-card" style="color: var(--accent-gold);"></i> Cartão de Crédito de Preferência
-                    </h2>
-                    <div class="form-row full-width">
-                        <div class="form-group">
-                            <label for="edit-cartao-numero">Número do Cartão</label>
-                            <input type="text" id="edit-cartao-numero" placeholder="0000 0000 0000 0000" maxlength="19">
-                        </div>
-                    </div>
-                    <div class="form-row split-half">
-                        <div class="form-group">
-                            <label for="edit-cartao-validade">Validade (MM/AA)</label>
-                            <input type="text" id="edit-cartao-validade" placeholder="MM/AA" maxlength="5">
-                        </div>
-                        <div class="form-group">
-                            <label for="edit-cartao-nome">Nome do Titular (Igual no Cartão)</label>
-                            <input type="text" id="edit-cartao-nome" placeholder="EX: LUCAS O OLIVEIRA">
-                        </div>
-                    </div>
-
-                    <!-- BOTÕES DE AÇÃO FLUIDOS -->
-                    <div style="display: flex; gap: 15px; margin-top: 35px; width: 100%;">
-                        <button type="button" class="btn-finalize-checkout" onclick="window.location.href='perfil.html'" style="background: transparent; color: var(--text-dark); border: 1px solid var(--border-color); width: 150px; cursor: pointer;">Cancelar</button>
-                        <button type="submit" class="btn-finalize-checkout" style="flex: 1; cursor: pointer;">Salvar Todas as Alterações</button>
-                    </div>
-
-                </form>
+    <!-- WRAPPER CENTRAL DO PAINEL ADMIN -->
+    <div class="admin-page-wrapper">
+        
+        <!-- BARRA LATERAL ADMIN (MENU DE OPÇÕES) -->
+        <aside class="admin-sidebar">
+            <div class="admin-sidebar-profile">
+                <!-- Área Dinâmica do Avatar (Aceita imagem ou mantém o bonequinho) -->
+                <div class="profile-avatar-circle" id="admin-avatar-preview-box">
+                    <i class="fas fa-user" id="admin-avatar-placeholder-icon"></i>
+                    <img id="admin-avatar-img" src="" alt="Foto do Cliente" style="display: none; width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <h3 id="sidebar-user-name">Administrador</h3>
+                <span class="access-level-text">Nível de Acesso: Cliente</span>
             </div>
-        </div>
-    </main>
+            
+            <nav class="admin-sidebar-menu">
+                <ul>
+                    <li><a href="./perfil.html" class="link-back"><i class="fas fa-arrow-left"></i> Voltar ao Perfil</a></li>
+                    <li><a href="#" class="link-active"><i class="fas fa-user-cog"></i> Dados Cadastrais</a></li>
+                    <li><a href="./meus-pedidos.html"><i class="fas fa-boxes"></i> Meus Pedidos</a></li>
+                </ul>
+            </nav>
+        </aside>
 
-        <!-- SEÇÃO DE DIFERENCIAIS (Barra Bege Logo Abaixo dos Produtos) -->
-    <section class="features-bar" style="background-color: #f7f4f0; display: flex; justify-content: space-between; align-items: center; padding: 25px 8%; border-top: 1px solid rgba(60, 36, 25, 0.05); gap: 20px; flex-wrap: wrap;">
-        <div class="feature-item" style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: #3c2419;">
-            <i class="far fa-truck" style="font-size: 18px; color: #3c2419;"></i>
-            <span>Entrega rápida e segura</span>
-        </div>
-        <div class="feature-item" style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: #3c2419;">
-            <i class="far fa-badge-check" style="font-size: 18px; color: #3c2419;"></i>
-            <span>Cafés selecionados com qualidade</span>
-        </div>
-        <div class="feature-item" style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: #3c2419;">
-            <i class="far fa-shield-check" style="font-size: 18px; color: #3c2419;"></i>
-            <span>Pagamento 100% seguro</span>
-        </div>
-        <div class="feature-item" style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: #3c2419;">
-            <i class="far fa-comments" style="font-size: 18px; color: #3c2419;"></i>
-            <span>Atendimento especializado</span>
-        </div>
-    </section>
+        <!-- CONTEÚDO PRINCIPAL: FORMULÁRIO DE GERENCIAMENTO -->
+        <main class="admin-main-content">
+            <div class="admin-content-header">
+                <h2>Alterar Dados Cadastrais</h2>
+                <p>Mantenha suas informações de faturamento, entrega e foto de perfil updated.</p>
+            </div>
 
-    <!-- RODAPÉ MESTRE (Idêntico ao Rodapé da Foto) -->
-    <footer class="footer" style="background-color: #f7f4f0; border-top: 1px solid rgba(60, 36, 25, 0.1); display: flex; align-items: center; justify-content: space-between; padding: 25px 8%; flex-wrap: wrap; gap: 20px;">
-        <div class="footer-brand" style="display: flex; align-items: center; gap: 10px; font-family: 'Playfair Display', serif; font-weight: bold; font-size: 14px; color: #1c0f0a; letter-spacing: 1px;">
-            <i class="fas fa-coffee" style="font-size: 16px; color: #1c0f0a;"></i>
-            <span>CAFETERIA GOURMET</span>
-        </div>
-        
-        <div class="footer-contact" style="font-size: 13px; color: #3c2419; font-weight: 500;">
-            <a href="mailto:contato@cafeteriagourmet.com.br" style="color: #3c2419; text-decoration: none;">contato@cafeteriagourmet.com.br</a>
-        </div>
-        
-        <div class="footer-social" style="display: flex; align-items: center; gap: 18px;">
-            <a href="#" style="color: #1c0f0a; font-size: 18px; text-decoration: none;"><i class="fab fa-instagram"></i></a>
-            <a href="#" style="color: #1c0f0a; font-size: 18px; text-decoration: none;"><i class="fab fa-facebook-f"></i></a>
-        </div>
+            <!-- FEEDBACK EM BANNER (OCULTO POR PADRÃO) -->
+            <div id="admin-alert-banner" class="alert-banner-success" style="display: none;">
+                <i class="far fa-check-circle"></i> Dados gravados com sucesso no banco local!
+            </div>
+
+            <!-- FORMULÁRIO OPERACIONAL COMPLETO -->
+            <form id="form-admin-perfil" class="admin-profile-form">
+                
+                <!-- BLOCO: SELEÇÃO DE FOTO DO CLIENTE -->
+                <div class="form-section-title">Foto de Perfil</div>
+                <div class="form-row">
+                    <div class="form-group file-group">
+                        <label for="admin-input-file" class="custom-file-upload">
+                            <i class="fas fa-camera"></i> Escolher foto do cliente...
+                        </label>
+                        <input type="file" id="admin-input-file" accept="image/*" onchange="processarUploadFotoCliente(this)">
+                        <span id="file-name-label" style="font-size: 12px; color: #6e5b53; margin-top: 4px; display: block;">Nenhum arquivo selecionado</span>
+                    </div>
+                </div>
+
+                <!-- BLOCO: INFORMAÇÕES PESSOAIS -->
+                <div class="form-section-title">Informações Pessoais</div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="admin-input-name">Nome Completo</label>
+                        <input type="text" id="admin-input-name" placeholder="Digite seu nome completo">
+                    </div>
+                    <div class="form-group">
+                        <label for="admin-input-email">E-mail de Contato</label>
+                        <input type="email" id="admin-input-email" placeholder="nome@exemplo.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="admin-input-phone">Telefone / WhatsApp</label>
+                        <input type="text" id="admin-input-phone" placeholder="(00) 00000-0000">
+                    </div>
+                </div>
+
+                <!-- BLOCO: ENDEREÇO SEPARADO E DETALHADO -->
+                <div class="form-section-title">Endereço de Entrega Detalhado</div>
+                <div class="form-row">
+                    <div class="form-group flex-2">
+                        <label for="admin-input-logradouro">Rua / Logradouro / Avenida</label>
+                        <input type="text" id="admin-input-logradouro" placeholder="Ex: Avenida Paulista">
+                    </div>
+                    <div class="form-group flex-0-5">
+                        <label for="admin-input-numero">Número</label>
+                        <input type="text" id="admin-input-numero" placeholder="123">
+                    </div>
+                    <div class="form-group">
+                        <label for="admin-input-complemento">Complemento</label>
+                        <input type="text" id="admin-input-complemento" placeholder="Ex: Apto 42 / Bloco B">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="admin-input-bairro">Bairro</label>
+                        <input type="text" id="admin-input-bairro" placeholder="Ex: Bela Vista">
+                    </div>
+                    <div class="form-group">
+                        <label for="admin-input-cidade">Cidade</label>
+                        <input type="text" id="admin-input-cidade" placeholder="Ex: São Paulo">
+                    </div>
+                    <div class="form-group flex-0-5">
+                        <label for="admin-input-estado">Estado (UF)</label>
+                        <input type="text" id="admin-input-estado" maxlength="2" placeholder="SP">
+                    </div>
+                    <div class="form-group">
+                        <label for="admin-input-cep">CEP</label>
+                        <input type="text" id="admin-input-cep" placeholder="00000-0000">
+                    </div>
+                </div>
+
+                <!-- LINHA DE AÇÕES -->
+                <div class="form-actions-row">
+                    <button type="button" class="btn-admin-save" onclick="atualizarDadosCadastraisAdmin()">
+                        Gravar Informações
+                    </button>
+                    <button type="button" class="btn-admin-cancel" onclick="window.location.href='./perfil.html'">
+                        Cancelar
+                    </button>
+                </div>
+            </form>
+        </main>
+    </div>
+
+    <!-- RODAPÉ MESTRE -->
+    <footer class="footer">
+        <div class="footer-brand"><i class="fas fa-coffee"></i> CAFETERIA GOURMET</div>
+        <div class="footer-contact"><a href="mailto:contato@cafeteriagourmet.com.br">contato@cafeteriagourmet.com.br</a></div>
     </footer>
 
     <!-- CONEXÃO COMPLETA DA INTELIGÊNCIA EM JAVASCRIPT -->
