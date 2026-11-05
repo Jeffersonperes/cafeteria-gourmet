@@ -1425,7 +1425,7 @@ function inicializarPaginaDetalhesDinamica() {
 }
 
 /* ==========================================================================
-   LOGICA DINÂMICA PAINEL ADMINISTRATIVO: GESTÃO DE FOTO E ENDEREÇO SEPARADO
+   LOGICA DINÂMICA PAINEL ADMINISTRATIVO: DISPARADOR DE BANNER DE FEEDBACK
    ========================================================================== */
 
 var fotoBase64Global = "";
@@ -1503,12 +1503,15 @@ function atualizarDadosCadastraisAdmin() {
         sidebarName.textContent = nomeVal;
     }
 
+    // GATILHO DO BANNER: Força a exibição da mensagem de sucesso na tela imediatamente
     var banner = document.getElementById("admin-alert-banner");
     if (banner) {
-        banner.style.display = "flex";
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        banner.style.setProperty("display", "flex", "important"); // Altera o display de none para flex
+        window.scrollTo({ top: 0, behavior: "smooth" }); // Sobe a tela suavemente para o usuário ver o aviso
+        
+        // Cronômetro digital: Esconde o aviso de forma automática após 3 segundos
         setTimeout(function() {
-            banner.style.display = "none";
+            banner.style.setProperty("display", "none", "important");
         }, 3000);
     }
 }
