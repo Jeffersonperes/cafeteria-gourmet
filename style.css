@@ -2537,3 +2537,308 @@ box-shadow: none;
 .btn-profile-logout:hover {
     background-color: #faf9f7 !important; /* Efeito cinza-claro muito suave */
 }
+
+/* ==========================================================================
+   9. PAINEL ADMINISTRATIVO: ADMIN-PERFIL.HTML (FIDELIDADE TOTAL AO DESIGN)
+   ========================================================================== */
+
+/* Fundo padrão para a área administrativa */
+body.admin-body-bg {
+    background-color: #f7f4f0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 100vh !important;
+}
+
+/* Container Master: Divide a tela em duas colunas (Menu na esquerda, Form na direita) */
+.admin-page-wrapper {
+    max-width: 1150px !important;
+    width: 100% !important;
+    margin: 40px auto !important;
+    padding: 0 20px !important;
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 30px !important;
+    box-sizing: border-box !important;
+    align-items: flex-start !important;
+}
+
+/* BARRA LATERAL ADMINISTRATIVA (ESQUERDA) */
+.admin-sidebar {
+    flex: 0 0 280px !important;
+    width: 280px !important;
+    background-color: #ffffff !important;
+    padding: 30px 20px !important;
+    border-radius: 12px !important;
+    border: 1px solid rgba(60, 36, 25, 0.05) !important;
+    box-shadow: 0 4px 20px rgba(60, 36, 25, 0.02) !important;
+    box-sizing: border-box !important;
+}
+
+.admin-sidebar-profile {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    margin-bottom: 25px !important;
+    border-bottom: 1px solid rgba(60, 36, 25, 0.08) !important;
+    padding-bottom: 20px !important;
+    width: 100% !important;
+}
+
+/* Avatar redondo cinza */
+.admin-sidebar-profile .profile-avatar-circle {
+    width: 85px !important;
+    height: 85px !important;
+    background-color: #e2e8f0 !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border: 2px solid #dfceb8 !important;
+    overflow: hidden !important;
+    margin-bottom: 12px !important;
+}
+
+.admin-sidebar-profile .profile-avatar-circle i {
+    font-size: 42px !important;
+    color: #94a3b8 !important;
+    margin-top: 10px !important;
+}
+
+.admin-sidebar-profile h3 {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    color: #1c0f0a !important;
+    margin: 0 0 4px 0 !important;
+}
+
+.access-level-text {
+    font-size: 11px !important;
+    color: #8a746c !important;
+    font-weight: 500 !important;
+}
+
+/* Menu de navegação interno da sidebar */
+.admin-sidebar-menu ul {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    width: 100% !important;
+}
+
+.admin-sidebar-menu a {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    padding: 12px 15px !important;
+    color: #3c2419 !important;
+    text-decoration: none !important;
+    font-size: 14px !important;
+    border-radius: 6px !important;
+    font-weight: 500 !important;
+    transition: background 0.2s !important;
+}
+
+.admin-sidebar-menu a:hover, .admin-sidebar-menu a.link-back {
+    background-color: #faf9f7 !important;
+}
+
+/* Aba ativa pintada com o marrom gourmet */
+.admin-sidebar-menu a.link-active {
+    background-color: #2b170f !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+}
+
+/* BLOCO DE CONTEÚDO DO FORMULÁRIO (DIREITA) */
+.admin-main-content {
+    flex: 1 !important;
+    background-color: #ffffff !important;
+    padding: 35px !important;
+    border-radius: 12px !important;
+    border: 1px solid rgba(60, 36, 25, 0.05) !important;
+    box-shadow: 0 4px 20px rgba(60, 36, 25, 0.02) !important;
+    box-sizing: border-box !important;
+}
+
+.admin-content-header {
+    border-bottom: 1px solid rgba(60, 36, 25, 0.08) !important;
+    padding-bottom: 15px !important;
+    margin-bottom: 25px !important;
+}
+
+.admin-content-header h2 {
+    font-family: 'Playfair Display', Georgia, serif !important;
+    font-size: 24px !important;
+    color: #1c0f0a !important;
+    margin: 0 0 4px 0 !important;
+}
+
+.admin-content-header p {
+    font-size: 13px !important;
+    color: #6e5b53 !important;
+    margin: 0 !important;
+}
+
+/* Divisores de seção em letras maiúsculas discretas */
+.form-section-title {
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    color: #a08a80 !important;
+    letter-spacing: 1px !important;
+    margin: 25px 0 12px 0 !important;
+    border-bottom: 1px dashed rgba(60,36,25,0.1) !important;
+    padding-bottom: 4px !important;
+}
+
+.form-section-title:first-of-type {
+    margin-top: 0 !important;
+}
+
+/* Sistema de Linhas e Colunas do Formulário */
+.admin-profile-form {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+    width: 100% !important;
+}
+
+.form-row {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 20px !important;
+    width: 100% !important;
+    flex-wrap: wrap !important;
+}
+
+.form-group {
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 6px !important;
+    min-width: 200px !important;
+}
+
+/* Multiplicadores de largura proporcional */
+.form-group.flex-2 { flex: 2 !important; }
+.form-group.flex-0-5 { flex: 0.5 !important; min-width: 80px !important; }
+
+.form-group label {
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    color: #3c2419 !important;
+}
+
+/* Inputs Premium customizados */
+.form-group input[type="text"],
+.form-group input[type="email"] {
+    padding: 12px !important;
+    border: 1px solid rgba(60, 36, 25, 0.2) !important;
+    border-radius: 6px !important;
+    font-size: 14px !important;
+    outline: none !important;
+    background-color: #ffffff !important;
+    color: #3c2419 !important;
+    transition: border-color 0.2s !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+.form-group input:focus {
+    border-color: #3c2419 !important;
+}
+
+/* Customização total do botão nativo feio de escolher arquivo */
+.form-group input[type="file"] {
+    display: none !important; /* Esconde o botão cinza feio do navegador */
+}
+
+.custom-file-upload {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    background-color: #faf9f7 !important;
+    color: #3c2419 !important;
+    border: 1px dashed rgba(60, 36, 25, 0.3) !important;
+    padding: 12px 20px !important;
+    border-radius: 6px !important;
+    cursor: pointer !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    width: fit-content !important;
+    transition: background 0.2s !important;
+}
+
+.custom-file-upload:hover {
+    background-color: #f3f1ed !important;
+}
+
+/* Linha final de botões de salvar/cancelar */
+.form-actions-row {
+    display: flex !important;
+    justify-content: flex-start !important;
+    gap: 15px !important;
+    margin-top: 20px !important;
+    border-top: 1px solid rgba(60, 36, 25, 0.08) !important;
+    padding-top: 20px !important;
+}
+
+.btn-admin-save {
+    background-color: #2b170f !important;
+    color: #ffffff !important;
+    border: none !important;
+    padding: 14px 35px !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    border-radius: 6px !important;
+    cursor: pointer !important;
+    box-shadow: 0 4px 12px rgba(43, 23, 15, 0.15) !important;
+    transition: background-color 0.2s !important;
+}
+
+.btn-admin-cancel {
+    background-color: #ffffff !important;
+    color: #2b170f !important;
+    border: 1px solid rgba(43, 23, 15, 0.25) !important;
+    padding: 14px 25px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    border-radius: 6px !important;
+    cursor: pointer !important;
+    transition: background-color 0.2s !important;
+}
+
+.btn-admin-save:hover { background-color: #1c0f0a !important; }
+.btn-admin-cancel:hover { background-color: #faf9f7 !important; }
+
+/* Banner de alerta verde de sucesso */
+.alert-banner-success {
+    background-color: #e6f7ed !important;
+    color: #28a745 !important;
+    border: 1px solid rgba(40,167,69,0.2) !important;
+    padding: 12px 20px !important;
+    border-radius: 6px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    margin-bottom: 20px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    box-sizing: border-box !important;
+}
+
+/* Responsividade Mobile */
+@media (max-width: 900px) {
+    .admin-page-wrapper {
+        flex-direction: column !important;
+    }
+    .admin-sidebar {
+        width: 100% !important;
+        flex: 1 1 100% !important;
+    }
+}
