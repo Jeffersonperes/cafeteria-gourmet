@@ -1423,3 +1423,134 @@ function inicializarPaginaDetalhesDinamica() {
         imgFoto.alt = produtoEncontrado.name;
     }
 }
+
+/* ==========================================================================
+   LOGICA DINÂMICA PAINEL ADMINISTRATIVO: GESTÃO DE FOTO E ENDEREÇO SEPARADO
+   ========================================================================== */
+
+var fotoBase64Global = "";
+
+function processarUploadFotoCliente(input) {
+    if (input.files && input.files[0]) {
+        var arquivo = input.files[0];
+        var fileLabel = document.getElementById("file-name-label");
+        if (fileLabel) {
+            fileLabel.textContent = arquivo.name;
+        }
+
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            fotoBase64Global = e.target.result;
+            exibirAvatarNaTela(fotoBase64Global);
+        };
+        reader.readAsDataURL(arquivo);
+    }
+}
+
+function exibirAvatarNaTela(sourceBase64) {
+    var imgTag = document.getElementById("admin-avatar-img");
+    var iconTag = document.getElementById("admin-avatar-placeholder-icon");
+    if (imgTag && iconTag) {
+        imgTag.src = sourceBase64;
+        imgTag.style.display = "block";
+        iconTag.style.display = "none";
+    }
+}
+
+function atualizarDadosCadastraisAdmin() {
+    var nomeVal = document.getElementById("admin-input-name").value;
+    var emailVal = document.getElementById("admin-input-email").value;
+    var foneVal = document.getElementById("admin-input-phone").value;
+    
+    var logradouroVal = document.getElementById("admin-input-logradouro").value;
+    var numeroVal = document.getElementById("admin-input-numero").value;
+    var complementoVal = document.getElementById("admin-input-complemento").value;
+    var bairroVal = document.getElementById("admin-input-bairro").value;
+    var cidadeVal = document.getElementById("admin-input-cidade").value;
+    var estadoVal = document.getElementById("admin-input-estado").value;
+    var cepVal = document.getElementById("admin-input-cep").value;
+
+    var enderecoMontadoCompleto = "";
+    if (logradouroVal) {
+        enderecoMontadoCompleto = logradouroVal;
+        if (numeroVal) enderecoMontadoCompleto += ", " + numeroVal;
+        if (complementoVal) enderecoMontadoCompleto += " (" + complementoVal + ")";
+        if (bairroVal) enderecoMontadoCompleto += " - " + bairroVal;
+        if (cidadeVal) enderecoMontadoCompleto += ". " + cidadeVal;
+        if (estadoVal) enderecoMontadoCompleto += "/" + estadoVal.toUpperCase();
+        if (cepVal) enderecoMontadoCompleto += " - CEP: " + cepVal;
+    }
+
+    localStorage.setItem("perfil_nome", nomeVal || "Seu Nome");
+    localStorage.setItem("perfil_email", emailVal || "seu.email@email.com");
+    localStorage.setItem("perfil_phone", foneVal || "(00) 00000-0000");
+    localStorage.setItem("perfil_address", enderecoMontadoCompleto || "Seu endereço completo aparecerá aqui");
+    
+    localStorage.setItem("perfil_logradouro", logradouroVal);
+    localStorage.setItem("perfil_numero", numeroVal);
+    localStorage.setItem("perfil_complemento", complementoVal);
+    localStorage.setItem("perfil_bairro", bairroVal);
+    localStorage.setItem("perfil_cidade", cidadeVal);
+    localStorage.setItem("perfil_estado", estadoVal);
+    localStorage.setItem("perfil_cep", cepVal);
+
+    if (fotoBase64Global) {
+        localStorage.setItem("perfil_foto_cliente", fotoBase64Global);
+    }
+
+    var sidebarName = document.getElementById("sidebar-user-name");
+    if (sidebarName && nomeVal) {
+        sidebarName.textContent = nomeVal;
+    }
+
+    var banner = document.getElementById("admin-alert-banner");
+    if (banner) {
+        banner.style.display = "flex";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        setTimeout(function() {
+            banner.style.display = "none";
+        }, 3000);
+    }
+}
+
+function inicializarFormularioAdmin() {
+    var salvoNome = localStorage.getItem("perfil_nome");
+    var salvoEmail = localStorage.getItem("perfil_email");
+    var salvoFone = localStorage.getItem("perfil_phone");
+    var salvoLogradouro = localStorage.getItem("perfil_logradouro");
+    var salvoNumero = localStorage.getItem("perfil_numero");
+    var salvoComplemento = localStorage.getItem("perfil_complemento");
+    var salvoBairro = localStorage.getItem("perfil_bairro");
+    var salvoCidade = localStorage.getItem("perfil_cidade");
+    var salvoEstado = localStorage.getItem("perfil_estado");
+    var salvoCep = localStorage.getItem("perfil_cep");
+    var salvaFoto = localStorage.getItem("perfil_foto_cliente");
+
+    if (salvoNome) {
+        var nameInput = document.getElementById("admin-input-name");
+        var nameSidebar = document.getElementById("sidebar-user-name");
+        if (nameInput) nameInput.value = salvoNome;
+        if (nameSidebar) nameSidebar.textContent = salvoNome;
+    }
+    
+    if (salvoEmail && document.getElementById("admin-input-email")) document.getElementById("admin-input-email").value = salvoEmail;
+    if (salvoFone && document.getElementById("admin-input-phone")) document.getElementById("admin-input-phone").value = salvoFone;
+    if (salvoLogradouro && document.getElementById("admin-input-logradouro")) document.getElementById("admin-input-logradouro").value = salvoLogradouro;
+    if (salvoNumero && document.getElementById("admin-input-numero")) document.getElementById("admin-input-numero").value = salvoNumero;
+    if (salvoComplemento && document.getElementById("admin-input-complemento")) document.getElementById("admin-input-complemento").value = salvoComplemento;
+    if (salvoBairro && document.getElementById("admin-input-bairro")) document.getElementById("admin-input-bairro").value = salvoBairro;
+    if (salvoCidade && document.getElementById("admin-input-cidade")) document.getElementById("admin-input-cidade").value = salvoCidade;
+    if (salvoEstado && document.getElementById("admin-input-estado")) document.getElementById("admin-input-estado").value = salvoEstado;
+    if (salvoCep && document.getElementById("admin-input-cep")) document.getElementById("admin-input-cep").value = salvoCep;
+
+    if (salvaFoto) {
+        fotoBase64Global = salvaFoto;
+        exibirAvatarNaTela(salvaFoto);
+    }
+}
+
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", inicializarFormularioAdmin);
+} else {
+    inicializarFormularioAdmin();
+}
