@@ -47,15 +47,19 @@
                 </div>
             </div>
             
-            <!-- COLUNA DE AÇÕES DA DIREITA -->
-            <div class="profile-actions-right">
-                <!-- BOTÃO CONFIGURADO COM DIRECIONAMENTO PARA ADMIN-PERFIL.HTML -->
-                <button type="button" class="btn-profile-edit" onclick="window.location.href='./admin-perfil.html'">
-                    <i class="far fa-edit"></i> Editar Perfil
+             <!-- COLUNA DE AÇÕES DA DIREITA (BLINDADA COM ESTILOS INLINES) -->
+            <div class="profile-actions-right" style="display: flex !important; flex-direction: column !important; gap: 12px !important; min-width: 220px !important; box-sizing: border-box !important;">
+                
+                <!-- BOTÃO EDITAR PERFIL (MARROM PREMIUM) -->
+                <button type="button" class="btn-profile-edit" onclick="window.location.href='./admin-perfil.html'" style="background-color: #2b170f !important; color: #ffffff !important; border: none !important; padding: 12px 24px !important; font-size: 14px !important; font-weight: 600 !important; border-radius: 8px !important; cursor: pointer !important; width: 100% !important; text-align: center !important; box-shadow: 0 4px 12px rgba(43, 23, 15, 0.15) !important; display: inline-block !important; font-family: 'Poppins', sans-serif !important;">
+                    <i class="far fa-edit" style="margin-right: 6px;"></i> Editar Perfil
                 </button>
-                <button type="button" class="btn-profile-logout" onclick="window.location.href='./index.html'">
-                    <i class="fas fa-sign-out-alt"></i> Sair da Conta
+                
+                <!-- BOTÃO SAIR DA CONTA (FUNDO BRANCO COM BORDA) -->
+                <button type="button" class="btn-profile-logout" onclick="window.location.href='./index.html'" style="background-color: #ffffff !important; color: #2b170f !important; border: 1px solid rgba(43, 23, 15, 0.25) !important; padding: 12px 24px !important; font-size: 14px !important; font-weight: 600 !important; border-radius: 8px !important; cursor: pointer !important; width: 100% !important; text-align: center !important; display: inline-block !important; font-family: 'Poppins', sans-serif !important;">
+                    <i class="fas fa-sign-out-alt" style="margin-right: 6px;"></i> Sair da Conta
                 </button>
+
             </div>
 
         </section>
