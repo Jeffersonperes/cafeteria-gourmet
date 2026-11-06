@@ -9,7 +9,7 @@
     <!-- Font Awesome para os ícones reais do design -->
     <link rel="stylesheet" href="https://cloudflare.com">
 </head>
-<body class="admin-body-bg" style="display: flex; flex-direction: column; min-height: 100vh;">
+<body class="admin-body-bg" style="display: flex; flex-direction: column; min-height: 100vh; background-color: #f7f4f0; margin: 0;">
 
     <!-- NAVBAR (Topo Escuro Premium Sincronizado) -->
     <header class="navbar" style="display: flex; align-items: center; justify-content: space-between; padding: 20px 8%; background-color: #1c0f0a; border-bottom: 1px solid rgba(223, 206, 184, 0.1);">
@@ -28,28 +28,28 @@
         </nav>
     </header>
 
-    <!-- WRAPPER CENTRAL DO LOGIN -->
-    <div class="admin-page-wrapper" style="max-width: 500px; width: 100%; margin: 60px auto; padding: 0 20px; box-sizing: border-box;">
-        <main class="admin-main-content" style="background: #ffffff; padding: 40px; border-radius: 12px; border: 1px solid rgba(60, 36, 25, 0.05); box-shadow: 0 4px 20px rgba(60, 36, 25, 0.02);">
-            <div class="admin-content-header" style="text-align: center; border-bottom: 1px solid rgba(60, 36, 25, 0.08); padding-bottom: 15px; margin-bottom: 30px;">
-                <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 26px; color: #1c0f0a; margin: 0 0 5px 0; font-weight: 700;">Acessar Conta</h2>
-                <p style="font-size: 13px; color: #6e5b53; margin: 0;">Entre com suas credenciais de cliente gourmet.</p>
+    <!-- WRAPPER CENTRAL DO LOGIN (CARD CENTRALIZADO COMO ANTES) -->
+    <div style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px 20px; box-sizing: border-box;">
+        <main style="background: #ffffff; padding: 45px; border-radius: 12px; border: 1px solid rgba(60, 36, 25, 0.05); box-shadow: 0 10px 30px rgba(60, 36, 25, 0.03); max-width: 460px; width: 100%; box-sizing: border-box;">
+            <div style="text-align: center; border-bottom: 1px solid rgba(60, 36, 25, 0.08); padding-bottom: 20px; margin-bottom: 30px;">
+                <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 28px; color: #1c0f0a; margin: 0 0 8px 0; font-weight: 700;">Acessar Conta</h2>
+                <p style="font-family: 'Poppins', sans-serif; font-size: 13px; color: #6e5b53; margin: 0; line-height: 1.4;">Entre com suas credenciais de cliente gourmet.</p>
             </div>
 
             <!-- FORMULÁRIO DE LOGIN -->
-            <form id="form-login-cliente" class="admin-profile-form" style="display: flex; flex-direction: column; gap: 20px;">
-                <div class="form-group" style="display: flex; flex-direction: column; gap: 6px;">
-                    <label for="login-email" style="font-size: 13px; font-weight: 600; color: #3c2419;">E-mail Cadastrado</label>
-                    <input type="email" id="login-email" placeholder="seu.email@email.com" style="padding: 12px; border: 1px solid rgba(60, 36, 25, 0.2); border-radius: 6px; font-size: 14px; outline: none; width: 100%; box-sizing: border-box;">
+            <form id="form-login-cliente" style="display: flex; flex-direction: column; gap: 22px;">
+                <div style="display: flex; flex-direction: column; gap: 6px;">
+                    <label for="login-email" style="font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 600; color: #3c2419;">E-mail Cadastrado</label>
+                    <input type="email" id="login-email" placeholder="seu.email@email.com" style="font-family: 'Poppins', sans-serif; padding: 12px 14px; border: 1px solid rgba(60, 36, 25, 0.2); border-radius: 6px; font-size: 14px; outline: none; width: 100%; box-sizing: border-box; background-color: #ffffff; color: #3c2419;">
                 </div>
 
-                <div class="form-group" style="display: flex; flex-direction: column; gap: 6px;">
-                    <label for="login-password" style="font-size: 13px; font-weight: 600; color: #3c2419;">Sua Senha</label>
-                    <input type="password" id="login-password" placeholder="••••••••" style="padding: 12px; border: 1px solid rgba(60, 36, 25, 0.2); border-radius: 6px; font-size: 14px; outline: none; width: 100%; box-sizing: border-box;">
+                <div style="display: flex; flex-direction: column; gap: 6px;">
+                    <label for="login-password" style="font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 600; color: #3c2419;">Sua Senha</label>
+                    <input type="password" id="login-password" placeholder="••••••••" style="font-family: 'Poppins', sans-serif; padding: 12px 14px; border: 1px solid rgba(60, 36, 25, 0.2); border-radius: 6px; font-size: 14px; outline: none; width: 100%; box-sizing: border-box; background-color: #ffffff; color: #3c2419;">
                 </div>
 
-                <div class="form-actions-row" style="display: flex; justify-content: center; margin-top: 10px;">
-                    <button type="button" class="btn-admin-save" style="background-color: #2b170f; color: #ffffff; border: none; padding: 14px 45px; font-size: 14px; font-weight: 700; border-radius: 6px; cursor: pointer; box-shadow: 0 4px 12px rgba(43, 23, 15, 0.15); width: 100%;" onclick="executarLoginBarista()">
+                <div style="display: flex; justify-content: center; margin-top: 10px;">
+                    <button type="button" style="background-color: #2b170f; color: #ffffff; border: none; padding: 14px; font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 700; border-radius: 6px; cursor: pointer; box-shadow: 0 4px 12px rgba(43, 23, 15, 0.15); width: 100%; transition: background-color 0.2s;" onclick="executarLoginBarista()">
                         Entrar na Conta
                     </button>
                 </div>
@@ -58,7 +58,7 @@
     </div>
 
     <!-- RODAPÉ MESTRE -->
-    <footer class="footer" style="background-color: #ffffff; border-top: 1px solid rgba(60, 36, 25, 0.1); display: flex; align-items: center; justify-content: space-between; padding: 25px 8%; width: 100%; box-sizing: border-box; margin-top: auto;">
+    <footer class="footer" style="background-color: #ffffff; border-top: 1px solid rgba(60, 36, 25, 0.1); display: flex; align-items: center; justify-content: space-between; padding: 25px 8%; width: 100%; box-sizing: border-box;">
         <div class="footer-brand" style="font-family: 'Playfair Display', serif; font-weight: bold; color: #1c0f0a;"><i class="fas fa-coffee"></i> CAFETERIA GOURMET</div>
         <div class="footer-contact" style="font-size: 13px; color:#3c2419;"><a href="mailto:contato@cafeteriagourmet.com.br" style="color: #3c2419; text-decoration: none;">contato@cafeteriagourmet.com.br</a></div>
     </footer>
