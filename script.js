@@ -1425,7 +1425,7 @@ function inicializarPaginaDetalhesDinamica() {
 }
 
 /* ==========================================================================
-   LOGICA DINÂMICA PAINEL ADMINISTRATIVO: DISPARADOR DE BANNER DE FEEDBACK
+   LOGICA DINÂMICA PAINEL ADMINISTRATIVO: DISPARADOR DE BANNER AUTOMÁTICO
    ========================================================================== */
 
 var fotoBase64Global = "";
@@ -1452,8 +1452,8 @@ function exibirAvatarNaTela(sourceBase64) {
     var iconTag = document.getElementById("admin-avatar-placeholder-icon");
     if (imgTag && iconTag) {
         imgTag.src = sourceBase64;
-        imgTag.style.display = "block";
-        iconTag.style.display = "none";
+        imgTag.style.setProperty("display", "block", "important");
+        iconTag.style.setProperty("display", "none", "important");
     }
 }
 
@@ -1503,13 +1503,13 @@ function atualizarDadosCadastraisAdmin() {
         sidebarName.textContent = nomeVal;
     }
 
-    // GATILHO DO BANNER: Força a exibição da mensagem de sucesso na tela imediatamente
+    // CONTROLE SEGURO DO BANNER (LIGA E DESLIGA COM RESET DE CLASSE)
     var banner = document.getElementById("admin-alert-banner");
     if (banner) {
-        banner.style.setProperty("display", "flex", "important"); // Altera o display de none para flex
-        window.scrollTo({ top: 0, behavior: "smooth" }); // Sobe a tela suavemente para o usuário ver o aviso
+        banner.style.setProperty("display", "flex", "important"); // Mostra o banner
+        window.scrollTo({ top: 0, behavior: "smooth" }); // Sobe a página para visualização
         
-        // Cronômetro digital: Esconde o aviso de forma automática após 3 segundos
+        // Cronômetro digital blindado: esconde forçadamente após 3 segundos
         setTimeout(function() {
             banner.style.setProperty("display", "none", "important");
         }, 3000);
@@ -1517,6 +1517,12 @@ function atualizarDadosCadastraisAdmin() {
 }
 
 function inicializarFormularioAdmin() {
+    // Garante que o banner inicie totalmente escondido via código na abertura da página
+    var bannerInicial = document.getElementById("admin-alert-banner");
+    if (bannerInicial) {
+        bannerInicial.style.setProperty("display", "none", "important");
+    }
+
     var salvoNome = localStorage.getItem("perfil_nome");
     var salvoEmail = localStorage.getItem("perfil_email");
     var salvoFone = localStorage.getItem("perfil_phone");
@@ -1556,4 +1562,57 @@ if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", inicializarFormularioAdmin);
 } else {
     inicializarFormularioAdmin();
+}
+
+/* ==========================================================================
+   ENGINE DE SINCRONIZAÇÃO DO PERFIL: RECUPERA TEXTOS E FOTO DO CLIENTE
+   ========================================================================== */
+
+function carregarDadosFidelidadeCliente() {
+    // 1. Puxa os dados salvos pelo painel administrativo no LocalStorage do navegador
+    var nomeSalvo = localStorage.getItem("perfil_nome");
+    var emailSalvo = localStorage.getItem("perfil_email");
+    var foneSalvo = localStorage.getItem("perfil_phone");
+    var enderecoSalvo = localStorage.getItem("perfil_address");
+    var fotoSalva = localStorage.getItem("perfil_foto_cliente");
+
+    // 2. Mapeia os seletores IDs oficiais da página de perfil do cliente
+    var txtNome = document.getElementById("user-display-name");
+    var txtEmail = document.getElementById("user-display-email");
+    var txtFone = document.getElementById("user-display-phone");
+    var txtEndereco = document.getElementById("user-display-address");
+    
+    // Seletores para a injeção da foto do cliente
+    var avatarBox = document.querySelector(".profile-avatar-circle");
+
+    // 3. Substitui os textos neutros/vazios pelos dados reais que o cliente digitou
+    if (txtNome && nomeSalvo) txtNome.textContent = nomeSalvo;
+    if (txtEmail && emailSalvo) txtEmail.textContent = emailSalvo;
+    if (txtFone && foneSalvo) txtFone.textContent = foneSalvo;
+    if (txtEndereco && enderecoSalvo) txtEndereco.textContent = enderecoSalvo;
+
+    // 4. Se o cliente tiver feito upload de uma foto, substitui o bonequinho cinza pela foto real
+    if (avatarBox && fotoSalva) {
+        // Limpa o bonequinho cinza antigo de dentro do círculo
+        avatarBox.innerHTML = ""; 
+        
+        // Cria a tag de imagem dinamicamente com as travas perfeitas do design
+        var novaImgCliente = document.createElement("img");
+        novaImgCliente.src = fotoSalva;
+        novaImgCliente.alt = "Foto do Cliente";
+        novaImgCliente.style.width = "100%";
+        novaImgCliente.style.height = "100%";
+        novaImgCliente.style.objectFit = "cover";
+        novaImgCliente.style.display = "block";
+        
+        // Injeta a foto do cliente dentro do círculo do avatar
+        avatarBox.appendChild(novaImgCliente);
+    }
+}
+
+// Executa a leitura de dados de forma segura assim que a estrutura da página desenhar na tela
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", carregarDadosFidelidadeCliente);
+} else {
+    carregarDadosFidelidadeCliente();
 }
