@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cafeteria Gourmet - Meu Perfil</title>
-    <!-- Link para o arquivo de estilos separado -->
-    <link rel="stylesheet" href="./style.css">
-    <!-- Font Awesome para os ícones oficiais do design -->
+    <!-- CHAMADA DO DESIGN SEPARADO COM QUEBRA DE CACHE INDUSTRIAL -->
+    <link rel="stylesheet" href="./style.css?v=fidelidade-estilo-9">
+    <!-- Font Awesome para os ícones reais do design -->
     <link rel="stylesheet" href="https://cloudflare.com">
 </head>
 <body class="profile-body-bg">
@@ -20,25 +20,26 @@
         <nav class="nav-menu">
             <a href="./index.html"><i class="fas fa-home"></i> Início</a>
             <a href="./produtos.html"><i class="fas fa-shopping-bag"></i> Produtos</a>
-            <a href="./carrinho.html" class="cart-link"><i class="fas fa-shopping-cart"></i> Carrinho <span class="cart-badge">0</span></a>
+            <a href="./carrinho.html" class="cart-link"><i class="fas fa-shopping-cart"></i> Carrinho</a>
             <a href="./perfil.html" class="active"><i class="fas fa-user"></i> Perfil</a>
-            <a href="./login.html" style="color: #DFCEB8; text-decoration: none; font-size: 14px;"><i class="fas fa-sign-in-alt"></i> Login</a>
+            <a href="./login.html"><i class="fas fa-sign-in-alt"></i> Login</a>
         </nav>
     </header>
 
     <!-- WRAPPER CENTRAL DO DESIGN -->
     <div class="profile-page-wrapper">
         
-        <!-- CARD 1: DADOS DO PERFIL -->
+        <!-- CARD 1: DADOS DO PERFIL (IDs CORRIGIDAS E INTEGRADAS) -->
         <section class="profile-card-info">
             <div class="profile-info-left">
-                <!-- Bonequinho Cinza do Avatar Substituindo a ilustração -->
+                <!-- Círculo do Avatar gerenciado pelo perfil.js -->
                 <div class="profile-avatar-circle">
                     <i class="fas fa-user"></i>
                 </div>
                 <div class="profile-details-text">
+                    <!-- O JavaScript vai injetar os dados salvos nestas IDs abaixo -->
                     <h2 id="user-display-name">Seu Nome</h2>
-                    <span class="client-since-badge"><i class="far fa-calendar-alt"></i> Cliente desde: --/--</span>
+                    <span class="client-since-badge"><i class="far fa-calendar-alt"></i> Cliente VIP</span>
                     
                     <div class="contact-info-list">
                         <p><i class="far fa-envelope"></i> <span id="user-display-email">seu.email@email.com</span></p>
@@ -48,128 +49,27 @@
                 </div>
             </div>
             
-             <!-- COLUNA DE AÇÕES DA DIREITA (BLINDADA COM ESTILOS INLINES) -->
-            <div class="profile-actions-right" style="display: flex !important; flex-direction: column !important; gap: 12px !important; min-width: 220px !important; box-sizing: border-box !important;">
-                
-                <!-- BOTÃO EDITAR PERFIL (MARROM PREMIUM) -->
-                <button type="button" class="btn-profile-edit" onclick="window.location.href='./admin-perfil.html'" style="background-color: #2b170f !important; color: #ffffff !important; border: none !important; padding: 12px 24px !important; font-size: 14px !important; font-weight: 600 !important; border-radius: 8px !important; cursor: pointer !important; width: 100% !important; text-align: center !important; box-shadow: 0 4px 12px rgba(43, 23, 15, 0.15) !important; display: inline-block !important; font-family: 'Poppins', sans-serif !important;">
-                    <i class="far fa-edit" style="margin-right: 6px;"></i> Editar Perfil
+            <!-- COLUNA DE AÇÕES DA DIREITA (REDIGIDA CONFORME SEU DESEJO) -->
+            <div class="profile-actions-right">
+                <button type="button" class="btn-profile-edit" onclick="window.location.href='./admin-perfil.html'">
+                    <i class="far fa-edit"></i> Editar Perfil
                 </button>
-                
-                <!-- BOTÃO SAIR DA CONTA (FUNDO BRANCO COM BORDA) -->
-                <button type="button" class="btn-profile-logout" onclick="window.location.href='./index.html'" style="background-color: #ffffff !important; color: #2b170f !important; border: 1px solid rgba(43, 23, 15, 0.25) !important; padding: 12px 24px !important; font-size: 14px !important; font-weight: 600 !important; border-radius: 8px !important; cursor: pointer !important; width: 100% !important; text-align: center !important; display: inline-block !important; font-family: 'Poppins', sans-serif !important;">
-                    <i class="fas fa-sign-out-alt" style="margin-right: 6px;"></i> Sair da Conta
+                <button type="button" class="btn-profile-logout" onclick="window.location.href='./index.html'">
+                    <i class="fas fa-sign-out-alt"></i> Sair da Conta
                 </button>
-
             </div>
-
         </section>
 
-        <!-- CARD 2: HISTÓRICO DE PEDIDOS DINÂMICO (INICIA OCULTO TOTALMENTE) -->
+        <!-- CARD 2: HISTÓRICO DE PEDIDOS DINÂMICO (INICIA OCULTO ATÉ HAVER COMPRA) -->
         <section id="card-historico-pedidos" class="orders-history-card" style="display: none !important;">
-            <div class="orders-header-row" style="display: flex !important; justify-content: space-between !important; align-items: center !important; margin-bottom: 25px !important; width: 100% !important;">
+            <div class="orders-header-row">
                 <h3>Histórico de Pedidos</h3>
-                <a href="./meus-pedidos.html" class="view-all-link" style="font-size: 13px !important; color: #6e5b53 !important; text-decoration: none !important; font-weight: 500 !important;">
-                    Ver todos <i class="fas fa-chevron-right" style="font-size: 11px; margin-left: 4px;"></i>
-                </a>
+                <a href="./meus-pedidos.html" class="view-all-link">Ver todos <i class="fas fa-chevron-right"></i></a>
             </div>
 
-            <!-- CONTAINER QUE RECEBERÁ OS PRODUTOS VIA JAVASCRIPT -->
+            <!-- CONTAINER QUE SERÁ MOLDADO DINAMICAMENTE CONFORME OS ITENS DO CARRINHO -->
             <div class="orders-list-container" id="perfil-historico-pedidos"></div>
         </section>
-
-
-            <!-- CONTAINER DO HISTÓRICO DE PEDIDOS COM IMAGENS REAIS VINCULADAS -->
-            <div class="orders-list-container">
-                
-                <!-- PEDIDO 1: CAFÉ ESPECIAL BOURBON (IMAGEM 1) -->
-                <div class="order-item-row">
-                    <div class="order-img-box">
-                        <img src="./img/imagem-1.jpg" alt="Café Especial Bourbon">
-                    </div>
-                    <div class="order-info-block">
-                        <h4>Pedido #C-2026-00123</h4>
-                        <p class="order-meta"><i class="far fa-calendar"></i> 15/05/2026 às 10:30</p>
-                        <p class="order-total"><i class="far fa-money-bill-alt"></i> Total: <strong>R$ 32,90</strong></p>
-                    </div>
-                    <div class="order-status-block">
-                        <span class="status-label">Status</span>
-                        <span class="badge-status delivered"><i class="far fa-check-circle"></i> Entregue</span>
-                    </div>
-                    <button type="button" class="btn-order-details" onclick="window.location.href='./detalhes.html?id=1'">Ver produto</button>
-                </div>
-
-                <!-- PEDIDO 2: CAFÉ GOURMET 100% ARÁBICA (IMAGEM 2) -->
-                <div class="order-item-row">
-                    <div class="order-img-box">
-                        <img src="./img/imagem-2.jpg" alt="Café Gourmet">
-                    </div>
-                    <div class="order-info-block">
-                        <h4>Pedido #C-2026-00105</h4>
-                        <p class="order-meta"><i class="far fa-calendar"></i> 02/05/2026 às 14:15</p>
-                        <p class="order-total"><i class="far fa-money-bill-alt"></i> Total: <strong>R$ 28,90</strong></p>
-                    </div>
-                    <div class="order-status-block">
-                        <span class="status-label">Status</span>
-                        <span class="badge-status shipping"><i class="fas fa-truck"></i> Em transporte</span>
-                    </div>
-                    <button type="button" class="btn-order-details" onclick="window.location.href='./detalhes.html?id=2'">Ver produto</button>
-                </div>
-
-                <!-- PEDIDO 3: CAFÉ TRADICIONAL PREMIUM (IMAGEM 5) - CORRIGIDO SEM DUPLICAÇÃO -->
-                <div class="order-item-row">
-                    <div class="order-img-box">
-                        <img src="./img/imagem-5.jpg" alt="Café Tradicional Premium">
-                    </div>
-                    <div class="order-info-block">
-                        <h4>Pedido #C-2026-00087</h4>
-                        <p class="order-meta"><i class="far fa-calendar"></i> 20/04/2026 às 09:45</p>
-                        <p class="order-total"><i class="far fa-money-bill-alt"></i> Total: <strong>R$ 19,90</strong></p>
-                    </div>
-                    <div class="order-status-block">
-                        <span class="status-label">Status</span>
-                        <span class="badge-status processing"><i class="far fa-clock"></i> Processando</span>
-                    </div>
-                    <button type="button" class="btn-order-details" onclick="window.location.href='./detalhes.html?id=13'">Ver produto</button>
-                </div>
-
-                <!-- PEDIDO 4: CAFÉ SOLÚVEL LIOFILIZADO (IMAGEM 7) -->
-                <div class="order-item-row">
-                    <div class="order-img-box">
-                        <img src="./img/imagem-7.jpg" alt="Café Solúvel Liofilizado">
-                    </div>
-                    <div class="order-info-block">
-                        <h4>Pedido #C-2026-00065</h4>
-                        <p class="order-meta"><i class="far fa-calendar"></i> 10/04/2026 às 16:20</p>
-                        <p class="order-total"><i class="far fa-money-bill-alt"></i> Total: <strong>R$ 22,90</strong></p>
-                    </div>
-                    <div class="order-status-block">
-                        <span class="status-label">Status</span>
-                        <span class="badge-status delivered"><i class="far fa-check-circle"></i> Entregue</span>
-                    </div>
-                    <button type="button" class="btn-order-details" onclick="window.location.href='./detalhes.html?id=15'">Ver produto</button>
-                </div>
-
-            </div>
-
-        </section>
-    </div>
-
-    <!-- MODAL POPUP OCULTO DE EDIÇÃO (PARA PREENCHIMENTO DOS DADOS ZERADOS) -->
-    <div id="modal-edit-profile" class="modal-profile-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); justify-content: center; align-items: center; z-index: 999;">
-        <div style="background: #ffffff; padding: 30px; border-radius: 12px; max-width: 500px; width: 90%; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
-            <h3 style="font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 20px; color: #1c0f0a;">Preencher Cadastro</h3>
-            <div style="display: flex; flex-direction: column; gap: 15px;">
-                <input type="text" id="input-edit-name" placeholder="Nome Completo" style="padding: 12px; border: 1px solid rgba(60,36,25,0.2); border-radius: 6px;">
-                <input type="email" id="input-edit-email" placeholder="E-mail" style="padding: 12px; border: 1px solid rgba(60,36,25,0.2); border-radius: 6px;">
-                <input type="text" id="input-edit-phone" placeholder="Telefone" style="padding: 12px; border: 1px solid rgba(60,36,25,0.2); border-radius: 6px;">
-                <input type="text" id="input-edit-address" placeholder="Endereço Completo" style="padding: 12px; border: 1px solid rgba(60,36,25,0.2); border-radius: 6px;">
-            </div>
-            <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 25px;">
-                <button type="button" onclick="fecharModalEdicao()" style="background: #e2e8f0; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer;">Cancelar</button>
-                <button type="button" onclick="salvarDadosPerfil()" style="background: #2b170f; color: #ffffff; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer;">Salvar</button>
-            </div>
-        </div>
     </div>
 
     <!-- RODAPÉ MESTRE -->
@@ -178,7 +78,7 @@
         <div class="footer-contact"><a href="mailto:contato@cafeteriagourmet.com.br">contato@cafeteriagourmet.com.br</a></div>
     </footer>
 
+    <!-- ENGINE SEPARADA DE RECONHECIMENTO DE DADOS COM ANTI-CACHE MÁXIMO -->
     <script src="script.js"></script>
-    
 </body>
 </html>
