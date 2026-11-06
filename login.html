@@ -4,97 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cafeteria Gourmet - Login</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- CDN Oficial estável do Font Awesome para carregar todos os ícones da página -->
+    <!-- Chamada oficial do arquivo de estilos separado -->
+    <link rel="stylesheet" href="./style.css?v=admin-estilo-atualizado-1">
+    <!-- Font Awesome para os ícones reais do design -->
     <link rel="stylesheet" href="https://cloudflare.com">
 </head>
-<body>
+<body class="admin-body-bg" style="display: flex; flex-direction: column; min-height: 100vh;">
 
-    <!-- NAVBAR (Topo Escuro) -->
-    <header class="navbar">
-        <div class="logo" style="display: flex; align-items: center; gap: 10px; cursor: pointer;" onclick="window.location.href='index.html'">
-            <!-- SÍMBOLO NATIVO DE XÍCARA EM TEXTO PURO (NUNCA FALHA) -->
+    <!-- NAVBAR (Topo Escuro Premium Sincronizado) -->
+    <header class="navbar" style="display: flex; align-items: center; justify-content: space-between; padding: 20px 8%; background-color: #1c0f0a; border-bottom: 1px solid rgba(223, 206, 184, 0.1);">
+        <div class="logo" style="display: flex; align-items: center; gap: 10px; cursor: pointer;" onclick="window.location.href='./index.html'">
             <span style="font-size: 26px; line-height: 1; display: inline-block;">☕</span>
             <span style="font-family: 'Playfair Display', serif; color: #ffffff; font-weight: bold; font-size: 16px; letter-spacing: 0.5px; line-height: 1.1;">
                 CAFETERIA<br><small style="font-size: 10px; letter-spacing: 2px; color: #DFCEB8; display: block;">GOURMET</small>
             </span>
         </div>
-        
-        <!-- O menu ganha o ID correto "nav-menu" -->
-        <nav class="nav-menu" id="nav-menu">
-            <a href="index.html" class="active"><i class="fas fa-home"></i> Início</a>
-            <a href="produtos.html"><i class="fas fa-shopping-bag"></i> Produtos</a>
-            <a href="carrinho.html" class="cart-link">
-                <i class="fas fa-shopping-cart"></i> Carrinho 
-                <span class="cart-badge">0</span>
-            </a>
-            <a href="perfil.html"><i class="fas fa-user"></i> Perfil</a>
+        <nav class="nav-menu" style="display: flex; align-items: center; gap: 30px;">
+            <a href="./index.html" style="color: #DFCEB8; text-decoration: none; font-size: 14px;"><i class="fas fa-home"></i> Início</a>
+            <a href="./produtos.html" style="color: #DFCEB8; text-decoration: none; font-size: 14px;"><i class="fas fa-shopping-bag"></i> Produtos</a>
+            <a href="./carrinho.html" style="color: #DFCEB8; text-decoration: none; font-size: 14px;"><i class="fas fa-shopping-cart"></i> Carrinho</a>
+            <a href="./perfil.html" style="color: #DFCEB8; text-decoration: none; font-size: 14px;"><i class="fas fa-user"></i> Perfil</a>
+            <a href="./login.html" class="active" style="color: #ffffff; text-decoration: none; font-size: 14px;"><i class="fas fa-sign-in-alt"></i> Login</a>
         </nav>
-
-        <!-- O BOTÃO AGORA CHAMA A FUNÇÃO DIRETO NO CLIQUE (IMPOSSÍVEL TRAVAR) -->
-        <button class="menu-hamburger" id="menu-hamburger" type="button" onclick="toggleMenuMobile()">☰</button>
     </header>
 
-    <!-- CONTAINER CENTRAL DO LOGIN -->
-    <main class="login-container">
-        <div class="login-card">
-            <h2>Entre na sua conta</h2>
-            <p class="subtitle">Bem-vindo de volta! Insira seus dados abaixo.</p>
+    <!-- WRAPPER CENTRAL DO LOGIN -->
+    <div class="admin-page-wrapper" style="max-width: 500px; width: 100%; margin: 60px auto; padding: 0 20px; box-sizing: border-box;">
+        <main class="admin-main-content" style="background: #ffffff; padding: 40px; border-radius: 12px; border: 1px solid rgba(60, 36, 25, 0.05); box-shadow: 0 4px 20px rgba(60, 36, 25, 0.02);">
+            <div class="admin-content-header" style="text-align: center; border-bottom: 1px solid rgba(60, 36, 25, 0.08); padding-bottom: 15px; margin-bottom: 30px;">
+                <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 26px; color: #1c0f0a; margin: 0 0 5px 0; font-weight: 700;">Acessar Conta</h2>
+                <p style="font-size: 13px; color: #6e5b53; margin: 0;">Entre com suas credenciais de cliente gourmet.</p>
+            </div>
 
-            <!-- FORMULÁRIO COM ID OPERACIONAL -->
-            <form class="login-form" id="form-login-cliente">
-                
-                <div class="form-group">
-                    <label for="login-email">E-mail</label>
-                    <div class="input-with-icon">
-                        <input type="email" id="login-email" placeholder="seuemail@email.com" required>
-                    </div>
+            <!-- FORMULÁRIO DE LOGIN -->
+            <form id="form-login-cliente" class="admin-profile-form" style="display: flex; flex-direction: column; gap: 20px;">
+                <div class="form-group" style="display: flex; flex-direction: column; gap: 6px;">
+                    <label for="login-email" style="font-size: 13px; font-weight: 600; color: #3c2419;">E-mail Cadastrado</label>
+                    <input type="email" id="login-email" placeholder="seu.email@email.com" style="padding: 12px; border: 1px solid rgba(60, 36, 25, 0.2); border-radius: 6px; font-size: 14px; outline: none; width: 100%; box-sizing: border-box;">
                 </div>
 
-                <div class="form-group">
-                    <label for="login-password">Senha</label>
-                    <div class="input-password-container" style="position: relative; width: 100%;">
-                        <input type="password" id="login-password" placeholder="Digite sua senha" required style="width: 100%; padding-right: 40px;">
-                        
-                        <!-- CORRIGIDO: O CLIQUE AGORA CHAMA A FUNÇÃO DIRETO NO HTML (IMPOSSÍVEL FALHAR) -->
-                        <span id="btn-toggle-senha" onclick="toggleMostrarSenha()" style="position: absolute; right: 14px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 16px; user-select: none;">👁️</span>
-                    </div>
+                <div class="form-group" style="display: flex; flex-direction: column; gap: 6px;">
+                    <label for="login-password" style="font-size: 13px; font-weight: 600; color: #3c2419;">Sua Senha</label>
+                    <input type="password" id="login-password" placeholder="••••••••" style="padding: 12px; border: 1px solid rgba(60, 36, 25, 0.2); border-radius: 6px; font-size: 14px; outline: none; width: 100%; box-sizing: border-box;">
                 </div>
 
-                <div class="form-options" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; font-size: 13px;">
-                    <label class="checkbox-container" style="display: inline-flex; align-items: center; gap: 8px; cursor: pointer;">
-                        <input type="checkbox" id="lembrar-dados" style="accent-color: var(--bg-dark-brown);">
-                        Lembrar de mim
-                    </label>
-                    <!-- CHAMADA DA FUNÇÃO DE RECUPERAÇÃO NO CLIQUE -->
-                    <a href="#" class="forgot-password" onclick="recuperarSenhaFicticia(event)" style="color: var(--text-dark); text-decoration: none; font-weight: 500;">Esqueceu a senha?</a>
+                <div class="form-actions-row" style="display: flex; justify-content: center; margin-top: 10px;">
+                    <button type="button" class="btn-admin-save" style="background-color: #2b170f; color: #ffffff; border: none; padding: 14px 45px; font-size: 14px; font-weight: 700; border-radius: 6px; cursor: pointer; box-shadow: 0 4px 12px rgba(43, 23, 15, 0.15); width: 100%;" onclick="executarLoginBarista()">
+                        Entrar na Conta
+                    </button>
                 </div>
-
-                <button type="submit" class="btn-submit">Entrar na conta</button>
             </form>
+        </main>
+    </div>
 
-            <p class="signup-text" style="font-size: 13px; margin-top: 25px; color: var(--text-muted);">
-                Não tem uma conta? <a href="cadastro.html" style="color: var(--text-dark); text-decoration: none; font-weight: 600;">Criar conta</a>
-            </p>
-        </div>
-    </main>
-
-    <!-- RODAPÉ (Footer Claro) -->
-    <footer class="footer">
-        <div class="footer-brand">
-            <i class="fas fa-coffee"></i> <!-- Ícone de café padronizado do rodapé -->
-            <span>CAFETERIA GOURMET</span>
-        </div>
-        <div class="footer-contact">
-            <a href="mailto:contato@cafeteriagourmet.com.br">contato@cafeteriagourmet.com.br</a>
-        </div>
-        <div class="footer-social">
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-facebook-f"></i></a>
-        </div>
+    <!-- RODAPÉ MESTRE -->
+    <footer class="footer" style="background-color: #ffffff; border-top: 1px solid rgba(60, 36, 25, 0.1); display: flex; align-items: center; justify-content: space-between; padding: 25px 8%; width: 100%; box-sizing: border-box; margin-top: auto;">
+        <div class="footer-brand" style="font-family: 'Playfair Display', serif; font-weight: bold; color: #1c0f0a;"><i class="fas fa-coffee"></i> CAFETERIA GOURMET</div>
+        <div class="footer-contact" style="font-size: 13px; color:#3c2419;"><a href="mailto:contato@cafeteriagourmet.com.br" style="color: #3c2419; text-decoration: none;">contato@cafeteriagourmet.com.br</a></div>
     </footer>
 
-    <!-- CONEXÃO OBRIGATÓRIA DA INTELIGÊNCIA EM JAVASCRIPT (CORRIGIDO) -->
+    <!-- LOGICA ISOLADA DO LOGIN EM SCRIPT SEPARADO -->
     <script src="script.js"></script>
 </body>
 </html>

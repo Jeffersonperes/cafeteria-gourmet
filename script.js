@@ -1671,3 +1671,41 @@ if (document.readyState === "loading") {
 } else {
     carregarDadosFidelidadeCliente();
 }
+
+/* ==========================================================================
+   LOGICA DINÂMICA DE REDIRECIONAMENTO E VERIFICAÇÃO DE LOGIN
+   ========================================================================== */
+
+function executarLoginBarista() {
+    var emailInput = document.getElementById("login-email").value.trim();
+
+    // Se o cliente não digitar nada, usamos o e-mail padrão do protótipo
+    var emailUsuario = emailInput || "cliente@cafeteriagourmet.com";
+
+    // Busca se já existem dados salvos de nome e endereço no navegador
+    var nomeExistente = localStorage.getItem("perfil_nome");
+    var enderecoExistente = localStorage.getItem("perfil_address");
+
+    // LÓGICA DE CONTINGÊNCIA: Se for o primeiro acesso e estiver vazio, criamos dados iniciais válidos
+    if (!nomeExistente || nomeExistente === "Seu Nome") {
+        localStorage.setItem("perfil_nome", "Cliente Gourmet");
+        localStorage.setItem("perfil_email", emailUsuario);
+        localStorage.setItem("perfil_phone", "(11) 99999-9999");
+        localStorage.setItem("perfil_address", "Avenida Paulista, 1000 - Bela Vista. São Paulo/SP - CEP: 01310-100");
+        
+        // Cadastra os campos separados do Admin de forma preventiva
+        localStorage.setItem("perfil_logradouro", "Avenida Paulista");
+        localStorage.setItem("perfil_numero", "1000");
+        localStorage.setItem("perfil_complemento", "");
+        localStorage.setItem("perfil_bairro", "Bela Vista");
+        localStorage.setItem("perfil_cidade", "São Paulo");
+        localStorage.setItem("perfil_estado", "SP");
+        localStorage.setItem("perfil_cep", "01310-100");
+    } else {
+        // Se o usuário já tiver alterado os dados no admin, apenas garante que o e-mail do login seja guardado
+        localStorage.setItem("perfil_email", emailUsuario);
+    }
+
+    // Redireciona o usuário de forma imediata e nativa para a tela de visualização do Perfil
+    window.location.href = "./perfil.html";
+}
