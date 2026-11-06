@@ -1565,11 +1565,11 @@ if (document.readyState === "loading") {
 }
 
 /* ==========================================================================
-   ENGINE DE SINCRONIZAÇÃO COMPLETA: SISTEMA DE CAPTURA UNIVERSAL ANTIFALHAS
+   ENGINE DE SINCRONIZAÇÃO DO PERFIL: RENDERIZAÇÃO CONDICIONAL DE PEDIDOS
    ========================================================================== */
 
 function carregarDadosFidelidadeCliente() {
-    // 1. CARREGAMENTO DOS DADOS DO CLIENTE (VINDOS DO ADMIN)
+    // 1. SINCRONIZAÇÃO COMPLETA DOS DADOS DO CLIENTE (VINDOS DO ADMIN)
     var nomeSalvo = localStorage.getItem("perfil_nome");
     var emailSalvo = localStorage.getItem("perfil_email");
     var foneSalvo = localStorage.getItem("perfil_phone");
@@ -1582,11 +1582,13 @@ function carregarDadosFidelidadeCliente() {
     var txtEndereco = document.getElementById("user-display-address");
     var avatarBox = document.querySelector(".profile-avatar-circle");
 
-    if (txtNome && nomeSalvo) txtNome.textContent = nomeSalvo;
-    if (txtEmail && emailSalvo) txtEmail.textContent = emailSalvo;
-    if (txtFone && foneSalvo) txtFone.textContent = foneSalvo;
-    if (txtEndereco && enderecoSalvo) txtEndereco.textContent = enderecoSalvo;
+    // Injeta os dados ou mantém padrões amigáveis de primeiro acesso
+    if (txtNome) txtNome.textContent = nomeSalvo || "Seu Nome";
+    if (txtEmail) txtEmail.textContent = emailSalvo || "seu.email@email.com";
+    if (txtFone) txtFone.textContent = foneSalvo || "(00) 00000-0000";
+    if (txtEndereco) txtEndereco.textContent = enderecoSalvo || "Seu endereço completo aparecerá aqui";
 
+    // Injeta a foto real do cliente caso ela tenha sido salva no admin
     if (avatarBox && fotoSalva) {
         avatarBox.innerHTML = ""; 
         var novaImgCliente = document.createElement("img");
@@ -1599,11 +1601,10 @@ function carregarDadosFidelidadeCliente() {
         avatarBox.appendChild(novaImgCliente);
     }
 
-    // 2. SISTEMA DE CAPTURA UNIVERSAL DE CARRINHO (TESTA TODAS AS CHAVES DO SEU PROJETO)
-    var containerHistorico = document.getElementById("perfil-historico-pedidos");
-    var msgSemPedidos = document.getElementById("sem-pedidos-mensagem");
-    
-    // Tenta ler todas as variáveis possíveis que seu script de produtos pode ter usado
+    // 2. CAPTURA DO CARRINHO PARA GERAR O HISTÓRICO DE COMPRAS REAIS
+    var cardHistorico = document.getElementById("card-historico-pedidos");
+    var containerListagem = document.getElementById("perfil-historico-pedidos");
+
     var dadosBrutos = localStorage.getItem("cafeteria_carrinho") || 
                       localStorage.getItem("carrinho") || 
                       localStorage.getItem("cart") || 
@@ -1616,16 +1617,16 @@ function carregarDadosFidelidadeCliente() {
         itensComprados = [];
     }
 
-    // 3. RENDERIZAÇÃO REAL NO HISTÓRICO
-    if (itensComprados && itensComprados.length > 0 && containerHistorico) {
-        if (msgSemPedidos) msgSemPedidos.style.display = "none";
-        containerHistorico.innerHTML = "";
+    // REGRA MESTRE: Só exibe a seção se houver itens comprados no carrinho
+    if (itensComprados && itensComprados.length > 0 && containerListagem && cardHistorico) {
+        // Revela o bloco inteiro do histórico na tela
+        cardHistorico.style.setProperty("display", "block", "important");
+        containerListagem.innerHTML = "";
 
         var dataHoje = new Date();
         var dataFormatada = dataHoje.toLocaleDateString('pt-BR') + " às " + dataHoje.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
 
         itensComprados.forEach(function(produto) {
-            // Tratamento preventivo para garantir que valores numéricos vazios ou nulos não quebrem o script
             var qtd = parseInt(produto.quantity) || 1;
             var precoBruto = produto.price;
             
@@ -1635,7 +1636,6 @@ function carregarDadosFidelidadeCliente() {
             var precoNum = parseFloat(precoBruto) || 0.00;
             var precoTotalItem = (precoNum * qtd).toFixed(2).replace(".", ",");
             
-            // Tratamento seguro para caminhos de imagens vazias
             var imgPath = produto.image || "./img/imagem-1.jpg";
             var numPedidoSimulado = Math.floor(100000 + Math.random() * 900000);
 
@@ -1656,8 +1656,13 @@ function carregarDadosFidelidadeCliente() {
                     <button type="button" class="btn-order-details" onclick="window.location.href='./detalhes.html?id=${produto.id || 1}'">Ver produto</button>
                 </div>
             `;
-            containerHistorico.innerHTML += linhaPedidoHTML;
+            containerListagem.innerHTML += linhaPedidoHTML;
         });
+    } else {
+        // Se não houver compras de verdade no carrinho, garante que a seção fique invisível
+        if (cardHistorico) {
+            cardHistorico.style.setProperty("display", "none", "important");
+        }
     }
 }
 
