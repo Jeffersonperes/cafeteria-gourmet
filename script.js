@@ -1565,38 +1565,30 @@ if (document.readyState === "loading") {
 }
 
 /* ==========================================================================
-   ENGINE DE SINCRONIZAÇÃO DO PERFIL: RECUPERA TEXTOS E FOTO DO CLIENTE
+   ENGINE DE SINCRONIZAÇÃO COMPLETA: DADOS DO CLIENTE E HISTÓRICO REAL
    ========================================================================== */
 
 function carregarDadosFidelidadeCliente() {
-    // 1. Puxa os dados salvos pelo painel administrativo no LocalStorage do navegador
+    // 1. CARREGAMENTO DOS DADOS DO CLIENTE (VINDOS DO ADMIN)
     var nomeSalvo = localStorage.getItem("perfil_nome");
     var emailSalvo = localStorage.getItem("perfil_email");
     var foneSalvo = localStorage.getItem("perfil_phone");
     var enderecoSalvo = localStorage.getItem("perfil_address");
     var fotoSalva = localStorage.getItem("perfil_foto_cliente");
 
-    // 2. Mapeia os seletores IDs oficiais da página de perfil do cliente
     var txtNome = document.getElementById("user-display-name");
     var txtEmail = document.getElementById("user-display-email");
     var txtFone = document.getElementById("user-display-phone");
     var txtEndereco = document.getElementById("user-display-address");
-    
-    // Seletores para a injeção da foto do cliente
     var avatarBox = document.querySelector(".profile-avatar-circle");
 
-    // 3. Substitui os textos neutros/vazios pelos dados reais que o cliente digitou
     if (txtNome && nomeSalvo) txtNome.textContent = nomeSalvo;
     if (txtEmail && emailSalvo) txtEmail.textContent = emailSalvo;
     if (txtFone && foneSalvo) txtFone.textContent = foneSalvo;
     if (txtEndereco && enderecoSalvo) txtEndereco.textContent = enderecoSalvo;
 
-    // 4. Se o cliente tiver feito upload de uma foto, substitui o bonequinho cinza pela foto real
     if (avatarBox && fotoSalva) {
-        // Limpa o bonequinho cinza antigo de dentro do círculo
         avatarBox.innerHTML = ""; 
-        
-        // Cria a tag de imagem dinamicamente com as travas perfeitas do design
         var novaImgCliente = document.createElement("img");
         novaImgCliente.src = fotoSalva;
         novaImgCliente.alt = "Foto do Cliente";
@@ -1604,13 +1596,58 @@ function carregarDadosFidelidadeCliente() {
         novaImgCliente.style.height = "100%";
         novaImgCliente.style.objectFit = "cover";
         novaImgCliente.style.display = "block";
-        
-        // Injeta a foto do cliente dentro do círculo do avatar
         avatarBox.appendChild(novaImgCliente);
+    }
+
+    // 2. RENDERIZAÇÃO DO HISTÓRICO CONFORME AS COMPRAS REAIS DO CLIENTE
+    var containerHistorico = document.getElementById("perfil-historico-pedidos");
+    var msgSemPedidos = document.getElementById("sem-pedidos-mensagem");
+    
+    // Captura os itens que o cliente comprou e que estão armazenados no LocalStorage
+    var itensComprados = JSON.parse(localStorage.getItem("cafeteria_carrinho")) || [];
+
+    if (itensComprados.length > 0 && containerHistorico) {
+        // Se houver compras, remove a mensagem de "Nenhum pedido realizado"
+        if (msgSemPedidos) msgSemPedidos.style.display = "none";
+
+        // Limpa o container para evitar duplicações de renderização
+        containerHistorico.innerHTML = "";
+
+        // Pega a data atual simulada do sistema para registrar no recibo
+        var dataHoje = new Date();
+        var dataFormatada = dataHoje.toLocaleDateString('pt-BR') + " às " + dataHoje.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+
+        // Loop mestre: cria uma linha de histórico para cada produto comprado pelo cliente
+        itensComprados.forEach(function(produto, index) {
+            var precoTotalItem = (produto.price * produto.quantity).toFixed(2).replace(".", ",");
+            var numPedidoSimulado = Math.floor(100000 + Math.random() * 900000); // Gera um ID único de pedido
+
+            // Estrutura HTML idêntica ao design de fidelidade
+            var linhaPedidoHTML = `
+                <div class="order-item-row">
+                    <div class="order-img-box">
+                        <img src="${produto.image}" alt="${produto.name}">
+                    </div>
+                    <div class="order-info-block">
+                        <h4>Pedido #C-2026-${numPedidoSimulado}</h4>
+                        <p class="order-meta"><i class="far fa-calendar"></i> ${dataFormatada}</p>
+                        <p class="order-total"><i class="far fa-money-bill-alt"></i> Qtd: ${produto.quantity}x | Total: <strong>R$ ${precoTotalItem}</strong></p>
+                    </div>
+                    <div class="order-status-block">
+                        <span class="status-label">Status</span>
+                        <span class="badge-status delivered"><i class="far fa-check-circle"></i> Entregue</span>
+                    </div>
+                    <button type="button" class="btn-order-details" onclick="window.location.href='./detalhes.html?id=${produto.id}'">Ver produto</button>
+                </div>
+            `;
+
+            // Injeta a linha criada diretamente dentro do painel do histórico de pedidos
+            containerHistorico.innerHTML += linhaPedidoHTML;
+        });
     }
 }
 
-// Executa a leitura de dados de forma segura assim que a estrutura da página desenhar na tela
+// Inicialização segura amarrada ao ciclo de vida da página
 if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", carregarDadosFidelidadeCliente);
 } else {
