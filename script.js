@@ -1709,3 +1709,33 @@ function executarLoginBarista() {
     // Redireciona o usuário de forma imediata e nativa para a tela de visualização do Perfil
     window.location.href = "./perfil.html";
 }
+
+/* ==========================================================================
+   ENGINE DE LOGICA DO FORMULÁRIO DE CADASTRO COM REDIRECIONAMENTO DE ROTA
+   ========================================================================== */
+
+function executarFluxoCadastro() {
+    var nomeInput = document.getElementById("cadastro-name").value.trim();
+    var emailInput = document.getElementById("cadastro-email").value.trim();
+    var senhaInput = document.getElementById("cadastro-password").value.trim();
+
+    // Validação de segurança básica para não deixar submeter o cadastro em branco
+    if (!nomeInput || !emailInput || !senhaInput) {
+        alert("Por favor, preencha todos os campos do formulário para efetuar seu cadastro!");
+        return;
+    }
+
+    // Grava temporariamente o nome e e-mail no LocalStorage para preenchimento automático nas outras telas
+    localStorage.setItem("perfil_nome", nomeInput);
+    localStorage.setItem("perfil_email", emailInput);
+    
+    // Configura os dados complementares padrão do primeiro acesso para evitar travamento de leitura no perfil
+    localStorage.setItem("perfil_phone", "(00) 00000-0000");
+    localStorage.setItem("perfil_address", "Seu endereço completo aparecerá aqui");
+
+    // Dispara a mensagem de sucesso e inicia a transição de rota
+    alert("✓ Cadastro efetuado com sucesso! Redirecionando para a página de login...");
+    
+    // Envia o usuário imediatamente de volta para a tela de autenticação
+    window.location.href = "./login.html";
+}
