@@ -1565,7 +1565,7 @@ if (document.readyState === "loading") {
 }
 
 /* ==========================================================================
-   ENGINE DE SINCRONIZAÇÃO COMPLETA: DADOS DO CLIENTE E HISTÓRICO REAL
+   ENGINE DE SINCRONIZAÇÃO COMPLETA: SISTEMA DE CAPTURA UNIVERSAL ANTIFALHAS
    ========================================================================== */
 
 function carregarDadosFidelidadeCliente() {
@@ -1599,55 +1599,68 @@ function carregarDadosFidelidadeCliente() {
         avatarBox.appendChild(novaImgCliente);
     }
 
-    // 2. RENDERIZAÇÃO DO HISTÓRICO CONFORME AS COMPRAS REAIS DO CLIENTE
+    // 2. SISTEMA DE CAPTURA UNIVERSAL DE CARRINHO (TESTA TODAS AS CHAVES DO SEU PROJETO)
     var containerHistorico = document.getElementById("perfil-historico-pedidos");
     var msgSemPedidos = document.getElementById("sem-pedidos-mensagem");
     
-    // Captura os itens que o cliente comprou e que estão armazenados no LocalStorage
-    var itensComprados = JSON.parse(localStorage.getItem("cafeteria_carrinho")) || [];
+    // Tenta ler todas as variáveis possíveis que seu script de produtos pode ter usado
+    var dadosBrutos = localStorage.getItem("cafeteria_carrinho") || 
+                      localStorage.getItem("carrinho") || 
+                      localStorage.getItem("cart") || 
+                      "[]";
+                      
+    var itensComprados = [];
+    try {
+        itensComprados = JSON.parse(dadosBrutos);
+    } catch(e) {
+        itensComprados = [];
+    }
 
-    if (itensComprados.length > 0 && containerHistorico) {
-        // Se houver compras, remove a mensagem de "Nenhum pedido realizado"
+    // 3. RENDERIZAÇÃO REAL NO HISTÓRICO
+    if (itensComprados && itensComprados.length > 0 && containerHistorico) {
         if (msgSemPedidos) msgSemPedidos.style.display = "none";
-
-        // Limpa o container para evitar duplicações de renderização
         containerHistorico.innerHTML = "";
 
-        // Pega a data atual simulada do sistema para registrar no recibo
         var dataHoje = new Date();
         var dataFormatada = dataHoje.toLocaleDateString('pt-BR') + " às " + dataHoje.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
 
-        // Loop mestre: cria uma linha de histórico para cada produto comprado pelo cliente
-        itensComprados.forEach(function(produto, index) {
-            var precoTotalItem = (produto.price * produto.quantity).toFixed(2).replace(".", ",");
-            var numPedidoSimulado = Math.floor(100000 + Math.random() * 900000); // Gera um ID único de pedido
+        itensComprados.forEach(function(produto) {
+            // Tratamento preventivo para garantir que valores numéricos vazios ou nulos não quebrem o script
+            var qtd = parseInt(produto.quantity) || 1;
+            var precoBruto = produto.price;
+            
+            if (typeof precoBruto === "string") {
+                precoBruto = parseFloat(precoBruto.replace("R$", "").replace(",", "."));
+            }
+            var precoNum = parseFloat(precoBruto) || 0.00;
+            var precoTotalItem = (precoNum * qtd).toFixed(2).replace(".", ",");
+            
+            // Tratamento seguro para caminhos de imagens vazias
+            var imgPath = produto.image || "./img/imagem-1.jpg";
+            var numPedidoSimulado = Math.floor(100000 + Math.random() * 900000);
 
-            // Estrutura HTML idêntica ao design de fidelidade
             var linhaPedidoHTML = `
-                <div class="order-item-row">
+                <div class="order-item-row" style="display: flex !important; flex-direction: row !important; align-items: center !important; justify-content: space-between !important; padding: 15px 0 !important; border-bottom: 1px solid rgba(60, 36, 25, 0.06) !important; width: 100% !important; box-sizing: border-box !important; gap: 20px !important;">
                     <div class="order-img-box">
-                        <img src="${produto.image}" alt="${produto.name}">
+                        <img src="${imgPath}" alt="${produto.name || 'Café'}" style="max-width: 100%; max-height: 100%; object-fit: contain;">
                     </div>
                     <div class="order-info-block">
                         <h4>Pedido #C-2026-${numPedidoSimulado}</h4>
                         <p class="order-meta"><i class="far fa-calendar"></i> ${dataFormatada}</p>
-                        <p class="order-total"><i class="far fa-money-bill-alt"></i> Qtd: ${produto.quantity}x | Total: <strong>R$ ${precoTotalItem}</strong></p>
+                        <p class="order-total"><i class="far fa-money-bill-alt"></i> Qtd: ${qtd}x | Total: <strong>R$ ${precoTotalItem}</strong></p>
                     </div>
                     <div class="order-status-block">
                         <span class="status-label">Status</span>
                         <span class="badge-status delivered"><i class="far fa-check-circle"></i> Entregue</span>
                     </div>
-                    <button type="button" class="btn-order-details" onclick="window.location.href='./detalhes.html?id=${produto.id}'">Ver produto</button>
+                    <button type="button" class="btn-order-details" onclick="window.location.href='./detalhes.html?id=${produto.id || 1}'">Ver produto</button>
                 </div>
             `;
-
-            // Injeta a linha criada diretamente dentro do painel do histórico de pedidos
             containerHistorico.innerHTML += linhaPedidoHTML;
         });
     }
 }
 
-// Inicialização segura amarrada ao ciclo de vida da página
 if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", carregarDadosFidelidadeCliente);
 } else {
