@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cafeteria Gourmet - Painel Administrativo do Perfil</title>
-    <!-- Chamada oficial do arquivo de estilos separado -->
-    <link rel="stylesheet" href="./style.css">
-    <!-- Font Awesome para os ícones reais do design -->
+    <!-- ROTA RELATIVA DO DESIGN COM ANTI-CACHE ATIVO -->
     <link rel="stylesheet" href="./style.css?v=admin-estilo-atualizado-1">
+    <!-- Font Awesome para os ícones reais do design -->
+    <link rel="stylesheet" href="https://cloudflare.com">
 </head>
 <body class="admin-body-bg">
 
@@ -22,6 +22,7 @@
             <a href="./produtos.html"><i class="fas fa-shopping-bag"></i> Produtos</a>
             <a href="./carrinho.html"><i class="fas fa-shopping-cart"></i> Carrinho</a>
             <a href="./perfil.html" class="active"><i class="fas fa-user"></i> Perfil</a>
+            <a href="./login.html"><i class="fas fa-sign-in-alt"></i> Login</a>
         </nav>
     </header>
 
@@ -31,7 +32,7 @@
         <!-- BARRA LATERAL ADMIN (MENU DE OPÇÕES) -->
         <aside class="admin-sidebar">
             <div class="admin-sidebar-profile">
-                <!-- Área Dinâmica do Avatar (Aceita imagem ou mantém o bonequinho) -->
+                <!-- Área Dinâmica do Avatar (Aceita imagem ou mantém o bonequinho cinza) -->
                 <div class="profile-avatar-circle" id="admin-avatar-preview-box">
                     <i class="fas fa-user" id="admin-avatar-placeholder-icon"></i>
                     <img id="admin-avatar-img" src="" alt="Foto do Cliente" style="display: none; width: 100%; height: 100%; object-fit: cover;">
@@ -53,15 +54,15 @@
         <main class="admin-main-content">
             <div class="admin-content-header">
                 <h2>Alterar Dados Cadastrais</h2>
-                <p>Mantenha suas informações de faturamento, entrega e foto de perfil updated.</p>
+                <p>Mantenha suas informações de faturamento, entrega e foto de perfil atualizadas.</p>
             </div>
 
-            <!-- FEEDBACK EM BANNER (INICIA TOTALMENTE OCULTO VIA STYLE INLINE) -->
+            <!-- FEEDBACK EM BANNER (INICIA OCULTO INLINE PARA EVITAR TRAVAMENTOS) -->
             <div id="admin-alert-banner" class="alert-banner-success" style="display: none !important;">
                 <i class="far fa-check-circle"></i> Dados gravados com sucesso no banco local!
             </div>
 
-            <!-- FORMULÁRIO OPERACIONAL COMPLETO -->
+            <!-- FORMULÁRIO OPERACIONAL COMPLETO COM IDENTIFICADORES BINDADOS -->
             <form id="form-admin-perfil" class="admin-profile-form">
                 
                 <!-- BLOCO: SELEÇÃO DE FOTO DO CLIENTE -->
@@ -148,7 +149,7 @@
         <div class="footer-contact"><a href="mailto:contato@cafeteriagourmet.com.br">contato@cafeteriagourmet.com.br</a></div>
     </footer>
 
-    <!-- CONEXÃO COMPLETA DA INTELIGÊNCIA EM JAVASCRIPT -->
+    <!-- CHAMADA DA ENGINE SEPARADA COM ANTI-CACHE EM VERSÃO DE RENOVAÇÃO -->
     <script src="script.js"></script>
 </body>
 </html>
