@@ -302,35 +302,46 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 /* ==========================================================================
-   LÓGICA DINÂMICA DE CADASTRO, VISUALIZAÇÃO DE SENHA E REDIRECIONAMENTO
+   LÓGICA DINÂMICA DE CADASTRO (VÍNCULO DIRETO POR ID)
    ========================================================================== */
 
-function executarFluxoCadastro() {
-    var nomeInput = document.getElementById("cadastro-name").value.trim();
-    var emailInput = document.getElementById("cadastro-email").value.trim();
-    var phoneInput = document.getElementById("cadastro-phone").value.trim();
-    var senhaInput = document.getElementById("cadastro-password").value.trim();
-
-    if (!nomeInput || !emailInput || !phoneInput || !senhaInput) {
-        alert("Por favor, preencha todos os campos para criar sua conta!");
-        return;
-    }
-
-    // Grava os dados do novo cliente no LocalStorage para sincronizar com o Perfil
-    localStorage.setItem("perfil_nome", nomeInput);
-    localStorage.setItem("perfil_email", emailInput);
-    localStorage.setItem("perfil_phone", phoneInput);
-    localStorage.setItem("perfil_address", "Seu endereço completo aparecerá aqui");
-
-    alert("✓ Conta criada com sucesso! Redirecionando para o login...");
-    window.location.href = "./login.html";
-}
-
-// Funcionalidade do ícone de olho para mostrar/esconder a senha
 document.addEventListener("DOMContentLoaded", function() {
+    var btnCriar = document.getElementById("btn-criar-conta");
     var eyeIcon = document.getElementById("toggle-cadastro-password");
     var passwordInput = document.getElementById("cadastro-password");
 
+    // 1. Ação de clique no botão "Criar conta"
+    if (btnCriar) {
+        btnCriar.addEventListener("click", function(evento) {
+            evento.preventDefault(); // Evita qualquer recarregamento acidental
+
+            var nomeInput = document.getElementById("cadastro-name").value.trim();
+            var emailInput = document.getElementById("cadastro-email").value.trim();
+            var phoneInput = document.getElementById("cadastro-phone").value.trim();
+            var senhaInput = document.getElementById("cadastro-password").value.trim();
+
+            if (!nomeInput || !emailInput || !phoneInput || !senhaInput) {
+                alert("⚠️ Por favor, preencha todos os campos antes de criar sua conta!");
+                return;
+            }
+
+            // Salva os dados no LocalStorage para aparecerem no Perfil e no Admin
+            localStorage.setItem("perfil_nome", nomeInput);
+            localStorage.setItem("perfil_email", emailInput);
+            localStorage.setItem("perfil_phone", phoneInput);
+            localStorage.setItem("perfil_address", "Seu endereço completo aparecerá aqui");
+
+            // Feedback visual no botão e redirecionamento
+            btnCriar.textContent = "✓ Conta criada! Redirecionando...";
+            btnCriar.style.backgroundColor = "#28a745";
+
+            setTimeout(function() {
+                window.location.href = "./login.html";
+            }, 1000);
+        });
+    }
+
+    // 2. Funcionalidade do ícone de olho na senha
     if (eyeIcon && passwordInput) {
         eyeIcon.addEventListener("click", function() {
             if (passwordInput.type === "password") {
