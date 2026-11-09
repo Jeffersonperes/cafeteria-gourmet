@@ -253,28 +253,28 @@ function inicializarPaginaDetalhesDinamica() {}
    LOGICA DINÂMICA DE LOGIN E CONTROLE INTERATIVO DO PROTÓTIPO
    ========================================================================== */
 
-function inicializarLogicaLogin() {
-    const btnLogin = document.getElementById("btn-login-submit");
-    const eyeIcon = document.getElementById("toggle-password-icon");
-    const passwordInput = document.getElementById("login-password");
+document.addEventListener("DOMContentLoaded", function() {
+    const caminhoAtual = window.location.pathname.toLowerCase();
 
-    // 1. Ação de clique no botão "Entrar"
-    if (btnLogin) {
-        btnLogin.addEventListener("click", function(evento) {
-            evento.preventDefault();
+    if (caminhoAtual.includes("login")) {
+        const formularioLogin = document.querySelector("form");
+        const botaoLogin = document.querySelector("button[type='submit'], button[type='button'], #btn-login-submit");
 
-            const emailInput = document.getElementById("login-email");
-            const emailDigitado = emailInput ? emailInput.value.trim() : "";
+        function acaoEntrar(evento) {
+            if (evento) evento.preventDefault();
+
+            const campoEmail = document.querySelector("input[type='email'], #login-email");
+            const emailDigitado = campoEmail ? campoEmail.value.trim() : "";
             const emailFinal = emailDigitado || localStorage.getItem("perfil_email") || "cliente@cafeteriagourmet.com";
             const nomeSalvo = localStorage.getItem("perfil_nome");
 
-            // Ativa a sessão para liberar o checkout e o perfil
+            // Ativa sessão para liberar checkout e perfil
             localStorage.setItem("cafeteria_usuario_ativo", JSON.stringify({
                 logado: true,
                 email: emailFinal
             }));
 
-            // Garante dados padrão caso o cliente entre sem passar pelo cadastro
+            // Preenche dados base caso o cliente não tenha passado pelo cadastro
             if (!nomeSalvo || nomeSalvo === "Seu Nome") {
                 localStorage.setItem("perfil_nome", "Cliente Gourmet");
                 localStorage.setItem("perfil_email", emailFinal);
@@ -284,31 +284,32 @@ function inicializarLogicaLogin() {
                 localStorage.setItem("perfil_email", emailFinal);
             }
 
-            // Feedback visual no botão e redirecionamento para o perfil
-            btnLogin.textContent = "✓ Entrando...";
-            btnLogin.style.backgroundColor = "#28a745";
+            if (botaoLogin) {
+                botaoLogin.textContent = "✓ Entrando...";
+                botaoLogin.style.backgroundColor = "#28a745";
+            }
 
             setTimeout(function() {
-                window.location.assign("./perfil.html");
-            }, 600);
-        });
-    }
+                window.location.href = "perfil.html";
+            }, 500);
+        }
 
-    // 2. Ação de clique no ícone de olho para mostrar/ocultar senha
-    if (eyeIcon && passwordInput) {
-        eyeIcon.addEventListener("click", function() {
-            if (passwordInput.type === "password") {
-                passwordInput.type = "text";
-                eyeIcon.classList.remove("fa-eye");
-                eyeIcon.classList.add("fa-eye-slash");
-            } else {
-                passwordInput.type = "password";
-                eyeIcon.classList.remove("fa-eye-slash");
-                eyeIcon.classList.add("fa-eye");
-            }
-        });
+        if (formularioLogin) formularioLogin.addEventListener("submit", acaoEntrar);
+        if (botaoLogin) botaoLogin.addEventListener("click", acaoEntrar);
+
+        // Ativa o olho de mostrar/esconder senha
+        const iconeOlho = document.querySelector(".fa-eye, #toggle-password-icon");
+        const campoSenha = document.querySelector("input[type='password'], #login-password");
+        if (iconeOlho && campoSenha) {
+            iconeOlho.addEventListener("click", function() {
+                const ehSenha = campoSenha.type === "password";
+                campoSenha.type = ehSenha ? "text" : "password";
+                iconeOlho.classList.toggle("fa-eye", !ehSenha);
+                iconeOlho.classList.toggle("fa-eye-slash", ehSenha);
+            });
+        }
     }
-}
+});
 
 /* ==========================================================================
    LÓGICA DINÂMICA DE CADASTRO (VÍNCULO DIRETO POR ID)
