@@ -253,28 +253,17 @@ function inicializarPaginaDetalhesDinamica() {}
    LOGICA DINÂMICA DE LOGIN E CONTROLE INTERATIVO DO PROTÓTIPO
    ========================================================================== */
 
-document.addEventListener("DOMContentLoaded", function() {
-    const caminhoAtual = window.location.pathname.toLowerCase();
+function fazerLoginAgora() {
+            var campoEmail = document.getElementById("login-email");
+            var emailDigitado = campoEmail ? campoEmail.value.trim() : "";
+            var emailFinal = emailDigitado || localStorage.getItem("perfil_email") || "cliente@cafeteriagourmet.com";
+            var nomeSalvo = localStorage.getItem("perfil_nome");
 
-    if (caminhoAtual.includes("login")) {
-        const formularioLogin = document.querySelector("form");
-        const botaoLogin = document.querySelector("button[type='submit'], button[type='button'], #btn-login-submit");
-
-        function acaoEntrar(evento) {
-            if (evento) evento.preventDefault();
-
-            const campoEmail = document.querySelector("input[type='email'], #login-email");
-            const emailDigitado = campoEmail ? campoEmail.value.trim() : "";
-            const emailFinal = emailDigitado || localStorage.getItem("perfil_email") || "cliente@cafeteriagourmet.com";
-            const nomeSalvo = localStorage.getItem("perfil_nome");
-
-            // Ativa sessão para liberar checkout e perfil
             localStorage.setItem("cafeteria_usuario_ativo", JSON.stringify({
                 logado: true,
                 email: emailFinal
             }));
 
-            // Preenche dados base caso o cliente não tenha passado pelo cadastro
             if (!nomeSalvo || nomeSalvo === "Seu Nome") {
                 localStorage.setItem("perfil_nome", "Cliente Gourmet");
                 localStorage.setItem("perfil_email", emailFinal);
@@ -284,32 +273,33 @@ document.addEventListener("DOMContentLoaded", function() {
                 localStorage.setItem("perfil_email", emailFinal);
             }
 
-            if (botaoLogin) {
-                botaoLogin.textContent = "✓ Entrando...";
-                botaoLogin.style.backgroundColor = "#28a745";
+            var btn = document.getElementById("btn-login-submit");
+            if (btn) {
+                btn.textContent = "✓ Entrando...";
+                btn.style.backgroundColor = "#28a745";
             }
 
             setTimeout(function() {
-                window.location.href = "perfil.html";
+                window.location.assign("./perfil.html");
             }, 500);
         }
 
-        if (formularioLogin) formularioLogin.addEventListener("submit", acaoEntrar);
-        if (botaoLogin) botaoLogin.addEventListener("click", acaoEntrar);
-
-        // Ativa o olho de mostrar/esconder senha
-        const iconeOlho = document.querySelector(".fa-eye, #toggle-password-icon");
-        const campoSenha = document.querySelector("input[type='password'], #login-password");
+        // Ativa o ícone de olho da senha
+        var iconeOlho = document.getElementById("toggle-password-icon");
+        var campoSenha = document.getElementById("login-password");
         if (iconeOlho && campoSenha) {
-            iconeOlho.addEventListener("click", function() {
-                const ehSenha = campoSenha.type === "password";
-                campoSenha.type = ehSenha ? "text" : "password";
-                iconeOlho.classList.toggle("fa-eye", !ehSenha);
-                iconeOlho.classList.toggle("fa-eye-slash", ehSenha);
-            });
+            iconeOlho.onclick = function() {
+                if (campoSenha.type === "password") {
+                    campoSenha.type = "text";
+                    iconeOlho.classList.remove("fa-eye");
+                    iconeOlho.classList.add("fa-eye-slash");
+                } else {
+                    campoSenha.type = "password";
+                    iconeOlho.classList.remove("fa-eye-slash");
+                    iconeOlho.classList.add("fa-eye");
+                }
+            };
         }
-    }
-});
 
 /* ==========================================================================
    LÓGICA DINÂMICA DE CADASTRO (VÍNCULO DIRETO POR ID)
