@@ -4,14 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cafeteria Gourmet - Login</title>
-    <!-- Chamada do arquivo de estilos separado -->
-    <link rel="stylesheet" href="./style.css?v=design-login-fidelidade">
-    <!-- Font Awesome para os ícones reais de redes sociais e navegação -->
+    <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="https://cloudflare.com">
 </head>
-<body class="admin-body-bg" style="display: flex; flex-direction: column; min-height: 100vh; background-color: #f7f4f0; margin: 0; font-family: 'Poppins', sans-serif;">
+<body style="display: flex; flex-direction: column; min-height: 100vh; background-color: #f7f4f0; margin: 0; font-family: 'Poppins', sans-serif;">
 
-    <!-- NAVBAR (Topo Escuro Premium do Design) -->
+    <!-- NAVBAR -->
     <header class="navbar" style="display: flex; align-items: center; justify-content: space-between; padding: 15px 8%; background-color: #3c2419; border-bottom: 1px solid rgba(223, 206, 184, 0.1);">
         <div class="logo" style="display: flex; align-items: center; gap: 10px; cursor: pointer;" onclick="window.location.href='./index.html'">
             <span style="font-size: 24px;">☕</span>
@@ -22,12 +20,12 @@
         <nav class="nav-menu" style="display: flex; align-items: center; gap: 25px;">
             <a href="./index.html" style="color: #ffffff; text-decoration: none; font-size: 14px;"><i class="fas fa-home"></i> Início</a>
             <a href="./produtos.html" style="color: #ffffff; text-decoration: none; font-size: 14px;"><i class="fas fa-shopping-bag"></i> Produtos</a>
-            <a href="./carrinho.html" style="color: #ffffff; text-decoration: none; font-size: 14px; display: inline-flex; align-items: center; gap: 5px;"><i class="fas fa-shopping-cart"></i> Carrinho <span class="cart-badge" style="background-color: #dfceb8; color: #3c2419; padding: 2px 6px; border-radius: 50%; font-size: 11px; font-weight: bold;">2</span></a>
+            <a href="./carrinho.html" style="color: #ffffff; text-decoration: none; font-size: 14px; display: inline-flex; align-items: center; gap: 5px;"><i class="fas fa-shopping-cart"></i> Carrinho <span class="cart-badge" style="background-color: #dfceb8; color: #3c2419; padding: 2px 6px; border-radius: 50%; font-size: 11px; font-weight: bold;">0</span></a>
             <a href="./perfil.html" style="color: #ffffff; text-decoration: none; font-size: 14px;"><i class="fas fa-user"></i> Perfil</a>
         </nav>
     </header>
 
-    <!-- WRAPPER CENTRAL DO LOGIN (CARD DE FIDELIDADE AO PROTÓTIPO) -->
+    <!-- WRAPPER CENTRAL DO LOGIN -->
     <div style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px 20px; box-sizing: border-box;">
         <main style="background: #ffffff; padding: 45px 35px; border-radius: 8px; box-shadow: 0 4px 25px rgba(0, 0, 0, 0.03); max-width: 440px; width: 100%; box-sizing: border-box;">
             
@@ -36,7 +34,7 @@
                 <p style="font-size: 13px; color: #6e5b53; margin: 0;">Entre na sua conta para continuar</p>
             </div>
 
-            <!-- FORMULÁRIO OPERACIONAL -->
+            <!-- FORMULÁRIO DE LOGIN -->
             <form id="form-login-cliente" style="display: flex; flex-direction: column; gap: 22px;">
                 
                 <!-- CAMPO E-MAIL -->
@@ -50,7 +48,7 @@
                     <label for="login-password" style="font-size: 13px; font-weight: 600; color: #2b170f;">Senha</label>
                     <div style="position: relative; width: 100%;">
                         <input type="password" id="login-password" placeholder="Digite sua senha" style="padding: 12px 40px 12px 14px; border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 6px; font-size: 14px; outline: none; width: 100%; box-sizing: border-box; background-color: #ffffff; color: #2b170f;">
-                        <i class="far fa-eye" id="toggle-password-icon" style="position: absolute; right: 14px; top: 50%; transform: translateY(-50%); color: #6e5b53; cursor: pointer; font-size: 14px;"></i>
+                        <i class="far fa-eye" onclick="alternarSenhaLogin(this)" style="position: absolute; right: 14px; top: 50%; transform: translateY(-50%); color: #6e5b53; cursor: pointer; font-size: 14px;"></i>
                     </div>
                 </div>
 
@@ -62,22 +60,22 @@
                     <a href="#" style="color: #2b170f; text-decoration: none; font-weight: 500;">Esqueci minha senha</a>
                 </div>
 
-                <!-- BOTÃO ENTRAR -->
+                <!-- BOTÃO ENTRAR COM CLIQUE DIRETO -->
                 <div style="margin-top: 10px;">
-                    <button type="button" id="btn-login-submit" style="background-color: #3c2419; color: #ffffff; border: none; padding: 14px; font-size: 15px; font-weight: 600; border-radius: 6px; cursor: pointer; width: 100%; box-shadow: 0 4px 12px rgba(60, 36, 25, 0.1);" onclick="executarLoginBarista()">
+                    <button type="button" id="btn-login-submit" onclick="processarLoginDirect()" style="background-color: #3c2419; color: #ffffff; border: none; padding: 14px; font-size: 15px; font-weight: 600; border-radius: 6px; cursor: pointer; width: 100%; box-shadow: 0 4px 12px rgba(60, 36, 25, 0.1);">
                         Entrar
                     </button>
                 </div>
             </form>
 
-            <!-- ACESSAR CRIAR CONTA -->
+            <!-- CRIAR CONTA -->
             <p style="font-size: 13px; color: #2b170f; text-align: center; margin: 25px 0 0 0;">
                 Ainda não tem conta? <a href="./cadastro.html" style="color: #3c2419; font-weight: 700; text-decoration: none;">Criar conta</a>
             </p>
         </main>
     </div>
 
-    <!-- RODAPÉ COMPACTO DO DESIGN -->
+    <!-- RODAPÉ COMPACTO -->
     <footer class="footer" style="background-color: #f3f1ed; border-top: 1px solid rgba(0,0,0,0.05); display: flex; align-items: center; justify-content: space-between; padding: 20px 8%; width: 100%; box-sizing: border-box;">
         <div style="display: flex; align-items: center; gap: 20px;">
             <div class="footer-brand" style="font-family: 'Playfair Display', serif; font-weight: bold; color: #2b170f; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; display: flex; align-items: center; gap: 8px;">
