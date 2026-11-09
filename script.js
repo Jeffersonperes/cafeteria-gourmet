@@ -253,19 +253,20 @@ function inicializarPaginaDetalhesDinamica() {}
    LOGICA DINÂMICA DE LOGIN E CONTROLE INTERATIVO DO PROTÓTIPO
    ========================================================================== */
 
-document.addEventListener("DOMContentLoaded", function() {
-    var btnLogin = document.getElementById("btn-login-submit");
-    var eyeIcon = document.getElementById("toggle-password-icon");
-    var passwordInput = document.getElementById("login-password");
+function inicializarLogicaLogin() {
+    const btnLogin = document.getElementById("btn-login-submit");
+    const eyeIcon = document.getElementById("toggle-password-icon");
+    const passwordInput = document.getElementById("login-password");
 
     // 1. Ação de clique no botão "Entrar"
     if (btnLogin) {
         btnLogin.addEventListener("click", function(evento) {
             evento.preventDefault();
 
-            var emailDigitado = document.getElementById("login-email").value.trim();
-            var emailFinal = emailDigitado || localStorage.getItem("perfil_email") || "cliente@cafeteriagourmet.com";
-            var nomeSalvo = localStorage.getItem("perfil_nome");
+            const emailInput = document.getElementById("login-email");
+            const emailDigitado = emailInput ? emailInput.value.trim() : "";
+            const emailFinal = emailDigitado || localStorage.getItem("perfil_email") || "cliente@cafeteriagourmet.com";
+            const nomeSalvo = localStorage.getItem("perfil_nome");
 
             // Ativa a sessão para liberar o checkout e o perfil
             localStorage.setItem("cafeteria_usuario_ativo", JSON.stringify({
@@ -283,7 +284,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 localStorage.setItem("perfil_email", emailFinal);
             }
 
-            // Feedback visual e redirecionamento
+            // Feedback visual no botão e redirecionamento para o perfil
             btnLogin.textContent = "✓ Entrando...";
             btnLogin.style.backgroundColor = "#28a745";
 
@@ -307,7 +308,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     }
-});
+}
 
 /* ==========================================================================
    LÓGICA DINÂMICA DE CADASTRO (VÍNCULO DIRETO POR ID)
