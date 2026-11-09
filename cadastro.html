@@ -3,71 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cafeteria Gourmet - Cadastro</title>
-    <!-- Chamada oficial do arquivo de estilos separado -->
-    <link rel="stylesheet" href="./style.css?v=admin-estilo-atualizado-1">
-    <!-- Font Awesome para os ícones reais do design -->
+    <title>Cafeteria Gourmet - Criar Conta</title>
+    <link rel="stylesheet" href="./style.css?v=design-cadastro-fidelidade">
     <link rel="stylesheet" href="https://cloudflare.com">
 </head>
-<body class="admin-body-bg" style="display: flex; flex-direction: column; min-height: 100vh;">
+<body style="display: flex; flex-direction: column; min-height: 100vh; background-color: #f7f4f0; margin: 0; font-family: 'Poppins', sans-serif;">
 
-    <!-- NAVBAR (Topo Escuro Premium Sincronizado) -->
-    <header class="navbar" style="display: flex; align-items: center; justify-content: space-between; padding: 20px 8%; background-color: #1c0f0a; border-bottom: 1px solid rgba(223, 206, 184, 0.1);">
+    <!-- NAVBAR -->
+    <header class="navbar" style="display: flex; align-items: center; justify-content: space-between; padding: 15px 8%; background-color: #3c2419; border-bottom: 1px solid rgba(223, 206, 184, 0.1);">
         <div class="logo" style="display: flex; align-items: center; gap: 10px; cursor: pointer;" onclick="window.location.href='./index.html'">
-            <span style="font-size: 26px; line-height: 1; display: inline-block;">☕</span>
-            <span style="font-family: 'Playfair Display', serif; color: #ffffff; font-weight: bold; font-size: 16px; letter-spacing: 0.5px; line-height: 1.1;">
-                CAFETERIA<br><small style="font-size: 10px; letter-spacing: 2px; color: #DFCEB8; display: block;">GOURMET</small>
+            <span style="font-size: 24px;">☕</span>
+            <span style="font-family: 'Playfair Display', serif; color: #ffffff; font-weight: bold; font-size: 16px; letter-spacing: 0.5px; line-height: 1.1; text-transform: uppercase;">
+                Cafeteria<br><small style="font-size: 10px; letter-spacing: 2px; color: #DFCEB8; display: block;">Gourmet</small>
             </span>
         </div>
-        <nav class="nav-menu" style="display: flex; align-items: center; gap: 30px;">
-            <a href="./index.html" style="color: #DFCEB8; text-decoration: none; font-size: 14px;"><i class="fas fa-home"></i> Início</a>
-            <a href="./produtos.html" style="color: #DFCEB8; text-decoration: none; font-size: 14px;"><i class="fas fa-shopping-bag"></i> Produtos</a>
-            <a href="./carrinho.html" style="color: #DFCEB8; text-decoration: none; font-size: 14px;"><i class="fas fa-shopping-cart"></i> Carrinho</a>
-            <a href="./perfil.html" style="color: #DFCEB8; text-decoration: none; font-size: 14px;"><i class="fas fa-user"></i> Perfil</a>
-            <a href="./login.html" style="color: #DFCEB8; text-decoration: none; font-size: 14px;"><i class="fas fa-sign-in-alt"></i> Login</a>
+        <nav class="nav-menu" style="display: flex; align-items: center; gap: 25px;">
+            <a href="./index.html" style="color: #ffffff; text-decoration: none; font-size: 14px;"><i class="fas fa-home"></i> Início</a>
+            <a href="./produtos.html" style="color: #ffffff; text-decoration: none; font-size: 14px;"><i class="fas fa-shopping-bag"></i> Produtos</a>
+            <a href="./carrinho.html" style="color: #ffffff; text-decoration: none; font-size: 14px; display: inline-flex; align-items: center; gap: 5px;"><i class="fas fa-shopping-cart"></i> Carrinho <span class="cart-badge" style="background-color: #dfceb8; color: #3c2419; padding: 2px 6px; border-radius: 50%; font-size: 11px; font-weight: bold;">2</span></a>
+            <a href="./perfil.html" style="color: #ffffff; text-decoration: none; font-size: 14px;"><i class="fas fa-user"></i> Perfil</a>
         </nav>
     </header>
 
     <!-- WRAPPER CENTRAL DO CADASTRO -->
-    <div class="admin-page-wrapper" style="max-width: 550px; width: 100%; margin: 40px auto; padding: 0 20px; box-sizing: border-box;">
-        <main class="admin-main-content" style="background: #ffffff; padding: 40px; border-radius: 12px; border: 1px solid rgba(60, 36, 25, 0.05); box-shadow: 0 4px 20px rgba(60, 36, 25, 0.02);">
-            <div class="admin-content-header" style="text-align: center; border-bottom: 1px solid rgba(60, 36, 25, 0.08); padding-bottom: 15px; margin-bottom: 30px;">
-                <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 26px; color: #1c0f0a; margin: 0 0 5px 0; font-weight: 700;">Criar Nova Conta</h2>
-                <p style="font-size: 13px; color: #6e5b53; margin: 0;">Cadastre-se para acompanhar seus pedidos e personalizar seu perfil.</p>
+    <div style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px 20px; box-sizing: border-box;">
+        <main style="background: #ffffff; padding: 40px 35px; border-radius: 10px; box-shadow: 0 4px 25px rgba(0, 0, 0, 0.03); max-width: 440px; width: 100%; box-sizing: border-box;">
+            
+            <div style="text-align: center; margin-bottom: 30px;">
+                <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 26px; color: #2b170f; margin: 0 0 8px 0; font-weight: 700;">Crie sua conta</h2>
+                <p style="font-size: 13px; color: #6e5b53; margin: 0;">É rápido e fácil</p>
             </div>
 
             <!-- FORMULÁRIO DE CADASTRO -->
-            <form id="form-cadastro-cliente" class="admin-profile-form" style="display: flex; flex-direction: column; gap: 20px;">
-                <div class="form-group" style="display: flex; flex-direction: column; gap: 6px;">
-                    <label for="cadastro-name" style="font-size: 13px; font-weight: 600; color: #3c2419;">Nome Completo</label>
-                    <input type="text" id="cadastro-name" placeholder="Digite seu nome completo" required style="padding: 12px; border: 1px solid rgba(60, 36, 25, 0.2); border-radius: 6px; font-size: 14px; outline: none; width: 100%; box-sizing: border-box;">
+            <form id="form-cadastro-cliente" style="display: flex; flex-direction: column; gap: 18px;">
+                
+                <!-- CAMPO NOME COMPLETO -->
+                <div style="display: flex; flex-direction: column; gap: 6px;">
+                    <label for="cadastro-name" style="font-size: 13px; font-weight: 600; color: #2b170f; display: flex; align-items: center; gap: 6px;">
+                        <i class="far fa-user" style="color: #6e5b53; font-size: 13px;"></i> Nome completo
+                    </label>
+                    <div style="position: relative; width: 100%;">
+                        <i class="far fa-user" style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: #8a746c; font-size: 14px;"></i>
+                        <input type="text" id="cadastro-name" placeholder="Seu nome completo" required style="padding: 12px 14px 12px 40px; border: 1px solid rgba(0, 0, 0, 0.12); border-radius: 6px; font-size: 14px; outline: none; width: 100%; box-sizing: border-box; background-color: #ffffff; color: #2b170f;">
+                    </div>
                 </div>
 
-                <div class="form-group" style="display: flex; flex-direction: column; gap: 6px;">
-                    <label for="cadastro-email" style="font-size: 13px; font-weight: 600; color: #3c2419;">E-mail de Contato</label>
-                    <input type="email" id="cadastro-email" placeholder="seu.email@email.com" required style="padding: 12px; border: 1px solid rgba(60, 36, 25, 0.2); border-radius: 6px; font-size: 14px; outline: none; width: 100%; box-sizing: border-box;">
+                <!-- CAMPO E-MAIL -->
+                <div style="display: flex; flex-direction: column; gap: 6px;">
+                    <label for="cadastro-email" style="font-size: 13px; font-weight: 600; color: #2b170f;">E-mail</label>
+                    <div style="position: relative; width: 100%;">
+                        <i class="far fa-envelope" style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: #8a746c; font-size: 14px;"></i>
+                        <input type="email" id="cadastro-email" placeholder="seu@email.com" required style="padding: 12px 14px 12px 40px; border: 1px solid rgba(0, 0, 0, 0.12); border-radius: 6px; font-size: 14px; outline: none; width: 100%; box-sizing: border-box; background-color: #ffffff; color: #2b170f;">
+                    </div>
                 </div>
 
-                <div class="form-group" style="display: flex; flex-direction: column; gap: 6px;">
-                    <label for="cadastro-password" style="font-size: 13px; font-weight: 600; color: #3c2419;">Criar Uma Senha</label>
-                    <input type="password" id="cadastro-password" placeholder="Mínimo 6 caracteres" required style="padding: 12px; border: 1px solid rgba(60, 36, 25, 0.2); border-radius: 6px; font-size: 14px; outline: none; width: 100%; box-sizing: border-box;">
+                <!-- CAMPO TELEFONE -->
+                <div style="display: flex; flex-direction: column; gap: 6px;">
+                    <label for="cadastro-phone" style="font-size: 13px; font-weight: 600; color: #2b170f;">Telefone</label>
+                    <div style="position: relative; width: 100%;">
+                        <i class="fas fa-phone-alt" style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: #8a746c; font-size: 13px;"></i>
+                        <input type="text" id="cadastro-phone" placeholder="(61) 99999-9999" required style="padding: 12px 14px 12px 40px; border: 1px solid rgba(0, 0, 0, 0.12); border-radius: 6px; font-size: 14px; outline: none; width: 100%; box-sizing: border-box; background-color: #ffffff; color: #2b170f;">
+                    </div>
                 </div>
 
-                <div class="form-actions-row" style="display: flex; justify-content: center; margin-top: 10px;">
-                    <button type="button" class="btn-admin-save" style="background-color: #2b170f; color: #ffffff; border: none; padding: 14px 45px; font-size: 14px; font-weight: 700; border-radius: 6px; cursor: pointer; box-shadow: 0 4px 12px rgba(43, 23, 15, 0.15); width: 100%;" onclick="executarFluxoCadastro()">
-                        Finalizar Cadastro
+                <!-- CAMPO SENHA COM ÍCONE DE OLHO -->
+                <div style="display: flex; flex-direction: column; gap: 6px;">
+                    <label for="cadastro-password" style="font-size: 13px; font-weight: 600; color: #2b170f;">Senha</label>
+                    <div style="position: relative; width: 100%;">
+                        <i class="fas fa-key" style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: #8a746c; font-size: 13px;"></i>
+                        <input type="password" id="cadastro-password" placeholder="Crie uma senha" required style="padding: 12px 40px 12px 40px; border: 1px solid rgba(0, 0, 0, 0.12); border-radius: 6px; font-size: 14px; outline: none; width: 100%; box-sizing: border-box; background-color: #ffffff; color: #2b170f;">
+                        <i class="far fa-eye" id="toggle-cadastro-password" style="position: absolute; right: 14px; top: 50%; transform: translateY(-50%); color: #6e5b53; cursor: pointer; font-size: 14px;"></i>
+                    </div>
+                </div>
+
+                <!-- BOTÃO CRIAR CONTA -->
+                <div style="margin-top: 8px;">
+                    <button type="button" style="background-color: #3c2419; color: #ffffff; border: none; padding: 14px; font-size: 15px; font-weight: 600; border-radius: 6px; cursor: pointer; width: 100%; box-shadow: 0 4px 12px rgba(60, 36, 25, 0.1);" onclick="executarFluxoCadastro()">
+                        Criar conta
                     </button>
                 </div>
-                
-                <p style="font-size: 13px; color: #6e5b53; text-align: center; margin-top: 10px;">Já possui uma conta? <a href="./login.html" style="color: #2b170f; font-weight: 600; text-decoration: none;">Faça Login</a></p>
             </form>
+
+            <!-- LINK ENTRAR -->
+            <p style="font-size: 13px; color: #2b170f; text-align: center; margin: 22px 0 0 0;">
+                Já tem uma conta? <a href="./login.html" style="color: #3c2419; font-weight: 700; text-decoration: none;">Entrar</a>
+            </p>
         </main>
     </div>
 
-    <!-- RODAPÉ MESTRE -->
-    <footer class="footer" style="background-color: #ffffff; border-top: 1px solid rgba(60, 36, 25, 0.1); display: flex; align-items: center; justify-content: space-between; padding: 25px 8%; width: 100%; box-sizing: border-box; margin-top: auto;">
-        <div class="footer-brand" style="font-family: 'Playfair Display', serif; font-weight: bold; color: #1c0f0a;"><i class="fas fa-coffee"></i> CAFETERIA GOURMET</div>
-        <div class="footer-contact" style="font-size: 13px; color:#3c2419;"><a href="mailto:contato@cafeteriagourmet.com.br" style="color: #3c2419; text-decoration: none;">contato@cafeteriagourmet.com.br</a></div>
+    <!-- RODAPÉ COMPACTO -->
+    <footer class="footer" style="background-color: #f3f1ed; border-top: 1px solid rgba(0,0,0,0.05); display: flex; align-items: center; justify-content: space-between; padding: 20px 8%; width: 100%; box-sizing: border-box;">
+        <div style="display: flex; align-items: center; gap: 20px;">
+            <div class="footer-brand" style="font-family: 'Playfair Display', serif; font-weight: bold; color: #2b170f; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 14px;">☕</span> Cafeteria Gourmet
+            </div>
+            <div style="height: 14px; width: 1px; background-color: rgba(0,0,0,0.15);"></div>
+            <div class="footer-contact" style="font-size: 12px; color: #6e5b53;">contato@cafeteriagourmet.com.br</div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 15px; color: #2b170f; font-size: 16px;">
+            <a href="#" style="color: inherit; text-decoration: none;"><i class="fab fa-instagram"></i></a>
+            <a href="#" style="color: inherit; text-decoration: none;"><i class="fab fa-facebook-f"></i></a>
+        </div>
     </footer>
 
     <!-- VINCULAÇÃO LOGICA DO ARQUIVO JS SEPARADO -->

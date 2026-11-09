@@ -300,3 +300,48 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
+
+/* ==========================================================================
+   LÓGICA DINÂMICA DE CADASTRO, VISUALIZAÇÃO DE SENHA E REDIRECIONAMENTO
+   ========================================================================== */
+
+function executarFluxoCadastro() {
+    var nomeInput = document.getElementById("cadastro-name").value.trim();
+    var emailInput = document.getElementById("cadastro-email").value.trim();
+    var phoneInput = document.getElementById("cadastro-phone").value.trim();
+    var senhaInput = document.getElementById("cadastro-password").value.trim();
+
+    if (!nomeInput || !emailInput || !phoneInput || !senhaInput) {
+        alert("Por favor, preencha todos os campos para criar sua conta!");
+        return;
+    }
+
+    // Grava os dados do novo cliente no LocalStorage para sincronizar com o Perfil
+    localStorage.setItem("perfil_nome", nomeInput);
+    localStorage.setItem("perfil_email", emailInput);
+    localStorage.setItem("perfil_phone", phoneInput);
+    localStorage.setItem("perfil_address", "Seu endereço completo aparecerá aqui");
+
+    alert("✓ Conta criada com sucesso! Redirecionando para o login...");
+    window.location.href = "./login.html";
+}
+
+// Funcionalidade do ícone de olho para mostrar/esconder a senha
+document.addEventListener("DOMContentLoaded", function() {
+    var eyeIcon = document.getElementById("toggle-cadastro-password");
+    var passwordInput = document.getElementById("cadastro-password");
+
+    if (eyeIcon && passwordInput) {
+        eyeIcon.addEventListener("click", function() {
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                eyeIcon.classList.remove("fa-eye");
+                eyeIcon.classList.add("fa-eye-slash");
+            } else {
+                passwordInput.type = "password";
+                eyeIcon.classList.remove("fa-eye-slash");
+                eyeIcon.classList.add("fa-eye");
+            }
+        });
+    }
+});
