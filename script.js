@@ -356,3 +356,41 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
+
+        function registrarNovoCliente() {
+            var nome = document.getElementById("cadastro-name").value.trim();
+            var email = document.getElementById("cadastro-email").value.trim();
+            var telefone = document.getElementById("cadastro-phone").value.trim();
+            var senha = document.getElementById("cadastro-password").value.trim();
+
+            if (!nome || !email || !telefone || !senha) {
+                alert("⚠️ Preencha todos os campos antes de continuar!");
+                return;
+            }
+
+            localStorage.setItem("perfil_nome", nome);
+            localStorage.setItem("perfil_email", email);
+            localStorage.setItem("perfil_phone", telefone);
+            localStorage.setItem("perfil_address", "Seu endereço completo aparecerá aqui");
+
+            var btn = document.getElementById("btn-criar-conta");
+            btn.textContent = "✓ Conta criada! Redirecionando...";
+            btn.style.backgroundColor = "#28a745";
+
+            setTimeout(function() {
+                window.location.assign("./login.html");
+            }, 600);
+        }
+
+        function alternarSenhaCadastro(icone) {
+            var input = document.getElementById("cadastro-password");
+            if (input.type === "password") {
+                input.type = "text";
+                icone.classList.remove("fa-eye");
+                icone.classList.add("fa-eye-slash");
+            } else {
+                input.type = "password";
+                icone.classList.remove("fa-eye-slash");
+                icone.classList.add("fa-eye");
+            }
+        }
