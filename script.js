@@ -248,3 +248,55 @@ function inicializarLogicaCadastro() {}
 function inicializarDadosPerfilDinamico() {}
 function inicializarFormularioAlterarPerfil() {}
 function inicializarPaginaDetalhesDinamica() {}
+
+/* ==========================================================================
+   LOGICA DINÂMICA DE LOGIN E CONTROLE INTERATIVO DO PROTÓTIPO
+   ========================================================================== */
+
+function executarLoginBarista() {
+    var emailInput = document.getElementById("login-email").value.trim();
+    var emailUsuario = emailInput || "cliente@cafeteriagourmet.com";
+
+    var nomeExistente = localStorage.getItem("perfil_nome");
+
+    // Sincronismo inteligente de dados preventivos para a página de perfil
+    if (!nomeExistente || nomeExistente === "Seu Nome") {
+        localStorage.setItem("perfil_nome", "Cliente Gourmet");
+        localStorage.setItem("perfil_email", emailUsuario);
+        localStorage.setItem("perfil_phone", "(11) 99999-9999");
+        localStorage.setItem("perfil_address", "Avenida Paulista, 1000 - Bela Vista. São Paulo/SP - CEP: 01310-100");
+        
+        localStorage.setItem("perfil_logradouro", "Avenida Paulista");
+        localStorage.setItem("perfil_numero", "1000");
+        localStorage.setItem("perfil_complemento", "");
+        localStorage.setItem("perfil_bairro", "Bela Vista");
+        localStorage.setItem("perfil_cidade", "São Paulo");
+        localStorage.setItem("perfil_estado", "SP");
+        localStorage.setItem("perfil_cep", "01310-100");
+    } else {
+        localStorage.setItem("perfil_email", emailUsuario);
+    }
+
+    // Redireciona de forma imediata e limpa para o perfil
+    window.location.href = "./perfil.html";
+}
+
+// FUNCIONALIDADE DO ÍCONE DE OLHO: Mostra ou esconde a senha dinamicamente
+document.addEventListener("DOMContentLoaded", function() {
+    var eyeIcon = document.getElementById("toggle-password-icon");
+    var passwordInput = document.getElementById("login-password");
+
+    if (eyeIcon && passwordInput) {
+        eyeIcon.addEventListener("click", function() {
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                eyeIcon.classList.remove("fa-eye");
+                eyeIcon.classList.add("fa-eye-slash");
+            } else {
+                passwordInput.type = "password";
+                eyeIcon.classList.remove("fa-eye-slash");
+                eyeIcon.classList.add("fa-eye");
+            }
+        });
+    }
+});
