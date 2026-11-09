@@ -48,7 +48,7 @@
                     <label for="login-password" style="font-size: 13px; font-weight: 600; color: #2b170f;">Senha</label>
                     <div style="position: relative; width: 100%;">
                         <input type="password" id="login-password" placeholder="Digite sua senha" style="padding: 12px 40px 12px 14px; border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 6px; font-size: 14px; outline: none; width: 100%; box-sizing: border-box; background-color: #ffffff; color: #2b170f;">
-                        <i class="far fa-eye" onclick="alternarSenhaLogin(this)" style="position: absolute; right: 14px; top: 50%; transform: translateY(-50%); color: #6e5b53; cursor: pointer; font-size: 14px;"></i>
+                        <i class="far fa-eye" id="toggle-password-icon" style="position: absolute; right: 14px; top: 50%; transform: translateY(-50%); color: #6e5b53; cursor: pointer; font-size: 14px;"></i>
                     </div>
                 </div>
 
@@ -60,9 +60,9 @@
                     <a href="#" style="color: #2b170f; text-decoration: none; font-weight: 500;">Esqueci minha senha</a>
                 </div>
 
-                <!-- BOTÃO ENTRAR COM CLIQUE DIRETO -->
+                <!-- BOTÃO ENTRAR -->
                 <div style="margin-top: 10px;">
-                    <button type="button" id="btn-login-submit" onclick="processarLoginDirect()" style="background-color: #3c2419; color: #ffffff; border: none; padding: 14px; font-size: 15px; font-weight: 600; border-radius: 6px; cursor: pointer; width: 100%; box-shadow: 0 4px 12px rgba(60, 36, 25, 0.1);">
+                    <button type="button" id="btn-login-submit" style="background-color: #3c2419; color: #ffffff; border: none; padding: 14px; font-size: 15px; font-weight: 600; border-radius: 6px; cursor: pointer; width: 100%; box-shadow: 0 4px 12px rgba(60, 36, 25, 0.1);">
                         Entrar
                     </button>
                 </div>
