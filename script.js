@@ -394,3 +394,40 @@ document.addEventListener("DOMContentLoaded", function() {
                 icone.classList.add("fa-eye");
             }
         }
+
+        /* ==========================================================================
+   FUNÇÃO DIRETA DO BOTÃO DE LOGIN (CHAMADA PELO ONCLICK DO HTML)
+   ========================================================================== */
+function fazerLoginAgora() {
+    const campoEmail = document.getElementById("login-email");
+    const emailDigitado = campoEmail ? campoEmail.value.trim() : "";
+    const emailFinal = emailDigitado || localStorage.getItem("perfil_email") || "cliente@cafeteriagourmet.com";
+    const nomeSalvo = localStorage.getItem("perfil_nome");
+
+    // Ativa a sessão para liberar o checkout e o perfil
+    localStorage.setItem("cafeteria_usuario_ativo", JSON.stringify({
+        logado: true,
+        email: emailFinal
+    }));
+
+    // Garante dados padrão caso o cliente ainda não tenha passado pelo cadastro
+    if (!nomeSalvo || nomeSalvo === "Seu Nome") {
+        localStorage.setItem("perfil_nome", "Cliente Gourmet");
+        localStorage.setItem("perfil_email", emailFinal);
+        localStorage.setItem("perfil_phone", "(61) 99999-9999");
+        localStorage.setItem("perfil_address", "Seu endereço completo aparecerá aqui");
+    } else {
+        localStorage.setItem("perfil_email", emailFinal);
+    }
+
+    // Feedback visual no botão e redirecionamento para o perfil
+    const btn = document.getElementById("btn-login-submit");
+    if (btn) {
+        btn.textContent = "✓ Entrando...";
+        btn.style.backgroundColor = "#28a745";
+    }
+
+    setTimeout(function() {
+        window.location.href = "./perfil.html";
+    }, 500);
+}
